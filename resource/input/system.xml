@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<parameter>
+    <array>
+        <!-- PE -->
+        <peNum>64</peNum>
+        <aluInNum>3 </aluInNum>
+        <peInBufferDepth>2</peInBufferDepth>
+        <peBufferBp>credit</peBufferBp>
+        <peOutBufferDepth>2</peOutBufferDepth>
+        <dataPortType>d32_b1_v1</dataPortType>
+        <boolPortType>d1_v1</boolPortType>
+        <dataInPortNum>2</dataInPortNum>
+        <boolInPortNum>1</boolInPortNum>
+        <dataOutPortNum>1</dataOutPortNum>
+        <boolOutPortNum>0</boolOutPortNum>
+
+        <!-- LSE -->>
+        <lseNum>32</lseNum>
+        <lseInBufferDepth>2</lseInBufferDepth>
+        <lseDataInBreadth>1</lseDataInBreadth>
+        <lseBoolInBreadth>0</lseBoolInBreadth>
+        <leDataOutBreadth>1</leDataOutBreadth>
+        <leBoolOutBreadth>0</leBoolOutBreadth>
+        <leOutBufferDepthSmall>16</leOutBufferDepthSmall>
+        <leOutBufferDepthMiddle>32</leOutBufferDepthMiddle>
+        <leOutBufferDepthLarge>64</leOutBufferDepthLarge>
+
+        <!-- LC -->>
+        <lcNum>4</lcNum>
+        <lcOutputNum>4</lcOutputNum>
+        <lcBufferDepth>1</lcBufferDepth>
+        <lcBufferBoolBreadth>0</lcBufferBoolBreadth>
+        <lcBufferDataBreadth>1</lcBufferDataBreadth>
+        <lcEndInNum>8</lcEndInNum>
+        <lcRegInNum>4</lcRegInNum>
+
+        <!-- LSU -->>
+        <tabline_num>20</tabline_num>
+        <fifolinen_num>20</fifolinen_num>
+        <offset_depth>4</offset_depth>
+        <post_offset_depth>8</post_offset_depth>
+        <in_num>16</in_num>
+        <tagbits>6</tagbits>
+        <overlap_print>false</overlap_print>
+        <bus_enable>true</bus_enable>
+        <bus_delay>5</bus_delay>
+        <print_bus>false</print_bus>
+           
+        <!-- SYSTEM -->>
+        <debugLevel>2</debugLevel>
+        <printscreen>false</printscreen>
+        <attachMemory>true</attachMemory>
+        <maxClk>1000000</maxClk>
+        <maxMemoryDepth>100000</maxMemoryDepth>
+    
+    </array>
+    <arch>
+
+    </arch>
+</parameter>

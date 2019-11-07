@@ -1,0 +1,16 @@
+﻿  PE.cpp
+E:\simulator\HGRA5_sim\HGRA5\src\sim\Node\PE.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+E:\simulator\HGRA5_sim\HGRA5\src\util\util.hpp(94): warning C4244: “参数”: 从“const _Rep”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              _Rep=__int64
+          ]
+E:\simulator\HGRA5_sim\HGRA5\src\sim\Node\PE.cpp(896): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+E:\simulator\HGRA5_sim\HGRA5\src\sim\Node\PE.cpp(1020): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\simulator\HGRA5_sim\HGRA5\src\sim\Node\PE.cpp(1043): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  正在生成代码
+  4 of 9567 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    38 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  HGRA5.vcxproj -> E:\simulator\HGRA5_sim\HGRA5\x64\Release\HGRA5.exe

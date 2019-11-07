@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- BFS -->
+<!-- PE55 LC2 LS13 total = 70 -->
+<Config manual_placement="true">
+    <node type="lc" index="0" outermost="true">
+        <input type="begin"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <!-- dfg_end_from -->
+        <input type="ls" index="1" port="0"/>
+        <input type="null"/>
+        <!-- break_from,temporarily not exists -->
+        <!-- <input type="pe" index="18" port="0"/> -->
+        <input type="null"/>
+        <input type="null"/>
+        <!-- mux,loop_bound,step -->
+        <reg value="0" />
+        <reg value="3" />
+        <reg value="1" />
+        <placement cord="[0, 0]"/>
+    </node>
+    <node type="lc" index="1" outermost="false">
+        <input type="lc" index="0" port="1"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <!-- dfg_end_from -->
+        <input type="pe" index="0" port="0"/>       
+        <input type="null"/>       
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="0" />
+        <reg value="3" />
+        <reg value="1" />
+        <placement cord="[9, 9]"/>
+    </node>
+    <node type="pe" index="0" opcode="add" controlMode="data_flow">
+        <inner_connection 
+            buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer" buffer0_from="null" buffer1_from="aluin1" buffer2_from="null"
+            input_bypass="inbuffer" output_from="outbuffer"/>  
+        <input type="lc" index="1" port="1"/>
+        <input type="lc" index="0" port="1"/>
+        <input type="null"/>
+        <reg value="null" /> <reg value="null" /> <reg value="null" /> 
+        <placement cord="[5, 4]"/>
+    </node>
+    <node type="pe" index="1" opcode="nop" controlMode="data_flow">
+        <inner_connection 
+            buffer0_mode="buffer" buffer1_mode="lr_out" buffer2_mode="buffer" buffer0_from="null" buffer1_from="in1" buffer2_from="in2"
+            input_bypass="inbuffer" output_from="outbuffer"/>  
+        <input type="null"/>
+        <input type="pe" index="0" port="0"/>
+        <input type="lc" index="0" port="1"/>
+        <reg value="null" /> <reg value="null" /> <reg value="null" /> 
+        <placement cord="[5, 4]"/>
+    </node>
+    <node type="ls" index="0" ls_mode="store_addr" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+        <input type="lc" index="0" port="1"/>
+        <input type="null"/>
+        <placement cord="[0, 1]"/>
+    </node>
+    <node type="ls" index="1" ls_mode="store_data" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+        <input type="pe" index="1" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 1]"/>
+    </node>
+</Config>

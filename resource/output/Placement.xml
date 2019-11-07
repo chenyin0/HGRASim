@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PlacementResult>
+    <node type="pe" num="0" placement="[6, 5]"/>
+    <node type="pe" num="1" placement="[8, 5]"/>
+    <node type="pe" num="2" placement="[5, 5]"/>
+    <node type="pe" num="3" placement="[5, 7]"/>
+    <node type="pe" num="4" placement="[3, 7]"/>
+    <node type="pe" num="5" placement="[2, 7]"/>
+    <node type="pe" num="6" placement="[3, 5]"/>
+    <node type="pe" num="7" placement="[1, 8]"/>
+    <node type="pe" num="8" placement="[3, 1]"/>
+    <node type="pe" num="9" placement="[2, 8]"/>
+    <node type="pe" num="10" placement="[1, 7]"/>
+    <node type="pe" num="11" placement="[5, 8]"/>
+    <node type="pe" num="12" placement="[7, 2]"/>
+    <node type="pe" num="13" placement="[7, 3]"/>
+    <node type="pe" num="14" placement="[5, 4]"/>
+    <node type="pe" num="15" placement="[4, 4]"/>
+    <node type="pe" num="16" placement="[6, 2]"/>
+    <node type="pe" num="17" placement="[2, 5]"/>
+    <node type="pe" num="18" placement="[8, 1]"/>
+    <node type="pe" num="19" placement="[2, 4]"/>
+    <node type="pe" num="20" placement="[1, 2]"/>
+    <node type="pe" num="21" placement="[1, 3]"/>
+    <node type="pe" num="22" placement="[4, 7]"/>
+    <node type="pe" num="23" placement="[8, 3]"/>
+    <node type="pe" num="24" placement="[1, 6]"/>
+    <node type="pe" num="25" placement="[3, 3]"/>
+    <node type="pe" num="26" placement="[1, 5]"/>
+    <node type="pe" num="27" placement="[8, 8]"/>
+    <node type="pe" num="28" placement="[3, 8]"/>
+    <node type="pe" num="29" placement="[7, 7]"/>
+    <node type="pe" num="30" placement="[6, 3]"/>
+    <node type="pe" num="31" placement="[4, 1]"/>
+    <node type="pe" num="32" placement="[3, 6]"/>
+    <node type="pe" num="33" placement="[3, 4]"/>
+    <node type="pe" num="34" placement="[8, 7]"/>
+    <node type="pe" num="35" placement="[4, 5]"/>
+    <node type="pe" num="36" placement="[7, 5]"/>
+    <node type="pe" num="37" placement="[5, 6]"/>
+    <node type="pe" num="38" placement="[6, 4]"/>
+    <node type="pe" num="39" placement="[5, 2]"/>
+    <node type="pe" num="40" placement="[2, 1]"/>
+    <node type="pe" num="41" placement="[7, 6]"/>
+    <node type="pe" num="42" placement="[4, 6]"/>
+    <node type="pe" num="43" placement="[3, 2]"/>
+    <node type="pe" num="44" placement="[7, 1]"/>
+    <node type="pe" num="45" placement="[4, 2]"/>
+    <node type="pe" num="46" placement="[6, 6]"/>
+    <node type="pe" num="47" placement="[2, 6]"/>
+    <node type="pe" num="48" placement="[1, 4]"/>
+    <node type="pe" num="49" placement="[8, 4]"/>
+    <node type="pe" num="50" placement="[7, 4]"/>
+    <node type="pe" num="51" placement="[5, 3]"/>
+    <node type="pe" num="52" placement="[6, 8]"/>
+    <node type="pe" num="53" placement="[8, 2]"/>
+    <node type="pe" num="54" placement="[2, 3]"/>
+    <node type="lc" num="0" placement="[9, 0]"/>
+    <node type="lc" num="1" placement="[9, 9]"/>
+    <node type="ls" num="0" placement="[9, 7]"/>
+    <node type="ls" num="1" placement="[2, 9]"/>
+    <node type="ls" num="2" placement="[6, 9]"/>
+    <node type="ls" num="3" placement="[0, 8]"/>
+    <node type="ls" num="4" placement="[5, 9]"/>
+    <node type="ls" num="5" placement="[7, 9]"/>
+    <node type="ls" num="6" placement="[1, 9]"/>
+    <node type="ls" num="7" placement="[3, 9]"/>
+    <node type="ls" num="8" placement="[0, 6]"/>
+    <node type="ls" num="9" placement="[9, 8]"/>
+    <node type="ls" num="10" placement="[0, 7]"/>
+    <node type="ls" num="11" placement="[4, 9]"/>
+    <node type="ls" num="12" placement="[8, 9]"/>
+    <array>
+        <row>***** ***** ***** ***** ***** ***** ls8-- ls10- ls3-- *****</row>
+        <row>***** ***** pe20- pe21- pe48- pe26- pe24- pe10- pe7-- ls6--</row>
+        <row>***** pe40- ***** pe54- pe19- pe17- pe47- pe5-- pe9-- ls1--</row>
+        <row>***** pe8-- pe43- pe25- pe33- pe6-- pe32- pe4-- pe28- ls7--</row>
+        <row>***** pe31- pe45- ***** pe15- pe35- pe42- pe22- ***** ls11-</row>
+        <row>***** ***** pe39- pe51- pe14- pe2-- pe37- pe3-- pe11- ls4--</row>
+        <row>***** ***** pe16- pe30- pe38- pe0-- pe46- ***** pe52- ls2--</row>
+        <row>***** pe44- pe12- pe13- pe50- pe36- pe41- pe29- ***** ls5--</row>
+        <row>***** pe18- pe53- pe23- pe49- pe1-- ***** pe34- pe27- ls12-</row>
+        <row>lc0-- ***** ***** ***** ***** ***** ***** ls0-- ls9-- lc1--</row>
+    </array>
+</PlacementResult>

@@ -1,0 +1,2509 @@
+--------PE 1 clk 0--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 0--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 0--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 0--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 1--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 1--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 1--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 1--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+head_ptr0
+--------PE 1 clk 2--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 2--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 2--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 2--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------PE 1 clk 3--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 3--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 3--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+head_ptr0
+--------LC 0 clk 3--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------PE 1 clk 4--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 4--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      bufferdep 1   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 4--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------LC 0 clk 4--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------PE 1 clk 5--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 5--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+trans data 0  0  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 5--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------LC 0 clk 5--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------PE 1 clk 6--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 6--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      bufferdep 1   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 6--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------LC 0 clk 6--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------PE 1 clk 7--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 7--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+trans data 1  0  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 7--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 7--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------PE 1 clk 8--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 8--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      bufferdep 1   10   1   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+head_ptr1
+--------LC 1 clk 8--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 8--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------PE 1 clk 9--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 9--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+trans data 2  1  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 9--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  1  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 9--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------PE 1 clk 10--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 10--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 1   10   3   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 10--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  1  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 10--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------PE 1 clk 11--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 11--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   1      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   10   1   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+trans data 3  3  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 11--------
+--------reg endreg --------
+reg0  1  1  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 11--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------PE 1 clk 12--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 12--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   1      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   10   1   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      
+head_ptr1
+--------LC 1 clk 12--------
+--------reg endreg --------
+reg0  1  1  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+head_ptr0
+--------LC 0 clk 12--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------PE 1 clk 13--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   10   3   0      bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 13--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   1      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      bufferdep 1   10   1   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 13--------
+--------reg endreg --------
+reg0  1  1  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------LC 0 clk 13--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------PE 1 clk 14--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 14--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   1      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+trans data 0  1  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 14--------
+--------reg endreg --------
+reg0  1  1  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------LC 0 clk 14--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------PE 1 clk 15--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 15--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   1      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      bufferdep 1   10   1   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 15--------
+--------reg endreg --------
+reg0  1  1  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------LC 0 clk 15--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  0  0  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------PE 1 clk 16--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 16--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   1      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+trans data 1  1  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 16--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  1  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 16--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------PE 1 clk 17--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 17--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   1      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      bufferdep 1   10   2   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+head_ptr1
+--------LC 1 clk 17--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  1  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 17--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------PE 1 clk 18--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 18--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   1      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+trans data 2  2  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 18--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  2  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 18--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------PE 1 clk 19--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 19--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   1      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 1   10   4   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   4   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 19--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  2  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 19--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------PE 1 clk 20--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 20--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   2      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   10   2   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+trans data 3  4  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 20--------
+--------reg endreg --------
+reg0  1  2  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 20--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------PE 1 clk 21--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 21--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   2      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   10   2   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   11   4   0      
+head_ptr1
+--------LC 1 clk 21--------
+--------reg endreg --------
+reg0  1  2  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+head_ptr0
+--------LC 0 clk 21--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------PE 1 clk 22--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 1   10   4   0      bufferdep 1   10   1   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 22--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   2      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      bufferdep 1   10   2   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 22--------
+--------reg endreg --------
+reg0  1  2  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   1   0      
+head_ptr0
+--------LC 0 clk 22--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------PE 1 clk 23--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   4   0      
+head_ptr1
+--------PE 0 clk 23--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   2      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+trans data 0  2  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 23--------
+--------reg endreg --------
+reg0  1  2  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+head_ptr0
+--------LC 0 clk 23--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------PE 1 clk 24--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 24--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   2      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      bufferdep 1   10   2   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 24--------
+--------reg endreg --------
+reg0  1  2  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------LC 0 clk 24--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------PE 1 clk 25--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 25--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   2      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+trans data 1  2  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 25--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  2  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 25--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------PE 1 clk 26--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 26--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   2      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   2   0      bufferdep 1   10   3   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   3   0      
+head_ptr1
+--------LC 1 clk 26--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  2  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 26--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------PE 1 clk 27--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 27--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   2      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+trans data 2  3  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 27--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 27--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------PE 1 clk 28--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 28--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   2      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      bufferdep 1   10   5   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   5   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 28--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 28--------
+--------reg endreg --------
+reg0  1  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+head_ptr0
+--------PE 1 clk 29--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   11   3   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 29--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   11   3   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+trans data 3  5  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 29--------
+--------reg endreg --------
+reg0  1  3  11  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  5  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 29--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 30--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   11   3   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 30--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   11   3   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   11   5   0      
+head_ptr1
+--------LC 1 clk 30--------
+--------reg endreg --------
+reg0  1  3  11  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  5  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 1   01   0   0      
+head_ptr0
+--------LC 0 clk 30--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 31--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 1   10   5   0      bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   11   3   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 31--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 1   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 1   01   0   0      bufferdep 1   11   3   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 31--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  5  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 31--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 32--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   11   3   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   5   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 32--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+trans data 0  3  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 32--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  5  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 32--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 33--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 1   11   3   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 33--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 1   01   3   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 1 clk 33--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  5  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 33--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  4  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 34--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 1   00   3   0      bufferdep 1   11   3   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------PE 0 clk 34--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 34--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 34--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  5  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 35--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   01   3   0      
+head_ptr1
+--------PE 0 clk 35--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 35--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 35--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  5  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 36--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 36--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 36--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 36--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  5  10  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 37--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 37--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 37--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 37--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 1 clk 38--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   0      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------PE 0 clk 38--------
+----LocalReg Element----
+valid control data bool
+local_reg 0   0      local_reg 0   3      local_reg 0   0      
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      bufferdep 0   10   0   0      bufferdep 0   10   0   0      
+head_ptr1
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr1
+--------LC 1 clk 38--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0
+--------LC 0 clk 38--------
+--------reg endreg --------
+reg0  0  0  10  0
+reg1  1  0  10  0
+reg2  1  3  10  0
+reg3  1  1  10  0
+end_reg0  1  3  11  0
+end_reg1  0  0  10  0
+end_reg2  0  0  10  0
+end_reg3  0  0  10  0
+end_reg4  0  0  10  0
+end_reg5  0  0  10  0
+end_reg6  0  0  10  0
+end_reg7  0  0  10  0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+head_ptr0

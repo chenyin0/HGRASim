@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config manual_placement="false">
+    <node type="lc" index="0" outermost="true">
+        <input type="begin"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+	    	<input type="ls" index="1" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+	     	<input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="0" />
+        <reg value="100" />
+        <reg value="1" />
+        <placement cord="[9, 9]"/>
+    </node>
+    <node type="pe" index="0" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="null" alu_in0_from="inbuffer" alu_in1_from="lr" alu_in2_from="null" ob0_from="alu" output0_from="outbuffer"/>
+        <input type="lc" index="0" port="1"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="0" />
+        <placement cord="[5, 5]"/>
+    </node>
+    <node type="pe" index="1" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="null" alu_in0_from="inbuffer" alu_in1_from="lr" alu_in2_from="null" ob0_from="alu" output0_from="outbuffer"/>
+        <input type="lc" index="0" port="1"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[5, 5]"/>
+    </node>
+	<node type="ls" index="0" ls_mode="load" tag_mode="false" dae="true" fifo_step="1" buffer_size="middle" match="false">
+        <input type="pe" index="0" port="0"/>
+        <input type="null"/>
+        <placement cord="[2, 9]"/>
+    </node>
+	<node type="ls" index="1" ls_mode="store_addr" tag_mode="false" dae="true" fifo_step="1" buffer_size="middle" match="false">
+        <input type="pe" index="1" port="0"/>
+        <input type="null"/>
+        <placement cord="[2, 9]"/>
+    </node>
+	<node type="ls" index="2" ls_mode="store_data" tag_mode="false" dae="true" fifo_step="1" buffer_size="middle" match="false">
+        <input type="ls" index="0" port="0"/>
+        <input type="null"/>
+        <placement cord="[2, 9]"/>
+    </node>
+</Config>

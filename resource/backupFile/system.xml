@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<parameter>
+    <array>
+        <peNum>64</peNum>
+        <peInBufferDepth>1</peInBufferDepth>
+        <peOutBufferDepth>1</peOutBufferDepth>
+        <lseBufferDepth>16</lseBufferDepth>
+    </array>
+    <arch>
+
+    </arch>
+</parameter>

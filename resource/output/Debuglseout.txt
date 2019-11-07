@@ -1,0 +1,5850 @@
+--------SE 1 clk 0--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 0--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 1--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 1--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 2--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 2--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 3--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 3--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 4--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 4--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 5--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 5--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 6--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 6--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 7--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 7--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 8--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 8--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 9--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 9--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 10--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 10--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 11--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 11--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 12--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 12--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 13--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 13--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 14--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 14--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 15--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 15--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 16--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 16--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 1   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 17--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 17--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 18--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 18--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 19--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 19--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 20--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 20--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 21--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 21--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 22--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 22--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 23--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 23--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 24--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   4   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 24--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 25--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   4   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 25--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 1   10   1   0      
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 26--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 26--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 27--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 27--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 28--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 28--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 29--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 29--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+bufferdep 1   11   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 30--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 30--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+bufferdep 1   11   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 31--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 31--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+bufferdep 1   11   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 32--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 32--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+bufferdep 1   11   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 33--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   5   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 33--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+bufferdep 1   11   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 34--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   5   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 34--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   10   2   0      
+bufferdep 1   11   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 35--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 35--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 36--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   01   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 36--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 1   11   3   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 37--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 37--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+
+--------SE 1 clk 38--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+--------SE 0 clk 38--------
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+----Buffer Element----
+valid control data bool
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+bufferdep 0   10   0   0      
+head_ptr0
+
+
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+    <node type="fg" index="0" mode="lbegin" mask="3" lut="2" tagMode="true" combinePath="true" tagBind="false">
+        <input type="null"/>
+        <input type="null"/>
+        <input type="begin"/>
+        <input type="pe" index="10" port="2"/>
+        <reg value="100" />
+    </node>
+
+    <node type="pe" index="0" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="pe" index="10" port="0"/>
+        <reg value="100" />
+    </node>
+
+    <node type="lc" index="0" outermost="false" controlMode="3">
+        <input ps="activate" type="begin"/>
+        <input ps="iterator" type="null"/>
+        <input ps="initial" type="pe" index="10" port="0"/>
+        <input ps="bound" type="pe" index="10" port="0"/>
+        <input ps="step" type="pe" index="10" port="0"/>
+
+        <input ps="end" type="pe" index="10" port="0"/>
+        <input ps="end" type="pe" index="10" port="0"/>
+        <input ps="end" type="pe" index="10" port="0"/>
+        <input ps="end" type="pe" index="10" port="0"/>
+        <input ps="end" type="pe" index="10" port="0"/>
+        <input ps="end" type="pe" index="10" port="0"/>
+        <input ps="end" type="pe" index="10" port="0"/>
+        <input ps="end" type="pe" index="10" port="0"/>
+
+        <reg0 value="100" />
+        <reg1 value="100" />
+        <reg2 value="100" />
+    </node>
+
+    <node type="ls" index="0">
+        <input type="pe" index="10" port="0"/>
+        <input type="pe" index="10" port="0"/>
+    </node>
+</Config>
+

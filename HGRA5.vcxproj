@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{E87B488D-5AB2-454F-9300-159F5EC0E1C7}</ProjectGuid>
+    <RootNamespace>HGRA5</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\HP\source\repos\HGRA5\HGRA5\src\define</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\HP\source\repos\HGRA5\HGRA5\src\define</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\HP\source\repos\HGRA5\HGRA5\src\define</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\HP\source\repos\HGRA5\HGRA5\src\define</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>_MBCS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>_MBCS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>_MBCS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>_MBCS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="lib\tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="src\app_graph\app_graph.cpp" />
+    <ClCompile Include="src\bridge\bridge.cpp" />
+    <ClCompile Include="src\preprocess\preprocess.cpp" />
+    <ClCompile Include="src\pr\mapping\mixed_mapping.cpp" />
+    <ClCompile Include="src\pr\mapping\routing_engine\routing_engine.cpp" />
+    <ClCompile Include="src\pr\mapping\simulate_anneal\engine\graph_analysis.cpp" />
+    <ClCompile Include="src\pr\mapping\simulate_anneal\engine\placement_board.cpp" />
+    <ClCompile Include="src\pr\mapping\simulate_anneal\engine\sa_engine.cpp" />
+    <ClCompile Include="src\pr\mapping\simulate_anneal\simulate_anneal.cpp" />
+    <ClCompile Include="src\pr\resource_graph\pr_res_graph.cpp" />
+    <ClCompile Include="src\pr\resource_graph\pr_res_graph_element.cpp" />
+    <ClCompile Include="src\pr\resource_graph\pr_res_graph_monitor.cpp" />
+    <ClCompile Include="src\shell\main.cpp" />
+    <ClCompile Include="src\sim\Buffer\buffer.cpp" />
+    <ClCompile Include="src\sim\ClkDomain.cpp" />
+    <ClCompile Include="src\sim\factory\factory.cpp" />
+    <ClCompile Include="src\sim\memory\MemoryData.cpp" />
+    <ClCompile Include="src\sim\mem_system\AddressMapping.cpp" />
+    <ClCompile Include="src\sim\mem_system\Bank.cpp" />
+    <ClCompile Include="src\sim\mem_system\BankState.cpp" />
+    <ClCompile Include="src\sim\mem_system\BusPacket.cpp" />
+    <ClCompile Include="src\sim\mem_system\Cache.cpp" />
+    <ClCompile Include="src\sim\mem_system\ClockDomain.cpp" />
+    <ClCompile Include="src\sim\mem_system\CommandQueue.cpp" />
+    <ClCompile Include="src\sim\mem_system\IniReader.cpp" />
+    <ClCompile Include="src\sim\mem_system\Lsu.cpp" />
+    <ClCompile Include="src\sim\mem_system\MemoryController.cpp" />
+    <ClCompile Include="src\sim\mem_system\MemorySystem.cpp" />
+    <ClCompile Include="src\sim\mem_system\MultiChannelMemorySystem.cpp" />
+    <ClCompile Include="src\sim\mem_system\PrintMacros.cpp" />
+    <ClCompile Include="src\sim\mem_system\Rank.cpp" />
+    <ClCompile Include="src\sim\mem_system\SimulatorObject.cpp" />
+    <ClCompile Include="src\sim\mem_system\Transaction.cpp" />
+    <ClCompile Include="src\sim\module\module.cpp" />
+    <ClCompile Include="src\sim\Node\LC.cpp" />
+    <ClCompile Include="src\sim\Node\LSE.cpp" />
+    <ClCompile Include="src\sim\Node\Node.cpp" />
+    <ClCompile Include="src\sim\Node\PE.cpp" />
+    <ClCompile Include="src\sim\protocol\protocol.cpp" />
+    <ClCompile Include="src\sim\HgraSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="src\app_graph\app_graph.h" />
+    <ClInclude Include="src\bridge\bridge.h" />
+    <ClInclude Include="src\define\define.hpp" />
+    <ClInclude Include="src\define\global.hpp" />
+    <ClInclude Include="src\fp\FP_lib.hpp" />
+    <ClInclude Include="src\preprocess\arch_block_net.hpp" />
+    <ClInclude Include="src\preprocess\dfg_node.hpp" />
+    <ClInclude Include="src\preprocess\enum_converter.hpp" />
+    <ClInclude Include="src\preprocess\enum_definition.hpp" />
+    <ClInclude Include="src\preprocess\para.hpp" />
+    <ClInclude Include="src\preprocess\preprocess.h" />
+    <ClInclude Include="src\pr\global\global.hpp" />
+    <ClInclude Include="src\pr\mapping\mixed_mapping.h" />
+    <ClInclude Include="src\pr\mapping\routing_engine\routing_engine.h" />
+    <ClInclude Include="src\pr\mapping\simulate_anneal\engine\graph_analysis.h" />
+    <ClInclude Include="src\pr\mapping\simulate_anneal\engine\placement_board.h" />
+    <ClInclude Include="src\pr\mapping\simulate_anneal\engine\sa_engine.h" />
+    <ClInclude Include="src\pr\mapping\simulate_anneal\sa_cost_function.hpp" />
+    <ClInclude Include="src\pr\mapping\simulate_anneal\sa_temperature_function.hpp" />
+    <ClInclude Include="src\pr\mapping\simulate_anneal\simulate_anneal.h" />
+    <ClInclude Include="src\pr\resource_graph\pr_res_graph.h" />
+    <ClInclude Include="src\pr\resource_graph\pr_res_graph_element.h" />
+    <ClInclude Include="src\pr\resource_graph\pr_res_graph_monitor.h" />
+    <ClInclude Include="src\sim\Buffer\buffer.h" />
+    <ClInclude Include="src\sim\ClkDomain.h" />
+    <ClInclude Include="src\sim\debug.hpp" />
+    <ClInclude Include="src\sim\factory\factory.h" />
+    <ClInclude Include="src\sim\inout.h" />
+    <ClInclude Include="src\sim\memory\MemoryData.h" />
+    <ClInclude Include="src\sim\mem_system\AddressMapping.h" />
+    <ClInclude Include="src\sim\mem_system\Bank.h" />
+    <ClInclude Include="src\sim\mem_system\BankState.h" />
+    <ClInclude Include="src\sim\mem_system\BusPacket.h" />
+    <ClInclude Include="src\sim\mem_system\Cache.h" />
+    <ClInclude Include="src\sim\mem_system\Callback.h" />
+    <ClInclude Include="src\sim\mem_system\ClockDomain.h" />
+    <ClInclude Include="src\sim\mem_system\CommandQueue.h" />
+    <ClInclude Include="src\sim\mem_system\CSVWriter.h" />
+    <ClInclude Include="src\sim\mem_system\define.h" />
+    <ClInclude Include="src\sim\mem_system\IniReader.h" />
+    <ClInclude Include="src\sim\mem_system\Lsu.h" />
+    <ClInclude Include="src\sim\mem_system\MemoryController.h" />
+    <ClInclude Include="src\sim\mem_system\MemorySystem.h" />
+    <ClInclude Include="src\sim\mem_system\MultiChannelMemorySystem.h" />
+    <ClInclude Include="src\sim\mem_system\PrintMacros.h" />
+    <ClInclude Include="src\sim\mem_system\Rank.h" />
+    <ClInclude Include="src\sim\mem_system\resource.h" />
+    <ClInclude Include="src\sim\mem_system\SimulatorObject.h" />
+    <ClInclude Include="src\sim\mem_system\SystemConfiguration.h" />
+    <ClInclude Include="src\sim\mem_system\Transaction.h" />
+    <ClInclude Include="src\sim\mem_system\unistd.h" />
+    <ClInclude Include="src\sim\module\module.h" />
+    <ClInclude Include="src\sim\Node\LC.h" />
+    <ClInclude Include="src\sim\Node\LSE.h" />
+    <ClInclude Include="src\sim\Node\Node.h" />
+    <ClInclude Include="src\sim\Node\PE.h" />
+    <ClInclude Include="src\sim\protocol\protocol.h" />
+    <ClInclude Include="src\sim\HgraSystem.h" />
+    <ClInclude Include="src\util\address.hpp" />
+    <ClInclude Include="src\util\cord.hpp" />
+    <ClInclude Include="src\util\txt_read.hpp" />
+    <ClInclude Include="src\util\util.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="resource\backupFile\DFGConfig.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="resource\backupFile\system.xml" />
+    <Xml Include="resource\input\aluin_test.xml" />
+    <Xml Include="resource\input\ArchConfig.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="resource\input\ArchConfig_nols.xml" />
+    <Xml Include="resource\input\break_test.xml" />
+    <Xml Include="resource\input\condition.xml" />
+    <Xml Include="resource\input\continue_test.xml" />
+    <Xml Include="resource\input\DFG_23.xml" />
+    <Xml Include="resource\input\DFG_42_adpcm.xml" />
+    <Xml Include="resource\input\DFG_42_nw_dp.xml" />
+    <Xml Include="resource\input\DFG_70.xml" />
+    <Xml Include="resource\input\DFG_73.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="resource\input\DFGTest.xml" />
+    <Xml Include="resource\input\DFG_84.xml" />
+    <Xml Include="resource\input\DFG_edge_detect.xml" />
+    <Xml Include="resource\input\system.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="resource\output\Block.xml" />
+    <Xml Include="resource\output\Placement.xml" />
+    <Xml Include="resource\output\Port.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="resource\output\Routing.xml" />
+    <Xml Include="resource\output\Segment.xml" />
+    <Xml Include="resource\output\Wire.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\项目源码理解\ConditionCase\01_ConditionCase\MemoryInFile.txt" />
+    <Text Include="resource\backupFile\KNN.txt" />
+    <Text Include="resource\output\Debuglseout.txt" />
+    <Text Include="resource\output\DebugReg.txt" />
+    <Text Include="resource\output\DebugWire.txt" />
+    <Text Include="resource\output\wholeDebuglseout.txt" />
+    <Text Include="resource\output\wholeDebugReg.txt" />
+    <Text Include="resource\output\wholeDebugWire.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="resource\input\ini\DDR2_micron_16M_8b_x8_sg3E.ini" />
+    <None Include="resource\input\ini\DDR2_micron_32M_4B_x4_sg3E.ini" />
+    <None Include="resource\input\ini\DDR2_micron_32M_8B_x4_sg25E.ini" />
+    <None Include="resource\input\ini\DDR3_micron_16M_8B_x8_sg15.ini" />
+    <None Include="resource\input\ini\DDR3_micron_32M_8B_x4_sg125.ini" />
+    <None Include="resource\input\ini\DDR3_micron_32M_8B_x4_sg15.ini" />
+    <None Include="resource\input\ini\DDR3_micron_32M_8B_x8_sg15.ini" />
+    <None Include="resource\input\ini\DDR3_micron_32M_8B_x8_sg25E.ini" />
+    <None Include="resource\input\ini\DDR3_micron_64M_8B_x4_sg15.ini" />
+    <None Include="resource\input\ini\DDR3_micron_8M_8B_x16_sg15.ini" />
+    <None Include="resource\input\ini\system.ini" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets" Condition="Exists('packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets')" />
+    <Import Project="packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets" Condition="Exists('packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets'))" />
+    <Error Condition="!Exists('packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets'))" />
+  </Target>
+</Project>

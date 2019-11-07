@@ -1,0 +1,1228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+    <!-- LS行列全互连，带router -->
+    <BlockConfig>
+        <!-- global array -->
+        <global row="10" col="10" />
+        <!-- pe -->
+        <block>
+            <type>pe</type>
+            <in_ports>
+                <port_type>d32_b1_v1</port_type>
+                <port_type>d32_b1_v1</port_type>
+                <port_type>d32_b1_v1</port_type>
+            </in_ports>
+            <out_ports>
+                <port_type>d32_b1_v1</port_type>
+            </out_ports>
+            <router_pipes>
+                <port_type>d32_b1_v1</port_type>
+            </router_pipes>
+            <array>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+                <row>-- pe pe pe pe pe pe pe pe --</row>
+                <row>-- pe pe pe pe pe pe pe pe --</row>
+                <row>-- pe pe pe pe pe pe pe pe --</row>
+                <row>-- pe pe pe pe pe pe pe pe --</row>
+                <row>-- pe pe pe pe pe pe pe pe --</row>
+                <row>-- pe pe pe pe pe pe pe pe --</row>
+                <row>-- pe pe pe pe pe pe pe pe --</row>
+                <row>-- pe pe pe pe pe pe pe pe --</row>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+            </array>
+        </block>
+        <!-- ls -->
+        <block>
+            <type>ls</type>
+            <in_ports>
+                <port_type>d32_b1_v1</port_type>
+                <port_type>d32_b1_v1</port_type>
+            </in_ports>
+            <out_ports>
+                <port_type>d32_b1_v1</port_type>
+            </out_ports>
+            <router_pipes>
+                <port_type>d32_b1_v1</port_type>
+            </router_pipes>
+            <array>
+                <row>-- ls ls ls ls ls ls ls ls --</row>
+                <row>ls -- -- -- -- -- -- -- -- ls</row>
+                <row>ls -- -- -- -- -- -- -- -- ls</row>
+                <row>ls -- -- -- -- -- -- -- -- ls</row>
+                <row>ls -- -- -- -- -- -- -- -- ls</row>
+                <row>ls -- -- -- -- -- -- -- -- ls</row>
+                <row>ls -- -- -- -- -- -- -- -- ls</row>
+                <row>ls -- -- -- -- -- -- -- -- ls</row>
+                <row>ls -- -- -- -- -- -- -- -- ls</row>
+                <row>-- ls ls ls ls ls ls ls ls --</row>
+            </array>
+        </block>
+        <!-- lc -->
+        <block>
+            <type>lc</type>
+            <in_ports>
+                <port_type ps="logic">d32_b1_v1</port_type>
+                <port_type ps="logic">d32_b1_v1</port_type>
+                <port_type ps="logic">d32_b1_v1</port_type>
+                <port_type ps="logic">d32_b1_v1</port_type>
+                <port_type ps="logic">d32_b1_v1</port_type>
+                <port_type ps="logic">d32_b1_v1</port_type>
+                <port_type ps="logic">d32_b1_v1</port_type>
+                <port_type ps="logic">d32_b1_v1</port_type>
+            </in_ports>
+            <out_ports>
+                <port_type ps="i_N">d32_b1_v1</port_type>
+            </out_ports>
+            <array>
+                <row>lc -- -- -- -- -- -- -- -- lc</row>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+                <row>-- -- -- -- -- -- -- -- -- --</row>
+                <row>lc -- -- -- -- -- -- -- -- lc</row>
+            </array>
+        </block>
+    </BlockConfig>
+    <NetConfig>
+        <WireNetConfig>
+
+            <!-- pe Mesh Generate - data -->
+            <WireNet config_mode="way4hop1">
+                <config wire_type="d32_b1_v1" block_type="pe" />
+                <out_port port_index="[out][normal][0]"/>
+                <out_port port_index="[out][router][0]"/>
+                <in_port port_index="[in][normal][0]"/>
+                <in_port port_index="[in][normal][1]"/>
+                <in_port port_index="[in][normal][2]"/>
+                <in_port port_index="[in][router][0]"/>
+            </WireNet>
+
+            <!-- ls Mesh Generate - data -->
+            <WireNet config_mode="way4hop1">
+                <config wire_type="d32_b1_v1" block_type="ls" />
+                <out_port port_index="[out][normal][0]"/>
+                <out_port port_index="[out][router][0]"/>
+                <in_port port_index="[in][normal][0]"/>
+                <in_port port_index="[in][normal][1]"/>
+                <in_port port_index="[in][router][0]"/>
+            </WireNet>
+
+            <!-- ls data to pe data -->
+            <!-- row 1 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][1, 0][out][normal][0]" />
+                <source receive="[ls][1, 9][out][normal][0]" />
+                <source receive="[ls][1, 0][out][router][0]" />
+                <source receive="[ls][1, 9][out][router][0]" />
+                <target send="[pe][1, 1][in][normal][0]" />
+                <target send="[pe][1, 2][in][normal][0]" />
+                <target send="[pe][1, 3][in][normal][0]" />
+                <target send="[pe][1, 4][in][normal][0]" />
+                <target send="[pe][1, 5][in][normal][0]" />
+                <target send="[pe][1, 6][in][normal][0]" />
+                <target send="[pe][1, 7][in][normal][0]" />
+                <target send="[pe][1, 8][in][normal][0]" />
+                <target send="[pe][1, 1][in][normal][1]" />
+                <target send="[pe][1, 2][in][normal][1]" />
+                <target send="[pe][1, 3][in][normal][1]" />
+                <target send="[pe][1, 4][in][normal][1]" />
+                <target send="[pe][1, 5][in][normal][1]" />
+                <target send="[pe][1, 6][in][normal][1]" />
+                <target send="[pe][1, 7][in][normal][1]" />
+                <target send="[pe][1, 8][in][normal][1]" />
+                <target send="[pe][1, 1][in][router][0]" />
+                <target send="[pe][1, 2][in][router][0]" />
+                <target send="[pe][1, 3][in][router][0]" />
+                <target send="[pe][1, 4][in][router][0]" />
+                <target send="[pe][1, 5][in][router][0]" />
+                <target send="[pe][1, 6][in][router][0]" />
+                <target send="[pe][1, 7][in][router][0]" />
+                <target send="[pe][1, 8][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 1][out][normal][0]" />
+                <source receive="[pe][1, 2][out][normal][0]" />
+                <source receive="[pe][1, 3][out][normal][0]" />
+                <source receive="[pe][1, 4][out][normal][0]" />
+                <source receive="[pe][1, 5][out][normal][0]" />
+                <source receive="[pe][1, 6][out][normal][0]" />
+                <source receive="[pe][1, 7][out][normal][0]" />
+                <source receive="[pe][1, 8][out][normal][0]" />
+                <source receive="[pe][1, 1][out][router][0]" />
+                <source receive="[pe][1, 2][out][router][0]" />
+                <source receive="[pe][1, 3][out][router][0]" />
+                <source receive="[pe][1, 4][out][router][0]" />
+                <source receive="[pe][1, 5][out][router][0]" />
+                <source receive="[pe][1, 6][out][router][0]" />
+                <source receive="[pe][1, 7][out][router][0]" />
+                <source receive="[pe][1, 8][out][router][0]" />
+                <target send="[ls][1, 0][in][normal][0]" />
+                <target send="[ls][1, 9][in][normal][0]" />
+                <target send="[ls][1, 0][in][normal][1]" />
+                <target send="[ls][1, 9][in][normal][1]" />
+                <target send="[ls][1, 0][in][router][0]" />
+                <target send="[ls][1, 9][in][router][0]" />
+            </WireNet>
+            <!-- row 2 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][2, 0][out][normal][0]" />
+                <source receive="[ls][2, 9][out][normal][0]" />
+                <source receive="[ls][2, 0][out][router][0]" />
+                <source receive="[ls][2, 9][out][router][0]" />
+                <target send="[pe][2, 1][in][normal][0]" />
+                <target send="[pe][2, 2][in][normal][0]" />
+                <target send="[pe][2, 3][in][normal][0]" />
+                <target send="[pe][2, 4][in][normal][0]" />
+                <target send="[pe][2, 5][in][normal][0]" />
+                <target send="[pe][2, 6][in][normal][0]" />
+                <target send="[pe][2, 7][in][normal][0]" />
+                <target send="[pe][2, 8][in][normal][0]" />
+                <target send="[pe][2, 1][in][normal][1]" />
+                <target send="[pe][2, 2][in][normal][1]" />
+                <target send="[pe][2, 3][in][normal][1]" />
+                <target send="[pe][2, 4][in][normal][1]" />
+                <target send="[pe][2, 5][in][normal][1]" />
+                <target send="[pe][2, 6][in][normal][1]" />
+                <target send="[pe][2, 7][in][normal][1]" />
+                <target send="[pe][2, 8][in][normal][1]" />
+                <target send="[pe][2, 1][in][router][0]" />
+                <target send="[pe][2, 2][in][router][0]" />
+                <target send="[pe][2, 3][in][router][0]" />
+                <target send="[pe][2, 4][in][router][0]" />
+                <target send="[pe][2, 5][in][router][0]" />
+                <target send="[pe][2, 6][in][router][0]" />
+                <target send="[pe][2, 7][in][router][0]" />
+                <target send="[pe][2, 8][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][2, 1][out][normal][0]" />
+                <source receive="[pe][2, 2][out][normal][0]" />
+                <source receive="[pe][2, 3][out][normal][0]" />
+                <source receive="[pe][2, 4][out][normal][0]" />
+                <source receive="[pe][2, 5][out][normal][0]" />
+                <source receive="[pe][2, 6][out][normal][0]" />
+                <source receive="[pe][2, 7][out][normal][0]" />
+                <source receive="[pe][2, 8][out][normal][0]" />
+                <source receive="[pe][2, 1][out][router][0]" />
+                <source receive="[pe][2, 2][out][router][0]" />
+                <source receive="[pe][2, 3][out][router][0]" />
+                <source receive="[pe][2, 4][out][router][0]" />
+                <source receive="[pe][2, 5][out][router][0]" />
+                <source receive="[pe][2, 6][out][router][0]" />
+                <source receive="[pe][2, 7][out][router][0]" />
+                <source receive="[pe][2, 8][out][router][0]" />
+                <target send="[ls][2, 0][in][normal][0]" />
+                <target send="[ls][2, 9][in][normal][0]" />
+                <target send="[ls][2, 0][in][normal][1]" />
+                <target send="[ls][2, 9][in][normal][1]" />
+                <target send="[ls][2, 0][in][router][0]" />
+                <target send="[ls][2, 9][in][router][0]" />
+            </WireNet>
+            <!-- row 3 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][3, 0][out][normal][0]" />
+                <source receive="[ls][3, 9][out][normal][0]" />
+                <source receive="[ls][3, 0][out][router][0]" />
+                <source receive="[ls][3, 9][out][router][0]" />
+                <target send="[pe][3, 1][in][normal][0]" />
+                <target send="[pe][3, 2][in][normal][0]" />
+                <target send="[pe][3, 3][in][normal][0]" />
+                <target send="[pe][3, 4][in][normal][0]" />
+                <target send="[pe][3, 5][in][normal][0]" />
+                <target send="[pe][3, 6][in][normal][0]" />
+                <target send="[pe][3, 7][in][normal][0]" />
+                <target send="[pe][3, 8][in][normal][0]" />
+                <target send="[pe][3, 1][in][normal][1]" />
+                <target send="[pe][3, 2][in][normal][1]" />
+                <target send="[pe][3, 3][in][normal][1]" />
+                <target send="[pe][3, 4][in][normal][1]" />
+                <target send="[pe][3, 5][in][normal][1]" />
+                <target send="[pe][3, 6][in][normal][1]" />
+                <target send="[pe][3, 7][in][normal][1]" />
+                <target send="[pe][3, 8][in][normal][1]" />
+                <target send="[pe][3, 1][in][router][0]" />
+                <target send="[pe][3, 2][in][router][0]" />
+                <target send="[pe][3, 3][in][router][0]" />
+                <target send="[pe][3, 4][in][router][0]" />
+                <target send="[pe][3, 5][in][router][0]" />
+                <target send="[pe][3, 6][in][router][0]" />
+                <target send="[pe][3, 7][in][router][0]" />
+                <target send="[pe][3, 8][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][3, 1][out][normal][0]" />
+                <source receive="[pe][3, 2][out][normal][0]" />
+                <source receive="[pe][3, 3][out][normal][0]" />
+                <source receive="[pe][3, 4][out][normal][0]" />
+                <source receive="[pe][3, 5][out][normal][0]" />
+                <source receive="[pe][3, 6][out][normal][0]" />
+                <source receive="[pe][3, 7][out][normal][0]" />
+                <source receive="[pe][3, 8][out][normal][0]" />
+                <source receive="[pe][3, 1][out][router][0]" />
+                <source receive="[pe][3, 2][out][router][0]" />
+                <source receive="[pe][3, 3][out][router][0]" />
+                <source receive="[pe][3, 4][out][router][0]" />
+                <source receive="[pe][3, 5][out][router][0]" />
+                <source receive="[pe][3, 6][out][router][0]" />
+                <source receive="[pe][3, 7][out][router][0]" />
+                <source receive="[pe][3, 8][out][router][0]" />
+                <target send="[ls][3, 0][in][normal][0]" />
+                <target send="[ls][3, 9][in][normal][0]" />
+                <target send="[ls][3, 0][in][normal][1]" />
+                <target send="[ls][3, 9][in][normal][1]" />
+                <target send="[ls][3, 0][in][router][0]" />
+                <target send="[ls][3, 9][in][router][0]" />
+            </WireNet>
+            <!-- row 4 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][4, 0][out][normal][0]" />
+                <source receive="[ls][4, 9][out][normal][0]" />
+                <source receive="[ls][4, 0][out][router][0]" />
+                <source receive="[ls][4, 9][out][router][0]" />
+                <target send="[pe][4, 1][in][normal][0]" />
+                <target send="[pe][4, 2][in][normal][0]" />
+                <target send="[pe][4, 3][in][normal][0]" />
+                <target send="[pe][4, 4][in][normal][0]" />
+                <target send="[pe][4, 5][in][normal][0]" />
+                <target send="[pe][4, 6][in][normal][0]" />
+                <target send="[pe][4, 7][in][normal][0]" />
+                <target send="[pe][4, 8][in][normal][0]" />
+                <target send="[pe][4, 1][in][normal][1]" />
+                <target send="[pe][4, 2][in][normal][1]" />
+                <target send="[pe][4, 3][in][normal][1]" />
+                <target send="[pe][4, 4][in][normal][1]" />
+                <target send="[pe][4, 5][in][normal][1]" />
+                <target send="[pe][4, 6][in][normal][1]" />
+                <target send="[pe][4, 7][in][normal][1]" />
+                <target send="[pe][4, 8][in][normal][1]" />
+                <target send="[pe][4, 1][in][router][0]" />
+                <target send="[pe][4, 2][in][router][0]" />
+                <target send="[pe][4, 3][in][router][0]" />
+                <target send="[pe][4, 4][in][router][0]" />
+                <target send="[pe][4, 5][in][router][0]" />
+                <target send="[pe][4, 6][in][router][0]" />
+                <target send="[pe][4, 7][in][router][0]" />
+                <target send="[pe][4, 8][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][4, 1][out][normal][0]" />
+                <source receive="[pe][4, 2][out][normal][0]" />
+                <source receive="[pe][4, 3][out][normal][0]" />
+                <source receive="[pe][4, 4][out][normal][0]" />
+                <source receive="[pe][4, 5][out][normal][0]" />
+                <source receive="[pe][4, 6][out][normal][0]" />
+                <source receive="[pe][4, 7][out][normal][0]" />
+                <source receive="[pe][4, 8][out][normal][0]" />
+                <source receive="[pe][4, 1][out][router][0]" />
+                <source receive="[pe][4, 2][out][router][0]" />
+                <source receive="[pe][4, 3][out][router][0]" />
+                <source receive="[pe][4, 4][out][router][0]" />
+                <source receive="[pe][4, 5][out][router][0]" />
+                <source receive="[pe][4, 6][out][router][0]" />
+                <source receive="[pe][4, 7][out][router][0]" />
+                <source receive="[pe][4, 8][out][router][0]" />
+                <target send="[ls][4, 0][in][normal][0]" />
+                <target send="[ls][4, 9][in][normal][0]" />
+                <target send="[ls][4, 0][in][normal][1]" />
+                <target send="[ls][4, 9][in][normal][1]" />
+                <target send="[ls][4, 0][in][router][0]" />
+                <target send="[ls][4, 9][in][router][0]" />
+            </WireNet>
+            <!-- row 5 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][5, 0][out][normal][0]" />
+                <source receive="[ls][5, 9][out][normal][0]" />
+                <source receive="[ls][5, 0][out][router][0]" />
+                <source receive="[ls][5, 9][out][router][0]" />
+                <target send="[pe][5, 1][in][normal][0]" />
+                <target send="[pe][5, 2][in][normal][0]" />
+                <target send="[pe][5, 3][in][normal][0]" />
+                <target send="[pe][5, 4][in][normal][0]" />
+                <target send="[pe][5, 5][in][normal][0]" />
+                <target send="[pe][5, 6][in][normal][0]" />
+                <target send="[pe][5, 7][in][normal][0]" />
+                <target send="[pe][5, 8][in][normal][0]" />
+                <target send="[pe][5, 1][in][normal][1]" />
+                <target send="[pe][5, 2][in][normal][1]" />
+                <target send="[pe][5, 3][in][normal][1]" />
+                <target send="[pe][5, 4][in][normal][1]" />
+                <target send="[pe][5, 5][in][normal][1]" />
+                <target send="[pe][5, 6][in][normal][1]" />
+                <target send="[pe][5, 7][in][normal][1]" />
+                <target send="[pe][5, 8][in][normal][1]" />
+                <target send="[pe][5, 1][in][router][0]" />
+                <target send="[pe][5, 2][in][router][0]" />
+                <target send="[pe][5, 3][in][router][0]" />
+                <target send="[pe][5, 4][in][router][0]" />
+                <target send="[pe][5, 5][in][router][0]" />
+                <target send="[pe][5, 6][in][router][0]" />
+                <target send="[pe][5, 7][in][router][0]" />
+                <target send="[pe][5, 8][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][5, 1][out][normal][0]" />
+                <source receive="[pe][5, 2][out][normal][0]" />
+                <source receive="[pe][5, 3][out][normal][0]" />
+                <source receive="[pe][5, 4][out][normal][0]" />
+                <source receive="[pe][5, 5][out][normal][0]" />
+                <source receive="[pe][5, 6][out][normal][0]" />
+                <source receive="[pe][5, 7][out][normal][0]" />
+                <source receive="[pe][5, 8][out][normal][0]" />
+                <source receive="[pe][5, 1][out][router][0]" />
+                <source receive="[pe][5, 2][out][router][0]" />
+                <source receive="[pe][5, 3][out][router][0]" />
+                <source receive="[pe][5, 4][out][router][0]" />
+                <source receive="[pe][5, 5][out][router][0]" />
+                <source receive="[pe][5, 6][out][router][0]" />
+                <source receive="[pe][5, 7][out][router][0]" />
+                <source receive="[pe][5, 8][out][router][0]" />
+                <target send="[ls][5, 0][in][normal][0]" />
+                <target send="[ls][5, 9][in][normal][0]" />
+                <target send="[ls][5, 0][in][normal][1]" />
+                <target send="[ls][5, 9][in][normal][1]" />
+                <target send="[ls][5, 0][in][router][0]" />
+                <target send="[ls][5, 9][in][router][0]" />
+            </WireNet>
+            <!-- row 6 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][6, 0][out][normal][0]" />
+                <source receive="[ls][6, 9][out][normal][0]" />
+                <source receive="[ls][6, 0][out][router][0]" />
+                <source receive="[ls][6, 9][out][router][0]" />
+                <target send="[pe][6, 1][in][normal][0]" />
+                <target send="[pe][6, 2][in][normal][0]" />
+                <target send="[pe][6, 3][in][normal][0]" />
+                <target send="[pe][6, 4][in][normal][0]" />
+                <target send="[pe][6, 5][in][normal][0]" />
+                <target send="[pe][6, 6][in][normal][0]" />
+                <target send="[pe][6, 7][in][normal][0]" />
+                <target send="[pe][6, 8][in][normal][0]" />
+                <target send="[pe][6, 1][in][normal][1]" />
+                <target send="[pe][6, 2][in][normal][1]" />
+                <target send="[pe][6, 3][in][normal][1]" />
+                <target send="[pe][6, 4][in][normal][1]" />
+                <target send="[pe][6, 5][in][normal][1]" />
+                <target send="[pe][6, 6][in][normal][1]" />
+                <target send="[pe][6, 7][in][normal][1]" />
+                <target send="[pe][6, 8][in][normal][1]" />
+                <target send="[pe][6, 1][in][router][0]" />
+                <target send="[pe][6, 2][in][router][0]" />
+                <target send="[pe][6, 3][in][router][0]" />
+                <target send="[pe][6, 4][in][router][0]" />
+                <target send="[pe][6, 5][in][router][0]" />
+                <target send="[pe][6, 6][in][router][0]" />
+                <target send="[pe][6, 7][in][router][0]" />
+                <target send="[pe][6, 8][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][6, 1][out][normal][0]" />
+                <source receive="[pe][6, 2][out][normal][0]" />
+                <source receive="[pe][6, 3][out][normal][0]" />
+                <source receive="[pe][6, 4][out][normal][0]" />
+                <source receive="[pe][6, 5][out][normal][0]" />
+                <source receive="[pe][6, 6][out][normal][0]" />
+                <source receive="[pe][6, 7][out][normal][0]" />
+                <source receive="[pe][6, 8][out][normal][0]" />
+                <source receive="[pe][6, 1][out][router][0]" />
+                <source receive="[pe][6, 2][out][router][0]" />
+                <source receive="[pe][6, 3][out][router][0]" />
+                <source receive="[pe][6, 4][out][router][0]" />
+                <source receive="[pe][6, 5][out][router][0]" />
+                <source receive="[pe][6, 6][out][router][0]" />
+                <source receive="[pe][6, 7][out][router][0]" />
+                <source receive="[pe][6, 8][out][router][0]" />
+                <target send="[ls][6, 0][in][normal][0]" />
+                <target send="[ls][6, 9][in][normal][0]" />
+                <target send="[ls][6, 0][in][normal][1]" />
+                <target send="[ls][6, 9][in][normal][1]" />
+                <target send="[ls][6, 0][in][router][0]" />
+                <target send="[ls][6, 9][in][router][0]" />
+            </WireNet>
+            <!-- row 7 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][7, 0][out][normal][0]" />
+                <source receive="[ls][7, 9][out][normal][0]" />
+                <source receive="[ls][7, 0][out][router][0]" />
+                <source receive="[ls][7, 9][out][router][0]" />
+                <target send="[pe][7, 1][in][normal][0]" />
+                <target send="[pe][7, 2][in][normal][0]" />
+                <target send="[pe][7, 3][in][normal][0]" />
+                <target send="[pe][7, 4][in][normal][0]" />
+                <target send="[pe][7, 5][in][normal][0]" />
+                <target send="[pe][7, 6][in][normal][0]" />
+                <target send="[pe][7, 7][in][normal][0]" />
+                <target send="[pe][7, 8][in][normal][0]" />
+                <target send="[pe][7, 1][in][normal][1]" />
+                <target send="[pe][7, 2][in][normal][1]" />
+                <target send="[pe][7, 3][in][normal][1]" />
+                <target send="[pe][7, 4][in][normal][1]" />
+                <target send="[pe][7, 5][in][normal][1]" />
+                <target send="[pe][7, 6][in][normal][1]" />
+                <target send="[pe][7, 7][in][normal][1]" />
+                <target send="[pe][7, 8][in][normal][1]" />
+                <target send="[pe][7, 1][in][router][0]" />
+                <target send="[pe][7, 2][in][router][0]" />
+                <target send="[pe][7, 3][in][router][0]" />
+                <target send="[pe][7, 4][in][router][0]" />
+                <target send="[pe][7, 5][in][router][0]" />
+                <target send="[pe][7, 6][in][router][0]" />
+                <target send="[pe][7, 7][in][router][0]" />
+                <target send="[pe][7, 8][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][7, 1][out][normal][0]" />
+                <source receive="[pe][7, 2][out][normal][0]" />
+                <source receive="[pe][7, 3][out][normal][0]" />
+                <source receive="[pe][7, 4][out][normal][0]" />
+                <source receive="[pe][7, 5][out][normal][0]" />
+                <source receive="[pe][7, 6][out][normal][0]" />
+                <source receive="[pe][7, 7][out][normal][0]" />
+                <source receive="[pe][7, 8][out][normal][0]" />
+                <source receive="[pe][7, 1][out][router][0]" />
+                <source receive="[pe][7, 2][out][router][0]" />
+                <source receive="[pe][7, 3][out][router][0]" />
+                <source receive="[pe][7, 4][out][router][0]" />
+                <source receive="[pe][7, 5][out][router][0]" />
+                <source receive="[pe][7, 6][out][router][0]" />
+                <source receive="[pe][7, 7][out][router][0]" />
+                <source receive="[pe][7, 8][out][router][0]" />
+                <target send="[ls][7, 0][in][normal][0]" />
+                <target send="[ls][7, 9][in][normal][0]" />
+                <target send="[ls][7, 0][in][normal][1]" />
+                <target send="[ls][7, 9][in][normal][1]" />
+                <target send="[ls][7, 0][in][router][0]" />
+                <target send="[ls][7, 9][in][router][0]" />
+            </WireNet>
+            <!-- row 8 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][8, 0][out][normal][0]" />
+                <source receive="[ls][8, 9][out][normal][0]" />
+                <source receive="[ls][8, 0][out][router][0]" />
+                <source receive="[ls][8, 9][out][router][0]" />
+                <target send="[pe][8, 1][in][normal][0]" />
+                <target send="[pe][8, 2][in][normal][0]" />
+                <target send="[pe][8, 3][in][normal][0]" />
+                <target send="[pe][8, 4][in][normal][0]" />
+                <target send="[pe][8, 5][in][normal][0]" />
+                <target send="[pe][8, 6][in][normal][0]" />
+                <target send="[pe][8, 7][in][normal][0]" />
+                <target send="[pe][8, 8][in][normal][0]" />
+                <target send="[pe][8, 1][in][normal][1]" />
+                <target send="[pe][8, 2][in][normal][1]" />
+                <target send="[pe][8, 3][in][normal][1]" />
+                <target send="[pe][8, 4][in][normal][1]" />
+                <target send="[pe][8, 5][in][normal][1]" />
+                <target send="[pe][8, 6][in][normal][1]" />
+                <target send="[pe][8, 7][in][normal][1]" />
+                <target send="[pe][8, 8][in][normal][1]" />
+                <target send="[pe][8, 1][in][router][0]" />
+                <target send="[pe][8, 2][in][router][0]" />
+                <target send="[pe][8, 3][in][router][0]" />
+                <target send="[pe][8, 4][in][router][0]" />
+                <target send="[pe][8, 5][in][router][0]" />
+                <target send="[pe][8, 6][in][router][0]" />
+                <target send="[pe][8, 7][in][router][0]" />
+                <target send="[pe][8, 8][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][8, 1][out][normal][0]" />
+                <source receive="[pe][8, 2][out][normal][0]" />
+                <source receive="[pe][8, 3][out][normal][0]" />
+                <source receive="[pe][8, 4][out][normal][0]" />
+                <source receive="[pe][8, 5][out][normal][0]" />
+                <source receive="[pe][8, 6][out][normal][0]" />
+                <source receive="[pe][8, 7][out][normal][0]" />
+                <source receive="[pe][8, 8][out][normal][0]" />
+                <source receive="[pe][8, 1][out][router][0]" />
+                <source receive="[pe][8, 2][out][router][0]" />
+                <source receive="[pe][8, 3][out][router][0]" />
+                <source receive="[pe][8, 4][out][router][0]" />
+                <source receive="[pe][8, 5][out][router][0]" />
+                <source receive="[pe][8, 6][out][router][0]" />
+                <source receive="[pe][8, 7][out][router][0]" />
+                <source receive="[pe][8, 8][out][router][0]" />
+                <target send="[ls][8, 0][in][normal][0]" />
+                <target send="[ls][8, 9][in][normal][0]" />
+                <target send="[ls][8, 0][in][normal][1]" />
+                <target send="[ls][8, 9][in][normal][1]" />
+                <target send="[ls][8, 0][in][router][0]" />
+                <target send="[ls][8, 9][in][router][0]" />
+            </WireNet>
+            <!-- col 1 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][0, 1][out][normal][0]" />
+                <source receive="[ls][9, 1][out][normal][0]" />
+                <source receive="[ls][0, 1][out][router][0]" />
+                <source receive="[ls][9, 1][out][router][0]" />
+                <target send="[pe][1, 1][in][normal][0]" />
+                <target send="[pe][2, 1][in][normal][0]" />
+                <target send="[pe][3, 1][in][normal][0]" />
+                <target send="[pe][4, 1][in][normal][0]" />
+                <target send="[pe][5, 1][in][normal][0]" />
+                <target send="[pe][6, 1][in][normal][0]" />
+                <target send="[pe][7, 1][in][normal][0]" />
+                <target send="[pe][8, 1][in][normal][0]" />
+                <target send="[pe][1, 1][in][normal][1]" />
+                <target send="[pe][2, 1][in][normal][1]" />
+                <target send="[pe][3, 1][in][normal][1]" />
+                <target send="[pe][4, 1][in][normal][1]" />
+                <target send="[pe][5, 1][in][normal][1]" />
+                <target send="[pe][6, 1][in][normal][1]" />
+                <target send="[pe][7, 1][in][normal][1]" />
+                <target send="[pe][8, 1][in][normal][1]" />
+                <target send="[pe][1, 1][in][router][0]" />
+                <target send="[pe][2, 1][in][router][0]" />
+                <target send="[pe][3, 1][in][router][0]" />
+                <target send="[pe][4, 1][in][router][0]" />
+                <target send="[pe][5, 1][in][router][0]" />
+                <target send="[pe][6, 1][in][router][0]" />
+                <target send="[pe][7, 1][in][router][0]" />
+                <target send="[pe][8, 1][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 1][out][normal][0]" />
+                <source receive="[pe][2, 1][out][normal][0]" />
+                <source receive="[pe][3, 1][out][normal][0]" />
+                <source receive="[pe][4, 1][out][normal][0]" />
+                <source receive="[pe][5, 1][out][normal][0]" />
+                <source receive="[pe][6, 1][out][normal][0]" />
+                <source receive="[pe][7, 1][out][normal][0]" />
+                <source receive="[pe][8, 1][out][normal][0]" />
+                <source receive="[pe][1, 1][out][router][0]" />
+                <source receive="[pe][2, 1][out][router][0]" />
+                <source receive="[pe][3, 1][out][router][0]" />
+                <source receive="[pe][4, 1][out][router][0]" />
+                <source receive="[pe][5, 1][out][router][0]" />
+                <source receive="[pe][6, 1][out][router][0]" />
+                <source receive="[pe][7, 1][out][router][0]" />
+                <source receive="[pe][8, 1][out][router][0]" />
+                <target send="[ls][0, 1][in][normal][0]" />
+                <target send="[ls][9, 1][in][normal][0]" />
+                <target send="[ls][0, 1][in][normal][1]" />
+                <target send="[ls][9, 1][in][normal][1]" />
+                <target send="[ls][0, 1][in][router][0]" />
+                <target send="[ls][9, 1][in][router][0]" />
+            </WireNet>
+            <!-- col 2 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][0, 2][out][normal][0]" />
+                <source receive="[ls][9, 2][out][normal][0]" />
+                <source receive="[ls][0, 2][out][router][0]" />
+                <source receive="[ls][9, 2][out][router][0]" />
+                <target send="[pe][1, 2][in][normal][0]" />
+                <target send="[pe][2, 2][in][normal][0]" />
+                <target send="[pe][3, 2][in][normal][0]" />
+                <target send="[pe][4, 2][in][normal][0]" />
+                <target send="[pe][5, 2][in][normal][0]" />
+                <target send="[pe][6, 2][in][normal][0]" />
+                <target send="[pe][7, 2][in][normal][0]" />
+                <target send="[pe][8, 2][in][normal][0]" />
+                <target send="[pe][1, 2][in][normal][1]" />
+                <target send="[pe][2, 2][in][normal][1]" />
+                <target send="[pe][3, 2][in][normal][1]" />
+                <target send="[pe][4, 2][in][normal][1]" />
+                <target send="[pe][5, 2][in][normal][1]" />
+                <target send="[pe][6, 2][in][normal][1]" />
+                <target send="[pe][7, 2][in][normal][1]" />
+                <target send="[pe][8, 2][in][normal][1]" />
+                <target send="[pe][1, 2][in][router][0]" />
+                <target send="[pe][2, 2][in][router][0]" />
+                <target send="[pe][3, 2][in][router][0]" />
+                <target send="[pe][4, 2][in][router][0]" />
+                <target send="[pe][5, 2][in][router][0]" />
+                <target send="[pe][6, 2][in][router][0]" />
+                <target send="[pe][7, 2][in][router][0]" />
+                <target send="[pe][8, 2][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 2][out][normal][0]" />
+                <source receive="[pe][2, 2][out][normal][0]" />
+                <source receive="[pe][3, 2][out][normal][0]" />
+                <source receive="[pe][4, 2][out][normal][0]" />
+                <source receive="[pe][5, 2][out][normal][0]" />
+                <source receive="[pe][6, 2][out][normal][0]" />
+                <source receive="[pe][7, 2][out][normal][0]" />
+                <source receive="[pe][8, 2][out][normal][0]" />
+                <source receive="[pe][1, 2][out][router][0]" />
+                <source receive="[pe][2, 2][out][router][0]" />
+                <source receive="[pe][3, 2][out][router][0]" />
+                <source receive="[pe][4, 2][out][router][0]" />
+                <source receive="[pe][5, 2][out][router][0]" />
+                <source receive="[pe][6, 2][out][router][0]" />
+                <source receive="[pe][7, 2][out][router][0]" />
+                <source receive="[pe][8, 2][out][router][0]" />
+                <target send="[ls][0, 2][in][normal][0]" />
+                <target send="[ls][9, 2][in][normal][0]" />
+                <target send="[ls][0, 2][in][normal][1]" />
+                <target send="[ls][9, 2][in][normal][1]" />
+                <target send="[ls][0, 2][in][router][0]" />
+                <target send="[ls][9, 2][in][router][0]" />
+            </WireNet>
+            <!-- col 3 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][0, 3][out][normal][0]" />
+                <source receive="[ls][9, 3][out][normal][0]" />
+                <source receive="[ls][0, 3][out][router][0]" />
+                <source receive="[ls][9, 3][out][router][0]" />
+                <target send="[pe][1, 3][in][normal][0]" />
+                <target send="[pe][2, 3][in][normal][0]" />
+                <target send="[pe][3, 3][in][normal][0]" />
+                <target send="[pe][4, 3][in][normal][0]" />
+                <target send="[pe][5, 3][in][normal][0]" />
+                <target send="[pe][6, 3][in][normal][0]" />
+                <target send="[pe][7, 3][in][normal][0]" />
+                <target send="[pe][8, 3][in][normal][0]" />
+                <target send="[pe][1, 3][in][normal][1]" />
+                <target send="[pe][2, 3][in][normal][1]" />
+                <target send="[pe][3, 3][in][normal][1]" />
+                <target send="[pe][4, 3][in][normal][1]" />
+                <target send="[pe][5, 3][in][normal][1]" />
+                <target send="[pe][6, 3][in][normal][1]" />
+                <target send="[pe][7, 3][in][normal][1]" />
+                <target send="[pe][8, 3][in][normal][1]" />
+                <target send="[pe][1, 3][in][router][0]" />
+                <target send="[pe][2, 3][in][router][0]" />
+                <target send="[pe][3, 3][in][router][0]" />
+                <target send="[pe][4, 3][in][router][0]" />
+                <target send="[pe][5, 3][in][router][0]" />
+                <target send="[pe][6, 3][in][router][0]" />
+                <target send="[pe][7, 3][in][router][0]" />
+                <target send="[pe][8, 3][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 3][out][normal][0]" />
+                <source receive="[pe][2, 3][out][normal][0]" />
+                <source receive="[pe][3, 3][out][normal][0]" />
+                <source receive="[pe][4, 3][out][normal][0]" />
+                <source receive="[pe][5, 3][out][normal][0]" />
+                <source receive="[pe][6, 3][out][normal][0]" />
+                <source receive="[pe][7, 3][out][normal][0]" />
+                <source receive="[pe][8, 3][out][normal][0]" />
+                <source receive="[pe][1, 3][out][router][0]" />
+                <source receive="[pe][2, 3][out][router][0]" />
+                <source receive="[pe][3, 3][out][router][0]" />
+                <source receive="[pe][4, 3][out][router][0]" />
+                <source receive="[pe][5, 3][out][router][0]" />
+                <source receive="[pe][6, 3][out][router][0]" />
+                <source receive="[pe][7, 3][out][router][0]" />
+                <source receive="[pe][8, 3][out][router][0]" />
+                <target send="[ls][0, 3][in][normal][0]" />
+                <target send="[ls][9, 3][in][normal][0]" />
+                <target send="[ls][0, 3][in][normal][1]" />
+                <target send="[ls][9, 3][in][normal][1]" />
+                <target send="[ls][0, 3][in][router][0]" />
+                <target send="[ls][9, 3][in][router][0]" />
+            </WireNet>
+            <!-- col 4 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][0, 4][out][normal][0]" />
+                <source receive="[ls][9, 4][out][normal][0]" />
+                <source receive="[ls][0, 4][out][router][0]" />
+                <source receive="[ls][9, 4][out][router][0]" />
+                <target send="[pe][1, 4][in][normal][0]" />
+                <target send="[pe][2, 4][in][normal][0]" />
+                <target send="[pe][3, 4][in][normal][0]" />
+                <target send="[pe][4, 4][in][normal][0]" />
+                <target send="[pe][5, 4][in][normal][0]" />
+                <target send="[pe][6, 4][in][normal][0]" />
+                <target send="[pe][7, 4][in][normal][0]" />
+                <target send="[pe][8, 4][in][normal][0]" />
+                <target send="[pe][1, 4][in][normal][1]" />
+                <target send="[pe][2, 4][in][normal][1]" />
+                <target send="[pe][3, 4][in][normal][1]" />
+                <target send="[pe][4, 4][in][normal][1]" />
+                <target send="[pe][5, 4][in][normal][1]" />
+                <target send="[pe][6, 4][in][normal][1]" />
+                <target send="[pe][7, 4][in][normal][1]" />
+                <target send="[pe][8, 4][in][normal][1]" />
+                <target send="[pe][1, 4][in][router][0]" />
+                <target send="[pe][2, 4][in][router][0]" />
+                <target send="[pe][3, 4][in][router][0]" />
+                <target send="[pe][4, 4][in][router][0]" />
+                <target send="[pe][5, 4][in][router][0]" />
+                <target send="[pe][6, 4][in][router][0]" />
+                <target send="[pe][7, 4][in][router][0]" />
+                <target send="[pe][8, 4][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 4][out][normal][0]" />
+                <source receive="[pe][2, 4][out][normal][0]" />
+                <source receive="[pe][3, 4][out][normal][0]" />
+                <source receive="[pe][4, 4][out][normal][0]" />
+                <source receive="[pe][5, 4][out][normal][0]" />
+                <source receive="[pe][6, 4][out][normal][0]" />
+                <source receive="[pe][7, 4][out][normal][0]" />
+                <source receive="[pe][8, 4][out][normal][0]" />
+                <source receive="[pe][1, 4][out][router][0]" />
+                <source receive="[pe][2, 4][out][router][0]" />
+                <source receive="[pe][3, 4][out][router][0]" />
+                <source receive="[pe][4, 4][out][router][0]" />
+                <source receive="[pe][5, 4][out][router][0]" />
+                <source receive="[pe][6, 4][out][router][0]" />
+                <source receive="[pe][7, 4][out][router][0]" />
+                <source receive="[pe][8, 4][out][router][0]" />
+                <target send="[ls][0, 4][in][normal][0]" />
+                <target send="[ls][9, 4][in][normal][0]" />
+                <target send="[ls][0, 4][in][normal][1]" />
+                <target send="[ls][9, 4][in][normal][1]" />
+                <target send="[ls][0, 4][in][router][0]" />
+                <target send="[ls][9, 4][in][router][0]" />
+            </WireNet>
+            <!-- col 5 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][0, 5][out][normal][0]" />
+                <source receive="[ls][9, 5][out][normal][0]" />
+                <source receive="[ls][0, 5][out][router][0]" />
+                <source receive="[ls][9, 5][out][router][0]" />
+                <target send="[pe][1, 5][in][normal][0]" />
+                <target send="[pe][2, 5][in][normal][0]" />
+                <target send="[pe][3, 5][in][normal][0]" />
+                <target send="[pe][4, 5][in][normal][0]" />
+                <target send="[pe][5, 5][in][normal][0]" />
+                <target send="[pe][6, 5][in][normal][0]" />
+                <target send="[pe][7, 5][in][normal][0]" />
+                <target send="[pe][8, 5][in][normal][0]" />
+                <target send="[pe][1, 5][in][normal][1]" />
+                <target send="[pe][2, 5][in][normal][1]" />
+                <target send="[pe][3, 5][in][normal][1]" />
+                <target send="[pe][4, 5][in][normal][1]" />
+                <target send="[pe][5, 5][in][normal][1]" />
+                <target send="[pe][6, 5][in][normal][1]" />
+                <target send="[pe][7, 5][in][normal][1]" />
+                <target send="[pe][8, 5][in][normal][1]" />
+                <target send="[pe][1, 5][in][router][0]" />
+                <target send="[pe][2, 5][in][router][0]" />
+                <target send="[pe][3, 5][in][router][0]" />
+                <target send="[pe][4, 5][in][router][0]" />
+                <target send="[pe][5, 5][in][router][0]" />
+                <target send="[pe][6, 5][in][router][0]" />
+                <target send="[pe][7, 5][in][router][0]" />
+                <target send="[pe][8, 5][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 5][out][normal][0]" />
+                <source receive="[pe][2, 5][out][normal][0]" />
+                <source receive="[pe][3, 5][out][normal][0]" />
+                <source receive="[pe][4, 5][out][normal][0]" />
+                <source receive="[pe][5, 5][out][normal][0]" />
+                <source receive="[pe][6, 5][out][normal][0]" />
+                <source receive="[pe][7, 5][out][normal][0]" />
+                <source receive="[pe][8, 5][out][normal][0]" />
+                <source receive="[pe][1, 5][out][router][0]" />
+                <source receive="[pe][2, 5][out][router][0]" />
+                <source receive="[pe][3, 5][out][router][0]" />
+                <source receive="[pe][4, 5][out][router][0]" />
+                <source receive="[pe][5, 5][out][router][0]" />
+                <source receive="[pe][6, 5][out][router][0]" />
+                <source receive="[pe][7, 5][out][router][0]" />
+                <source receive="[pe][8, 5][out][router][0]" />
+                <target send="[ls][0, 5][in][normal][0]" />
+                <target send="[ls][9, 5][in][normal][0]" />
+                <target send="[ls][0, 5][in][normal][1]" />
+                <target send="[ls][9, 5][in][normal][1]" />
+                <target send="[ls][0, 5][in][router][0]" />
+                <target send="[ls][9, 5][in][router][0]" />
+            </WireNet>
+            <!-- col 6 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][0, 6][out][normal][0]" />
+                <source receive="[ls][9, 6][out][normal][0]" />
+                <source receive="[ls][0, 6][out][router][0]" />
+                <source receive="[ls][9, 6][out][router][0]" />
+                <target send="[pe][1, 6][in][normal][0]" />
+                <target send="[pe][2, 6][in][normal][0]" />
+                <target send="[pe][3, 6][in][normal][0]" />
+                <target send="[pe][4, 6][in][normal][0]" />
+                <target send="[pe][5, 6][in][normal][0]" />
+                <target send="[pe][6, 6][in][normal][0]" />
+                <target send="[pe][7, 6][in][normal][0]" />
+                <target send="[pe][8, 6][in][normal][0]" />
+                <target send="[pe][1, 6][in][normal][1]" />
+                <target send="[pe][2, 6][in][normal][1]" />
+                <target send="[pe][3, 6][in][normal][1]" />
+                <target send="[pe][4, 6][in][normal][1]" />
+                <target send="[pe][5, 6][in][normal][1]" />
+                <target send="[pe][6, 6][in][normal][1]" />
+                <target send="[pe][7, 6][in][normal][1]" />
+                <target send="[pe][8, 6][in][normal][1]" />
+                <target send="[pe][1, 6][in][router][0]" />
+                <target send="[pe][2, 6][in][router][0]" />
+                <target send="[pe][3, 6][in][router][0]" />
+                <target send="[pe][4, 6][in][router][0]" />
+                <target send="[pe][5, 6][in][router][0]" />
+                <target send="[pe][6, 6][in][router][0]" />
+                <target send="[pe][7, 6][in][router][0]" />
+                <target send="[pe][8, 6][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 6][out][normal][0]" />
+                <source receive="[pe][2, 6][out][normal][0]" />
+                <source receive="[pe][3, 6][out][normal][0]" />
+                <source receive="[pe][4, 6][out][normal][0]" />
+                <source receive="[pe][5, 6][out][normal][0]" />
+                <source receive="[pe][6, 6][out][normal][0]" />
+                <source receive="[pe][7, 6][out][normal][0]" />
+                <source receive="[pe][8, 6][out][normal][0]" />
+                <source receive="[pe][1, 6][out][router][0]" />
+                <source receive="[pe][2, 6][out][router][0]" />
+                <source receive="[pe][3, 6][out][router][0]" />
+                <source receive="[pe][4, 6][out][router][0]" />
+                <source receive="[pe][5, 6][out][router][0]" />
+                <source receive="[pe][6, 6][out][router][0]" />
+                <source receive="[pe][7, 6][out][router][0]" />
+                <source receive="[pe][8, 6][out][router][0]" />
+                <target send="[ls][0, 6][in][normal][0]" />
+                <target send="[ls][9, 6][in][normal][0]" />
+                <target send="[ls][0, 6][in][normal][1]" />
+                <target send="[ls][9, 6][in][normal][1]" />
+                <target send="[ls][0, 6][in][router][0]" />
+                <target send="[ls][9, 6][in][router][0]" />
+            </WireNet>
+            <!-- col 7 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][0, 7][out][normal][0]" />
+                <source receive="[ls][9, 7][out][normal][0]" />
+                <source receive="[ls][0, 7][out][router][0]" />
+                <source receive="[ls][9, 7][out][router][0]" />
+                <target send="[pe][1, 7][in][normal][0]" />
+                <target send="[pe][2, 7][in][normal][0]" />
+                <target send="[pe][3, 7][in][normal][0]" />
+                <target send="[pe][4, 7][in][normal][0]" />
+                <target send="[pe][5, 7][in][normal][0]" />
+                <target send="[pe][6, 7][in][normal][0]" />
+                <target send="[pe][7, 7][in][normal][0]" />
+                <target send="[pe][8, 7][in][normal][0]" />
+                <target send="[pe][1, 7][in][normal][1]" />
+                <target send="[pe][2, 7][in][normal][1]" />
+                <target send="[pe][3, 7][in][normal][1]" />
+                <target send="[pe][4, 7][in][normal][1]" />
+                <target send="[pe][5, 7][in][normal][1]" />
+                <target send="[pe][6, 7][in][normal][1]" />
+                <target send="[pe][7, 7][in][normal][1]" />
+                <target send="[pe][8, 7][in][normal][1]" />
+                <target send="[pe][1, 7][in][router][0]" />
+                <target send="[pe][2, 7][in][router][0]" />
+                <target send="[pe][3, 7][in][router][0]" />
+                <target send="[pe][4, 7][in][router][0]" />
+                <target send="[pe][5, 7][in][router][0]" />
+                <target send="[pe][6, 7][in][router][0]" />
+                <target send="[pe][7, 7][in][router][0]" />
+                <target send="[pe][8, 7][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 7][out][normal][0]" />
+                <source receive="[pe][2, 7][out][normal][0]" />
+                <source receive="[pe][3, 7][out][normal][0]" />
+                <source receive="[pe][4, 7][out][normal][0]" />
+                <source receive="[pe][5, 7][out][normal][0]" />
+                <source receive="[pe][6, 7][out][normal][0]" />
+                <source receive="[pe][7, 7][out][normal][0]" />
+                <source receive="[pe][8, 7][out][normal][0]" />
+                <source receive="[pe][1, 7][out][router][0]" />
+                <source receive="[pe][2, 7][out][router][0]" />
+                <source receive="[pe][3, 7][out][router][0]" />
+                <source receive="[pe][4, 7][out][router][0]" />
+                <source receive="[pe][5, 7][out][router][0]" />
+                <source receive="[pe][6, 7][out][router][0]" />
+                <source receive="[pe][7, 7][out][router][0]" />
+                <source receive="[pe][8, 7][out][router][0]" />
+                <target send="[ls][0, 7][in][normal][0]" />
+                <target send="[ls][9, 7][in][normal][0]" />
+                <target send="[ls][0, 7][in][normal][1]" />
+                <target send="[ls][9, 7][in][normal][1]" />
+                <target send="[ls][0, 7][in][router][0]" />
+                <target send="[ls][9, 7][in][router][0]" />
+            </WireNet>
+            <!-- col 8 -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[ls][0, 8][out][normal][0]" />
+                <source receive="[ls][9, 8][out][normal][0]" />
+                <source receive="[ls][0, 8][out][router][0]" />
+                <source receive="[ls][9, 8][out][router][0]" />
+                <target send="[pe][1, 8][in][normal][0]" />
+                <target send="[pe][2, 8][in][normal][0]" />
+                <target send="[pe][3, 8][in][normal][0]" />
+                <target send="[pe][4, 8][in][normal][0]" />
+                <target send="[pe][5, 8][in][normal][0]" />
+                <target send="[pe][6, 8][in][normal][0]" />
+                <target send="[pe][7, 8][in][normal][0]" />
+                <target send="[pe][8, 8][in][normal][0]" />
+                <target send="[pe][1, 8][in][normal][1]" />
+                <target send="[pe][2, 8][in][normal][1]" />
+                <target send="[pe][3, 8][in][normal][1]" />
+                <target send="[pe][4, 8][in][normal][1]" />
+                <target send="[pe][5, 8][in][normal][1]" />
+                <target send="[pe][6, 8][in][normal][1]" />
+                <target send="[pe][7, 8][in][normal][1]" />
+                <target send="[pe][8, 8][in][normal][1]" />
+                <target send="[pe][1, 8][in][router][0]" />
+                <target send="[pe][2, 8][in][router][0]" />
+                <target send="[pe][3, 8][in][router][0]" />
+                <target send="[pe][4, 8][in][router][0]" />
+                <target send="[pe][5, 8][in][router][0]" />
+                <target send="[pe][6, 8][in][router][0]" />
+                <target send="[pe][7, 8][in][router][0]" />
+                <target send="[pe][8, 8][in][router][0]" />
+            </WireNet>
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 8][out][normal][0]" />
+                <source receive="[pe][2, 8][out][normal][0]" />
+                <source receive="[pe][3, 8][out][normal][0]" />
+                <source receive="[pe][4, 8][out][normal][0]" />
+                <source receive="[pe][5, 8][out][normal][0]" />
+                <source receive="[pe][6, 8][out][normal][0]" />
+                <source receive="[pe][7, 8][out][normal][0]" />
+                <source receive="[pe][8, 8][out][normal][0]" />
+                <source receive="[pe][1, 8][out][router][0]" />
+                <source receive="[pe][2, 8][out][router][0]" />
+                <source receive="[pe][3, 8][out][router][0]" />
+                <source receive="[pe][4, 8][out][router][0]" />
+                <source receive="[pe][5, 8][out][router][0]" />
+                <source receive="[pe][6, 8][out][router][0]" />
+                <source receive="[pe][7, 8][out][router][0]" />
+                <source receive="[pe][8, 8][out][router][0]" />
+                <target send="[ls][0, 8][in][normal][0]" />
+                <target send="[ls][9, 8][in][normal][0]" />
+                <target send="[ls][0, 8][in][normal][1]" />
+                <target send="[ls][9, 8][in][normal][1]" />
+                <target send="[ls][0, 8][in][router][0]" />
+                <target send="[ls][9, 8][in][router][0]" />
+            </WireNet>
+
+            <!-- LC -->
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[lc][0, 0][out][normal][0]" />
+                <source receive="[lc][0, 9][out][normal][0]" />
+                <source receive="[lc][9, 0][out][normal][0]" />
+                <source receive="[lc][9, 9][out][normal][0]" />
+
+                <target send="[pe][1, 1][in][normal][0]" />
+                <target send="[pe][1, 2][in][normal][0]" />
+                <target send="[pe][1, 3][in][normal][0]" />
+                <target send="[pe][1, 4][in][normal][0]" />
+                <target send="[pe][1, 5][in][normal][0]" />
+                <target send="[pe][1, 6][in][normal][0]" />
+                <target send="[pe][1, 7][in][normal][0]" />
+                <target send="[pe][1, 8][in][normal][0]" />
+
+                <target send="[pe][2, 1][in][normal][0]" />
+                <target send="[pe][2, 2][in][normal][0]" />
+                <target send="[pe][2, 3][in][normal][0]" />
+                <target send="[pe][2, 4][in][normal][0]" />
+                <target send="[pe][2, 5][in][normal][0]" />
+                <target send="[pe][2, 6][in][normal][0]" />
+                <target send="[pe][2, 7][in][normal][0]" />
+                <target send="[pe][2, 8][in][normal][0]" />
+
+                <target send="[pe][3, 1][in][normal][0]" />
+                <target send="[pe][3, 2][in][normal][0]" />
+                <target send="[pe][3, 3][in][normal][0]" />
+                <target send="[pe][3, 4][in][normal][0]" />
+                <target send="[pe][3, 5][in][normal][0]" />
+                <target send="[pe][3, 6][in][normal][0]" />
+                <target send="[pe][3, 7][in][normal][0]" />
+                <target send="[pe][3, 8][in][normal][0]" />
+
+                <target send="[pe][4, 1][in][normal][0]" />
+                <target send="[pe][4, 2][in][normal][0]" />
+                <target send="[pe][4, 3][in][normal][0]" />
+                <target send="[pe][4, 4][in][normal][0]" />
+                <target send="[pe][4, 5][in][normal][0]" />
+                <target send="[pe][4, 6][in][normal][0]" />
+                <target send="[pe][4, 7][in][normal][0]" />
+                <target send="[pe][4, 8][in][normal][0]" />
+
+                <target send="[pe][5, 1][in][normal][0]" />
+                <target send="[pe][5, 2][in][normal][0]" />
+                <target send="[pe][5, 3][in][normal][0]" />
+                <target send="[pe][5, 4][in][normal][0]" />
+                <target send="[pe][5, 5][in][normal][0]" />
+                <target send="[pe][5, 6][in][normal][0]" />
+                <target send="[pe][5, 7][in][normal][0]" />
+                <target send="[pe][5, 8][in][normal][0]" />
+
+                <target send="[pe][6, 1][in][normal][0]" />
+                <target send="[pe][6, 2][in][normal][0]" />
+                <target send="[pe][6, 3][in][normal][0]" />
+                <target send="[pe][6, 4][in][normal][0]" />
+                <target send="[pe][6, 5][in][normal][0]" />
+                <target send="[pe][6, 6][in][normal][0]" />
+                <target send="[pe][6, 7][in][normal][0]" />
+                <target send="[pe][6, 8][in][normal][0]" />
+
+                <target send="[pe][7, 1][in][normal][0]" />
+                <target send="[pe][7, 2][in][normal][0]" />
+                <target send="[pe][7, 3][in][normal][0]" />
+                <target send="[pe][7, 4][in][normal][0]" />
+                <target send="[pe][7, 5][in][normal][0]" />
+                <target send="[pe][7, 6][in][normal][0]" />
+                <target send="[pe][7, 7][in][normal][0]" />
+                <target send="[pe][7, 8][in][normal][0]" />
+
+                <target send="[pe][8, 1][in][normal][0]" />
+                <target send="[pe][8, 2][in][normal][0]" />
+                <target send="[pe][8, 3][in][normal][0]" />
+                <target send="[pe][8, 4][in][normal][0]" />
+                <target send="[pe][8, 5][in][normal][0]" />
+                <target send="[pe][8, 6][in][normal][0]" />
+                <target send="[pe][8, 7][in][normal][0]" />
+                <target send="[pe][8, 8][in][normal][0]" />
+            </WireNet>
+
+            <WireNet config_mode="multi_connect">
+                <config type="d32_b1_v1" />
+                <source receive="[pe][1, 1][out][normal][0]" />
+                <source receive="[pe][1, 2][out][normal][0]" />
+                <source receive="[pe][1, 3][out][normal][0]" />
+                <source receive="[pe][1, 4][out][normal][0]" />
+                <source receive="[pe][1, 5][out][normal][0]" />
+                <source receive="[pe][1, 6][out][normal][0]" />
+                <source receive="[pe][1, 7][out][normal][0]" />
+                <source receive="[pe][1, 8][out][normal][0]" />
+
+                <source receive="[pe][2, 1][out][normal][0]" />
+                <source receive="[pe][2, 2][out][normal][0]" />
+                <source receive="[pe][2, 3][out][normal][0]" />
+                <source receive="[pe][2, 4][out][normal][0]" />
+                <source receive="[pe][2, 5][out][normal][0]" />
+                <source receive="[pe][2, 6][out][normal][0]" />
+                <source receive="[pe][2, 7][out][normal][0]" />
+                <source receive="[pe][2, 8][out][normal][0]" />
+
+                <source receive="[pe][3, 1][out][normal][0]" />
+                <source receive="[pe][3, 2][out][normal][0]" />
+                <source receive="[pe][3, 3][out][normal][0]" />
+                <source receive="[pe][3, 4][out][normal][0]" />
+                <source receive="[pe][3, 5][out][normal][0]" />
+                <source receive="[pe][3, 6][out][normal][0]" />
+                <source receive="[pe][3, 7][out][normal][0]" />
+                <source receive="[pe][3, 8][out][normal][0]" />
+
+                <source receive="[pe][4, 1][out][normal][0]" />
+                <source receive="[pe][4, 2][out][normal][0]" />
+                <source receive="[pe][4, 3][out][normal][0]" />
+                <source receive="[pe][4, 4][out][normal][0]" />
+                <source receive="[pe][4, 5][out][normal][0]" />
+                <source receive="[pe][4, 6][out][normal][0]" />
+                <source receive="[pe][4, 7][out][normal][0]" />
+                <source receive="[pe][4, 8][out][normal][0]" />
+
+                <source receive="[pe][5, 1][out][normal][0]" />
+                <source receive="[pe][5, 2][out][normal][0]" />
+                <source receive="[pe][5, 3][out][normal][0]" />
+                <source receive="[pe][5, 4][out][normal][0]" />
+                <source receive="[pe][5, 5][out][normal][0]" />
+                <source receive="[pe][5, 6][out][normal][0]" />
+                <source receive="[pe][5, 7][out][normal][0]" />
+                <source receive="[pe][5, 8][out][normal][0]" />
+
+                <source receive="[pe][6, 1][out][normal][0]" />
+                <source receive="[pe][6, 2][out][normal][0]" />
+                <source receive="[pe][6, 3][out][normal][0]" />
+                <source receive="[pe][6, 4][out][normal][0]" />
+                <source receive="[pe][6, 5][out][normal][0]" />
+                <source receive="[pe][6, 6][out][normal][0]" />
+                <source receive="[pe][6, 7][out][normal][0]" />
+                <source receive="[pe][6, 8][out][normal][0]" />
+
+                <source receive="[pe][7, 1][out][normal][0]" />
+                <source receive="[pe][7, 2][out][normal][0]" />
+                <source receive="[pe][7, 3][out][normal][0]" />
+                <source receive="[pe][7, 4][out][normal][0]" />
+                <source receive="[pe][7, 5][out][normal][0]" />
+                <source receive="[pe][7, 6][out][normal][0]" />
+                <source receive="[pe][7, 7][out][normal][0]" />
+                <source receive="[pe][7, 8][out][normal][0]" />
+
+                <source receive="[pe][8, 1][out][normal][0]" />
+                <source receive="[pe][8, 2][out][normal][0]" />
+                <source receive="[pe][8, 3][out][normal][0]" />
+                <source receive="[pe][8, 4][out][normal][0]" />
+                <source receive="[pe][8, 5][out][normal][0]" />
+                <source receive="[pe][8, 6][out][normal][0]" />
+                <source receive="[pe][8, 7][out][normal][0]" />
+                <source receive="[pe][8, 8][out][normal][0]" />
+
+                <target send="[lc][0, 0][in][normal][0]" />
+                <target send="[lc][0, 9][in][normal][0]" />
+                <target send="[lc][9, 0][in][normal][0]" />
+                <target send="[lc][9, 9][in][normal][0]" />
+
+
+                <target send="[lc][0, 0][in][normal][1]" />
+                <target send="[lc][0, 9][in][normal][1]" />
+                <target send="[lc][9, 0][in][normal][1]" />
+                <target send="[lc][9, 9][in][normal][1]" />
+
+                <target send="[lc][0, 0][in][normal][2]" />
+                <target send="[lc][0, 9][in][normal][2]" />
+                <target send="[lc][9, 0][in][normal][2]" />
+                <target send="[lc][9, 9][in][normal][2]" />
+
+                <target send="[lc][0, 0][in][normal][3]" />
+                <target send="[lc][0, 9][in][normal][3]" />
+                <target send="[lc][9, 0][in][normal][3]" />
+                <target send="[lc][9, 9][in][normal][3]" />
+
+                <target send="[lc][0, 0][in][normal][4]" />
+                <target send="[lc][0, 9][in][normal][4]" />
+                <target send="[lc][9, 0][in][normal][4]" />
+                <target send="[lc][9, 9][in][normal][4]" />
+
+                <target send="[lc][0, 0][in][normal][5]" />
+                <target send="[lc][0, 9][in][normal][5]" />
+                <target send="[lc][9, 0][in][normal][5]" />
+                <target send="[lc][9, 9][in][normal][5]" />
+
+                <target send="[lc][0, 0][in][normal][6]" />
+                <target send="[lc][0, 9][in][normal][6]" />
+                <target send="[lc][9, 0][in][normal][6]" />
+                <target send="[lc][9, 9][in][normal][6]" />
+
+                <target send="[lc][0, 0][in][normal][7]" />
+                <target send="[lc][0, 9][in][normal][7]" />
+                <target send="[lc][9, 0][in][normal][7]" />
+                <target send="[lc][9, 9][in][normal][7]" />
+            </WireNet>
+
+        </WireNetConfig>
+
+    </NetConfig>
+</Config>
