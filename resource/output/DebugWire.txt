@@ -339,7 +339,7 @@ pe0         output0  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              1
+              1              0              1
 --------LC 1 clk 2--------
    this is step3
       bufferout  0  10  0  0
@@ -369,7 +369,9 @@ lc1df_cnt 1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
+              0              0              0              0
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 2--------
    this is step3
       bufferout  1  10  0  0
@@ -504,8 +506,8 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 3--------
    this is step3
       bufferout  0  10  0  0
@@ -640,8 +642,8 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 4--------
    this is step3
       bufferout  0  10  0  0
@@ -776,8 +778,8 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 5--------
    this is step3
       bufferout  0  10  0  0
@@ -881,7 +883,8 @@ pe0         output0  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              0              1
+              0              0              1
+lc1.1 stall reason is pe0.0
 --------LC 1 clk 6--------
    this is step3
       bufferout  1  10  2  0
@@ -912,8 +915,8 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 6--------
    this is step3
       bufferout  0  10  0  0
@@ -1011,7 +1014,7 @@ pe0         output0  1  10  0  0
         alu_out  0  10  0  0
           lastflag0
    this is step1
-    input_port0  1  11  3  0
+    input_port0  0  10  0  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
@@ -1020,14 +1023,14 @@ pe0         output0  1  10  0  0
               1              0              1
 --------LC 1 clk 7--------
    this is step3
-      bufferout  1  10  3  0
-        stepout  0  10  0  0
-        combout  1  10  0  0
-lc1       lc_output  1  11  3  0
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
-      loopbegin  0  10  0  0
+      loopbegin  1  10  0  0
          muxout  0  10  0  0
    this is step1
      reg_input0  0  10  0  0
@@ -1043,12 +1046,13 @@ lc1df_cnt 1
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
-lc01stall reason ispe01
+              0              0              0              0
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 7--------
    this is step3
       bufferout  0  10  0  0
@@ -1146,20 +1150,20 @@ pe0         output0  0  10  0  0
         alu_out  1  10  1  0
           lastflag0
    this is step1
-    input_port0  0  10  0  0
+    input_port0  1  11  3  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
               0              0              1
-lc11stall reason ispe00
+lc1.1 stall reason is pe0.0
 --------LC 1 clk 8--------
    this is step3
-      bufferout  0  10  0  0
-        stepout  0  10  1  0
-        combout  0  10  0  1
-lc1       lc_output  0  10  0  0
+      bufferout  1  10  3  0
+        stepout  0  10  0  0
+        combout  1  10  0  0
+lc1       lc_output  1  11  3  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
@@ -1179,12 +1183,12 @@ lc1df_cnt 1
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              0              1              1
+              1              1              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
-lc01stall reason ispe01
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 8--------
    this is step3
       bufferout  0  10  0  0
@@ -1314,12 +1318,12 @@ lc1df_cnt 1
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
-lc01stall reason ispe01
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 9--------
    this is step3
       bufferout  0  10  0  0
@@ -1454,7 +1458,7 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
-lc01stall reason ispe01
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 10--------
    this is step3
       bufferout  0  10  0  0
@@ -1501,7 +1505,7 @@ lse1       input_pe0  0  10  0  0
      match_tag       0
 lse0        outport2  0  10  0  0
    this is step1
-lse0       input_pe0  1  10  1  0
+lse0       input_pe0  0  10  0  0
    this is bp
       nextpe_bp0
               1
@@ -1528,7 +1532,7 @@ pe1         output0  0  10  0  0
    this is step1
     input_port0  0  10  0  0
     input_port1  1  10  3  0
-    input_port2  1  10  1  0
+    input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
@@ -1553,7 +1557,7 @@ pe0         output0  1  10  3  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  10  1  0
+    input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -1566,12 +1570,12 @@ pe0         output0  1  10  3  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 2
+lc1df_cnt 1
    this is step2
       loopbegin  0  10  0  0
          muxout  0  10  0  0
    this is step1
-     reg_input0  1  10  1  0
+     reg_input0  0  10  0  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
@@ -1591,15 +1595,15 @@ lc1df_cnt 2
               1              0              0              0
 --------LC 0 clk 11--------
    this is step3
-      bufferout  1  10  1  0
-        stepout  1  10  2  0
-        combout  1  10  0  1
-lc0       lc_output  1  10  1  0
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc0       lc_output  0  10  0  0
 lc0      lc_output3  0  10  0  0
 lc0df_cnt 0
    this is step2
       loopbegin  1  10  0  0
-         muxout  1  10  2  0
+         muxout  0  10  0  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -1614,7 +1618,7 @@ lc0df_cnt 0
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
@@ -1635,7 +1639,7 @@ lse1       input_pe0  0  10  0  0
      match_tag       0
 lse0        outport2  0  10  0  0
    this is step1
-lse0       input_pe0  0  10  0  0
+lse0       input_pe0  1  10  1  0
    this is bp
       nextpe_bp0
               1
@@ -1662,7 +1666,7 @@ pe1         output0  0  10  0  0
    this is step1
     input_port0  0  10  0  0
     input_port1  0  10  0  0
-    input_port2  0  10  0  0
+    input_port2  1  10  1  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
@@ -1674,7 +1678,7 @@ pe0         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
-        regout1  1  10  1  0
+        regout1  1  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
@@ -1687,7 +1691,7 @@ pe0         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  0  10  0  0
+    input_port1  1  10  1  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -1702,10 +1706,10 @@ lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 2
    this is step2
-      loopbegin  1  10  0  1
-         muxout  1  10  0  0
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
    this is step1
-     reg_input0  0  10  0  0
+     reg_input0  1  10  1  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
@@ -1723,20 +1727,20 @@ lc1df_cnt 2
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe12
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
+lc0.1 stall reason is pe1.2
 --------LC 0 clk 12--------
    this is step3
-      bufferout  0  10  0  0
-        stepout  0  10  1  0
-        combout  0  10  0  1
-lc0       lc_output  0  10  0  0
+      bufferout  1  10  1  0
+        stepout  1  10  2  0
+        combout  1  10  0  1
+lc0       lc_output  1  10  1  0
 lc0      lc_output3  0  10  0  0
 lc0df_cnt 0
    this is step2
       loopbegin  1  10  0  0
-         muxout  0  10  0  0
+         muxout  1  10  2  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -1751,7 +1755,7 @@ lc0df_cnt 0
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              0              1              1
+              1              1              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
@@ -1823,7 +1827,7 @@ pe0         output0  1  11  3  0
         alu_out  0  10  0  0
           lastflag0
    this is step1
-    input_port0  1  10  0  0
+    input_port0  0  10  0  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
@@ -1832,15 +1836,15 @@ pe0         output0  1  11  3  0
               1              0              1
 --------LC 1 clk 13--------
    this is step3
-      bufferout  1  10  0  0
-        stepout  1  10  1  0
-        combout  1  10  0  1
-lc1       lc_output  1  10  0  0
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 1
+lc1df_cnt 2
    this is step2
-      loopbegin  1  10  0  0
-         muxout  1  10  1  0
+      loopbegin  1  10  0  1
+         muxout  1  10  0  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -1860,9 +1864,9 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe12
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
+lc0.1 stall reason is pe1.2
 --------LC 0 clk 13--------
    this is step3
       bufferout  0  10  0  0
@@ -1952,15 +1956,15 @@ pe0         output0  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size1
-          oprand_collected1
-         aluin0  1  10  0  0
-         aluin1  1  10  1  0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
          aluin2  0  10  0  0
         alu_out  0  10  0  0
           lastflag0
    this is step1
-    input_port0  1  10  1  0
+    input_port0  1  10  0  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
@@ -1969,15 +1973,15 @@ pe0         output0  0  10  0  0
               1              0              1
 --------LC 1 clk 14--------
    this is step3
-      bufferout  1  10  1  0
-        stepout  1  10  2  0
+      bufferout  1  10  0  0
+        stepout  1  10  1  0
         combout  1  10  0  1
-lc1       lc_output  1  10  1  0
+lc1       lc_output  1  10  0  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
       loopbegin  1  10  0  0
-         muxout  1  10  2  0
+         muxout  1  10  1  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -1997,8 +2001,8 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 14--------
    this is step3
       bufferout  0  10  0  0
@@ -2088,15 +2092,15 @@ pe0         output0  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size0
-          oprand_collected0
-         aluin0  0  10  0  0
-         aluin1  0  10  0  0
+          pipeline size1
+          oprand_collected1
+         aluin0  1  10  0  0
+         aluin1  1  10  1  0
          aluin2  0  10  0  0
-        alu_out  1  10  1  0
+        alu_out  0  10  0  0
           lastflag0
    this is step1
-    input_port0  1  10  2  0
+    input_port0  1  10  1  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
@@ -2105,15 +2109,15 @@ pe0         output0  0  10  0  0
               1              0              1
 --------LC 1 clk 15--------
    this is step3
-      bufferout  1  10  2  0
-        stepout  1  10  3  0
+      bufferout  1  10  1  0
+        stepout  1  10  2  0
         combout  1  10  0  1
-lc1       lc_output  1  10  2  0
+lc1       lc_output  1  10  1  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
       loopbegin  1  10  0  0
-         muxout  1  10  3  0
+         muxout  1  10  2  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -2133,8 +2137,8 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 15--------
    this is step3
       bufferout  0  10  0  0
@@ -2207,7 +2211,7 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  10  1  0
+    input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -2216,7 +2220,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 16--------
 valid control data bool
    this is step3
-pe0         output0  1  10  1  0
+pe0         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -2224,38 +2228,39 @@ pe0         output0  1  10  1  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size1
-          oprand_collected1
-         aluin0  1  10  1  0
-         aluin1  1  10  1  0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  0  10  0  0
+        alu_out  1  10  1  0
           lastflag0
    this is step1
-    input_port0  1  11  3  0
+    input_port0  1  10  2  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              0              1
+              0              0              1
+lc1.1 stall reason is pe0.0
 --------LC 1 clk 16--------
    this is step3
-      bufferout  1  10  3  0
-        stepout  0  10  0  0
-        combout  1  10  0  0
-lc1       lc_output  1  11  3  0
+      bufferout  1  10  2  0
+        stepout  1  10  3  0
+        combout  1  10  0  1
+lc1       lc_output  1  10  2  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
-      loopbegin  0  10  0  0
-         muxout  0  10  0  0
+      loopbegin  1  10  0  0
+         muxout  1  10  3  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  10  1  0
+     end_input0  0  10  0  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -2268,8 +2273,9 @@ lc1df_cnt 1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
-lc01stall reason ispe01
+              0              0              0              0
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 16--------
    this is step3
       bufferout  0  10  0  0
@@ -2342,7 +2348,7 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  0  10  0  0
+    input_port1  1  10  1  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -2351,7 +2357,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 17--------
 valid control data bool
    this is step3
-pe0         output0  0  10  0  0
+pe0         output0  1  10  1  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -2359,12 +2365,12 @@ pe0         output0  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size0
-          oprand_collected0
-         aluin0  0  10  0  0
-         aluin1  0  10  0  0
+          pipeline size1
+          oprand_collected1
+         aluin0  1  10  1  0
+         aluin1  1  10  1  0
          aluin2  0  10  0  0
-        alu_out  1  10  2  0
+        alu_out  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
@@ -2373,8 +2379,7 @@ pe0         output0  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              0              0              1
-lc11stall reason ispe00
+              1              0              1
 --------LC 1 clk 17--------
    this is step3
       bufferout  0  10  0  0
@@ -2384,14 +2389,14 @@ lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
-      loopbegin  0  10  0  0
+      loopbegin  1  10  0  0
          muxout  0  10  0  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  0  10  0  0
+     end_input0  1  10  1  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -2404,8 +2409,9 @@ lc1df_cnt 1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
-lc01stall reason ispe01
+              0              0              0              0
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 17--------
    this is step3
       bufferout  0  10  0  0
@@ -2478,7 +2484,7 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  10  2  0
+    input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -2487,7 +2493,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 18--------
 valid control data bool
    this is step3
-pe0         output0  1  10  2  0
+pe0         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -2495,27 +2501,28 @@ pe0         output0  1  10  2  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size1
-          oprand_collected1
-         aluin0  1  10  2  0
-         aluin1  1  10  2  0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  0  10  0  0
+        alu_out  1  10  2  0
           lastflag0
    this is step1
-    input_port0  0  10  0  0
+    input_port0  1  11  3  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              0              1
+              0              0              1
+lc1.1 stall reason is pe0.0
 --------LC 1 clk 18--------
    this is step3
-      bufferout  0  10  0  0
-        stepout  0  10  1  0
-        combout  0  10  0  1
-lc1       lc_output  0  10  0  0
+      bufferout  1  10  3  0
+        stepout  0  10  0  0
+        combout  1  10  0  0
+lc1       lc_output  1  11  3  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
@@ -2526,7 +2533,7 @@ lc1df_cnt 1
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  10  2  0
+     end_input0  0  10  0  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -2540,7 +2547,7 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
-lc01stall reason ispe01
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 18--------
    this is step3
       bufferout  0  10  0  0
@@ -2613,7 +2620,7 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  0  10  0  0
+    input_port1  1  10  2  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -2622,7 +2629,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 19--------
 valid control data bool
    this is step3
-pe0         output0  0  10  0  0
+pe0         output0  1  10  2  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -2630,12 +2637,12 @@ pe0         output0  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size0
-          oprand_collected0
-         aluin0  0  10  0  0
-         aluin1  0  10  0  0
+          pipeline size1
+          oprand_collected1
+         aluin0  1  10  2  0
+         aluin1  1  10  2  0
          aluin2  0  10  0  0
-        alu_out  1  10  4  0
+        alu_out  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
@@ -2661,7 +2668,7 @@ lc1df_cnt 1
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  0  10  0  0
+     end_input0  1  10  2  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -2670,12 +2677,12 @@ lc1df_cnt 1
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
-lc01stall reason ispe01
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 19--------
    this is step3
       bufferout  0  10  0  0
@@ -2722,7 +2729,7 @@ lse1       input_pe0  0  10  0  0
      match_tag       0
 lse0        outport2  0  10  0  0
    this is step1
-lse0       input_pe0  1  10  2  0
+lse0       input_pe0  0  10  0  0
    this is bp
       nextpe_bp0
               1
@@ -2748,8 +2755,8 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  10  4  0
-    input_port2  1  10  2  0
+    input_port1  0  10  0  0
+    input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
@@ -2757,7 +2764,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 20--------
 valid control data bool
    this is step3
-pe0         output0  1  10  4  0
+pe0         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -2765,21 +2772,21 @@ pe0         output0  1  10  4  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size1
-          oprand_collected1
-         aluin0  1  11  3  0
-         aluin1  1  10  4  0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  0  10  0  0
+        alu_out  1  10  4  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  10  2  0
+    input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              1
+              1              0              1
 --------LC 1 clk 20--------
    this is step3
       bufferout  0  10  0  0
@@ -2787,40 +2794,10 @@ pe0         output0  1  10  4  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 2
+lc1df_cnt 1
    this is step2
       loopbegin  0  10  0  0
          muxout  0  10  0  0
-   this is step1
-     reg_input0  1  10  2  0
-     reg_input1  0  10  0  0
-     reg_input2  0  10  0  0
-     reg_input3  0  10  0  0
-     end_input0  1  10  4  0
-     end_input1  0  10  0  0
-     end_input2  0  10  0  0
-     end_input3  0  10  0  0
-     end_input4  0  10  0  0
-     end_input5  0  10  0  0
-     end_input6  0  10  0  0
-     end_input7  0  10  0  0
-         nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
-     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
-              1              1              1              1              1              1              1              1
-     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
---------LC 0 clk 20--------
-   this is step3
-      bufferout  1  10  2  0
-        stepout  1  10  3  0
-        combout  1  10  0  1
-lc0       lc_output  1  10  2  0
-lc0      lc_output3  0  10  0  0
-lc0df_cnt 0
-   this is step2
-      loopbegin  1  10  0  0
-         muxout  1  10  3  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -2836,6 +2813,37 @@ lc0df_cnt 0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
               1              1              1              1
+     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
+              1              1              1              1              1              1              1              1
+     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
+              1              0              0              0
+lc0.1 stall reason is pe0.1
+--------LC 0 clk 20--------
+   this is step3
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc0       lc_output  0  10  0  0
+lc0      lc_output3  0  10  0  0
+lc0df_cnt 0
+   this is step2
+      loopbegin  1  10  0  0
+         muxout  0  10  0  0
+   this is step1
+     reg_input0  0  10  0  0
+     reg_input1  0  10  0  0
+     reg_input2  0  10  0  0
+     reg_input3  0  10  0  0
+     end_input0  0  10  0  0
+     end_input1  0  10  0  0
+     end_input2  0  10  0  0
+     end_input3  0  10  0  0
+     end_input4  0  10  0  0
+     end_input5  0  10  0  0
+     end_input6  0  10  0  0
+     end_input7  0  10  0  0
+         nextbp0         nextbp1         nextbp2         nextbp3
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
@@ -2882,29 +2890,29 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  0  10  0  0
+    input_port1  1  10  4  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              0
+              1              1              1
 --------PE 0 clk 21--------
 valid control data bool
    this is step3
-pe0         output0  0  10  0  0
+pe0         output0  1  10  4  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
-        regout1  1  10  2  0
+        regout1  1  10  1  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size0
-          oprand_collected0
-         aluin0  0  10  0  0
-         aluin1  0  10  0  0
+          pipeline size1
+          oprand_collected1
+         aluin0  1  11  3  0
+         aluin1  1  10  4  0
          aluin2  0  10  0  0
-        alu_out  1  11  4  0
+        alu_out  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
@@ -2913,7 +2921,7 @@ pe0         output0  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              0              1
+              1              1              1
 --------LC 1 clk 21--------
    this is step3
       bufferout  0  10  0  0
@@ -2921,16 +2929,16 @@ pe0         output0  0  10  0  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 2
+lc1df_cnt 1
    this is step2
-      loopbegin  1  10  0  1
-         muxout  1  10  0  0
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  0  10  0  0
+     end_input0  1  10  4  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -2943,10 +2951,7 @@ lc1df_cnt 2
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              0              0              0              0
-lc01stall reason ispe12
-lc01stall reason ispe01
-lc01stall reason islc10
+              1              0              0              0
 --------LC 0 clk 21--------
    this is step3
       bufferout  0  10  0  0
@@ -2993,7 +2998,7 @@ lse1       input_pe0  0  10  0  0
      match_tag       0
 lse0        outport2  0  10  0  0
    this is step1
-lse0       input_pe0  0  10  0  0
+lse0       input_pe0  1  10  2  0
    this is bp
       nextpe_bp0
               1
@@ -3019,8 +3024,8 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  11  4  0
-    input_port2  0  10  0  0
+    input_port1  0  10  0  0
+    input_port2  1  10  2  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
@@ -3028,11 +3033,11 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 22--------
 valid control data bool
    this is step3
-pe0         output0  1  11  4  0
+pe0         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
-        regout1  1  10  2  0
+        regout1  1  10  1  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
@@ -3041,11 +3046,11 @@ pe0         output0  1  11  4  0
          aluin0  0  10  0  0
          aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  0  10  0  0
+        alu_out  1  11  4  0
           lastflag0
    this is step1
-    input_port0  1  10  0  0
-    input_port1  0  10  0  0
+    input_port0  0  10  0  0
+    input_port1  1  10  2  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -3053,21 +3058,21 @@ pe0         output0  1  11  4  0
               1              0              1
 --------LC 1 clk 22--------
    this is step3
-      bufferout  1  10  0  0
-        stepout  1  10  1  0
-        combout  1  10  0  1
-lc1       lc_output  1  10  0  0
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 1
+lc1df_cnt 2
    this is step2
-      loopbegin  1  10  0  0
-         muxout  1  10  1  0
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
    this is step1
-     reg_input0  0  10  0  0
+     reg_input0  1  10  2  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  11  4  0
+     end_input0  0  10  0  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -3081,20 +3086,20 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe12
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
+lc0.1 stall reason is pe1.2
 --------LC 0 clk 22--------
    this is step3
-      bufferout  0  10  0  0
-        stepout  0  10  1  0
-        combout  0  10  0  1
-lc0       lc_output  0  10  0  0
+      bufferout  1  10  2  0
+        stepout  1  10  3  0
+        combout  1  10  0  1
+lc0       lc_output  1  10  2  0
 lc0      lc_output3  0  10  0  0
 lc0df_cnt 0
    this is step2
       loopbegin  1  10  0  0
-         muxout  0  10  0  0
+         muxout  1  10  3  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -3109,7 +3114,7 @@ lc0df_cnt 0
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              0              1              1
+              1              1              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
@@ -3141,18 +3146,44 @@ valid control data bool
    this is step3
 pe1         output0  0  10  0  0
    this is step2
-        control  1  10  1  0
+        control  0  10  0  0
         regout0  0  10  0  0
         regout1  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
           pipeline size0
-          oprand_collected1
+          oprand_collected0
          aluin0  0  10  0  0
-         aluin1  1  10  4  0
-         aluin2  1  10  1  0
-        alu_out  1  10  4  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  1  11  4  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              0
+--------PE 0 clk 23--------
+valid control data bool
+   this is step3
+pe0         output0  1  11  4  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  1  10  2  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
@@ -3161,50 +3192,24 @@ pe1         output0  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              1
---------PE 0 clk 23--------
-valid control data bool
-   this is step3
-pe0         output0  0  10  0  0
-   this is step2
-        control  0  10  0  0
-        regout0  0  10  0  0
-        regout1  1  10  2  0
-        regout2  0  10  0  0
-    break_state0    break_state1    break_state2
-              0              0              0
-          pipeline size1
-          oprand_collected1
-         aluin0  1  10  0  0
-         aluin1  1  10  2  0
-         aluin2  0  10  0  0
-        alu_out  0  10  0  0
-          lastflag0
-   this is step1
-    input_port0  1  10  1  0
-    input_port1  0  10  0  0
-    input_port2  0  10  0  0
-        next_bp0
-              1
-      thispe_bp0      thispe_bp1      thispe_bp2
               1              0              1
 --------LC 1 clk 23--------
    this is step3
-      bufferout  1  10  1  0
-        stepout  1  10  2  0
-        combout  1  10  0  1
-lc1       lc_output  1  10  1  0
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 1
+lc1df_cnt 2
    this is step2
-      loopbegin  1  10  0  0
-         muxout  1  10  2  0
+      loopbegin  1  10  0  1
+         muxout  1  10  0  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  0  10  0  0
+     end_input0  1  11  4  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -3218,8 +3223,9 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
+lc0.1 stall reason is pe1.2
 --------LC 0 clk 23--------
    this is step3
       bufferout  0  10  0  0
@@ -3255,7 +3261,7 @@ lc0df_cnt 0
      match_tag       4294967295
 lse1        outport2  0  10  0  0
    this is step1
-lse1       input_pe0  1  10  4  0
+lse1       input_pe0  0  10  0  0
    this is bp
       nextpe_bp0
               1
@@ -3275,20 +3281,20 @@ lse0       input_pe0  0  10  0  0
 --------PE 1 clk 24--------
 valid control data bool
    this is step3
-pe1         output0  1  10  4  0
+pe1         output0  0  10  0  0
    this is step2
-        control  0  10  0  0
+        control  1  10  1  0
         regout0  0  10  0  0
         regout1  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
           pipeline size0
-          oprand_collected0
+          oprand_collected1
          aluin0  0  10  0  0
-         aluin1  0  10  0  0
-         aluin2  0  10  0  0
-        alu_out  0  10  0  0
+         aluin1  1  10  4  0
+         aluin2  1  10  1  0
+        alu_out  1  10  4  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
@@ -3314,10 +3320,10 @@ pe0         output0  0  10  0  0
          aluin0  0  10  0  0
          aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  1  10  2  0
+        alu_out  0  10  0  0
           lastflag0
    this is step1
-    input_port0  1  10  2  0
+    input_port0  1  10  0  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
@@ -3326,15 +3332,15 @@ pe0         output0  0  10  0  0
               1              0              1
 --------LC 1 clk 24--------
    this is step3
-      bufferout  1  10  2  0
-        stepout  1  10  3  0
+      bufferout  1  10  0  0
+        stepout  1  10  1  0
         combout  1  10  0  1
-lc1       lc_output  1  10  2  0
+lc1       lc_output  1  10  0  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
       loopbegin  1  10  0  0
-         muxout  1  10  3  0
+         muxout  1  10  1  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -3354,8 +3360,8 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               0              0              0              0
-lc01stall reason ispe01
-lc01stall reason islc10
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 24--------
    this is step3
       bufferout  0  10  0  0
@@ -3388,10 +3394,10 @@ lc0df_cnt 0
               0              0              0              0
 --------SE 1 clk 25--------
    this is step2
-     match_tag       1
-lse1        outport2  1  10  4  0
+     match_tag       4294967295
+lse1        outport2  0  10  0  0
    this is step1
-lse1       input_pe0  0  10  0  0
+lse1       input_pe0  1  10  4  0
    this is bp
       nextpe_bp0
               1
@@ -3400,7 +3406,7 @@ lse1       input_pe0  0  10  0  0
 --------SE 0 clk 25--------
    this is step2
      match_tag       0
-lse0        outport2  1  10  1  0
+lse0        outport2  0  10  0  0
    this is step1
 lse0       input_pe0  0  10  0  0
    this is bp
@@ -3411,7 +3417,7 @@ lse0       input_pe0  0  10  0  0
 --------PE 1 clk 25--------
 valid control data bool
    this is step3
-pe1         output0  0  10  0  0
+pe1         output0  1  10  4  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -3428,7 +3434,7 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  10  2  0
+    input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -3437,7 +3443,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 25--------
 valid control data bool
    this is step3
-pe0         output0  1  10  2  0
+pe0         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -3447,13 +3453,13 @@ pe0         output0  1  10  2  0
               0              0              0
           pipeline size1
           oprand_collected1
-         aluin0  1  10  1  0
+         aluin0  1  10  0  0
          aluin1  1  10  2  0
          aluin2  0  10  0  0
         alu_out  0  10  0  0
           lastflag0
    this is step1
-    input_port0  1  11  3  0
+    input_port0  1  10  1  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
@@ -3462,21 +3468,21 @@ pe0         output0  1  10  2  0
               1              0              1
 --------LC 1 clk 25--------
    this is step3
-      bufferout  1  10  3  0
-        stepout  0  10  0  0
-        combout  1  10  0  0
-lc1       lc_output  1  11  3  0
+      bufferout  1  10  1  0
+        stepout  1  10  2  0
+        combout  1  10  0  1
+lc1       lc_output  1  10  1  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
-      loopbegin  0  10  0  0
-         muxout  0  10  0  0
+      loopbegin  1  10  0  0
+         muxout  1  10  2  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  10  2  0
+     end_input0  0  10  0  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -3489,8 +3495,9 @@ lc1df_cnt 1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
-lc01stall reason ispe01
+              0              0              0              0
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 25--------
    this is step3
       bufferout  0  10  0  0
@@ -3507,7 +3514,7 @@ lc0df_cnt 0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  10  4  0
+     end_input0  0  10  0  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -3523,8 +3530,8 @@ lc0df_cnt 0
               0              0              0              0
 --------SE 1 clk 26--------
    this is step2
-     match_tag       4294967295
-lse1        outport2  0  10  0  0
+     match_tag       1
+lse1        outport2  1  10  4  0
    this is step1
 lse1       input_pe0  0  10  0  0
    this is bp
@@ -3535,7 +3542,7 @@ lse1       input_pe0  0  10  0  0
 --------SE 0 clk 26--------
    this is step2
      match_tag       0
-lse0        outport2  0  10  0  0
+lse0        outport2  1  10  1  0
    this is step1
 lse0       input_pe0  0  10  0  0
    this is bp
@@ -3585,28 +3592,28 @@ pe0         output0  0  10  0  0
          aluin0  0  10  0  0
          aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  1  10  3  0
+        alu_out  1  10  2  0
           lastflag0
    this is step1
-    input_port0  0  10  0  0
+    input_port0  1  10  2  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
               0              0              1
-lc11stall reason ispe00
+lc1.1 stall reason is pe0.0
 --------LC 1 clk 26--------
    this is step3
-      bufferout  0  10  0  0
-        stepout  0  10  1  0
-        combout  0  10  0  1
-lc1       lc_output  0  10  0  0
+      bufferout  1  10  2  0
+        stepout  1  10  3  0
+        combout  1  10  0  1
+lc1       lc_output  1  10  2  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
-      loopbegin  0  10  0  0
-         muxout  0  10  0  0
+      loopbegin  1  10  0  0
+         muxout  1  10  3  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -3621,12 +3628,13 @@ lc1df_cnt 1
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              0              1              1
+              1              1              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
-lc01stall reason ispe01
+              0              0              0              0
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 26--------
    this is step3
       bufferout  0  10  0  0
@@ -3643,7 +3651,7 @@ lc0df_cnt 0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  0  10  0  0
+     end_input0  1  10  4  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -3699,7 +3707,7 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  10  3  0
+    input_port1  1  10  2  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -3708,7 +3716,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 27--------
 valid control data bool
    this is step3
-pe0         output0  1  10  3  0
+pe0         output0  1  10  2  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -3718,8 +3726,8 @@ pe0         output0  1  10  3  0
               0              0              0
           pipeline size1
           oprand_collected1
-         aluin0  1  10  2  0
-         aluin1  1  10  3  0
+         aluin0  1  10  1  0
+         aluin1  1  10  2  0
          aluin2  0  10  0  0
         alu_out  0  10  0  0
           lastflag0
@@ -3740,14 +3748,14 @@ lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
-      loopbegin  0  10  0  0
+      loopbegin  1  10  0  0
          muxout  0  10  0  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  10  3  0
+     end_input0  1  10  2  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -3756,12 +3764,13 @@ lc1df_cnt 1
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
-lc01stall reason ispe01
+              0              0              0              0
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 27--------
    this is step3
       bufferout  0  10  0  0
@@ -3856,22 +3865,23 @@ pe0         output0  0  10  0  0
          aluin0  0  10  0  0
          aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  1  10  5  0
+        alu_out  1  10  3  0
           lastflag0
    this is step1
-    input_port0  0  10  0  0
+    input_port0  1  11  3  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              0              1
+              0              0              1
+lc1.1 stall reason is pe0.0
 --------LC 1 clk 28--------
    this is step3
-      bufferout  0  10  0  0
-        stepout  0  10  1  0
-        combout  0  10  0  1
-lc1       lc_output  0  10  0  0
+      bufferout  1  10  3  0
+        stepout  0  10  0  0
+        combout  1  10  0  0
+lc1       lc_output  1  11  3  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
@@ -3896,7 +3906,7 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
-lc01stall reason ispe01
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 28--------
    this is step3
       bufferout  0  10  0  0
@@ -3943,7 +3953,7 @@ lse1       input_pe0  0  10  0  0
      match_tag       0
 lse0        outport2  0  10  0  0
    this is step1
-lse0       input_pe0  1  11  3  0
+lse0       input_pe0  0  10  0  0
    this is bp
       nextpe_bp0
               1
@@ -3969,8 +3979,8 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  10  5  0
-    input_port2  1  11  3  0
+    input_port1  1  10  3  0
+    input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
@@ -3978,7 +3988,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 29--------
 valid control data bool
    this is step3
-pe0         output0  1  10  5  0
+pe0         output0  1  10  3  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -3988,19 +3998,19 @@ pe0         output0  1  10  5  0
               0              0              0
           pipeline size1
           oprand_collected1
-         aluin0  1  11  3  0
-         aluin1  1  10  5  0
+         aluin0  1  10  2  0
+         aluin1  1  10  3  0
          aluin2  0  10  0  0
         alu_out  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  11  3  0
+    input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              1
+              1              0              1
 --------LC 1 clk 29--------
    this is step3
       bufferout  0  10  0  0
@@ -4008,16 +4018,16 @@ pe0         output0  1  10  5  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 2
+lc1df_cnt 1
    this is step2
       loopbegin  0  10  0  0
          muxout  0  10  0  0
    this is step1
-     reg_input0  1  11  3  0
+     reg_input0  0  10  0  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  10  5  0
+     end_input0  1  10  3  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -4026,21 +4036,22 @@ lc1df_cnt 2
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 29--------
    this is step3
-      bufferout  1  10  3  0
-        stepout  0  10  0  0
-        combout  1  10  0  0
-lc0       lc_output  1  11  3  0
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc0       lc_output  0  10  0  0
 lc0      lc_output3  0  10  0  0
 lc0df_cnt 0
    this is step2
-      loopbegin  0  10  0  0
+      loopbegin  1  10  0  0
          muxout  0  10  0  0
    this is step1
      reg_input0  0  10  0  0
@@ -4056,11 +4067,11 @@ lc0df_cnt 0
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
+              0              0              0              0
 --------SE 1 clk 30--------
    this is step2
      match_tag       4294967295
@@ -4108,7 +4119,7 @@ pe1         output0  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              0
+              1              1              1
 --------PE 0 clk 30--------
 valid control data bool
    this is step3
@@ -4116,7 +4127,7 @@ pe0         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
-        regout1  1  10  3  0
+        regout1  1  10  2  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
@@ -4125,7 +4136,7 @@ pe0         output0  0  10  0  0
          aluin0  0  10  0  0
          aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  1  11  5  0
+        alu_out  1  10  5  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
@@ -4142,10 +4153,10 @@ pe0         output0  0  10  0  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 2
+lc1df_cnt 1
    this is step2
-      loopbegin  1  10  0  1
-         muxout  1  01  0  0
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
@@ -4164,10 +4175,8 @@ lc1df_cnt 2
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              0              0              0              0
-lc01stall reason ispe12
-lc01stall reason ispe01
-lc01stall reason islc10
+              1              0              0              0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 30--------
    this is step3
       bufferout  0  10  0  0
@@ -4177,7 +4186,7 @@ lc0       lc_output  0  10  0  0
 lc0      lc_output3  0  10  0  0
 lc0df_cnt 0
    this is step2
-      loopbegin  0  10  0  0
+      loopbegin  1  10  0  0
          muxout  0  10  0  0
    this is step1
      reg_input0  0  10  0  0
@@ -4197,7 +4206,7 @@ lc0df_cnt 0
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
+              0              0              0              0
 --------SE 1 clk 31--------
    this is step2
      match_tag       4294967295
@@ -4240,44 +4249,44 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  11  5  0
+    input_port1  1  10  5  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              0
+              1              1              1
 --------PE 0 clk 31--------
 valid control data bool
    this is step3
-pe0         output0  1  11  5  0
+pe0         output0  1  10  5  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
-        regout1  1  10  3  0
+        regout1  1  10  2  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size0
-          oprand_collected0
-         aluin0  0  10  0  0
-         aluin1  0  10  0  0
+          pipeline size1
+          oprand_collected1
+         aluin0  1  11  3  0
+         aluin1  1  10  5  0
          aluin2  0  10  0  0
         alu_out  0  10  0  0
           lastflag0
    this is step1
-    input_port0  1  01  0  0
+    input_port0  0  10  0  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              0              1
+              1              1              1
 --------LC 1 clk 31--------
    this is step3
-      bufferout  1  01  0  0
-        stepout  0  10  0  0
-        combout  1  10  0  1
-lc1       lc_output  1  01  0  0
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
 lc1df_cnt 1
    this is step2
@@ -4288,7 +4297,7 @@ lc1df_cnt 1
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  11  5  0
+     end_input0  1  10  5  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -4302,8 +4311,6 @@ lc1df_cnt 1
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
-lc01stall reason ispe12
-lc01stall reason ispe01
 --------LC 0 clk 31--------
    this is step3
       bufferout  0  10  0  0
@@ -4313,7 +4320,7 @@ lc0       lc_output  0  10  0  0
 lc0      lc_output3  0  10  0  0
 lc0df_cnt 0
    this is step2
-      loopbegin  0  10  0  0
+      loopbegin  1  10  0  0
          muxout  0  10  0  0
    this is step1
      reg_input0  0  10  0  0
@@ -4333,7 +4340,7 @@ lc0df_cnt 0
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
+              0              0              0              0
 --------SE 1 clk 32--------
    this is step2
      match_tag       4294967295
@@ -4350,7 +4357,7 @@ lse1       input_pe0  0  10  0  0
      match_tag       0
 lse0        outport2  0  10  0  0
    this is step1
-lse0       input_pe0  0  10  0  0
+lse0       input_pe0  1  11  3  0
    this is bp
       nextpe_bp0
               1
@@ -4361,27 +4368,27 @@ valid control data bool
    this is step3
 pe1         output0  0  10  0  0
    this is step2
-        control  1  10  2  0
+        control  0  10  0  0
         regout0  0  10  0  0
         regout1  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
           pipeline size0
-          oprand_collected1
+          oprand_collected0
          aluin0  0  10  0  0
-         aluin1  1  10  5  0
-         aluin2  1  10  2  0
-        alu_out  1  10  5  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
     input_port1  0  10  0  0
-    input_port2  0  10  0  0
+    input_port2  1  11  3  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              1
+              1              1              0
 --------PE 0 clk 32--------
 valid control data bool
    this is step3
@@ -4389,25 +4396,25 @@ pe0         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
-        regout1  1  10  3  0
+        regout1  1  10  2  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size1
-          oprand_collected1
-         aluin0  1  01  0  0
-         aluin1  1  11  3  0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  0  10  0  0
+        alu_out  1  11  5  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  0  10  0  0
+    input_port1  1  11  3  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              1
+              1              0              1
 --------LC 1 clk 32--------
    this is step3
       bufferout  0  10  0  0
@@ -4415,12 +4422,12 @@ pe0         output0  0  10  0  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 1
+lc1df_cnt 2
    this is step2
       loopbegin  0  10  0  0
          muxout  0  10  0  0
    this is step1
-     reg_input0  0  10  0  0
+     reg_input0  1  11  3  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
@@ -4437,13 +4444,16 @@ lc1df_cnt 1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
+              0              0              0              0
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
+lc0.1 stall reason is pe1.2
 --------LC 0 clk 32--------
    this is step3
-      bufferout  0  10  0  0
-        stepout  0  10  1  0
-        combout  0  10  0  1
-lc0       lc_output  0  10  0  0
+      bufferout  1  10  3  0
+        stepout  0  10  0  0
+        combout  1  10  0  0
+lc0       lc_output  1  11  3  0
 lc0      lc_output3  0  10  0  0
 lc0df_cnt 0
    this is step2
@@ -4473,7 +4483,7 @@ lc0df_cnt 0
      match_tag       4294967295
 lse1        outport2  0  10  0  0
    this is step1
-lse1       input_pe0  1  10  5  0
+lse1       input_pe0  0  10  0  0
    this is bp
       nextpe_bp0
               1
@@ -4493,11 +4503,37 @@ lse0       input_pe0  0  10  0  0
 --------PE 1 clk 33--------
 valid control data bool
    this is step3
-pe1         output0  1  10  5  0
+pe1         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
         regout1  0  10  0  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  1  11  5  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              0
+--------PE 0 clk 33--------
+valid control data bool
+   this is step3
+pe0         output0  1  11  5  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  1  10  3  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
@@ -4515,33 +4551,7 @@ pe1         output0  1  10  5  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              1
---------PE 0 clk 33--------
-valid control data bool
-   this is step3
-pe0         output0  0  10  0  0
-   this is step2
-        control  0  10  0  0
-        regout0  0  10  0  0
-        regout1  1  10  3  0
-        regout2  0  10  0  0
-    break_state0    break_state1    break_state2
-              0              0              0
-          pipeline size0
-          oprand_collected0
-         aluin0  0  10  0  0
-         aluin1  0  10  0  0
-         aluin2  0  10  0  0
-        alu_out  1  01  3  0
-          lastflag0
-   this is step1
-    input_port0  0  10  0  0
-    input_port1  0  10  0  0
-    input_port2  0  10  0  0
-        next_bp0
-              1
-      thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              1
+              1              0              1
 --------LC 1 clk 33--------
    this is step3
       bufferout  0  10  0  0
@@ -4549,16 +4559,16 @@ pe0         output0  0  10  0  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 1
+lc1df_cnt 2
    this is step2
-      loopbegin  0  10  0  0
-         muxout  0  10  0  0
+      loopbegin  1  10  0  1
+         muxout  1  01  0  0
    this is step1
      reg_input0  0  10  0  0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  0  10  0  0
+     end_input0  1  11  5  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -4571,7 +4581,10 @@ lc1df_cnt 1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
-              1              0              0              0
+              0              0              0              0
+lc0.1 stall reason is lc1.0
+lc0.1 stall reason is pe0.1
+lc0.1 stall reason is pe1.2
 --------LC 0 clk 33--------
    this is step3
       bufferout  0  10  0  0
@@ -4597,15 +4610,15 @@ lc0df_cnt 0
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
 --------SE 1 clk 34--------
    this is step2
-     match_tag       2
-lse1        outport2  1  10  5  0
+     match_tag       4294967295
+lse1        outport2  0  10  0  0
    this is step1
 lse1       input_pe0  0  10  0  0
    this is bp
@@ -4616,7 +4629,7 @@ lse1       input_pe0  0  10  0  0
 --------SE 0 clk 34--------
    this is step2
      match_tag       0
-lse0        outport2  1  10  2  0
+lse0        outport2  0  10  0  0
    this is step1
 lse0       input_pe0  0  10  0  0
    this is bp
@@ -4629,22 +4642,22 @@ valid control data bool
    this is step3
 pe1         output0  0  10  0  0
    this is step2
-        control  0  10  0  0
+        control  1  10  2  0
         regout0  0  10  0  0
         regout1  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
           pipeline size0
-          oprand_collected0
+          oprand_collected1
          aluin0  0  10  0  0
-         aluin1  0  10  0  0
-         aluin2  0  10  0  0
-        alu_out  0  10  0  0
+         aluin1  1  10  5  0
+         aluin2  1  10  2  0
+        alu_out  1  10  5  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  1  01  3  0
+    input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -4653,7 +4666,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 34--------
 valid control data bool
    this is step3
-pe0         output0  1  01  3  0
+pe0         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -4669,21 +4682,21 @@ pe0         output0  1  01  3  0
         alu_out  0  10  0  0
           lastflag0
    this is step1
-    input_port0  0  10  0  0
+    input_port0  1  01  0  0
     input_port1  0  10  0  0
     input_port2  0  10  0  0
         next_bp0
               1
       thispe_bp0      thispe_bp1      thispe_bp2
-              1              1              1
+              1              0              1
 --------LC 1 clk 34--------
    this is step3
-      bufferout  0  10  0  0
-        stepout  0  10  1  0
-        combout  0  10  0  1
-lc1       lc_output  0  10  0  0
-lc1      lc_output3  1  11  0  1
-lc1df_cnt 0
+      bufferout  1  01  0  0
+        stepout  0  10  0  0
+        combout  1  10  0  1
+lc1       lc_output  1  01  0  0
+lc1      lc_output3  0  10  0  0
+lc1df_cnt 1
    this is step2
       loopbegin  0  10  0  0
          muxout  0  10  0  0
@@ -4692,7 +4705,7 @@ lc1df_cnt 0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  01  3  0
+     end_input0  0  10  0  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -4706,6 +4719,7 @@ lc1df_cnt 0
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
+lc0.1 stall reason is pe0.1
 --------LC 0 clk 34--------
    this is step3
       bufferout  0  10  0  0
@@ -4722,7 +4736,7 @@ lc0df_cnt 0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  10  5  0
+     end_input0  0  10  0  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -4731,7 +4745,7 @@ lc0df_cnt 0
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
@@ -4741,7 +4755,7 @@ lc0df_cnt 0
      match_tag       4294967295
 lse1        outport2  0  10  0  0
    this is step1
-lse1       input_pe0  0  10  0  0
+lse1       input_pe0  1  10  5  0
    this is bp
       nextpe_bp0
               1
@@ -4761,20 +4775,20 @@ lse0       input_pe0  0  10  0  0
 --------PE 1 clk 35--------
 valid control data bool
    this is step3
-pe1         output0  0  10  0  0
+pe1         output0  1  10  5  0
    this is step2
-        control  1  11  3  0
+        control  0  10  0  0
         regout0  0  10  0  0
         regout1  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
           pipeline size0
-          oprand_collected1
+          oprand_collected0
          aluin0  0  10  0  0
-         aluin1  1  00  3  0
-         aluin2  1  11  3  0
-        alu_out  1  01  3  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
@@ -4795,10 +4809,10 @@ pe0         output0  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
-          pipeline size0
-          oprand_collected0
-         aluin0  0  10  0  0
-         aluin1  0  10  0  0
+          pipeline size1
+          oprand_collected1
+         aluin0  1  01  0  0
+         aluin1  1  11  3  0
          aluin2  0  10  0  0
         alu_out  0  10  0  0
           lastflag0
@@ -4817,7 +4831,7 @@ pe0         output0  0  10  0  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 0
+lc1df_cnt 1
    this is step2
       loopbegin  0  10  0  0
          muxout  0  10  0  0
@@ -4865,17 +4879,17 @@ lc0df_cnt 0
      end_input6  0  10  0  0
      end_input7  0  10  0  0
          nextbp0         nextbp1         nextbp2         nextbp3
-              1              1              1              1
+              1              0              1              1
      thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
 --------SE 1 clk 36--------
    this is step2
-     match_tag       4294967295
-lse1        outport2  0  10  0  0
+     match_tag       2
+lse1        outport2  1  10  5  0
    this is step1
-lse1       input_pe0  1  01  3  0
+lse1       input_pe0  0  10  0  0
    this is bp
       nextpe_bp0
               1
@@ -4884,7 +4898,7 @@ lse1       input_pe0  1  01  3  0
 --------SE 0 clk 36--------
    this is step2
      match_tag       0
-lse0        outport2  0  10  0  0
+lse0        outport2  1  10  2  0
    this is step1
 lse0       input_pe0  0  10  0  0
    this is bp
@@ -4895,7 +4909,7 @@ lse0       input_pe0  0  10  0  0
 --------PE 1 clk 36--------
 valid control data bool
    this is step3
-pe1         output0  1  01  3  0
+pe1         output0  0  10  0  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -4934,7 +4948,7 @@ pe0         output0  0  10  0  0
          aluin0  0  10  0  0
          aluin1  0  10  0  0
          aluin2  0  10  0  0
-        alu_out  0  10  0  0
+        alu_out  1  01  3  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
@@ -4951,7 +4965,7 @@ pe0         output0  0  10  0  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 0
+lc1df_cnt 1
    this is step2
       loopbegin  0  10  0  0
          muxout  0  10  0  0
@@ -4990,7 +5004,7 @@ lc0df_cnt 0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  0  10  0  0
+     end_input0  1  10  5  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -5006,8 +5020,8 @@ lc0df_cnt 0
               1              0              0              0
 --------SE 1 clk 37--------
    this is step2
-     match_tag       3
-lse1        outport2  1  01  3  0
+     match_tag       4294967295
+lse1        outport2  0  10  0  0
    this is step1
 lse1       input_pe0  0  10  0  0
    this is bp
@@ -5018,7 +5032,7 @@ lse1       input_pe0  0  10  0  0
 --------SE 0 clk 37--------
    this is step2
      match_tag       0
-lse0        outport2  1  11  3  0
+lse0        outport2  0  10  0  0
    this is step1
 lse0       input_pe0  0  10  0  0
    this is bp
@@ -5046,7 +5060,7 @@ pe1         output0  0  10  0  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
-    input_port1  0  10  0  0
+    input_port1  1  01  3  0
     input_port2  0  10  0  0
         next_bp0
               1
@@ -5055,7 +5069,7 @@ pe1         output0  0  10  0  0
 --------PE 0 clk 37--------
 valid control data bool
    this is step3
-pe0         output0  0  10  0  0
+pe0         output0  1  01  3  0
    this is step2
         control  0  10  0  0
         regout0  0  10  0  0
@@ -5085,7 +5099,7 @@ pe0         output0  0  10  0  0
         combout  0  10  0  1
 lc1       lc_output  0  10  0  0
 lc1      lc_output3  0  10  0  0
-lc1df_cnt 0
+lc1df_cnt 1
    this is step2
       loopbegin  0  10  0  0
          muxout  0  10  0  0
@@ -5094,7 +5108,7 @@ lc1df_cnt 0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  0  10  0  0
+     end_input0  1  01  3  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -5124,7 +5138,7 @@ lc0df_cnt 0
      reg_input1  0  10  0  0
      reg_input2  0  10  0  0
      reg_input3  0  10  0  0
-     end_input0  1  01  3  0
+     end_input0  0  10  0  0
      end_input1  0  10  0  0
      end_input2  0  10  0  0
      end_input3  0  10  0  0
@@ -5165,18 +5179,18 @@ valid control data bool
    this is step3
 pe1         output0  0  10  0  0
    this is step2
-        control  0  10  0  0
+        control  1  11  3  0
         regout0  0  10  0  0
         regout1  0  10  0  0
         regout2  0  10  0  0
     break_state0    break_state1    break_state2
               0              0              0
           pipeline size0
-          oprand_collected0
+          oprand_collected1
          aluin0  0  10  0  0
-         aluin1  0  10  0  0
-         aluin2  0  10  0  0
-        alu_out  0  10  0  0
+         aluin1  1  00  3  0
+         aluin2  1  11  3  0
+        alu_out  1  01  3  0
           lastflag0
    this is step1
     input_port0  0  10  0  0
@@ -5248,6 +5262,542 @@ lc1df_cnt 0
         stepout  0  10  1  0
         combout  0  10  0  1
 lc0       lc_output  0  10  0  0
+lc0      lc_output3  0  10  0  0
+lc0df_cnt 0
+   this is step2
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
+   this is step1
+     reg_input0  0  10  0  0
+     reg_input1  0  10  0  0
+     reg_input2  0  10  0  0
+     reg_input3  0  10  0  0
+     end_input0  0  10  0  0
+     end_input1  0  10  0  0
+     end_input2  0  10  0  0
+     end_input3  0  10  0  0
+     end_input4  0  10  0  0
+     end_input5  0  10  0  0
+     end_input6  0  10  0  0
+     end_input7  0  10  0  0
+         nextbp0         nextbp1         nextbp2         nextbp3
+              1              1              1              1
+     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
+              1              1              1              1              1              1              1              1
+     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
+              1              0              0              0
+--------SE 1 clk 39--------
+   this is step2
+     match_tag       4294967295
+lse1        outport2  0  10  0  0
+   this is step1
+lse1       input_pe0  1  01  3  0
+   this is bp
+      nextpe_bp0
+              1
+        this_bp0
+              1
+--------SE 0 clk 39--------
+   this is step2
+     match_tag       0
+lse0        outport2  0  10  0  0
+   this is step1
+lse0       input_pe0  0  10  0  0
+   this is bp
+      nextpe_bp0
+              1
+        this_bp0
+              1
+--------PE 1 clk 39--------
+valid control data bool
+   this is step3
+pe1         output0  1  01  3  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  0  10  0  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  0  10  0  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              1
+--------PE 0 clk 39--------
+valid control data bool
+   this is step3
+pe0         output0  0  10  0  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  1  10  3  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  0  10  0  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              1
+--------LC 1 clk 39--------
+   this is step3
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc1       lc_output  0  10  0  0
+lc1      lc_output3  1  11  0  1
+lc1df_cnt 0
+   this is step2
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
+   this is step1
+     reg_input0  0  10  0  0
+     reg_input1  0  10  0  0
+     reg_input2  0  10  0  0
+     reg_input3  0  10  0  0
+     end_input0  0  10  0  0
+     end_input1  0  10  0  0
+     end_input2  0  10  0  0
+     end_input3  0  10  0  0
+     end_input4  0  10  0  0
+     end_input5  0  10  0  0
+     end_input6  0  10  0  0
+     end_input7  0  10  0  0
+         nextbp0         nextbp1         nextbp2         nextbp3
+              1              1              1              1
+     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
+              1              1              1              1              1              1              1              1
+     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
+              1              0              0              0
+--------LC 0 clk 39--------
+   this is step3
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc0       lc_output  0  10  0  0
+lc0      lc_output3  0  10  0  0
+lc0df_cnt 0
+   this is step2
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
+   this is step1
+     reg_input0  0  10  0  0
+     reg_input1  0  10  0  0
+     reg_input2  0  10  0  0
+     reg_input3  0  10  0  0
+     end_input0  0  10  0  0
+     end_input1  0  10  0  0
+     end_input2  0  10  0  0
+     end_input3  0  10  0  0
+     end_input4  0  10  0  0
+     end_input5  0  10  0  0
+     end_input6  0  10  0  0
+     end_input7  0  10  0  0
+         nextbp0         nextbp1         nextbp2         nextbp3
+              1              1              1              1
+     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
+              1              1              1              1              1              1              1              1
+     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
+              1              0              0              0
+--------SE 1 clk 40--------
+   this is step2
+     match_tag       3
+lse1        outport2  1  01  3  0
+   this is step1
+lse1       input_pe0  0  10  0  0
+   this is bp
+      nextpe_bp0
+              1
+        this_bp0
+              1
+--------SE 0 clk 40--------
+   this is step2
+     match_tag       0
+lse0        outport2  1  11  3  0
+   this is step1
+lse0       input_pe0  0  10  0  0
+   this is bp
+      nextpe_bp0
+              1
+        this_bp0
+              1
+--------PE 1 clk 40--------
+valid control data bool
+   this is step3
+pe1         output0  0  10  0  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  0  10  0  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  0  10  0  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              1
+--------PE 0 clk 40--------
+valid control data bool
+   this is step3
+pe0         output0  0  10  0  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  1  10  3  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  0  10  0  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              1
+--------LC 1 clk 40--------
+   this is step3
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc1       lc_output  0  10  0  0
+lc1      lc_output3  0  10  0  0
+lc1df_cnt 0
+   this is step2
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
+   this is step1
+     reg_input0  0  10  0  0
+     reg_input1  0  10  0  0
+     reg_input2  0  10  0  0
+     reg_input3  0  10  0  0
+     end_input0  0  10  0  0
+     end_input1  0  10  0  0
+     end_input2  0  10  0  0
+     end_input3  0  10  0  0
+     end_input4  0  10  0  0
+     end_input5  0  10  0  0
+     end_input6  0  10  0  0
+     end_input7  0  10  0  0
+         nextbp0         nextbp1         nextbp2         nextbp3
+              1              1              1              1
+     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
+              1              1              1              1              1              1              1              1
+     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
+              1              0              0              0
+--------LC 0 clk 40--------
+   this is step3
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc0       lc_output  0  10  0  0
+lc0      lc_output3  0  10  0  0
+lc0df_cnt 0
+   this is step2
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
+   this is step1
+     reg_input0  0  10  0  0
+     reg_input1  0  10  0  0
+     reg_input2  0  10  0  0
+     reg_input3  0  10  0  0
+     end_input0  1  01  3  0
+     end_input1  0  10  0  0
+     end_input2  0  10  0  0
+     end_input3  0  10  0  0
+     end_input4  0  10  0  0
+     end_input5  0  10  0  0
+     end_input6  0  10  0  0
+     end_input7  0  10  0  0
+         nextbp0         nextbp1         nextbp2         nextbp3
+              1              1              1              1
+     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
+              1              1              1              1              1              1              1              1
+     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
+              1              0              0              0
+--------SE 1 clk 41--------
+   this is step2
+     match_tag       4294967295
+lse1        outport2  0  10  0  0
+   this is step1
+lse1       input_pe0  0  10  0  0
+   this is bp
+      nextpe_bp0
+              1
+        this_bp0
+              1
+--------SE 0 clk 41--------
+   this is step2
+     match_tag       0
+lse0        outport2  0  10  0  0
+   this is step1
+lse0       input_pe0  0  10  0  0
+   this is bp
+      nextpe_bp0
+              1
+        this_bp0
+              1
+--------PE 1 clk 41--------
+valid control data bool
+   this is step3
+pe1         output0  0  10  0  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  0  10  0  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  0  10  0  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              1
+--------PE 0 clk 41--------
+valid control data bool
+   this is step3
+pe0         output0  0  10  0  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  1  10  3  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  0  10  0  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              1
+--------LC 1 clk 41--------
+   this is step3
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc1       lc_output  0  10  0  0
+lc1      lc_output3  0  10  0  0
+lc1df_cnt 0
+   this is step2
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
+   this is step1
+     reg_input0  0  10  0  0
+     reg_input1  0  10  0  0
+     reg_input2  0  10  0  0
+     reg_input3  0  10  0  0
+     end_input0  0  10  0  0
+     end_input1  0  10  0  0
+     end_input2  0  10  0  0
+     end_input3  0  10  0  0
+     end_input4  0  10  0  0
+     end_input5  0  10  0  0
+     end_input6  0  10  0  0
+     end_input7  0  10  0  0
+         nextbp0         nextbp1         nextbp2         nextbp3
+              1              1              1              1
+     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
+              1              1              1              1              1              1              1              1
+     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
+              1              0              0              0
+--------LC 0 clk 41--------
+   this is step3
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc0       lc_output  0  10  0  0
+lc0      lc_output3  0  10  0  0
+lc0df_cnt 0
+   this is step2
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
+   this is step1
+     reg_input0  0  10  0  0
+     reg_input1  0  10  0  0
+     reg_input2  0  10  0  0
+     reg_input3  0  10  0  0
+     end_input0  0  10  0  0
+     end_input1  0  10  0  0
+     end_input2  0  10  0  0
+     end_input3  0  10  0  0
+     end_input4  0  10  0  0
+     end_input5  0  10  0  0
+     end_input6  0  10  0  0
+     end_input7  0  10  0  0
+         nextbp0         nextbp1         nextbp2         nextbp3
+              1              1              1              1
+     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
+              1              1              1              1              1              1              1              1
+     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
+              1              0              0              0
+--------SE 1 clk 42--------
+   this is step2
+     match_tag       4294967295
+lse1        outport2  0  10  0  0
+   this is step1
+lse1       input_pe0  0  10  0  0
+   this is bp
+      nextpe_bp0
+              1
+        this_bp0
+              1
+--------SE 0 clk 42--------
+   this is step2
+     match_tag       0
+lse0        outport2  0  10  0  0
+   this is step1
+lse0       input_pe0  0  10  0  0
+   this is bp
+      nextpe_bp0
+              1
+        this_bp0
+              1
+--------PE 1 clk 42--------
+valid control data bool
+   this is step3
+pe1         output0  0  10  0  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  0  10  0  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  0  10  0  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              1
+--------PE 0 clk 42--------
+valid control data bool
+   this is step3
+pe0         output0  0  10  0  0
+   this is step2
+        control  0  10  0  0
+        regout0  0  10  0  0
+        regout1  1  10  3  0
+        regout2  0  10  0  0
+    break_state0    break_state1    break_state2
+              0              0              0
+          pipeline size0
+          oprand_collected0
+         aluin0  0  10  0  0
+         aluin1  0  10  0  0
+         aluin2  0  10  0  0
+        alu_out  0  10  0  0
+          lastflag0
+   this is step1
+    input_port0  0  10  0  0
+    input_port1  0  10  0  0
+    input_port2  0  10  0  0
+        next_bp0
+              1
+      thispe_bp0      thispe_bp1      thispe_bp2
+              1              1              1
+--------LC 1 clk 42--------
+   this is step3
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc1       lc_output  0  10  0  0
+lc1      lc_output3  0  10  0  0
+lc1df_cnt 0
+   this is step2
+      loopbegin  0  10  0  0
+         muxout  0  10  0  0
+   this is step1
+     reg_input0  0  10  0  0
+     reg_input1  0  10  0  0
+     reg_input2  0  10  0  0
+     reg_input3  0  10  0  0
+     end_input0  0  10  0  0
+     end_input1  0  10  0  0
+     end_input2  0  10  0  0
+     end_input3  0  10  0  0
+     end_input4  0  10  0  0
+     end_input5  0  10  0  0
+     end_input6  0  10  0  0
+     end_input7  0  10  0  0
+         nextbp0         nextbp1         nextbp2         nextbp3
+              1              1              1              1
+     thisbp_end0     thisbp_end1     thisbp_end2     thisbp_end3     thisbp_end4     thisbp_end5     thisbp_end6     thisbp_end7
+              1              1              1              1              1              1              1              1
+     thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
+              1              0              0              0
+--------LC 0 clk 42--------
+   this is step3
+      bufferout  0  10  0  0
+        stepout  0  10  1  0
+        combout  0  10  0  1
+lc0       lc_output  0  10  0  0
 lc0      lc_output3  1  11  0  1
 lc0df_cnt 0
    this is step2
@@ -5272,4 +5822,3 @@ lc0df_cnt 0
               1              1              1              1              1              1              1              1
      thisbp_reg0     thisbp_reg1     thisbp_reg2     thisbp_reg3
               1              0              0              0
-clk38

@@ -15,6 +15,14 @@ namespace Simulator::Array
 		Port_inout() { value_bool = false; value_data = 0; valid = false; condition = true; last = false; }//初始情况下condition为true
 		Port_inout(bool valueb, int valued, bool valid_, bool cond, bool last_)
 		: value_bool(valueb), value_data(valued), valid(valid_), condition(cond), last(last_){}
+		//Port_inout& operator=(Port_inout& rhs) {
+		//	this->value_bool = rhs.value_bool;
+		//	this->value_data = rhs.value_data;
+		//	this->valid = rhs.valid;
+		//	this->condition = rhs.value_bool;
+		//	this->last = rhs.last;
+		//	return *this;
+		//}
 		void reset() { value_bool = false; value_data = 0; valid = false; condition = true; last = false; };
 	};
 

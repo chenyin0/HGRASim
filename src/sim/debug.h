@@ -11,7 +11,7 @@ namespace Simulator::Array
 		std::ofstream regfile;
 		std::ofstream portfile;
 		std::ofstream lseRegfile;
-		std::ofstream reDufile;
+		std::ofstream dataFlowfile;
 	public:
 		friend Singleton<Debug>;
 		uint debug_level;
@@ -152,7 +152,7 @@ namespace Simulator::Array
 			print_file_begin(0), print_file_end(10000), print_file_interval(1) {
 			const auto& system_para = Preprocess::Para::getInstance()->getArrayPara();
 			debug_level = system_para.debug_level;
-			regfile.open(".\\resource\\output\\DebugReg.txt"); portfile.open(".\\resource\\output\\DebugWire.txt"); lseRegfile.open(".\\resource\\output\\Debuglseout.txt");reDufile.open(".\\resource\\output\\Debugredout.txt");
+			regfile.open(".\\resource\\output\\DebugReg.txt"); portfile.open(".\\resource\\output\\DebugWire.txt"); lseRegfile.open(".\\resource\\output\\Debuglseout.txt");dataFlowfile.open(".\\resource\\output\\dataflow.txt");
 //			regfile.open("F:\\lab\\reconfig\\HGRA5\\resource\\DebugReg.txt"); portfile.open("F:\\lab\\reconfig\\HGRA5\\resource\\DebugWire.txt");
 	//	F:\lab\reconfig\HGRA5\resource
 		}
@@ -167,5 +167,6 @@ namespace Simulator::Array
 		std::ofstream& getRegFile() { return regfile; }
 		std::ofstream& getPortFile() { return portfile; }
 		std::ofstream& getLseFile() { return lseRegfile;}
+		std::ofstream& getdataFlowFile() { return dataFlowfile; }
 	};
 }

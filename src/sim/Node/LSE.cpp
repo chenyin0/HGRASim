@@ -8,7 +8,7 @@ Loadstore_element::Loadstore_element(const Simulator::Preprocess::ArrayPara para
 	this->lsu = lsu;
 	this->index = index;
 	inbuffer = Buffer_factory::createLseInBuffer(para);
-	outbuffer = Buffer_factory::createLseBuffer(para);
+	//outbuffer = Buffer_factory::createLseBuffer(para,attribution);
 	tag_counter = 0;
 	nextpe_bp.resize(system_parameter.le_dataout_breadth + system_parameter.le_boolout_breadth);
 	input_port_pe.resize(system_parameter.lse_boolin_breadth + system_parameter.lse_datain_breadth);
@@ -17,6 +17,7 @@ Loadstore_element::Loadstore_element(const Simulator::Preprocess::ArrayPara para
 	auto dict = Preprocess::DFG::getInstance()->getDictionary();
 	auto ls_vec = dict.find(Simulator::NodeType::ls)->second;
 	attribution = dynamic_cast<const Preprocess::DFGNode<Simulator::NodeType::ls>*>(ls_vec[index]);
+	outbuffer = Buffer_factory::createLseBuffer(para, attribution->size);
 	inbuffer_bp = Bp_factory::createLseBp(para, this);
 	outbuffer_bp = Bp_factory::createLseBp(para, this);
 	break_state.resize(system_parameter.lse_boolin_breadth + system_parameter.lse_datain_breadth);
@@ -33,11 +34,11 @@ Loadstore_element::~Loadstore_element()
 }
 void Loadstore_element::update()
 {
-//	simStep2();
-//	simStep1();
+	simStep2();
+	simStep1();
 	simBp();
-	print();
-	wireReset();
+//	print();
+//	wireReset();
 }
 
 void Loadstore_element::attachLsu(Lsu* lsu_)
@@ -56,6 +57,7 @@ void Loadstore_element::wireReset()
 	for (auto& i : input_port_lsu)//////////这里需要上一周期的lsu的输入信号，因此在step1用完了这个信号之后再清空，这是其自己的内部信号
 		i.reset();
 	output_port_2lsu.reset();//////////////////////////////////////////////这个地方需要reset吗////////////
+	output_port_2array.reset();
 	//output_port_2array.reset();////////////////////不能把out reset，不然收不到数/////////////////////////////////////////////
 	//output_port_2lc.reset();
 	//vector<Bool> this_bp;         //bp线由于每周期更新且没有valid位，不需要reset
@@ -63,9 +65,9 @@ void Loadstore_element::wireReset()
 	//Bool nextlsu_bp;
 	//uint sended_tag;
 }
-void Loadstore_element::outReset() {
-	output_port_2array.reset();
-}
+//void Loadstore_element::outReset() {
+//	output_port_2array.reset();
+//}
 
 void Loadstore_element::lseReset() {
 	for (auto& i : input_port_lsu)//////////这里需要上一周期的lsu的输入信号，因此在step1用完了这个信号之后再清空，这是其自己的内部信号
@@ -111,7 +113,11 @@ void Loadstore_element::leSimStep1(uint i)
 	//	}
 	//}
 }
-
+void Loadstore_element::leSimStep1()
+{
+	for (uint i = 0; i < input_port_pe.size(); ++i)
+		leSimStep1(i);
+}
 void Loadstore_element::seSimStep1(uint i)
 {
 	//get input from pe
@@ -148,13 +154,14 @@ void Loadstore_element::seSimStep1(uint i)
 //	}
 }
 
-
+void Loadstore_element::seSimStep1()
+{
+	for (uint i = 0; i < input_port_pe.size(); ++i)
+		seSimStep1(i);
+}
 //getinput to buffer
 void Loadstore_element::simStep1(uint i)
 {
-	//le
-
-
 	if (attribution->ls_mode != LSMode::dummy) {
 		if (attribution->ls_mode == LSMode::load)
 		{
@@ -170,6 +177,28 @@ void Loadstore_element::simStep1(uint i)
 	{ 
 		DEBUG_ASSERT(i == 0);
 		outbuffer->input(input_port_pe[i], i);
+	}
+
+}
+
+void Loadstore_element::simStep1()
+{
+	if (attribution->ls_mode != LSMode::dummy) {
+		if (attribution->ls_mode == LSMode::load)
+		{
+			leSimStep1();
+		}
+		//se
+		else if (attribution->ls_mode == LSMode::store_addr || attribution->ls_mode == LSMode::store_data)
+		{
+			seSimStep1();
+		}
+	}
+	else
+	{
+	//	DEBUG_ASSERT(i == 0);
+		for (uint i = 0; i < input_port_pe.size(); ++i)
+			outbuffer->input(input_port_pe[i], i);
 	}
 
 }

@@ -279,9 +279,11 @@
   <ItemGroup>
     <Text Include="..\..\项目源码理解\ConditionCase\01_ConditionCase\MemoryInFile.txt" />
     <Text Include="resource\backupFile\KNN.txt" />
+    <Text Include="resource\output\dataflow.txt" />
     <Text Include="resource\output\Debuglseout.txt" />
     <Text Include="resource\output\DebugReg.txt" />
     <Text Include="resource\output\DebugWire.txt" />
+    <Text Include="resource\output\wholedata.txt" />
     <Text Include="resource\output\wholeDebuglseout.txt" />
     <Text Include="resource\output\wholeDebugReg.txt" />
     <Text Include="resource\output\wholeDebugWire.txt" />

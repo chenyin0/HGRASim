@@ -681,26 +681,51 @@ Bufferlse_in::Bufferlse_in(const Simulator::Preprocess::ArrayPara para):Buffer_i
 
 	ack = { false };
 }
-
-Bufferlse_out::Bufferlse_out(const Simulator::Preprocess::ArrayPara para):Buffer_out(para)
-{   
-	/*
-    switch(attribution->size)
-    {
+Bufferlse_out::Bufferlse_out(const Simulator::Preprocess::ArrayPara para, Simulator::BufferSize size) :Buffer_out(para)
+{
+	switch (size)
+	{
 	case BufferSize::small:
-		depth = le_outbuffer_depth_small;
+		depth = system_parameter.le_outbuffer_depth_small;
 		break;
 	case BufferSize::middle:
-		depth = le_outbuffer_depth_middle;
+		depth = system_parameter.le_outbuffer_depth_middle;
 		break;
 	case BufferSize::large:
-		depth = le_outbuffer_depth_large;
+		depth = system_parameter.le_outbuffer_depth_large;
 		break;
 	default:
 		DEBUG_ASSERT(false);
-    }
-	*/
-	depth = system_parameter.le_outbuffer_depth_large;
+	}
+
+//	depth = system_parameter.le_outbuffer_depth_large;
+	databreadth = system_parameter.le_dataout_breadth;
+	boolbreadth = system_parameter.le_boolout_breadth;
+	entity.resize(depth);
+	head_ptr.resize(databreadth + boolbreadth);
+
+	for (auto it = entity.begin(); it < entity.end(); ++it)
+		it->resize(databreadth + boolbreadth);
+
+	tail_ptr.resize(databreadth + boolbreadth);
+	head_ptr.resize(databreadth + boolbreadth);
+	port_empty.resize(databreadth + boolbreadth);
+	port_full.resize(databreadth + boolbreadth);
+
+	for (auto& i : port_full)
+		i = false;
+	for (auto& i : port_empty)
+		i = true;
+	for (auto& i : tail_ptr)
+		i = 0;
+	for (auto& i : head_ptr)
+		i = 0;
+
+	ack = { false };
+}
+Bufferlse_out::Bufferlse_out(const Simulator::Preprocess::ArrayPara para):Buffer_out(para)
+{   	
+	depth = system_parameter.le_outbuffer_depth_middle;
 	databreadth = system_parameter.le_dataout_breadth;
 	boolbreadth = system_parameter.le_boolout_breadth;
 	entity.resize(depth);

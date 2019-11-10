@@ -57,7 +57,12 @@ namespace Simulator
 		ack,
 		credit
 	};
-
+	enum class stallType
+	{
+		none,
+		inbuffer_stall,
+		step_stall
+	};
 	enum class ControlMode
 	{
 		data_flow,

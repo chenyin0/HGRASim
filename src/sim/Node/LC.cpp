@@ -12,7 +12,7 @@ LoopControl::LoopControl(const Simulator::Preprocess::ArrayPara para, uint index
 	end_input.resize(system_parameter.lc_endin_num);
 	reg_input.resize(system_parameter.lc_regin_num);
 	lc_output.resize(system_parameter.lc_output_num);
-
+	relay_input.resize(system_parameter.lc_endin_num);
 	reg[1].valued = attribution->reg[0];
 	reg[2].valued = attribution->reg[1];
 	reg[3].valued = attribution->reg[2];
@@ -23,7 +23,9 @@ LoopControl::LoopControl(const Simulator::Preprocess::ArrayPara para, uint index
 	end_reg.resize(system_parameter.lc_endin_num);
 	muxout_buffer = Buffer_factory::createLcBuffer(para);
 	first_loop = true;
-
+	if (system_parameter.stall_mode == stallType::none) {
+		#define stall
+	}
 	thisbp_end.resize(system_parameter.lc_endin_num);
 	thisbp_reg.resize(system_parameter.lc_regin_num);
 	//nextbp.resize(system_parameter.lc_output_num);
@@ -56,11 +58,11 @@ void LoopControl::update()
 {
 	simStep3();
 	simStep2();
-//	simStep1();
+	simStep1();
 
 	simBp();
-	print();
-	wireReset();
+//	print();
+//	wireReset();
 	
 }
 
@@ -140,13 +142,15 @@ void LoopControl::wireReset()
 	stepout.reset();
 	bufferout.reset();
 	combout.reset();
+	for (auto& i : lc_output)
+		i.reset();
 }
 
 //在reg_input中将first_loop置为了true，但后面如果再有有效的输出将会使first_loop保持为true，因此需要将output清空(应在send完之后做)//////////
-void LoopControl::outReset() {
-	for (auto& i : lc_output)
-	i.reset();
-}
+//void LoopControl::outReset() {
+//	for (auto& i : lc_output)
+//	i.reset();
+//}
 void LoopControl::regInput(Port_inout input, uint port)
 {
 	if (input.valid)
@@ -180,6 +184,19 @@ void LoopControl::endInput(Port_inout input, uint port)
 	}
 }
 
+void LoopControl::simStep1()
+{
+	for (uint i = 0; i < reg_input.size(); i++) {
+		if (reg_input[i].valid)
+			regInput(reg_input[i], i);
+	}
+	for (uint i = 0; i < end_input.size(); i++) {
+		if (end_input[i].valid) {//只有last的时候才能进end_reg
+			endInput(end_input[i], i);
+		}
+	}
+
+}
 
 void LoopControl::simStep1(uint i)
 {
@@ -188,27 +205,39 @@ void LoopControl::simStep1(uint i)
 			regInput(reg_input[i], i);
 	}
 	else {
-		if (end_input[i - reg_input.size()].valid) {//只有last的时候才能进end_reg
+#ifdef stall
+		if (relay_input[i - reg_input.size()].valid) {//只有last的时候才能进end_reg
+			endInput(relay_input[i - reg_input.size()], i - reg_input.size());
+		}
+		relay_input[i - reg_input.size()] = end_input[i - reg_input.size()];
+#endif // stall
+
+#ifndef stall
+		if (end_input[i - reg_input.size()].valid) {
 			endInput(end_input[i - reg_input.size()], i - reg_input.size());
 		}
+#endif // !stall
+
 	}
 
 }
 
-void LoopControl::simall()
-{
-	for (uint i = 0; i < reg_input.size(); i++)
-	{
-		if (reg_input[i].valid)
-			regInput(reg_input[i], i);
-	}
-
-	for (uint i = 0; i < end_input.size(); i++)
-	{
-		if (end_input[i].valid)
-			endInput(end_input[i], i);
-	}
-}
+//void LoopControl::simall()
+//{
+//	for (uint i = 0; i < reg_input.size(); i++)
+//	{
+//		if (reg_input[i].valid)
+//			regInput(reg_input[i], i);
+//	}
+//
+//	for (uint i = 0; i < end_input.size(); i++)
+//	{
+//		if (end_input[i].valid) {
+//			endInput(end_input[i], i);
+//		}
+//		relay_input[i] = end_input[i - reg_input.size()];
+//	}
+//}
 
 //lc内部由于没有inbuffer，使用ack机制，muxbuffer接收到数后进行一定的清数行为
 void LoopControl::simStep2()
@@ -299,7 +328,8 @@ void LoopControl::simStep3()
 
 	//i
 //	if(bufferout.last)
-	lc_output[0].valid = combout.valid & combout.value_bool & reg[0].valid;
+//	lc_output[0].valid = combout.valid & combout.value_bool & reg[0].valid;
+	lc_output[0].valid = false;
 	lc_output[0].value_data = reg[0].valued;
 	lc_output[0].last = bufferout.last ? true: !combout.value_bool;
 	//if(reg[0].valid&&reg[0].condition==false)
@@ -318,7 +348,8 @@ void LoopControl::simStep3()
 //	lc_output[1].condition = combout.value_bool;
 	lc_output[1].condition = bufferout.condition;
 	//loopsignal
-	lc_output[2].valid = combout.valid;
+//	lc_output[2].valid = combout.valid;
+	lc_output[2].valid = false;
 	lc_output[2].value_bool = combout.value_bool;
 	lc_output[2].last = bufferout.last ? true: !combout.value_bool;
 //	lc_output[2].value_bool = false;
@@ -326,7 +357,7 @@ void LoopControl::simStep3()
 	lc_output[2].condition = bufferout.condition;
 
 	//endreg sim
-	bool end_loop = end_flag[0];
+	//bool end_loop = end_flag[0];
 //	bool getvalid = false;
 //	for (uint i = 0; i < end_reg.size(); i++)
 //		if (end_reg[i].valid)
@@ -340,6 +371,7 @@ void LoopControl::simStep3()
 //			end_loop = end_loop || end_flag[i];
 		}
 	}
+	bool end_loop = end_flag[0];
 	for(auto &i:end_flag){end_loop= end_loop && i;}
 
 	if (reg[0].last && reg[0].valid)

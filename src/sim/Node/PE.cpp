@@ -184,12 +184,12 @@ void Processing_element::update()
 	simInstruction();
 	simStep3();
 	simStep2();
-	//	simStep1();
+	simStep1();
 
 		//inbufferReset();        //INSPECTION
 	simBp();
-	print();
-	wireReset();
+	//print();
+//	wireReset();
 }
 
 void Processing_element::getInput(uint port, Port_inout input)
@@ -202,6 +202,13 @@ void Processing_element::getBp(uint port, bool input)
 	next_bp[port] = input;
 }
 
+void Processing_element::simStep1()
+{
+	for (uint i = 0; i < (system_parameter.bool_inport_breadth + system_parameter.data_inport_breadth); ++i)
+	{
+		simStep1(i);
+	}
+}
 void Processing_element::simStep1(uint i)
 {
 	//	for (uint i = 0; i < (system_parameter.bool_inport_breadth + system_parameter.data_inport_breadth); ++i)
@@ -223,6 +230,7 @@ void Processing_element::simStep1(uint i)
 //	}
 //	else
 //	{
+
 		if (attribution->input_bypass != InputBypass::bypass) {
 			if (i == 1 && attribution->inbuffer_from[1] == InBufferFrom::aluin1) {
 				if (!local_reg[1]->reg_v) {
@@ -364,86 +372,252 @@ void Processing_element::getAluInput()
 	//alu输入 其中aluin[2]用于mux选择端或用于控制
 	if (allAluOperandsGot())
 	{
-		oprand_collected = true;
-		//	DEBUG_ASSERT(!(attribution->control_mode == ControlMode::loop_activate && attribution->opcode == PEOpcode::null));
-//			if (attribution->control_mode == ControlMode::loop_activate) {
-//				if (attribution->input_bypass == InputBypass::inbuffer && (attribution->buffer_mode[2] == BufferMode::buffer)) {
-//					//if (alu->canReceiveInput() && !local_reg[1]->reg_v) {
-//					//	aluin[0] = reg_out[1];
-//					//	inbuffer->output(aluin[1], 2);
-//					//}
-//					if (alu->canReceiveInput() && local_reg[1]->reg_v) {
-//						DEBUG_ASSERT(alu_num < 2);
-////						inbuffer->output(aluin[0], 1);
-//						inbuffer->output(aluin[1], 1);
-//					//	inbuffer->output(aluin[1], 2);
-//					}
-//				}
-//				else if (attribution->input_bypass == InputBypass::inbuffer && (attribution->buffer_mode[2] == BufferMode::keep || attribution->buffer_mode[2] == BufferMode::lr)) {
-//					//if (alu->canReceiveInput() && !local_reg[1]->reg_v) {
-//					//	aluin[0] = reg_out[1];
-//					//	aluin[1] = reg_out[2];
-//					//}
-//					if (alu->canReceiveInput() && local_reg[1]->reg_v) {
-//						inbuffer->output(aluin[1], 1);
-//						if (alu_num > 1)
-//							aluin[0] = reg_out[0];
-//					}
-//				}
-//			}
-
-		for (uint i = 0; i < in_num; ++i) {
-			//					int search_index = alu_num == 1 ? 1 : i;
-			if (attribution->opcode == PEOpcode::null) {
-				if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::inbuffer && 
-					(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer 
-						|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
-					inbuffer->output(aluin[i], i);
-				else if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::inbuffer &&
-					(attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr 
-						))//alu来源于lr
-					aluin[i] = reg_out[i];
-				else if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::bypass)//alu来源于inport
-					aluin[i] = input_port[i];
-			}
-			else {
-				if (alu->canReceiveInput() && attribution->input_bypass == InputBypass::inbuffer && 
-					(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer 
-						|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
-					inbuffer->output(aluin[i], i);
-				else if (alu->canReceiveInput() && attribution->input_bypass == InputBypass::inbuffer &&
-					(attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr
-						) )//alu来源于lr
-					aluin[i] = reg_out[i];
-				else if (alu->canReceiveInput() && attribution->input_bypass == InputBypass::bypass)//alu来源于inport
-					aluin[i] = input_port[i];
-			}
+		if (stall_one) {
+			stall_one = false;
+			return;
 		}
-		//else if (alu->canReceiveInput() && attribution->alu_in_from[i] == AluInFrom::first_loop)//alu来源于first_loop
-		//{
-		//	aluin[i].value_bool = first_loop;
-		//	aluin[i].valid = true;
-		//}
+		else {
+			oprand_collected = true;
+			//	DEBUG_ASSERT(!(attribution->control_mode == ControlMode::loop_activate && attribution->opcode == PEOpcode::null));
+	//			if (attribution->control_mode == ControlMode::loop_activate) {
+	//				if (attribution->input_bypass == InputBypass::inbuffer && (attribution->buffer_mode[2] == BufferMode::buffer)) {
+	//					//if (alu->canReceiveInput() && !local_reg[1]->reg_v) {
+	//					//	aluin[0] = reg_out[1];
+	//					//	inbuffer->output(aluin[1], 2);
+	//					//}
+	//					if (alu->canReceiveInput() && local_reg[1]->reg_v) {
+	//						DEBUG_ASSERT(alu_num < 2);
+	////						inbuffer->output(aluin[0], 1);
+	//						inbuffer->output(aluin[1], 1);
+	//					//	inbuffer->output(aluin[1], 2);
+	//					}
+	//				}
+	//				else if (attribution->input_bypass == InputBypass::inbuffer && (attribution->buffer_mode[2] == BufferMode::keep || attribution->buffer_mode[2] == BufferMode::lr)) {
+	//					//if (alu->canReceiveInput() && !local_reg[1]->reg_v) {
+	//					//	aluin[0] = reg_out[1];
+	//					//	aluin[1] = reg_out[2];
+	//					//}
+	//					if (alu->canReceiveInput() && local_reg[1]->reg_v) {
+	//						inbuffer->output(aluin[1], 1);
+	//						if (alu_num > 1)
+	//							aluin[0] = reg_out[0];
+	//					}
+	//				}
+	//			}
+
+			for (uint i = 0; i < in_num; ++i) {
+				//					int search_index = alu_num == 1 ? 1 : i;
+				if (attribution->opcode == PEOpcode::null) {
+					if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::inbuffer &&
+						(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
+							|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
+						inbuffer->output(aluin[i], i);
+					else if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::inbuffer &&
+						(attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr
+							))//alu来源于lr
+						aluin[i] = reg_out[i];
+					else if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::bypass)//alu来源于inport
+						aluin[i] = input_port[i];
+				}
+				else {
+					if (alu->canReceiveInput() && attribution->input_bypass == InputBypass::inbuffer &&
+						(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
+							|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
+						inbuffer->output(aluin[i], i);
+					else if (alu->canReceiveInput() && attribution->input_bypass == InputBypass::inbuffer &&
+						(attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr
+							))//alu来源于lr
+						aluin[i] = reg_out[i];
+					else if (alu->canReceiveInput() && attribution->input_bypass == InputBypass::bypass)//alu来源于inport
+						aluin[i] = input_port[i];
+				}
+			}
+			//else if (alu->canReceiveInput() && attribution->alu_in_from[i] == AluInFrom::first_loop)//alu来源于first_loop
+			//{
+			//	aluin[i].value_bool = first_loop;
+			//	aluin[i].valid = true;
+			//}
 
 
-		if (isSpecial())
-		{
-			control_value = aluin[2];
-			//if (attribution->opcode != PEOpcode::null) {
-			//	if (alu->canReceiveInput()) {
-			//		if (attribution->input_bypass == InputBypass::inbuffer) {
-			//			if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-			//				inbuffer->output(control_value, ctrl_index);
-			//			if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
-			//				local_reg[2]->output(control_value);
-			//		}
-			//		else if (attribution->input_bypass == InputBypass::bypass) {
-			//			control_value = input_port[2];
+			if (isSpecial())
+			{
+				control_value = aluin[2];
+				//if (attribution->opcode != PEOpcode::null) {
+				//	if (alu->canReceiveInput()) {
+				//		if (attribution->input_bypass == InputBypass::inbuffer) {
+				//			if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
+				//				inbuffer->output(control_value, ctrl_index);
+				//			if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
+				//				local_reg[2]->output(control_value);
+				//		}
+				//		else if (attribution->input_bypass == InputBypass::bypass) {
+				//			control_value = input_port[2];
+				//		}
+				//	}
+				//}
+				//else {
+				//	if (attribution->output_from[0] == OutputFrom::outbuffer) {
+				//		if (outbuffer->isBufferNotFull(0)) {
+				//			if (attribution->input_bypass == InputBypass::inbuffer) {
+				//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
+				//					inbuffer->output(control_value, ctrl_index);
+				//				if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
+				//					local_reg[2]->output(control_value);
+				//			}
+				//			else if (attribution->input_bypass == InputBypass::bypass) {
+				//				control_value = input_port[2];
+				//			}
+				//		}
+				//	}
+				//}
+				//DEBUG_ASSERT(alu_num < in_num);
+				if (attribution->control_mode == ControlMode::cb) {
+					if (control_value.valid)
+					{
+						if (!control_value.value_data)
+							rs_cd = true;
+					}
+				}
+				else if (attribution->control_mode == ControlMode::cinvb) {
+					if (control_value.valid)
+					{
+						if (control_value.value_data)
+							rs_cd = true;
+					}
+				}
+				else if (attribution->control_mode == ControlMode::bind) {//bind对last的操作有所不同
+					if (aluin[0].valid && aluin[0].last) {
+						alu_flag = true;
+					}
+					else {
+						for (auto& k : aluin) {
+							if (k.valid && k.last)
+							{
+								oprand_collected = false;
+								break;
+							}
+						}
+						if (oprand_collected) {
+							if (control_value.valid && !control_value.value_data)
+								alu_flag = true;
+							//if (control_value.valid && !control_value.value_data)
+							//	alu_flag = true;
+						}
+					}
+				}
+				else if (attribution->control_mode == ControlMode::break_post || attribution->control_mode == ControlMode::break_pre || attribution->control_mode == ControlMode::continue_) {
+					if (break_state[0]) {
+						oprand_collected = false;
+						for (auto& in : aluin) {
+							if (in.last) {
+								for (auto& i : break_state)
+									i = false;
+								oprand_collected = true;
+								break;
+							}
+							//						oprand_collected = true;
+						}
+
+					}
+					else {
+						if (attribution->control_mode == ControlMode::break_pre)
+						{
+							//	if (aluin[2].valid && aluin[2].value_bool)
+							if (aluin[2].valid && aluin[2].value_data && !aluin[2].last)
+							{
+								//oprand_collected = false;
+								breakoccur();
+								//inbuffer->reset();       //进入break状态是清空inbuffer
+							}
+						}
+						else if (attribution->control_mode == ControlMode::break_post)
+						{
+							//if (aluin[2].valid && aluin[2].value_bool)
+							if (aluin[2].valid && aluin[2].value_data && !aluin[2].last)
+							{
+								oprand_collected = false;
+								breakoccur();
+								//inbuffer->reset();       //进入break状态是清空inbuffer
+							}
+
+						}
+						else if (attribution->control_mode == ControlMode::continue_)
+						{
+							//if (aluin[2].valid && aluin[2].value_bool)
+							if (aluin[2].valid && aluin[2].value_data && !aluin[2].last)
+							{
+								oprand_collected = false;
+								//do nothing
+							}
+						}
+					}
+				}
+
+			}
+
+			//if (attribution->control_mode == ControlMode::transout) {
+			//	if (attribution->output_from[0] == OutputFrom::alu) {
+			//		if (next_bp[0])
+			//		{
+			//			if (attribution->input_bypass == InputBypass::inbuffer) {
+			//				inbuffer->output(aluin[1], 1);
+			//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
+			//					inbuffer->output(control_value, ctrl_index);
+			//				else if (attribution->buffer_mode[ctrl_index] == BufferMode::keep)
+			//					local_reg[2]->output(control_value);
+			//				else { DEBUG_ASSERT(false);}
+			//				if (control_value.valid && control_value.condition) {
+			//					if (control_value.last != true) { oprand_collected = false; }
+			//					else { //这个时候lr的值也应该是last的/////////////////
+			//						//DEBUG_ASSERT()
+			//						oprand_collected = true; 
+			//						local_reg[1]->reg_v = false; 
+			//					}
+			//				}
+			//				
+			//			}
+			//		}				
+			//	}
+				//else if(attribution->output_from[0] == OutputFrom::outbuffer){
+				//	if (outbuffer->isBufferNotFull(0))
+				//	{
+				//		if (attribution->input_bypass == InputBypass::inbuffer) {
+				//			inbuffer->output(aluin[0], 1);
+				//			if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
+				//				inbuffer->output(control_value, ctrl_index);
+				//			else if (attribution->buffer_mode[ctrl_index] == BufferMode::keep)
+				//				local_reg[2]->output(control_value);
+				//			else { DEBUG_ASSERT(false); }
+				//			if (control_value.valid && control_value.condition) {
+				//				if (control_value.last != true) { oprand_collected = false; }
+				//				else { //这个时候lr的值也应该是last的/////////////////
+				//					//DEBUG_ASSERT()
+				//					oprand_collected = true;
+				//					local_reg[1]->reg_v = false;
+				//				}
+				//			}
+
+				//		}
+				//	}
+				//}
+				//else { DEBUG_ASSERT(false); }
+		//	}
+			//else if(attribution->control_mode == ControlMode::cinvb)
+			//{
+			//	if (attribution->opcode != PEOpcode::null) {
+			//		if (alu->canReceiveInput()) {
+			//			if (attribution->input_bypass == InputBypass::inbuffer) {
+			//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
+			//					inbuffer->output(control_value, ctrl_index);
+			//				if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
+			//					local_reg[2]->output(control_value);
+			//			}
+			//			else if (attribution->input_bypass == InputBypass::bypass) {
+			//				control_value = input_port[2];
+			//			}
 			//		}
 			//	}
-			//}
-			//else {
-			//	if (attribution->output_from[0] == OutputFrom::outbuffer) {
+			//	else {
 			//		if (outbuffer->isBufferNotFull(0)) {
 			//			if (attribution->input_bypass == InputBypass::inbuffer) {
 			//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
@@ -456,256 +630,103 @@ void Processing_element::getAluInput()
 			//			}
 			//		}
 			//	}
+			//	DEBUG_ASSERT(alu_num < in_num);
+			//	if (control_value.valid)
+			//	{
+			//		for (auto& i : aluin) {
+			//			if (i.condition == false)
+			//				rs_cd = true;
+			//				break;
+			//		}
+			//		//if (control_value.value_bool)
+			//		if (control_value.value_data)
+			//			rs_cd = true;
+			//	}
 			//}
-			//DEBUG_ASSERT(alu_num < in_num);
-			if (attribution->control_mode == ControlMode::cb) {
-				if (control_value.valid)
-				{
-					if (!control_value.value_data)
+
+			for (auto& i : aluin) {
+				if (i.valid) {
+					if (i.condition == false) {//清condition
 						rs_cd = true;
-				}
-			}
-			else if (attribution->control_mode == ControlMode::cinvb) {
-				if (control_value.valid)
-				{
-					if (control_value.value_data)
-						rs_cd = true;
-				}
-			}
-			else if (attribution->control_mode == ControlMode::bind) {//bind对last的操作有所不同
-				for (auto& k : aluin) {
-					if (k.valid && k.last)
-					{
-						oprand_collected = false;
 						break;
 					}
 				}
-				if (oprand_collected) {
-					if (control_value.valid && !control_value.value_data)
+			}
+			//if (control_value.valid && !control_value.condition) {
+			//	rs_cd = true;
+			//}
+			if (attribution->control_mode != ControlMode::bind) {
+				//for (auto& aluinOne : aluin) {
+		//		if (alu_in[i].valid) {
+				//for (uint k = 0; k < aluin.size(); k++) {
+				//	if (k == 1 && attribution->control_mode == ControlMode::loop_activate) {
+				//		if (aluin[1].last) {
+				//			for (uint i = 0; i < in_num; i++) {
+				//				if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
+				//					local_reg[i]->reg_v = false;
+				//			}
+				//			break;
+				//		}
+				//	}
+				//	else if ((aluin[k].valid && aluin[k].last) || (control_value.valid && control_value.last)) {
+				//		alu_flag = true;
+				//		for (uint i = 0; i < in_num; i++) {
+				//			if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
+				//				local_reg[i]->reg_v = false;
+				//		}
+				//		break;
+				//	}
+				//}
+				for (auto& aluinOne : aluin) {
+					if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) {
 						alu_flag = true;
-				}
-			}
-			else if (attribution->control_mode == ControlMode::break_post|| attribution->control_mode == ControlMode::break_pre|| attribution->control_mode == ControlMode::continue_) {
-				if (break_state[0]) {
-					oprand_collected = false;
-					for (auto& in : aluin) {
-						if (in.last) {
-							for (auto& i : break_state)
-								i = false;
-							oprand_collected = true;
-							break;
+						for (uint i = 0; i < in_num; i++) {
+							if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
+								local_reg[i]->reg_v = false;
+							else if ((attribution->inbuffer_from[i] == InBufferFrom::aluin1) && attribution->inbuffer_from[i] != InBufferFrom::flr)
+								local_reg[i]->reg_v = false;
+							else if ((attribution->control_mode == ControlMode::loop_activate) && (i == 1))
+								local_reg[i]->reg_v = false;
 						}
-//						oprand_collected = true;
-					}
-					
-				}
-				else {
-					if (attribution->control_mode == ControlMode::break_pre)
-					{
-						//	if (aluin[2].valid && aluin[2].value_bool)
-						if (aluin[2].valid && aluin[2].value_data && !aluin[2].last)
-						{
-							//oprand_collected = false;
-							breakoccur();
-							//inbuffer->reset();       //进入break状态是清空inbuffer
-						}
-					}
-					else if (attribution->control_mode == ControlMode::break_post)
-					{
-						//if (aluin[2].valid && aluin[2].value_bool)
-						if (aluin[2].valid && aluin[2].value_data && !aluin[2].last)
-						{
-							oprand_collected = false;
-							breakoccur();
-							//inbuffer->reset();       //进入break状态是清空inbuffer
-						}
-
-					}
-					else if (attribution->control_mode == ControlMode::continue_)
-					{
-						//if (aluin[2].valid && aluin[2].value_bool)
-						if (aluin[2].valid && aluin[2].value_data && !aluin[2].last)
-						{
-							oprand_collected = false;
-							//do nothing
-						}
+						break;
 					}
 				}
-			}
-
-		}
-
-		//if (attribution->control_mode == ControlMode::transout) {
-		//	if (attribution->output_from[0] == OutputFrom::alu) {
-		//		if (next_bp[0])
-		//		{
-		//			if (attribution->input_bypass == InputBypass::inbuffer) {
-		//				inbuffer->output(aluin[1], 1);
-		//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-		//					inbuffer->output(control_value, ctrl_index);
-		//				else if (attribution->buffer_mode[ctrl_index] == BufferMode::keep)
-		//					local_reg[2]->output(control_value);
-		//				else { DEBUG_ASSERT(false);}
-		//				if (control_value.valid && control_value.condition) {
-		//					if (control_value.last != true) { oprand_collected = false; }
-		//					else { //这个时候lr的值也应该是last的/////////////////
-		//						//DEBUG_ASSERT()
-		//						oprand_collected = true; 
-		//						local_reg[1]->reg_v = false; 
-		//					}
-		//				}
-		//				
-		//			}
-		//		}				
-		//	}
-			//else if(attribution->output_from[0] == OutputFrom::outbuffer){
-			//	if (outbuffer->isBufferNotFull(0))
-			//	{
-			//		if (attribution->input_bypass == InputBypass::inbuffer) {
-			//			inbuffer->output(aluin[0], 1);
-			//			if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-			//				inbuffer->output(control_value, ctrl_index);
-			//			else if (attribution->buffer_mode[ctrl_index] == BufferMode::keep)
-			//				local_reg[2]->output(control_value);
-			//			else { DEBUG_ASSERT(false); }
-			//			if (control_value.valid && control_value.condition) {
-			//				if (control_value.last != true) { oprand_collected = false; }
-			//				else { //这个时候lr的值也应该是last的/////////////////
-			//					//DEBUG_ASSERT()
-			//					oprand_collected = true;
-			//					local_reg[1]->reg_v = false;
-			//				}
-			//			}
-
-			//		}
-			//	}
-			//}
-			//else { DEBUG_ASSERT(false); }
-	//	}
-		//else if(attribution->control_mode == ControlMode::cinvb)
-		//{
-		//	if (attribution->opcode != PEOpcode::null) {
-		//		if (alu->canReceiveInput()) {
-		//			if (attribution->input_bypass == InputBypass::inbuffer) {
-		//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-		//					inbuffer->output(control_value, ctrl_index);
-		//				if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
-		//					local_reg[2]->output(control_value);
-		//			}
-		//			else if (attribution->input_bypass == InputBypass::bypass) {
-		//				control_value = input_port[2];
-		//			}
+				//if (attribution->control_mode == ControlMode::loop_activate) {
+				//	for (auto& aluinOne : aluin) {
+				//		if (aluinOne.valid && aluinOne.last) {
+				//			alu_flag = true;
+				//			for (uint i = 0; i < in_num; i++) {
+				//				if ((attribution->buffer_mode[i] == BufferMode::keep|| attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
+				//					local_reg[i]->reg_v = false;
+				//			}
+				//			break;
+				//		}
+				//	}
+				//}
+				//else {
+				//	if (aluin[0].valid && attribution->buffer_mode[0] == BufferMode::keep && attribution->inbuffer_from[0] == InBufferFrom::in0 && (aluin[0].last == true || control_value.last)) {
+				//		local_reg[0]->reg_v = false;
+				//		alu_flag = true;
+				//	}
+				//	
+				//	if (aluin[1].valid && attribution->buffer_mode[1] == BufferMode::lr && attribution->inbuffer_from[1] == InBufferFrom::in1 && (aluin[1].last == true || control_value.last)) {
+				//		local_reg[1]->reg_v = false;
+				//		alu_flag = true;
+				//	}
+				//	if (aluin[2].valid && attribution->buffer_mode[2] == BufferMode::keep && attribution->inbuffer_from[2] == InBufferFrom::in2 && (aluin[2].last == true || control_value.last)) {
+				//		local_reg[2]->reg_v = false;
+				//		alu_flag = true;
+				//	}
+				//}
+	//					first_loop = true;
 		//		}
-		//	}
-		//	else {
-		//		if (outbuffer->isBufferNotFull(0)) {
-		//			if (attribution->input_bypass == InputBypass::inbuffer) {
-		//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-		//					inbuffer->output(control_value, ctrl_index);
-		//				if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
-		//					local_reg[2]->output(control_value);
-		//			}
-		//			else if (attribution->input_bypass == InputBypass::bypass) {
-		//				control_value = input_port[2];
-		//			}
-		//		}
-		//	}
-		//	DEBUG_ASSERT(alu_num < in_num);
-		//	if (control_value.valid)
-		//	{
-		//		for (auto& i : aluin) {
-		//			if (i.condition == false)
-		//				rs_cd = true;
-		//				break;
-		//		}
-		//		//if (control_value.value_bool)
-		//		if (control_value.value_data)
-		//			rs_cd = true;
-		//	}
-		//}
+			//	}//清local_reg
 
-		for (auto& i : aluin) {
-			if (i.valid) {
-				if (i.condition == false) {//清condition
-					rs_cd = true;
-					break;
-				}
+				//if (control_value.valid) {
+				//	if(control_value.last)
+				//		alu_flag = true;
+				//}
 			}
-		}
-		//if (control_value.valid && !control_value.condition) {
-		//	rs_cd = true;
-		//}
-		if (attribution->control_mode != ControlMode::bind) {
-			//for (auto& aluinOne : aluin) {
-	//		if (alu_in[i].valid) {
-			//for (uint k = 0; k < aluin.size(); k++) {
-			//	if (k == 1 && attribution->control_mode == ControlMode::loop_activate) {
-			//		if (aluin[1].last) {
-			//			for (uint i = 0; i < in_num; i++) {
-			//				if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
-			//					local_reg[i]->reg_v = false;
-			//			}
-			//			break;
-			//		}
-			//	}
-			//	else if ((aluin[k].valid && aluin[k].last) || (control_value.valid && control_value.last)) {
-			//		alu_flag = true;
-			//		for (uint i = 0; i < in_num; i++) {
-			//			if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
-			//				local_reg[i]->reg_v = false;
-			//		}
-			//		break;
-			//	}
-			//}
-			for (auto& aluinOne : aluin) {
-				if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) {
-					alu_flag = true;
-					for (uint i = 0; i < in_num; i++) {
-						if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
-							local_reg[i]->reg_v = false;
-						else if((attribution->inbuffer_from[i] == InBufferFrom::aluin1) && attribution->inbuffer_from[i] != InBufferFrom::flr)
-							local_reg[i]->reg_v = false;
-						else if((attribution->control_mode == ControlMode::loop_activate) &&(i==1))
-							local_reg[i]->reg_v = false;
-					}
-					break;
-				}
-			}
-			//if (attribution->control_mode == ControlMode::loop_activate) {
-			//	for (auto& aluinOne : aluin) {
-			//		if (aluinOne.valid && aluinOne.last) {
-			//			alu_flag = true;
-			//			for (uint i = 0; i < in_num; i++) {
-			//				if ((attribution->buffer_mode[i] == BufferMode::keep|| attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
-			//					local_reg[i]->reg_v = false;
-			//			}
-			//			break;
-			//		}
-			//	}
-			//}
-			//else {
-			//	if (aluin[0].valid && attribution->buffer_mode[0] == BufferMode::keep && attribution->inbuffer_from[0] == InBufferFrom::in0 && (aluin[0].last == true || control_value.last)) {
-			//		local_reg[0]->reg_v = false;
-			//		alu_flag = true;
-			//	}
-			//	
-			//	if (aluin[1].valid && attribution->buffer_mode[1] == BufferMode::lr && attribution->inbuffer_from[1] == InBufferFrom::in1 && (aluin[1].last == true || control_value.last)) {
-			//		local_reg[1]->reg_v = false;
-			//		alu_flag = true;
-			//	}
-			//	if (aluin[2].valid && attribution->buffer_mode[2] == BufferMode::keep && attribution->inbuffer_from[2] == InBufferFrom::in2 && (aluin[2].last == true || control_value.last)) {
-			//		local_reg[2]->reg_v = false;
-			//		alu_flag = true;
-			//	}
-			//}
-//					first_loop = true;
-	//		}
-		//	}//清local_reg
-
-			//if (control_value.valid) {
-			//	if(control_value.last)
-			//		alu_flag = true;
-			//}
 		}
 	}
 }
@@ -1147,6 +1168,8 @@ void Processing_element::wireReset()
 		i.reset();
 	alu_out.reset();
 	rs_cd = false;
+	for (auto& i : output_port)///////////////////////////////加了这个之后输出就无效了，不能把out清空//
+		i.reset();
 	control_value.reset();
 	oprand_collected = false;
 }

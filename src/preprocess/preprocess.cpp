@@ -420,6 +420,7 @@ namespace Simulator::Preprocess
 
 		//system
 		_array_para.debug_level = std::stoi(array_xml->FirstChildElement("debugLevel")->GetText());
+		_array_para.stall_mode = StallModeConverter::toEnum(array_xml->FirstChildElement("stallMode")->GetText());
 		_array_para.print_screen = (array_xml->FirstChildElement("printscreen")->GetText() == string("true"));
 		_array_para.maxclk = std::stoi(array_xml->FirstChildElement("maxClk")->GetText());
 		_array_para.max_memory_depth = std::stoi(array_xml->FirstChildElement("maxMemoryDepth")->GetText());

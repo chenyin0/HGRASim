@@ -82,6 +82,7 @@ namespace Simulator::Array
 
 	public:
 		friend class Pebp;
+		bool stall_one;
 		Processing_element(const Preprocess::ArrayPara para, uint index);
 		~Processing_element();
 		void update();
@@ -89,6 +90,7 @@ namespace Simulator::Array
 		void bufferprint();
 		void simStep2();
 		void simStep1(uint i);
+		void simStep1();
 		void print();
 		vector<Port_inout> input_port;
 		void simBp();

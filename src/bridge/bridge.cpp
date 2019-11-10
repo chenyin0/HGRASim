@@ -115,7 +115,7 @@ namespace Simulator
 	{
 		for (auto[location, value] : _bp_temporary_buffer)
 			_bp_funs(location.type, location.node_index, location.port_index, value);
-		_bp_temporary_buffer.clear();
+	//	_bp_temporary_buffer.clear();
 	}
 
 	void Bridge::recvOneBp(Location location,bool value)

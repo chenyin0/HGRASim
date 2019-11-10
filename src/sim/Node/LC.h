@@ -11,7 +11,8 @@ namespace Simulator::Array
 		uint index;
 		uint end_innum;
 		vector<Bufferd> reg;                                  //0-iterator 1-initial 2-loopbound 3-step
-		vector<Bufferd> end_reg;             
+		vector<Bufferd> end_reg; 
+		vector<Bufferd> relay_reg;
 		vector<Protocol*> reg_protocol;
 		vector<Protocol*> endreg_protocol;
 		Buffer* muxout_buffer;
@@ -21,13 +22,12 @@ namespace Simulator::Array
 		bool last_flag = false;
 	    //wire signal
 		//the order is reg_input first, end_input second
-		vector<Port_inout> reg_input;
-		vector<Port_inout> end_input;
 		Port_inout loopbegin;
 		Port_inout muxout;
 		Port_inout stepout;
 		Port_inout bufferout;
 		Port_inout combout;
+		vector<Port_inout> relay_input;
 	    //bp
 		vector<Bool> nextbp;
 		vector<Bool> end_flag;
@@ -38,6 +38,9 @@ namespace Simulator::Array
 	public:
 		LoopControl(const Preprocess::ArrayPara para, uint index);
 		~LoopControl();
+		bool stall_one;
+		vector<Port_inout> reg_input;
+		vector<Port_inout> end_input;
 		void update();
 		void buffer_print();
 		void getInput(uint port, Port_inout input) override;  //port之间来源不同，解耦合；但inbuffer的写入仍保持耦合
@@ -45,6 +48,7 @@ namespace Simulator::Array
 		void simStep2();                                       //lc buffer get input
 		void simStep3();                                       //lc buffer give output
 		void simStep1(uint i);
+		void simStep1();
 		void simBp();
 		void simall();
 		void wireReset();

@@ -21,9 +21,9 @@
         <lseBoolInBreadth>0</lseBoolInBreadth>
         <leDataOutBreadth>1</leDataOutBreadth>
         <leBoolOutBreadth>0</leBoolOutBreadth>
-        <leOutBufferDepthSmall>16</leOutBufferDepthSmall>
-        <leOutBufferDepthMiddle>32</leOutBufferDepthMiddle>
-        <leOutBufferDepthLarge>64</leOutBufferDepthLarge>
+        <leOutBufferDepthSmall>32</leOutBufferDepthSmall>
+        <leOutBufferDepthMiddle>64</leOutBufferDepthMiddle>
+        <leOutBufferDepthLarge>128</leOutBufferDepthLarge>
 
         <!-- LC -->>
         <lcNum>4</lcNum>
@@ -49,10 +49,11 @@
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>
         <printscreen>false</printscreen>
+        <stallMode>inbuffer_stall</stallMode>
         <attachMemory>true</attachMemory>
-        <maxClk>1000000</maxClk>
+        <maxClk>200</maxClk>
         <maxMemoryDepth>100000</maxMemoryDepth>
-    
+      
     </array>
     <arch>
 

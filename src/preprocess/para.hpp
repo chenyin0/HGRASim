@@ -17,7 +17,7 @@ namespace Simulator::Preprocess
 		bool attach_memory;
 		uint maxclk;
 		uint max_memory_depth;
-
+		stallType stall_mode;
 		//pe
 		uint pe_num;
 		uint pe_in_buffer_depth;

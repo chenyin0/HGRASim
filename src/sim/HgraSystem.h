@@ -42,6 +42,10 @@ namespace Simulator::Array
 		DRAMSim::MultiChannelMemorySystem* mem;
 		vector<type_index> config_order;
 		uint clk;
+		std::map<uint, std::pair<NodeType, uint>> order2index;//config_order转换成pe_map中的以pe_map的index为索引的元素
+		std::map< std::pair<NodeType, uint>,uint> ele2order;
+		std::map<std::pair<NodeType, uint>, uint> index2order;//pe_map中的元素转换成pe_map的index
+		std::map<std::tuple<NodeType, uint,uint>, vector<std::tuple<uint,uint,bool>>> data_flow;
 		//Debug debug;
 
 		bool sendOutput(Simulator::NodeType type, uint index);
@@ -50,7 +54,12 @@ namespace Simulator::Array
 	public:
 		HgraArray(const AppGraph& app_graph);
 		~HgraArray();
+		const char* maps[7] = { "pe","fg","ls","lv","lc","null","begin" };
 		void run();
+		void nextStep1(type_index type_in,uint port);
+		void reverseStep1(type_index type_in, uint port);
+		void printStall(type_index type_in, uint port);
+		void initIndex();
 		static void power_callback(double a, double b, double c, double d) {}
 	};
 

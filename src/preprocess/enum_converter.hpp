@@ -433,7 +433,33 @@ namespace Simulator
 			return AluInFrom::null;
 		}
 	};
+	class StallModeConverter
+	{
+	public:
+		static auto toString(stallType type_)->string
+		{
+			if (type_ == stallType::none)
+				return "none";
+			if (type_ == stallType::inbuffer_stall)
+				return "inbuffer_stall";
+			if (type_ == stallType::step_stall)
+				return "step_stall";
+			DEBUG_ASSERT(false);
+			return "";
+		}
 
+		static auto toEnum(string s_)->stallType
+		{
+			if (s_ == "none")
+				return stallType::none;
+			if (s_ == "inbuffer_stall")
+				return stallType::inbuffer_stall;
+			if (s_ == "step_stall")
+				return stallType::step_stall;
+			throw std::runtime_error("your configuration is boom(stall_type,recommend choice:none,inbuffer_stall,step_stall)");
+			DEBUG_ASSERT(false);
+		}
+	};
 	class OutBufferFromConverter
 	{
 	public:

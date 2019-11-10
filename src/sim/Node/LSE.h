@@ -44,7 +44,9 @@ namespace Simulator::Array
 		bool ack;
 
 		void leSimStep1(uint i);
+		void leSimStep1();
 		void seSimStep1(uint i);
+		void seSimStep1();
 
 		void leSimStep2();
 		void sedSimStep2();
@@ -68,6 +70,7 @@ namespace Simulator::Array
 		friend class Lsebp;
 		~Loadstore_element();
 		void simStep2();
+		void simStep1();
 		void simStep1(uint i);
 		void simBp();
 		void print();

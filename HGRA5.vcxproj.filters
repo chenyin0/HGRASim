@@ -490,6 +490,12 @@
     <Text Include="..\..\项目源码理解\ConditionCase\01_ConditionCase\MemoryInFile.txt">
       <Filter>resource\input</Filter>
     </Text>
+    <Text Include="resource\output\dataflow.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+    <Text Include="resource\output\wholedata.txt">
+      <Filter>resource\output</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\output\DebugReg.txt">

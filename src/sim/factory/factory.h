@@ -13,7 +13,7 @@ namespace Simulator::Array
 		static Buffer* createOutBuffer(Preprocess::ArrayPara para);
 		static Buffer* createLcBuffer(Preprocess::ArrayPara para);
 		static Buffer* createLseInBuffer(Preprocess::ArrayPara para);
-		static Buffer* createLseBuffer(Preprocess::ArrayPara para);
+		static Buffer* createLseBuffer(Simulator::Preprocess::ArrayPara para, Simulator::BufferSize size);
 		~Buffer_factory() = default;
 	};
 	/*
