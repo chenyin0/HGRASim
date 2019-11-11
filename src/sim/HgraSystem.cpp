@@ -538,8 +538,10 @@ void HgraArray::run()
 			}
 
 
-			if (task_finish)
+			if (task_finish) {
+				Debug::getInstance()->getPortFile() << "clk" << clk << std::endl;
 				break;
+			}
 			bridge.setAllBp();
 			ClkDomain::getInstance()->selfAdd();
 		}

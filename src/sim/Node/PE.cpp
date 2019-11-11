@@ -246,18 +246,6 @@ void Processing_element::simStep1(uint i)
 						inbuffer->input(this->alu_out, 1);//最后一个带last的信号不会进buffer，因为这时候last已经为true,reg_v已经被置位
 				}
 			}
-			//			else if (i == 1 && attribution->buffer_mode[1] == BufferMode::lr_out) {
-			//	//			if (input_port[i].last&&!local_reg[i]->reg_v) {//这个输入后不会置reg_v，但需要reg_v为false才能进入
-			//					local_reg[1]->input_transout(input_port[i]);
-			//					//if (input_port[i].valid && input_port[i].condition)
-			//					//	if (!input_port[i].last)
-			//					//		inbuffer->input(input_port[i], i);
-			//					//	else {
-			//					//		inbuffer->back_head(0);
-			//					//		local_reg[1]->reg_v = true;
-			//					//	}
-			////				}
-			//			}
 			else {
 				if (input_port[i].valid) {
 					if (i == 1) {
@@ -837,7 +825,17 @@ void Processing_element::gatherOperands()
 					//alu_out.value_bool = aluin[0].value_bool;
 					alu_out.valid = true;
 				}
-				outbuffer->input(alu_out, 0);
+				for (uint i = 0; i < system_parameter.bool_outport_breadth + system_parameter.data_outport_breadth; ++i)
+				{
+					if (attribution->output_from[i] == OutputFrom::outbuffer) {
+						outbuffer->input(alu_out, i);
+					}
+					else if (attribution->output_from[i] == OutputFrom::alu) {
+						if (next_bp[i]) {
+							output_port[i] = alu_out;//考虑到alu是nop的情况，只有在pipeline 非空的情况才会pop出去
+						}
+					}
+				}
 			}
 		}
 	//}
@@ -926,8 +924,14 @@ void Processing_element::aluUpdate()
 {
 	if (attribution->opcode != PEOpcode::null) {
 		alu->compute(alu_out);
-		if (outbuffer->isBufferNotFull(0)) {
-			alu->update();      //alu流水更新以及输出
+		if (attribution->output_from[0] == OutputFrom::outbuffer) {
+			if (outbuffer->isBufferNotFull(0)) {
+				alu->update();      //alu流水更新以及输出
+			}
+		}
+		else if (attribution->output_from[0] == OutputFrom::alu) 
+		{
+			if(next_bp[0]){ alu->update(); }
 		}
 	}
 }
@@ -973,7 +977,7 @@ void Processing_element::toOutBuffer()
 					aluPop();
 			}
 			else if (attribution->output_from[i] == OutputFrom::alu) {
-				if (next_bp[i] && alu->getpipeline().size() != 0) {
+				if (next_bp[i] ) {
 					output_port[i] = alu_out;//考虑到alu是nop的情况，只有在pipeline 非空的情况才会pop出去
 					if (alu->getpipeline().size() != 0) { aluPop(); }
 				}
@@ -986,7 +990,7 @@ void Processing_element::outBufferSend()
 {
 	for (uint i = 0; i < system_parameter.data_outport_breadth + system_parameter.bool_outport_breadth; ++i)
 	{
-		if (next_bp[i])
+		if (next_bp[i]&& attribution->output_from[i] == OutputFrom::outbuffer)
 			outbuffer->output(output_port[i], i);
 	}
 }

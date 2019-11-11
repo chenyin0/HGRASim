@@ -19,9 +19,9 @@ using std::endl;
 int main()
 {
 	// ÉèÖÃÂ·¾¶
-//	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\break_test.xml)");
-//	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\condition.xml)");
-	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\aluin_test.xml)");
+	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\break_test.xml)");
+//	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\NW.xml)");
+//	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\aluin_test.xml)");
 //    GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\continue_test.xml)");
 	GlobalPara::getInstance()->setInputAddr(InputAddr::parameter_xml_addr, R"(.\resource\input\system.xml)");
 	GlobalPara::getInstance()->setInputAddr(InputAddr::architecture_xml_addr, R"(.\resource\input\ArchConfig.xml)");
@@ -81,7 +81,7 @@ int main()
 	uint debug_level;
 	
 	std::ifstream memoryInFile("");
- //	std::ifstream memoryInFile("resource/input/memoryInFileCond.txt");
+// 	std::ifstream memoryInFile("resource/input/NW_memoryInFile.txt");
 	std::ofstream memoryWritefile("resource/output/memorywrite.txt");
 //	memoryInFile.open("memoryInFile.txt");
 //	Simulator::Array::MemoryData memory(100000);

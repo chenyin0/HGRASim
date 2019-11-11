@@ -19,6 +19,7 @@ namespace Simulator::Array
 
 		bool first_loop;
 		int df_cnt;
+		int break_cnt;
 		bool last_flag = false;
 	    //wire signal
 		//the order is reg_input first, end_input second

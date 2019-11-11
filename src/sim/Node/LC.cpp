@@ -31,7 +31,7 @@ LoopControl::LoopControl(const Simulator::Preprocess::ArrayPara para, uint index
 	//nextbp.resize(system_parameter.lc_output_num);
 	reg_protocol.resize(reg.size());
 	endreg_protocol.resize(end_reg.size());
-	for (uint i = system_parameter.lc_regin_num; i < system_parameter.lc_endin_num; i++) {
+	for (uint i = system_parameter.lc_regin_num; i <  system_parameter.lc_endin_num; i++) {
 		if (attribution->input_vec[i].source_node_type != NodeType::null)
 			end_innum++;
 	}
@@ -164,7 +164,7 @@ void LoopControl::regInput(Port_inout input, uint port)
 		if (port == 0) {
 			first_loop = true;
 		//	if (!attribution->outermost && !reg[port].last) { df_cnt++; }
-			if (!attribution->outermost) { df_cnt++; }
+			if (!attribution->outermost) { df_cnt++; break_cnt++; }
 		}
 	}
 }
@@ -181,6 +181,7 @@ void LoopControl::endInput(Port_inout input, uint port)
 			df_cnt--;
 		//	DEBUG_ASSERT(!(df_cnt < 0));
 		}
+		else if (!attribution->outermost && port == 4 && input.last) { break_cnt--; }
 	}
 }
 
@@ -252,7 +253,12 @@ void LoopControl::simStep2()
 	//}
 
 	loopbegin.value_bool = first_loop;
-
+	bool break_end=false;
+	for (uint i = 0; i < end_reg.size(); i++) {
+		if (i >= 4 && end_reg[i].valid && end_reg[i].valued) {
+			break_end = true;
+		}
+	}
 	if (loopbegin.valid)
 	{
 		if (loopbegin.value_bool && reg[1].valid)
@@ -271,6 +277,13 @@ void LoopControl::simStep2()
 				muxout.condition = true;
 				muxout.last = false;
 			}
+		}
+		else if (break_end && df_cnt == break_cnt) {
+			muxout.value_data = stepout.value_data;
+			muxout.valid = true;
+			muxout.condition = true;
+			muxout.value_bool = false;
+			muxout.last = true;
 		}
 		else if (!loopbegin.value_bool && stepout.valid)
 		{
@@ -364,8 +377,7 @@ void LoopControl::simStep3()
 ////			getvalid = true;
 ////			end_loop &= (end_reg[i].last && end_reg[i].valid);
 //			end_loop = end_loop || end_reg[i].last;
-
-	for (uint i = 0; i < end_reg.size(); i++) {
+	for (uint i = 0; i < end_flag.size(); i++) {
 		if (end_reg[i].valid && end_reg[i].last) {
 			end_flag[i] = true;
 //			end_loop = end_loop || end_flag[i];

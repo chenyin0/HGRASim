@@ -77,7 +77,14 @@ bool Pebp::getBp(uint port)
 //			}
 		}
 		else if (pe->attribution->input_bypass == InputBypass::bypass) {
-			return(pe->alu->canReceiveInput());
+			if(pe->attribution->opcode!=PEOpcode::null)
+				return(pe->alu->canReceiveInput());
+			else {
+				if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
+					return(pe->outbuffer->isBufferNotFull(0));
+				else if(pe->attribution->output_from[0] == OutputFrom::alu)
+					return(pe->next_bp[0]);
+			}
 		}
 //		else if(pe->inbuffer->isBufferNotFull(port)) { return true; }
 		else { return false; } 

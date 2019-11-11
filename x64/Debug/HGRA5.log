@@ -1,12 +1,7 @@
-﻿  HgraSystem.cpp
-E:\simulator\HGRA5_simBp\src\util\util.hpp(94): warning C4244: “参数”: 从“const _Rep”转换到“unsigned int”，可能丢失数据
+﻿  LC.cpp
+E:\simulator\HGRA5_simBp - 副本\src\util\util.hpp(94): warning C4244: “参数”: 从“const _Rep”转换到“unsigned int”，可能丢失数据
           with
           [
               _Rep=__int64
           ]
-E:\simulator\HGRA5_simBp\src\sim\HgraSystem.cpp(269): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-E:\simulator\HGRA5_simBp\src\sim\HgraSystem.cpp(348): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-E:\simulator\HGRA5_simBp\src\sim\HgraSystem.cpp(362): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-E:\simulator\HGRA5_simBp\src\sim\HgraSystem.cpp(499): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-E:\simulator\HGRA5_simBp\src\sim\HgraSystem.cpp(513): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-  HGRA5.vcxproj -> E:\simulator\HGRA5_simBp\x64\Debug\HGRA5.exe
+  HGRA5.vcxproj -> E:\simulator\HGRA5_simBp - 副本\x64\Debug\HGRA5.exe

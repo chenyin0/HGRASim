@@ -148,8 +148,8 @@ namespace Simulator::Array
 			portfile << name;
 			portfile << std::endl;
 		}
-		Debug():print_screen_begin(0), print_screen_end(120000), print_screen_interval(1),
-			print_file_begin(0), print_file_end(10000), print_file_interval(1) {
+		Debug():print_screen_begin(0), print_screen_end(1200), print_screen_interval(1),
+			print_file_begin(0), print_file_end(1000), print_file_interval(1) {
 			const auto& system_para = Preprocess::Para::getInstance()->getArrayPara();
 			debug_level = system_para.debug_level;
 			regfile.open(".\\resource\\output\\DebugReg.txt"); portfile.open(".\\resource\\output\\DebugWire.txt"); lseRegfile.open(".\\resource\\output\\Debuglseout.txt");dataFlowfile.open(".\\resource\\output\\dataflow.txt");

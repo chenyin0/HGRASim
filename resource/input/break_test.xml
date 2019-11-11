@@ -28,9 +28,10 @@
         <input type="null"/>
         <input type="null"/>
         <input type="null"/>
+        <input type="pe" index="1" port="0"/>
         <!-- mux,loop_bound,step -->
         <reg value="0" />
-        <reg value="5" />
+        <reg value="20" />
         <reg value="1" />
         <placement cord="[0, 0]"/>
     </node>
@@ -68,7 +69,7 @@
       <input type="lc" index="1" port="1"/>
       <input type="null"/>
       <input type="null"/>
-      <reg value="3" />
+      <reg value="10" />
       <placement cord="[1, 6]"/>
     </node>
     <node type="pe" index="2" opcode="nop" controlMode="break_pre">

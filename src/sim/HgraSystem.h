@@ -45,7 +45,7 @@ namespace Simulator::Array
 		std::map<uint, std::pair<NodeType, uint>> order2index;//config_order转换成pe_map中的以pe_map的index为索引的元素
 		std::map< std::pair<NodeType, uint>,uint> ele2order;
 		std::map<std::pair<NodeType, uint>, uint> index2order;//pe_map中的元素转换成pe_map的index
-		std::map<std::tuple<NodeType, uint,uint>, vector<std::tuple<uint,uint,bool>>> data_flow;
+		std::map<std::tuple<NodeType, uint,uint>, vector<std::tuple<uint,int,bool>>> data_flow;
 		//Debug debug;
 
 		bool sendOutput(Simulator::NodeType type, uint index);

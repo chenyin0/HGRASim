@@ -1,16 +1,42 @@
-﻿  PE.cpp
-E:\simulator\HGRA5_sim\HGRA5\src\sim\Node\PE.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-E:\simulator\HGRA5_sim\HGRA5\src\util\util.hpp(94): warning C4244: “参数”: 从“const _Rep”转换到“unsigned int”，可能丢失数据
+﻿  main.cpp
+E:\simulator\HGRA5_simBp - 副本\src\util\util.hpp(94): warning C4244: “参数”: 从“const _Rep”转换到“unsigned int”，可能丢失数据
           with
           [
               _Rep=__int64
           ]
-E:\simulator\HGRA5_sim\HGRA5\src\sim\Node\PE.cpp(896): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-E:\simulator\HGRA5_sim\HGRA5\src\sim\Node\PE.cpp(1020): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-E:\simulator\HGRA5_sim\HGRA5\src\sim\Node\PE.cpp(1043): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\simulator\HGRA5_simBp - 副本\src\shell\main.cpp(90): warning C4930: “Simulator::Array::ClkDomain clk(void)”: 未调用原型函数(是否是有意用变量定义的?)
+E:\simulator\HGRA5_simBp - 副本\src\shell\main.cpp(81): warning C4101: “debug_level”: 未引用的局部变量
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\algorithm(83): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+  E:\simulator\HGRA5_simBp - 副本\src\pr\mapping\simulate_anneal\sa_cost_function.hpp(53): note: 参见对正在编译的函数 模板 实例化“_Fn std::for_each<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,Simulator::Mpr::CostFunDataBase::funPureChessBoard::<lambda_26e42b15ee393b1b1e219db332a7dd0a>>(_InIt,_InIt,_Fn)”的引用
+          with
+          [
+              _Fn=Simulator::Mpr::CostFunDataBase::funPureChessBoard::<lambda_26e42b15ee393b1b1e219db332a7dd0a>,
+              _Ty=uint,
+              _InIt=std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<uint>>>
+          ]
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\chrono(595): note: 参见对正在编译的 类 模板 实例化 "std::chrono::duration<double,std::ratio<1,1>>" 的引用
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\chrono(172): note: 参见对正在编译的 类 模板 实例化 "std::chrono::duration<__int64,std::nano>" 的引用
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\chrono(574): note: 参见对正在编译的 类 模板 实例化 "std::chrono::time_point<std::chrono::steady_clock,std::chrono::steady_clock::duration>" 的引用
+  HgraSystem.cpp
+E:\simulator\HGRA5_simBp - 副本\src\util\util.hpp(94): warning C4244: “参数”: 从“const _Rep”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              _Rep=__int64
+          ]
+E:\simulator\HGRA5_simBp - 副本\src\sim\HgraSystem.cpp(269): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\simulator\HGRA5_simBp - 副本\src\sim\HgraSystem.cpp(348): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\simulator\HGRA5_simBp - 副本\src\sim\HgraSystem.cpp(362): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\simulator\HGRA5_simBp - 副本\src\sim\HgraSystem.cpp(499): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\simulator\HGRA5_simBp - 副本\src\sim\HgraSystem.cpp(513): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  LC.cpp
+E:\simulator\HGRA5_simBp - 副本\src\util\util.hpp(94): warning C4244: “参数”: 从“const _Rep”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              _Rep=__int64
+          ]
   正在生成代码
-  4 of 9567 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  24 of 9747 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    38 functions had inline decision re-evaluated but remain unchanged
+    11 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
-  HGRA5.vcxproj -> E:\simulator\HGRA5_sim\HGRA5\x64\Release\HGRA5.exe
+  HGRA5.vcxproj -> E:\simulator\HGRA5_simBp - 副本\x64\Release\HGRA5.exe

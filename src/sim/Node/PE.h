@@ -79,7 +79,6 @@ namespace Simulator::Array
 
 //		void print();
 		void wirePrint(std::ofstream& file);
-
 	public:
 		friend class Pebp;
 		bool stall_one;
@@ -96,6 +95,10 @@ namespace Simulator::Array
 		void simBp();
 		void wireReset();
 		void parameterSet();
+		//using returnBp= bool(Processing_element::*)();
+		//enum class threeBp{inbuffer,alu,outbuffer};
+		//bool everybp(threeBp);
+		//static returnBp Menu[];
 		bool isSpecial() {
 			return attribution->control_mode == ControlMode::bind || attribution->control_mode == ControlMode::cb
 				|| attribution->control_mode == ControlMode::cinvb || attribution->control_mode == ControlMode::break_pre
@@ -117,5 +120,6 @@ namespace Simulator::Array
 		const Preprocess::DFGNode<NodeType::pe>* getAttr(){ return attribution; };
 		vector<Port_inout> output_port;
 		vector<Bool> thispe_bp;
+
 	};
 }
