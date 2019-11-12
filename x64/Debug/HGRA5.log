@@ -1,7 +1,0 @@
-﻿  LC.cpp
-E:\simulator\HGRA5_simBp - 副本\src\util\util.hpp(94): warning C4244: “参数”: 从“const _Rep”转换到“unsigned int”，可能丢失数据
-          with
-          [
-              _Rep=__int64
-          ]
-  HGRA5.vcxproj -> E:\simulator\HGRA5_simBp - 副本\x64\Debug\HGRA5.exe
