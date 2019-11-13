@@ -367,6 +367,8 @@ namespace Simulator
 				return "transout";
 			if (type_ == ControlMode::trans)
 				return "trans";
+			if(type_ == ControlMode::calc_activate)
+				return "calc_activate";
 			DEBUG_ASSERT(false);
 			return "";
 		}
@@ -379,6 +381,8 @@ namespace Simulator
 				return ControlMode::loop_activate;
 			if (s_ == "loop_reset")
 				return ControlMode::loop_reset;
+			if (s_ == "calc_activate")
+				return ControlMode::calc_activate;
 			if (s_ == "break_pre")
 				return ControlMode::break_pre;
 			if (s_ == "break_post")
