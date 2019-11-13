@@ -211,28 +211,9 @@ void Processing_element::simStep1()
 }
 void Processing_element::simStep1(uint i)
 {
-	//	for (uint i = 0; i < (system_parameter.bool_inport_breadth + system_parameter.data_inport_breadth); ++i)
-	//	{
-//	if (break_state[i])
-//	{
-//		if (input_port[i].last && input_port[i].valid)
-//		{
-//			for (auto& i : break_state)
-//				break_state[i] = false;
-////			break_state[i] = false;       //当输入last信号时该端口的break状态结束
-//			//由于last携带的信号并没不携带数据所以不需要进入buffer
-//		}
-//		else if (!input_port[i].last && input_port[i].valid)
-//		{
-//			//input不进入inbuffer
-//			//bp仍返回   ack-入数成功/credit-可以入数
-//		}
-//	}
-//	else
-//	{
 
-		if (attribution->input_bypass != InputBypass::bypass) {
-			if (i == 1 && attribution->inbuffer_from[1] == InBufferFrom::aluin1) {
+		//if (attribution->input_bypass != InputBypass::bypass) {
+			if (i == 1 && attribution->inbuffer_from[1] == InBufferFrom::aluin1&& attribution->input_bypass != InputBypass::bypass) {
 				if (!local_reg[1]->reg_v) {
 					if (input_port[i].valid) {
 						local_reg[1]->input(input_port[i]);
@@ -249,12 +230,12 @@ void Processing_element::simStep1(uint i)
 			else {
 				if (input_port[i].valid) {
 					if (i == 1) {
-						if (attribution->control_mode == ControlMode::loop_activate) {
+						if (attribution->control_mode == ControlMode::loop_activate&&attribution->input_bypass != InputBypass::bypass) {
 							if (!local_reg[1]->reg_v) {
 								local_reg[1]->input(input_port[i]);
 								inbuffer->input(input_port[1], 1);
 								//local_reg[1]->reg_v = true;
-								first_loop = false;
+								first_loop = true;
 							}
 							else {
 								//inbuffer->input(input_port[0], 1);
@@ -265,11 +246,11 @@ void Processing_element::simStep1(uint i)
 							if (attribution->inbuffer_from[1] == InBufferFrom::in1 && !local_reg[1]->reg_v && (attribution->buffer_mode[1] == BufferMode::lr)) {
 								local_reg[1]->input(input_port[i]);
 							}
-							else if (attribution->buffer_mode[1] == BufferMode::buffer) {
+							else if (attribution->buffer_mode[1] == BufferMode::buffer && attribution->input_bypass != InputBypass::bypass) {
 								if (input_port[i].valid)
 									inbuffer->input(input_port[i], i);
 							}
-							else if (attribution->buffer_mode[1] == BufferMode::lr_out) {
+							else if (attribution->buffer_mode[1] == BufferMode::lr_out && attribution->input_bypass != InputBypass::bypass) {
 								if (input_port[i].valid && input_port[i].last)
 									inbuffer->input_nolast(input_port[i], i);
 							}
@@ -278,19 +259,25 @@ void Processing_element::simStep1(uint i)
 					else {
 						//if (attribution->lr_from == LocalregFrom::in1 && i == 1&& !local_reg->reg_v)
 						//	local_reg->input(input_port[i]);{
-						if (i == 0 && attribution->control_mode == ControlMode::loop_activate) {
-							if (local_reg[1]->reg_v) { inbuffer->input(input_port[0], 1); }
+						if (i == 0 && attribution->control_mode == ControlMode::loop_activate && attribution->input_bypass != InputBypass::bypass) {
+							if (local_reg[1]->reg_v&& input_port[i].valid && !input_port[i].last) { inbuffer->input(input_port[0], 1); }
 							else { ; }
 						}
 						else {
+							if(i == 2 && attribution->control_mode == ControlMode::loop_activate && attribution->input_bypass != InputBypass::bypass) {
+								if (attribution->buffer_mode[i] == BufferMode::buffer && attribution->inbuffer_from[2] == InBufferFrom::in2) {
+									if (input_port[i].valid && !input_port[i].last) { inbuffer->input(input_port[i], i); }
+									else { ; }
+								}
+							}
 							if (i == 0 && attribution->inbuffer_from[0] == InBufferFrom::in0 && !local_reg[0]->reg_v && attribution->buffer_mode[0] == BufferMode::keep)
 								local_reg[0]->input(input_port[i]);
 							else if (i == 2 && attribution->inbuffer_from[2] == InBufferFrom::in2 && !local_reg[2]->reg_v && attribution->buffer_mode[2] == BufferMode::keep)
 								local_reg[2]->input(input_port[i]);
-							else if (attribution->buffer_mode[i] == BufferMode::buffer) {
+							else if (attribution->buffer_mode[i] == BufferMode::buffer && attribution->input_bypass != InputBypass::bypass) {
 								inbuffer->input(input_port[i], i);
 							}
-							else if (attribution->buffer_mode[i] == BufferMode::lr_out) {
+							else if (attribution->buffer_mode[i] == BufferMode::lr_out && attribution->input_bypass != InputBypass::bypass) {
 								if (input_port[i].valid && input_port[i].last)
 									inbuffer->input_nolast(input_port[i], i);
 							}
@@ -300,50 +287,14 @@ void Processing_element::simStep1(uint i)
 				}
 			}
 		//}
-	}
+	//}
 
 	instruction_buffer->update();
 }
 
 void Processing_element::loopControlParse()
 {
-	//此时bool端口信号单独生效
-	//if (!controlBufferCanBeReset())
-		//return;
-	//if (attribution->control_mode == ControlMode::loop_activate)
-	//{
-	//	//控制信号解读
-	//	//if (control_value.valid)
-	//	//{
-	//	//	if (control_value.value_bool)     //代表循环开始
-	//	//	{
-	//	//		if (local_reg[1]->reg_v)
-	//	//		{
-	//	//			local_reg[1]->output(reg_out[1]);
-	//	//			reg_out[1].last = control_value.last;
-	//	//			reg_out[1].last = control_value.last;
-	//	//		}
-	//	//	}
-	//	//	else
-	//	//	{
-	//	//		local_reg[1]->reset();
-	//	//		inbuffer->reset();
-	//	//	}
-	//	//}
-	//}
-	//else    //在非loopcontrol情况下localreg主动输出
-	//{
-		//if (attribution->control_mode == ControlMode::loop_reset)
-		//{
-		//	if (control_value.valid)
-		//	{ 
-		//		if (!control_value.value_bool)     //代表循环开始
-		//		{
-		//			local_reg[1]->reset();
-		//			inbuffer->reset();
-		//		}
-		//	}
-		//}
+
 //	if (attribution->output_from[0] == OutputFrom::alu && attribution->opcode == PEOpcode::null) {
 	local_reg[0]->output(reg0_out);
 	local_reg[1]->output(reg1_out);
@@ -360,38 +311,14 @@ void Processing_element::getAluInput()
 	//alu输入 其中aluin[2]用于mux选择端或用于控制
 	if (allAluOperandsGot())
 	{
+		first_loop = false;
 		if (stall_one) {
 			stall_one = false;
 			return;
 		}
 		else {
 			oprand_collected = true;
-			//	DEBUG_ASSERT(!(attribution->control_mode == ControlMode::loop_activate && attribution->opcode == PEOpcode::null));
-	//			if (attribution->control_mode == ControlMode::loop_activate) {
-	//				if (attribution->input_bypass == InputBypass::inbuffer && (attribution->buffer_mode[2] == BufferMode::buffer)) {
-	//					//if (alu->canReceiveInput() && !local_reg[1]->reg_v) {
-	//					//	aluin[0] = reg_out[1];
-	//					//	inbuffer->output(aluin[1], 2);
-	//					//}
-	//					if (alu->canReceiveInput() && local_reg[1]->reg_v) {
-	//						DEBUG_ASSERT(alu_num < 2);
-	////						inbuffer->output(aluin[0], 1);
-	//						inbuffer->output(aluin[1], 1);
-	//					//	inbuffer->output(aluin[1], 2);
-	//					}
-	//				}
-	//				else if (attribution->input_bypass == InputBypass::inbuffer && (attribution->buffer_mode[2] == BufferMode::keep || attribution->buffer_mode[2] == BufferMode::lr)) {
-	//					//if (alu->canReceiveInput() && !local_reg[1]->reg_v) {
-	//					//	aluin[0] = reg_out[1];
-	//					//	aluin[1] = reg_out[2];
-	//					//}
-	//					if (alu->canReceiveInput() && local_reg[1]->reg_v) {
-	//						inbuffer->output(aluin[1], 1);
-	//						if (alu_num > 1)
-	//							aluin[0] = reg_out[0];
-	//					}
-	//				}
-	//			}
+
 
 			for (uint i = 0; i < in_num; ++i) {
 				//					int search_index = alu_num == 1 ? 1 : i;
@@ -400,7 +327,7 @@ void Processing_element::getAluInput()
 						(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
 							|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
 						inbuffer->output(aluin[i], i);
-					else if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::inbuffer &&
+					else if (outbuffer->isBufferNotFull(0) &&
 						(attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr
 							))//alu来源于lr
 						aluin[i] = reg_out[i];
@@ -412,7 +339,7 @@ void Processing_element::getAluInput()
 						(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
 							|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
 						inbuffer->output(aluin[i], i);
-					else if (alu->canReceiveInput() && attribution->input_bypass == InputBypass::inbuffer &&
+					else if (alu->canReceiveInput() &&
 						(attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr
 							))//alu来源于lr
 						aluin[i] = reg_out[i];
@@ -420,45 +347,12 @@ void Processing_element::getAluInput()
 						aluin[i] = input_port[i];
 				}
 			}
-			//else if (alu->canReceiveInput() && attribution->alu_in_from[i] == AluInFrom::first_loop)//alu来源于first_loop
-			//{
-			//	aluin[i].value_bool = first_loop;
-			//	aluin[i].valid = true;
-			//}
+
 
 
 			if (isSpecial())
 			{
 				control_value = aluin[2];
-				//if (attribution->opcode != PEOpcode::null) {
-				//	if (alu->canReceiveInput()) {
-				//		if (attribution->input_bypass == InputBypass::inbuffer) {
-				//			if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-				//				inbuffer->output(control_value, ctrl_index);
-				//			if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
-				//				local_reg[2]->output(control_value);
-				//		}
-				//		else if (attribution->input_bypass == InputBypass::bypass) {
-				//			control_value = input_port[2];
-				//		}
-				//	}
-				//}
-				//else {
-				//	if (attribution->output_from[0] == OutputFrom::outbuffer) {
-				//		if (outbuffer->isBufferNotFull(0)) {
-				//			if (attribution->input_bypass == InputBypass::inbuffer) {
-				//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-				//					inbuffer->output(control_value, ctrl_index);
-				//				if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
-				//					local_reg[2]->output(control_value);
-				//			}
-				//			else if (attribution->input_bypass == InputBypass::bypass) {
-				//				control_value = input_port[2];
-				//			}
-				//		}
-				//	}
-				//}
-				//DEBUG_ASSERT(alu_num < in_num);
 				if (attribution->control_mode == ControlMode::cb) {
 					if (control_value.valid)
 					{
@@ -473,26 +367,26 @@ void Processing_element::getAluInput()
 							rs_cd = true;
 					}
 				}
-				else if (attribution->control_mode == ControlMode::bind) {//bind对last的操作有所不同
-					if (aluin[0].valid && aluin[0].last) {
-						alu_flag = true;
-					}
-					else {
-						for (auto& k : aluin) {
-							if (k.valid && k.last)
-							{
-								oprand_collected = false;
-								break;
-							}
-						}
-						if (oprand_collected) {
-							if (control_value.valid && !control_value.value_data)
-								alu_flag = true;
-							//if (control_value.valid && !control_value.value_data)
-							//	alu_flag = true;
-						}
-					}
-				}
+				//else if (attribution->control_mode == ControlMode::bind) {//bind对last的操作有所不同
+				//	if (aluin[0].valid && aluin[0].last) {
+				//		alu_flag = true;
+				//	}
+				//	else {
+				//		for (auto& k : aluin) {
+				//			if (k.valid && k.last)
+				//			{
+				//				oprand_collected = false;
+				//				break;
+				//			}
+				//		}
+				//		if (oprand_collected) {
+				//			if (control_value.valid && !control_value.value_data)
+				//				alu_flag = true;
+				//			//if (control_value.valid && !control_value.value_data)
+				//			//	alu_flag = true;
+				//		}
+				//	}
+				//}
 				else if (attribution->control_mode == ControlMode::break_post || attribution->control_mode == ControlMode::break_pre || attribution->control_mode == ControlMode::continue_) {
 					if (break_state[0]) {
 						oprand_collected = false;
@@ -543,94 +437,6 @@ void Processing_element::getAluInput()
 
 			}
 
-			//if (attribution->control_mode == ControlMode::transout) {
-			//	if (attribution->output_from[0] == OutputFrom::alu) {
-			//		if (next_bp[0])
-			//		{
-			//			if (attribution->input_bypass == InputBypass::inbuffer) {
-			//				inbuffer->output(aluin[1], 1);
-			//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-			//					inbuffer->output(control_value, ctrl_index);
-			//				else if (attribution->buffer_mode[ctrl_index] == BufferMode::keep)
-			//					local_reg[2]->output(control_value);
-			//				else { DEBUG_ASSERT(false);}
-			//				if (control_value.valid && control_value.condition) {
-			//					if (control_value.last != true) { oprand_collected = false; }
-			//					else { //这个时候lr的值也应该是last的/////////////////
-			//						//DEBUG_ASSERT()
-			//						oprand_collected = true; 
-			//						local_reg[1]->reg_v = false; 
-			//					}
-			//				}
-			//				
-			//			}
-			//		}				
-			//	}
-				//else if(attribution->output_from[0] == OutputFrom::outbuffer){
-				//	if (outbuffer->isBufferNotFull(0))
-				//	{
-				//		if (attribution->input_bypass == InputBypass::inbuffer) {
-				//			inbuffer->output(aluin[0], 1);
-				//			if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-				//				inbuffer->output(control_value, ctrl_index);
-				//			else if (attribution->buffer_mode[ctrl_index] == BufferMode::keep)
-				//				local_reg[2]->output(control_value);
-				//			else { DEBUG_ASSERT(false); }
-				//			if (control_value.valid && control_value.condition) {
-				//				if (control_value.last != true) { oprand_collected = false; }
-				//				else { //这个时候lr的值也应该是last的/////////////////
-				//					//DEBUG_ASSERT()
-				//					oprand_collected = true;
-				//					local_reg[1]->reg_v = false;
-				//				}
-				//			}
-
-				//		}
-				//	}
-				//}
-				//else { DEBUG_ASSERT(false); }
-		//	}
-			//else if(attribution->control_mode == ControlMode::cinvb)
-			//{
-			//	if (attribution->opcode != PEOpcode::null) {
-			//		if (alu->canReceiveInput()) {
-			//			if (attribution->input_bypass == InputBypass::inbuffer) {
-			//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-			//					inbuffer->output(control_value, ctrl_index);
-			//				if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
-			//					local_reg[2]->output(control_value);
-			//			}
-			//			else if (attribution->input_bypass == InputBypass::bypass) {
-			//				control_value = input_port[2];
-			//			}
-			//		}
-			//	}
-			//	else {
-			//		if (outbuffer->isBufferNotFull(0)) {
-			//			if (attribution->input_bypass == InputBypass::inbuffer) {
-			//				if (attribution->buffer_mode[ctrl_index] == BufferMode::buffer)
-			//					inbuffer->output(control_value, ctrl_index);
-			//				if (attribution->buffer_mode[ctrl_index] == BufferMode::keep || attribution->buffer_mode[ctrl_index] == BufferMode::lr)
-			//					local_reg[2]->output(control_value);
-			//			}
-			//			else if (attribution->input_bypass == InputBypass::bypass) {
-			//				control_value = input_port[2];
-			//			}
-			//		}
-			//	}
-			//	DEBUG_ASSERT(alu_num < in_num);
-			//	if (control_value.valid)
-			//	{
-			//		for (auto& i : aluin) {
-			//			if (i.condition == false)
-			//				rs_cd = true;
-			//				break;
-			//		}
-			//		//if (control_value.value_bool)
-			//		if (control_value.value_data)
-			//			rs_cd = true;
-			//	}
-			//}
 
 			for (auto& i : aluin) {
 				if (i.valid) {
@@ -643,28 +449,7 @@ void Processing_element::getAluInput()
 			//if (control_value.valid && !control_value.condition) {
 			//	rs_cd = true;
 			//}
-			if (attribution->control_mode != ControlMode::bind) {
-				//for (auto& aluinOne : aluin) {
-		//		if (alu_in[i].valid) {
-				//for (uint k = 0; k < aluin.size(); k++) {
-				//	if (k == 1 && attribution->control_mode == ControlMode::loop_activate) {
-				//		if (aluin[1].last) {
-				//			for (uint i = 0; i < in_num; i++) {
-				//				if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
-				//					local_reg[i]->reg_v = false;
-				//			}
-				//			break;
-				//		}
-				//	}
-				//	else if ((aluin[k].valid && aluin[k].last) || (control_value.valid && control_value.last)) {
-				//		alu_flag = true;
-				//		for (uint i = 0; i < in_num; i++) {
-				//			if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
-				//				local_reg[i]->reg_v = false;
-				//		}
-				//		break;
-				//	}
-				//}
+		//	if (attribution->control_mode != ControlMode::bind) {
 				for (auto& aluinOne : aluin) {
 					if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) {
 						alu_flag = true;
@@ -679,42 +464,8 @@ void Processing_element::getAluInput()
 						break;
 					}
 				}
-				//if (attribution->control_mode == ControlMode::loop_activate) {
-				//	for (auto& aluinOne : aluin) {
-				//		if (aluinOne.valid && aluinOne.last) {
-				//			alu_flag = true;
-				//			for (uint i = 0; i < in_num; i++) {
-				//				if ((attribution->buffer_mode[i] == BufferMode::keep|| attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
-				//					local_reg[i]->reg_v = false;
-				//			}
-				//			break;
-				//		}
-				//	}
-				//}
-				//else {
-				//	if (aluin[0].valid && attribution->buffer_mode[0] == BufferMode::keep && attribution->inbuffer_from[0] == InBufferFrom::in0 && (aluin[0].last == true || control_value.last)) {
-				//		local_reg[0]->reg_v = false;
-				//		alu_flag = true;
-				//	}
-				//	
-				//	if (aluin[1].valid && attribution->buffer_mode[1] == BufferMode::lr && attribution->inbuffer_from[1] == InBufferFrom::in1 && (aluin[1].last == true || control_value.last)) {
-				//		local_reg[1]->reg_v = false;
-				//		alu_flag = true;
-				//	}
-				//	if (aluin[2].valid && attribution->buffer_mode[2] == BufferMode::keep && attribution->inbuffer_from[2] == InBufferFrom::in2 && (aluin[2].last == true || control_value.last)) {
-				//		local_reg[2]->reg_v = false;
-				//		alu_flag = true;
-				//	}
-				//}
-	//					first_loop = true;
-		//		}
-			//	}//清local_reg
 
-				//if (control_value.valid) {
-				//	if(control_value.last)
-				//		alu_flag = true;
-				//}
-			}
+//			}
 		}
 	}
 }
@@ -825,6 +576,10 @@ void Processing_element::gatherOperands()
 					//alu_out.value_bool = aluin[0].value_bool;
 					alu_out.valid = true;
 				}
+				if (attribution->control_mode == ControlMode::bind) {
+					if (!aluin[1].value_data)
+						alu_out.last = true;
+				}
 				for (uint i = 0; i < system_parameter.bool_outport_breadth + system_parameter.data_outport_breadth; ++i)
 				{
 					if (attribution->output_from[i] == OutputFrom::outbuffer) {
@@ -852,78 +607,15 @@ void Processing_element::breakoccur()
 	}
 }
 
-//void Processing_element::lastCheck()
-//{
-//	//if (aluin[0].last || aluin[1].last || aluin[2].last)
-//	//{
-//	//	lastflag = true;
-//	//	//for (auto& i : aluin)
-//	//		//DEBUG_ASSERT(i.last);//something wrong
-//	//	/*
-//	//	if (attribution->dfg_end)                        //数据流终点
-//	//	{
-//	//		if (alu->empty() && outbuffer->empty())
-//	//		{
-//	//			output_port[2].valid = true;
-//	//			output_port[2].last = true;
-//	//			inbufferReset();
-//	//		}
-//	//	}
-//	//	*/
-//	//	
-//	//	if (lastflag && alu->empty() && outbuffer->empty())
-//	//	{
-//	//		for (uint i = 0; i < attribution->ob_from.size(); ++i)
-//	//		{
-//	//			if (attribution->ob_from[i] == OutBufferFrom::alu)
-//	//			{
-//	//				alu_out.valid = true;
-//	//				alu_out.last = true;
-//	//			}
-//	//			//其他情况下，outbuffer的last信号能从其来源获得
-//	//		}
-//	//		first_loop = true;
-//	//		lastflag = false;
-//	//	}
-//	//}
-//	//信号带last可能与alu为空的情况不能同时存在，所以设置lastflag记录last信号的产生，将上一段注释了
-//	if (aluin[0].last || aluin[1].last || aluin[2].last)
-//	{
-//		lastflag = true;
-//	}
-//
-//		
-////		if (lastflag && alu->empty() && outbuffer->empty())
-//	if (lastflag && alu->empty() && outbuffer->empty())
-//	{
-//		//for (uint i = 0; i < attribution->ob_from.size(); ++i)
-//		//{
-//		//	if (attribution->ob_from[i] == OutBufferFrom::alu)
-//		//	{
-//		//		alu_out.valid = true;//输入信号last时就把alu_out置为true
-//		//		alu_out.last = true;
-//		//	}
-//		//	//其他情况下，outbuffer的last信号能从其来源获得
-//		//}
-//		first_loop = true;
-//		lastflag = false;
-//	}
-//	
-//}
-/*
-void Processing_element::inbufferReset()
-{
-	for (uint i = 0; i < buffer_reset.size(); ++i)
-	{
-		if (buffer_reset[i])
-			inbuffer->reset(i);
-	}
-}
-*/
+
 void Processing_element::aluUpdate()
 {
 	if (attribution->opcode != PEOpcode::null) {
 		alu->compute(alu_out);
+		if (attribution->control_mode == ControlMode::bind) {
+			if (alu_out.value_data == 0)
+				alu_out.last = 1;
+		}
 		if (attribution->output_from[0] == OutputFrom::outbuffer) {
 			if (outbuffer->isBufferNotFull(0)) {
 				alu->update();      //alu流水更新以及输出
@@ -1008,54 +700,7 @@ void Processing_element::simBp()
 	//给上一级outbuffer返回bp
 }
 
-//bool Processing_element::bufferCanBeEmpty(uint port)
-//{
-//
-//	//if (inbuffer->isBufferNotFull(port)) {
-//	////	Debug::getInstance()->getPortFile() << "here buffer is full";
-//	//	return true;
-//	//}
-//	if (isBufferCanBeNotFull(port)) {
-//		Debug::getInstance()->getPortFile() << "here buffer can be not full"<<std::endl;
-//		return true;
-//	}
-//	return false;
-//}
 
-//bool Processing_element::isBufferCanBeNotFull(uint port)
-//{
-//	if (attribution->ob_from[0] == OutBufferFrom::inbuffer && port == 0)//当dummy时
-//	{
-//		if (outbuffer->isBufferNotFull(port))
-//			return true;
-//		else
-//			return next_bp[0];
-//	}
-//	else if (attribution->alu_in_from[port] == AluInFrom::inbuffer)    //当去往alu时查询该通路是否有空                    
-//	{
-//		if (allAluOperandsGot())
-//		{
-//			if (alu->canReceiveInput())                               //alu not full
-//				return true;
-//			else if (attribution->ob_from[0] == OutBufferFrom::alu)
-//			{
-//				if (outbuffer->isBufferNotFull(0))   //ob not full
-//					return true;
-//				else if (next_bp[0])                      //next_pe not full
-//					return true;
-//			}
-//			else if (attribution->output_from[0] == OutputFrom::alu)
-//			{
-//				return next_bp[0];
-//			}
-//		}
-//	}
-//	else if (port == 2 && attribution->alu_in_from[port] != AluInFrom::inbuffer) //control port
-//	{
-//		return (controlBufferCanBeReset());
-//	}
-//	return false;
-//}
 
 //判断是否集齐所有操作数
 bool Processing_element::allAluOperandsGot()
@@ -1070,7 +715,7 @@ bool Processing_element::allAluOperandsGot()
 	}
 	//			alu_mask[i] = true;
 	uint clk = ClkDomain::getInstance()->getClk();
-	if (attribution->input_bypass == InputBypass::inbuffer) {
+//	if (attribution->input_bypass == InputBypass::inbuffer) {
 		if (isSpecial())
 		{
 			if (attribution->inbuffer_from[2] == InBufferFrom::flr) {//这个实际上只针对loop_activate在循环头中的情况
@@ -1079,23 +724,54 @@ bool Processing_element::allAluOperandsGot()
 				}
 			}
 			else {
+				
 				if (attribution->buffer_mode[2] == BufferMode::buffer || attribution->buffer_mode[2] == BufferMode::lr_out ) {//肯定不会是aluin1，只能从1口进
-					if (!inbuffer->isBufferNotEmpty(2))
-						return false;
+					if (attribution->input_bypass == InputBypass::inbuffer) {
+						if (attribution->control_mode == ControlMode::loop_activate) {
+							if (!first_loop) {
+								if (!inbuffer->isBufferNotEmpty(2))
+									return false;
+							}
+							//	else { first_loop = false; }
+						}
+						else {
+							if (!inbuffer->isBufferNotEmpty(2))
+								return false;
+						}
+					}
+					else{
+						if (!input_port[2].valid)
+							return false;
+					}
 				}
 				else if (attribution->buffer_mode[2] == BufferMode::keep || attribution->buffer_mode[2] == BufferMode::lr) {
-					if (!local_reg[2]->reg_v)
-						return false;
+					if (attribution->control_mode == ControlMode::loop_activate) {
+						if (!first_loop) {
+							if (!local_reg[2]->reg_v)
+								return false;
+						}
+					//	else { first_loop = false; }
+					}
+					else {
+						if (!local_reg[2]->reg_v)
+							return false;
+					}
 				}
 			}
 		}
 		for (uint i = 0; i < alu_num; ++i) {
 			int search_index = (alu_num == 1 ? 1 : i);
 			if ((attribution->buffer_mode[search_index] == BufferMode::buffer || (attribution->inbuffer_from[search_index] == InBufferFrom::aluin1) || 
-			(attribution->buffer_mode[search_index] == BufferMode::lr_out)|| (attribution->control_mode == ControlMode::loop_activate)))
+			(attribution->buffer_mode[search_index] == BufferMode::lr_out)|| (attribution->control_mode == ControlMode::loop_activate)) )
 			{
-				if (!inbuffer->isBufferNotEmpty(search_index))
-					return false;
+				if ( attribution->input_bypass == InputBypass::inbuffer) {
+					if (!inbuffer->isBufferNotEmpty(search_index))
+						return false;
+				}
+				else {
+					if (!input_port[search_index].valid)
+						return false;
+				}
 			}
 			else if ((attribution->buffer_mode[search_index] == BufferMode::keep || attribution->buffer_mode[search_index] == BufferMode::lr) )
 			{
@@ -1104,57 +780,26 @@ bool Processing_element::allAluOperandsGot()
 			}
 		}
 
-	}
+//	}
 
-	else {
-		DEBUG_ASSERT(attribution->control_mode != ControlMode::loop_activate)
-			if (isSpecial())
-			{
-				if (!input_port[2].valid)
-					return false;
-			}
-		for (uint i = 0; i < alu_num; ++i) {
-			int search_index = (alu_num == 1 ? 1 : i);
-			if (!input_port[search_index].valid)
-				return false;
-		}
-	}//bypass情况不做getoprands判断
+	//else {
+	//	DEBUG_ASSERT(attribution->control_mode != ControlMode::loop_activate)
+	//		if (isSpecial())
+	//		{
+	//			if (!input_port[2].valid)
+	//				return false;
+	//		}
+	//	for (uint i = 0; i < alu_num; ++i) {
+	//		int search_index = (alu_num == 1 ? 1 : i);
+	//		if (!input_port[search_index].valid)
+	//			return false;
+	//	}
+	//}//bypass情况不做getoprands判断
 
 	return true;
 }
 
-//bool Processing_element::controlBufferCanBeReset()
-//{
-//	if (attribution->control_mode == ControlMode::loop_activate || attribution->control_mode == ControlMode::loop_reset)
-//	{
-//		if (local_reg->reg_v && inbuffer->isBufferNotEmpty(2))       //操作数集齐
-//		{
-//			if (attribution->ob_from[0] == OutBufferFrom::lr)
-//			{
-//				if (outbuffer->isBufferNotFull(0))   //ob not full
-//					return true;
-//				else if (next_bp[0])                      //next_pe not full
-//					return true;
-//			}
-//			else if (attribution->alu_in_from[2] == AluInFrom::lr)     //lr->alu
-//			{
-//				if (attribution->ob_from[0] == OutBufferFrom::alu)     //alu->ob
-//				{
-//					if (outbuffer->isBufferNotFull(0))   //ob not full
-//						return true;
-//					else if (next_bp[0])                      //next_pe not full
-//						return true;
-//				}
-//				else if (attribution->output_from[0] == OutputFrom::alu)
-//				{
-//					if (next_bp[0])                      //next_pe not full
-//						return true;
-//				}
-//			}
-//		}
-//	}
-//	return false;                //其他路径都需要操作数匹配
-//}
+
 
 void Processing_element::wireReset()
 {

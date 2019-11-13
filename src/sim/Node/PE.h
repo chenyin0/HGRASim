@@ -100,7 +100,7 @@ namespace Simulator::Array
 		//bool everybp(threeBp);
 		//static returnBp Menu[];
 		bool isSpecial() {
-			return attribution->control_mode == ControlMode::bind || attribution->control_mode == ControlMode::cb
+			return attribution->control_mode == ControlMode::cb
 				|| attribution->control_mode == ControlMode::cinvb || attribution->control_mode == ControlMode::break_pre
 				|| attribution->control_mode == ControlMode::break_post || attribution->control_mode == ControlMode::loop_activate
 				|| std::find(attribution->buffer_mode.begin(), attribution->buffer_mode.end(), BufferMode::lr_out) != attribution->buffer_mode.end()

@@ -238,17 +238,17 @@ void Loadstore_element::tag_counter_update()
 	switch (attribution->size)
 	{
 	case BufferSize::small:
-		if (tag_counter == 32)
+		if (tag_counter == system_parameter.le_outbuffer_depth_small)
 			tag_counter = 0;
 		break;
 
 	case BufferSize::middle:
-		if (tag_counter == 64)
+		if (tag_counter == system_parameter.le_outbuffer_depth_middle)
 			tag_counter = 0;
 		break;
 
 	case BufferSize::large:
-		if (tag_counter == 128)
+		if (tag_counter == system_parameter.le_outbuffer_depth_large)
 			tag_counter = 0;
 		break;
 	}
@@ -260,7 +260,8 @@ void Loadstore_element::LSEcallback(uint addr, uint64_t cycle, short tag)
 			input_port_lsu[i].value_addr = addr;
 			input_port_lsu[i].valid = true;
 			input_port_lsu[i].tag = tag;
-			input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////
+			input_port_lsu[i].value_data = addr;
+//			input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////
 			input_port_lsu[i].rdwr = false;
 		}
 		for (uint i = 0; i < input_port_lsu.size(); ++i)
@@ -474,8 +475,8 @@ void Loadstore_element::readNoMemory()
 		fake_lsu.push_back(output_port_2lsu);
 
 		input_port_lsu[0] = fake_lsu.front();
-		input_port_lsu[0].value_data = MemoryData::getInstance()->read(fake_lsu.front().value_addr);///////////////////这个里面memory还没有赋值///////////
-//		input_port_lsu[0].value_data = fake_lsu.front().value_addr;
+//		input_port_lsu[0].value_data = MemoryData::getInstance()->read(fake_lsu.front().value_addr);///////////////////这个里面memory还没有赋值///////////
+		input_port_lsu[0].value_data = fake_lsu.front().value_addr;
 		input_port_lsu[0].tag=tag_counter;
 	}
 }

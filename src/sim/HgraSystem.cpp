@@ -494,7 +494,7 @@ void HgraArray::run()
 				lsu->update();//lsu->updateÒª·ÅÔÚ×îÉÏÃæ£¬ÕâÑùlsu°ÑÊä³ö·ÅÔÚ¶Ë¿ÚÉÏ¾ÍÄÜÊÕµ½
 			}
 
-
+			bridge.setAllBp();
 
 			for (int i = config_order.size() - 1; i >= 0; i--) {
 				if (config_order[i].type == NodeType::pe) {
@@ -509,7 +509,7 @@ void HgraArray::run()
 				else { DEBUG_ASSERT(false); }
 			}
 
-
+			bridge.setAllBp();
 			for (int i = config_order.size() - 1; i >= 0; i--) {
 				if (config_order[i].type == NodeType::pe) {
 					for (uint port = 0; port < system_para.data_outport_breadth + system_para.bool_outport_breadth; ++port) {
@@ -542,7 +542,7 @@ void HgraArray::run()
 				Debug::getInstance()->getPortFile() << "clk" << clk << std::endl;
 				break;
 			}
-			bridge.setAllBp();
+	//		bridge.setAllBp();
 			ClkDomain::getInstance()->selfAdd();
 		}
 	}
