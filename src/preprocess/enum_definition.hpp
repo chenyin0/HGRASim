@@ -67,7 +67,7 @@ namespace Simulator
 	{
 		data_flow,
 		loop_activate,
-		calc_loop,
+		calc_activate,
 		loop_reset,
 		break_pre,
 		break_post,

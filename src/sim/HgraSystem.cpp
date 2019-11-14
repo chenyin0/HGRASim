@@ -124,9 +124,11 @@ void HgraArray::initIndex()
 void HgraArray::printStall(type_index type_in, uint port)
 {
 	Bridge::Location self_location{ type_in.type,type_in.index,port };
-	if (bridge._bp_temporary_buffer.find(self_location) != bridge._bp_temporary_buffer.end()) {
-		if (bridge._bp_temporary_buffer[self_location] == false) {
-			for (const auto& i : bridge.stall_note[self_location]) { Debug::getInstance()->getPortFile() << maps[int(self_location.type)] << self_location.node_index <<"."<< self_location.port_index << " stall reason is " << maps[int(i.type)] << i.node_index<<"." << i.port_index << std::endl; }
+	if (ClkDomain::getInstance()->getClk() >= Debug::getInstance()->print_file_begin && ClkDomain::getInstance()->getClk() < Debug::getInstance()->print_file_end) {
+		if (bridge._bp_temporary_buffer.find(self_location) != bridge._bp_temporary_buffer.end()) {
+			if (bridge._bp_temporary_buffer[self_location] == false) {
+				for (const auto& i : bridge.stall_note[self_location]) { Debug::getInstance()->getPortFile() << maps[int(self_location.type)] << self_location.node_index << "." << self_location.port_index << " stall reason is " << maps[int(i.type)] << i.node_index << "." << i.port_index << std::endl; }
+			}
 		}
 	}
 }
@@ -201,7 +203,7 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 	{
 		for (uint i = 0; i < pe_map[index]->output_port.size(); i++) {
 			bridge.setNextInput(pe_map[index]->output_port[i], NodeType::pe, pe_map[index]->getAttr()->index, i);
-			if (clk < Debug::getInstance()->print_file_end && pe_map[index]->output_port[i].valid)
+			if (clk < Debug::getInstance()->print_screen_end && pe_map[index]->output_port[i].valid)
 			{
 				if (pe_map[index]->output_port[i].last)
 					data_flow[make_tuple(NodeType::pe, pe_map[index]->getAttr()->index,i)].push_back(make_tuple(clk, pe_map[index]->output_port[i].value_data, true));
@@ -214,7 +216,7 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 	{
 		for (uint i = 0; i < lc_map[index]->lc_output.size(); i++) {
 			bridge.setNextInput(lc_map[index]->lc_output[i], NodeType::lc, lc_map[index]->getAttr()->index, i);
-			if (clk<Debug::getInstance()->print_file_end&&lc_map[index]->lc_output[i].valid)
+			if (clk<Debug::getInstance()->print_screen_end &&lc_map[index]->lc_output[i].valid)
 			{
 				if (lc_map[index]->lc_output[i].last)
 					data_flow[make_tuple(NodeType::lc, lc_map[index]->getAttr()->index, i)].push_back(make_tuple(clk, lc_map[index]->lc_output[i].value_data, true));
@@ -231,7 +233,7 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 	}
 	else if (type == NodeType::ls) {
 		bridge.setNextInput(lse_map[index]->output_port_2array, NodeType::ls, lse_map[index]->getAttr()->index, 0);
-		if (clk < Debug::getInstance()->print_file_end && lse_map[index]->output_port_2array.valid)
+		if (clk < Debug::getInstance()->print_screen_end && lse_map[index]->output_port_2array.valid)
 		{
 			if (lse_map[index]->output_port_2array.last)
 				data_flow[make_tuple(NodeType::ls, lse_map[index]->getAttr()->index, 0)].push_back(make_tuple(clk, lse_map[index]->output_port_2array.value_data, true));
@@ -546,6 +548,7 @@ void HgraArray::run()
 			ClkDomain::getInstance()->selfAdd();
 		}
 	}
+	Debug::getInstance()->getPortFile() << "clk" << clk << std::endl;
 	for (const auto& single_out : data_flow) {
 		uint pr_ct = 0;
 		Debug::getInstance()->getdataFlowFile() << endl;

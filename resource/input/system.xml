@@ -49,9 +49,9 @@
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>
         <printscreen>false</printscreen>
-        <stallMode>inbuffer_stall</stallMode>
+        <stallMode>none</stallMode>
         <attachMemory>true</attachMemory>
-        <maxClk>4000000</maxClk>
+        <maxClk>1000000</maxClk>
         <maxMemoryDepth>100000</maxMemoryDepth>
       
     </array>

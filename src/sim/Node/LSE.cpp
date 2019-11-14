@@ -19,8 +19,21 @@ Loadstore_element::Loadstore_element(const Simulator::Preprocess::ArrayPara para
 	attribution = dynamic_cast<const Preprocess::DFGNode<Simulator::NodeType::ls>*>(ls_vec[index]);
 	outbuffer = Buffer_factory::createLseBuffer(para, attribution->size);
 	inbuffer_bp = Bp_factory::createLseBp(para, this);
+	lastout = Port_inout();
 	outbuffer_bp = Bp_factory::createLseBp(para, this);
+#define order_force
 	break_state.resize(system_parameter.lse_boolin_breadth + system_parameter.lse_datain_breadth);
+	if (attribution->size == BufferSize::small)
+		maintain_order.resize(system_parameter.le_outbuffer_depth_small);
+	else if (attribution->size == BufferSize::middle)
+		maintain_order.resize(system_parameter.le_outbuffer_depth_middle);
+	else if (attribution->size == BufferSize::large)
+		maintain_order.resize(system_parameter.le_outbuffer_depth_large);
+	else
+		;
+	for (auto& i : maintain_order)
+		i = true;
+
 	for (auto& i : nextpe_bp)
 		i = true;
 }
@@ -265,8 +278,13 @@ void Loadstore_element::LSEcallback(uint addr, uint64_t cycle, short tag)
 			input_port_lsu[i].rdwr = false;
 		}
 		for (uint i = 0; i < input_port_lsu.size(); ++i)
-			if (input_port_lsu[i].valid)
-				outbuffer->input_tag_lsu(input_port_lsu[i], i, input_port_lsu[i].tag);
+			if (input_port_lsu[i].valid) {
+				if (outbuffer->input_tag_lsu(input_port_lsu[i], i, input_port_lsu[i].tag)) { ; }////////////////////这个地方是需要bp判断的吧
+				else { DEBUG_ASSERT(false); }
+#ifdef order_force
+				maintain_order[input_port_lsu[i].tag] = true;
+#endif
+			}
 	}
 	else
 		DEBUG_ASSERT(false);
@@ -274,6 +292,7 @@ void Loadstore_element::LSEcallback(uint addr, uint64_t cycle, short tag)
 }
 void Loadstore_element::leSimStep2()
 {
+
 	//for (uint i = 0; i < input_port_lsu.size(); ++i)
 	//{
 	//	if (input_port_lsu[i].valid)///////////需要考虑直连情况////////////////////////
@@ -298,6 +317,10 @@ void Loadstore_element::leSimStep2()
 		//tag match, matchset的仿真是多LE级的，适合放在更高层次执行
 		//不放在le函数内执行
 	}
+	if (lastout.valid&& output_port_2array.valid&&lastout.last != true && output_port_2array.last != true)
+		DEBUG_ASSERT(output_port_2array.value_data - lastout.value_data == 1);
+	if(!output_port_2array.last)
+		lastout = output_port_2array;
 
 
 	if (nextlsu_bp)
@@ -340,7 +363,16 @@ void Loadstore_element::leSimStep2()
 		output_port_2lsu.tag = tag_counter;
 	//	tag_counter_update();
 	//	if (addr_v) {
+
+#ifdef order_force
+		if (maintain_order[output_port_2lsu.tag]) {
+#endif
 			lsu->AddTrans(output_port_2lsu, index);
+#ifdef order_force
+			maintain_order[output_port_2lsu.tag] = false;
+
+		}
+#endif
 	//		addr_v = false;
 	//	}
 	}
@@ -348,15 +380,22 @@ void Loadstore_element::leSimStep2()
 	{
 //		if (inbuffer_out.valid) {
 //			tag_counter_update();
+#ifdef order_force
+		if (maintain_order[tag_counter]) {
+#endif
 			if (outbuffer->input_tag(inbuffer_out, 0, tag_counter))////////////////暗含了inbuffer_out.valid信息/////////////
 			{
-		//		tag_counter_update();
+				//		tag_counter_update();
 				nextlsu_bp = true;
 				//			inbuffer->reset(0);
 				//			if (attribution->match)
 				//////////////////////////////////////////////////////在所有情况都需要tag_counter_update()///////////////
 			}
-			else { nextlsu_bp = false; }
+			else { DEBUG_ASSERT(false); }
+#ifdef order_force
+		}
+		else{ nextlsu_bp = false; }
+#endif
 //		}
 	}
 	//通过outbuffer的输出决定bp
@@ -370,6 +409,7 @@ void Loadstore_element::leSimStep2NoMem()
 	//Port_inout inbuffer_out;
 	if (nextpe_bp[0])
 	{
+		//DEBUG_ASSERT(false);
 		if (!attribution->match)
 			outbuffer->output(output_port_2array, 0);//这里输出了
 		//tag match, matchset的仿真是多LE级的，适合放在更高层次执行
@@ -541,6 +581,8 @@ void Loadstore_element::wirePrint()
 			debugPrint->onePrint<Port_inout>(inbuffer_out, "inbuffer_out");
 			Debug::getInstance()->getPortFile() << "lse" << index<<" ";
 			debugPrint->onePrint<Port_inout_lsu>(output_port_2lsu, "output_port_2lsu");
+			debugPrint->onePrint<Bool>(maintain_order[output_port_2lsu.tag], "output_port_2lsu.order");
+			Debug::getInstance()->getPortFile() << "lse" << index<< "output_port_2lsu.tag" << output_port_2lsu.tag << " "<<std::endl;
 			Debug::getInstance()->getPortFile() << "lse" << index<<" ";
 			debugPrint->onePrint<Port_inout_lsu>(input_port_lsu[0], "input_port_lsu");
 			Debug::getInstance()->getPortFile() << "lse" << index << " ";
@@ -552,6 +594,7 @@ void Loadstore_element::wirePrint()
 		}
 		else {
 			debugPrint->linePrint("   this is step2");
+			debugPrint->onePrint<Bool>(nextlsu_bp, "nextlsu_bp");
 			debugPrint->vecPrint<uint>(validAddrIndex, "validAddrIndex");
 			debugPrint->vecPrint<uint>(validDataIndex, "validDataIndex");
 			Debug::getInstance()->getPortFile() << "     match_tag       "<<match_tag<<std::endl;
@@ -590,6 +633,7 @@ void Loadstore_element::sedSimStep2()
 			//inbuffer->reset(0);
 			outbuffer->resetTag(sended_tag);
 			coupleSeReset(sended_tag);
+//			maintain_order[sended_tag] = true;
 		}
 //		if (temp.valid) {
 			//if (firstlsu) {
@@ -654,7 +698,7 @@ void Loadstore_element::sedSimStep2()
 			output_port_2lsu.value_data = output_port_2array.value_data;
 			output_port_2lsu.rdwr = true;
 			output_port_2lsu.dae = attribution->dae;
-			output_port_2lsu.tag = tag_counter;
+			output_port_2lsu.tag = match_tag;
 			lsu->AddTrans(output_port_2lsu, index);////////////给output_port_2lsu赋值////////////////
 			MemoryData::getInstance()->write(output_port_2lsu.value_addr, output_port_2lsu.value_data);
 			sended_tag = match_tag;
