@@ -651,7 +651,7 @@ void Processing_element::aluUpdate()
 	if (attribution->opcode != PEOpcode::null) {
 		alu->compute(alu_out);
 		if (attribution->control_mode == ControlMode::bind) {
-			if (alu_out.value_data == 0)
+			if (alu_out.valid&&alu_out.value_data == 0)
 				alu_out.last = 1;
 		}
 		if (attribution->output_from[0] == OutputFrom::outbuffer) {
