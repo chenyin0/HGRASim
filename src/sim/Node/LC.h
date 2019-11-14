@@ -19,6 +19,8 @@ namespace Simulator::Array
 
 		bool first_loop;
 		int df_cnt;
+		uint activate_cnt;
+		uint end_cnt;
 		int break_cnt;
 		bool last_flag = false;
 	    //wire signal

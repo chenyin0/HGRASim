@@ -263,7 +263,7 @@ void Processing_element::simStep1(uint i)
 							if (local_reg[1]->reg_v&& input_port[i].valid && !input_port[i].last) { inbuffer->input(input_port[0], 1); }
 							else { ; }
 						}
-						else */if (i == 0 && attribution->control_mode == ControlMode::calc_activate|| attribution->control_mode == ControlMode::loop_activate 
+						else */if (i == 0 && (attribution->control_mode == ControlMode::calc_activate|| attribution->control_mode == ControlMode::loop_activate) 
 							&& attribution->input_bypass != InputBypass::bypass) {
 							if (local_reg[1]->reg_v ) { inbuffer->input(input_port[0], 1); }
 							else { ; }
@@ -275,14 +275,14 @@ void Processing_element::simStep1(uint i)
 									else { ; }
 								}
 							}
-							else */if (i == 2 && attribution->control_mode == ControlMode::calc_activate || attribution->control_mode == ControlMode::loop_activate 
+							else */if (i == 2 && (attribution->control_mode == ControlMode::calc_activate || attribution->control_mode == ControlMode::loop_activate) 
 										&& attribution->input_bypass != InputBypass::bypass) {
 								if (attribution->buffer_mode[i] == BufferMode::buffer && attribution->inbuffer_from[2] == InBufferFrom::in2) {
 									if (input_port[i].valid ) { inbuffer->input(input_port[i], i); }
 									else { ; }
 								}
 							}
-							if (i == 0 && attribution->inbuffer_from[0] == InBufferFrom::in0 && !local_reg[0]->reg_v && attribution->buffer_mode[0] == BufferMode::keep)
+							else if (i == 0 && attribution->inbuffer_from[0] == InBufferFrom::in0 && !local_reg[0]->reg_v && attribution->buffer_mode[0] == BufferMode::keep)
 								local_reg[0]->input(input_port[i]);
 							else if (i == 2 && attribution->inbuffer_from[2] == InBufferFrom::in2 && !local_reg[2]->reg_v && attribution->buffer_mode[2] == BufferMode::keep)
 								local_reg[2]->input(input_port[i]);
@@ -800,7 +800,7 @@ bool Processing_element::allAluOperandsGot()
 		for (uint i = 0; i < alu_num; ++i) {
 			int search_index = (alu_num == 1 ? 1 : i);
 			if ((attribution->buffer_mode[search_index] == BufferMode::buffer || (attribution->inbuffer_from[search_index] == InBufferFrom::aluin1) || 
-			(attribution->buffer_mode[search_index] == BufferMode::lr_out)|| (attribution->control_mode == ControlMode::loop_activate)||attribution->control_mode == ControlMode::calc_activate) )
+			(attribution->buffer_mode[search_index] == BufferMode::lr_out)|| (attribution->control_mode == ControlMode::loop_activate||attribution->control_mode == ControlMode::calc_activate)) )
 			{
 				if ( attribution->input_bypass == InputBypass::inbuffer) {
 					if (!inbuffer->isBufferNotEmpty(search_index))

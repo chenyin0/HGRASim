@@ -66,7 +66,7 @@ void LoopControl::update()
 	
 }
 
-//Ê¹ÓÃdebugÀàµÄ´òÓ¡·½·¨½øÐÐ´òÓ¡
+//Ê¹ï¿½ï¿½debugï¿½ï¿½Ä´ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ó¡
 void LoopControl::wirePrint()
 {
 	const auto& debugPrint = Debug::getInstance();
@@ -79,7 +79,9 @@ void LoopControl::wirePrint()
 		debugPrint->onePrint<Port_inout>(lc_output[1], "lc_output");
 		Debug::getInstance()->getPortFile() << "lc" << attribution->index << " ";
 		debugPrint->onePrint<Port_inout>(lc_output[3], "lc_output3");
-		Debug::getInstance()->getPortFile() << "lc"<<attribution->index<<"df_cnt " << df_cnt << std::endl;
+		Debug::getInstance()->getPortFile() << std::setw(15) <<"df_cnt="<< df_cnt;
+		Debug::getInstance()->getPortFile() << std::setw(15) << "activate_cnt=" << activate_cnt;
+		Debug::getInstance()->getPortFile() << std::setw(15) << "end_cnt=" << end_cnt << std::endl;
 		debugPrint->linePrint("   this is step2");
 		debugPrint->onePrint<Port_inout>(loopbegin, "loopbegin");
 		debugPrint->onePrint<Port_inout>(muxout, "muxout");
@@ -146,7 +148,7 @@ void LoopControl::wireReset()
 		i.reset();
 }
 
-//ÔÚreg_inputÖÐ½«first_loopÖÃÎªÁËtrue£¬µ«ºóÃæÈç¹ûÔÙÓÐÓÐÐ§µÄÊä³ö½«»áÊ¹first_loop±£³ÖÎªtrue£¬Òò´ËÐèÒª½«outputÇå¿Õ(Ó¦ÔÚsendÍêÖ®ºó×ö)//////////
+//ï¿½ï¿½reg_inputï¿½Ð½ï¿½first_loopï¿½ï¿½Îªï¿½ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹first_loopï¿½ï¿½ï¿½ï¿½Îªtrueï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½outputï¿½ï¿½ï¿½(Ó¦ï¿½ï¿½sendï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½)//////////
 //void LoopControl::outReset() {
 //	for (auto& i : lc_output)
 //	i.reset();
@@ -155,7 +157,7 @@ void LoopControl::regInput(Port_inout input, uint port)
 {
 	if (input.valid)
 	{
-//		DEBUG_ASSERT(!reg[port].valid); //ÐèÒªÈ¥µô×¢ÊÍ
+//		DEBUG_ASSERT(!reg[port].valid); //ï¿½ï¿½ÒªÈ¥ï¿½ï¿½×¢ï¿½ï¿½
 		reg[port].valid = true;
 		reg[port].valued = input.value_data;
 		reg[port].last = input.last;
@@ -164,7 +166,7 @@ void LoopControl::regInput(Port_inout input, uint port)
 		if (port == 0) {
 			first_loop = true;
 		//	if (!attribution->outermost && !reg[port].last) { df_cnt++; }
-			if (!attribution->outermost) { df_cnt++; break_cnt++; }
+			if (!attribution->outermost) { df_cnt++; break_cnt++; activate_cnt++; }
 		}
 	}
 }
@@ -179,6 +181,7 @@ void LoopControl::endInput(Port_inout input, uint port)
 		end_reg[port].last = input.last;
 		if (!attribution->outermost&&input.last&&port==0) {
 			df_cnt--;
+			end_cnt++;
 		//	DEBUG_ASSERT(!(df_cnt < 0));
 		}
 		else if (!attribution->outermost && port == 4 && input.last) { break_cnt--; }
@@ -192,7 +195,7 @@ void LoopControl::simStep1()
 			regInput(reg_input[i], i);
 	}
 	for (uint i = 0; i < end_input.size(); i++) {
-		if (end_input[i].valid) {//Ö»ÓÐlastµÄÊ±ºò²ÅÄÜ½øend_reg
+		if (end_input[i].valid) {//Ö»ï¿½ï¿½lastï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ü½ï¿½end_reg
 			endInput(end_input[i], i);
 		}
 	}
@@ -207,7 +210,7 @@ void LoopControl::simStep1(uint i)
 	}
 	else {
 #ifdef stall
-		if (relay_input[i - reg_input.size()].valid) {//Ö»ÓÐlastµÄÊ±ºò²ÅÄÜ½øend_reg
+		if (relay_input[i - reg_input.size()].valid) {//Ö»ï¿½ï¿½lastï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ü½ï¿½end_reg
 			endInput(relay_input[i - reg_input.size()], i - reg_input.size());
 		}
 		relay_input[i - reg_input.size()] = end_input[i - reg_input.size()];
@@ -240,7 +243,7 @@ void LoopControl::simStep1(uint i)
 //	}
 //}
 
-//lcÄÚ²¿ÓÉÓÚÃ»ÓÐinbuffer£¬Ê¹ÓÃack»úÖÆ£¬muxbuffer½ÓÊÕµ½Êýºó½øÐÐÒ»¶¨µÄÇåÊýÐÐÎª
+//lcï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½inbufferï¿½ï¿½Ê¹ï¿½ï¿½ackï¿½ï¿½ï¿½Æ£ï¿½muxbufferï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª
 void LoopControl::simStep2()
 {
 	//loopbegin
@@ -249,7 +252,7 @@ void LoopControl::simStep2()
 		loopbegin.valid = true;
 	//else if (attribution->outermost)
 	//{
-	//	loopbegin.valid =              //È«¾Öbegin½ÚµãµÄÊäÈë£¡   //INSPECTION
+	//	loopbegin.valid =              //È«ï¿½ï¿½beginï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ë£¡   //INSPECTION
 	//}
 
 	loopbegin.value_bool = first_loop;
@@ -293,8 +296,8 @@ void LoopControl::simStep2()
 
 	if (muxout_buffer->isBufferNotFull(0))
 	{
-	//	if (muxout.valid && muxout.last)         //µ±combineÊä³öÎª10Ê±´ú±íÑ­»·½áÊø
-	//		reg[0].valid = false;                         //iÖµÎÞÐ§»¯
+	//	if (muxout.valid && muxout.last)         //ï¿½ï¿½combineï¿½ï¿½ï¿½Îª10Ê±ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//		reg[0].valid = false;                         //iÖµï¿½ï¿½Ð§ï¿½ï¿½
 
 		if(muxout_buffer->input(muxout, 0))
 			first_loop = false;
@@ -315,7 +318,7 @@ void LoopControl::simStep3()
     //step calculate
 	if (reg[3].valid)
 	{
-		if (!bufferout.last&&bufferout.value_data < reg[2].valued) {//´óÓÚÁÙ½çÖµµÄÊý¾Í²»ÒªÔÙËãÁË
+		if (!bufferout.last&&bufferout.value_data < reg[2].valued) {//ï¿½ï¿½ï¿½ï¿½ï¿½Ù½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			stepout.valid = bufferout.valid;
 			stepout.value_data = bufferout.value_data + reg[3].valued;
 		}
@@ -323,18 +326,18 @@ void LoopControl::simStep3()
 			stepout.valid = false;
 		}
 	}
-	if (bufferout.value_data >= reg[2].valued||bufferout.last) {//Ò»µ©reg[0].last¾ÍÓÀÔ¶Çå²»ÁËÁË
+	if (bufferout.value_data >= reg[2].valued||bufferout.last) {//Ò»ï¿½ï¿½reg[0].lastï¿½ï¿½ï¿½ï¿½Ô¶ï¿½å²»ï¿½ï¿½ï¿½ï¿½
 		reg[0].valid = false;
 		reg[0].valued = 0;
 		reg[0].valueb = false;
-		reg[0].last = false;//ÐèÒªÕâ¸ölastÀ´²é¿´ÊÇ·ñ½áÊø
+		reg[0].last = false;//ï¿½ï¿½Òªï¿½ï¿½ï¿½lastï¿½ï¿½ï¿½é¿´ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 		reg[0].condition = true;
 	}
 	//compare calculate
 	if (reg[2].valid)
 	{
 		combout.valid = bufferout.valid;
-		combout.value_bool = bufferout.value_data < reg[2].valued;//stepoutºÍcomboutÊÇ·ñ¿ÉÒÔºÏ²¢£¬lastÓ¦¸ÃÊÇmuxoutÐÅºÅÉÏ½øÐÐÅÐ¶Ï
+		combout.value_bool = bufferout.value_data < reg[2].valued;//stepoutï¿½ï¿½comboutï¿½Ç·ï¿½ï¿½ï¿½ÔºÏ²ï¿½ï¿½ï¿½lastÓ¦ï¿½ï¿½ï¿½ï¿½muxoutï¿½Åºï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
 /*		if (!combout.value_bool)
 			stepout.last = true;*/
 	}
@@ -392,7 +395,7 @@ void LoopControl::simStep3()
 		//reg[0].valid = false;
 		//reg[0].valued = 0;
 		//reg[0].valueb = false;
-		//reg[0].last = false;//ÐèÒªÕâ¸ölastÀ´²é¿´ÊÇ·ñ½áÊø
+		//reg[0].last = false;//ï¿½ï¿½Òªï¿½ï¿½ï¿½lastï¿½ï¿½ï¿½é¿´ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 		//reg[0].condition = true;
 	}
 	if (last_flag &&end_loop&&df_cnt==0)
