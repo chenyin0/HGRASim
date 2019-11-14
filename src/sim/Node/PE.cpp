@@ -263,7 +263,7 @@ void Processing_element::simStep1(uint i)
 							if (local_reg[1]->reg_v&& input_port[i].valid && !input_port[i].last) { inbuffer->input(input_port[0], 1); }
 							else { ; }
 						}
-						else */if (i == 0 && attribution->control_mode == ControlMode::calc_activate|| attribution->control_mode == ControlMode::loop_activate 
+						else */if (i == 0 && (attribution->control_mode == ControlMode::calc_activate|| attribution->control_mode == ControlMode::loop_activate )
 							&& attribution->input_bypass != InputBypass::bypass) {
 							if (local_reg[1]->reg_v ) { inbuffer->input(input_port[0], 1); }
 							else { ; }
@@ -275,14 +275,14 @@ void Processing_element::simStep1(uint i)
 									else { ; }
 								}
 							}
-							else */if (i == 2 && attribution->control_mode == ControlMode::calc_activate || attribution->control_mode == ControlMode::loop_activate 
+							else */if (i == 2 && (attribution->control_mode == ControlMode::calc_activate || attribution->control_mode == ControlMode::loop_activate )
 										&& attribution->input_bypass != InputBypass::bypass) {
 								if (attribution->buffer_mode[i] == BufferMode::buffer && attribution->inbuffer_from[2] == InBufferFrom::in2) {
 									if (input_port[i].valid ) { inbuffer->input(input_port[i], i); }
 									else { ; }
 								}
 							}
-							if (i == 0 && attribution->inbuffer_from[0] == InBufferFrom::in0 && !local_reg[0]->reg_v && attribution->buffer_mode[0] == BufferMode::keep)
+							else if (i == 0 && attribution->inbuffer_from[0] == InBufferFrom::in0 && !local_reg[0]->reg_v && attribution->buffer_mode[0] == BufferMode::keep)
 								local_reg[0]->input(input_port[i]);
 							else if (i == 2 && attribution->inbuffer_from[2] == InBufferFrom::in2 && !local_reg[2]->reg_v && attribution->buffer_mode[2] == BufferMode::keep)
 								local_reg[2]->input(input_port[i]);
@@ -487,6 +487,7 @@ void Processing_element::getAluInput()
 			//}
 		//	if (attribution->control_mode != ControlMode::bind) {
 				for (auto& aluinOne : aluin) {
+					
 					if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) {
 //					if ( (aluin[2].valid && aluin[2].last)) {
 						first_loop = true;
