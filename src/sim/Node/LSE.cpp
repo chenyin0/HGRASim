@@ -17,7 +17,7 @@ Loadstore_element::Loadstore_element(const Simulator::Preprocess::ArrayPara para
 	auto dict = Preprocess::DFG::getInstance()->getDictionary();
 	auto ls_vec = dict.find(Simulator::NodeType::ls)->second;
 	attribution = dynamic_cast<const Preprocess::DFGNode<Simulator::NodeType::ls>*>(ls_vec[index]);
-	outbuffer = Buffer_factory::createLseBuffer(para, attribution->size);
+	outbuffer = Buffer_factory::createLseBuffer(para, attribution->size,attribution->ls_mode);
 	inbuffer_bp = Bp_factory::createLseBp(para, this);
 	lastout = Port_inout();
 	outbuffer_bp = Bp_factory::createLseBp(para, this);
@@ -273,8 +273,8 @@ void Loadstore_element::LSEcallback(uint addr, uint64_t cycle, short tag)
 			input_port_lsu[i].value_addr = addr;
 			input_port_lsu[i].valid = true;
 			input_port_lsu[i].tag = tag;
-			input_port_lsu[i].value_data = addr;
-//			input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////
+//			input_port_lsu[i].value_data = addr;
+			input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////
 			input_port_lsu[i].rdwr = false;
 		}
 		for (uint i = 0; i < input_port_lsu.size(); ++i)
@@ -317,10 +317,10 @@ void Loadstore_element::leSimStep2()
 		//tag match, matchset的仿真是多LE级的，适合放在更高层次执行
 		//不放在le函数内执行
 	}
-	if (lastout.valid&& output_port_2array.valid&&lastout.last != true && output_port_2array.last != true)
-		DEBUG_ASSERT(output_port_2array.value_data - lastout.value_data == 1);
-	if(!output_port_2array.last)
-		lastout = output_port_2array;
+	//if (lastout.valid&& output_port_2array.valid&&lastout.last != true && output_port_2array.last != true)
+	//	DEBUG_ASSERT(output_port_2array.value_data - lastout.value_data == 1);
+	//if(!output_port_2array.last)
+	//	lastout = output_port_2array;
 
 
 	if (nextlsu_bp)
@@ -515,8 +515,8 @@ void Loadstore_element::readNoMemory()
 		fake_lsu.push_back(output_port_2lsu);
 
 		input_port_lsu[0] = fake_lsu.front();
-//		input_port_lsu[0].value_data = MemoryData::getInstance()->read(fake_lsu.front().value_addr);///////////////////这个里面memory还没有赋值///////////
-		input_port_lsu[0].value_data = fake_lsu.front().value_addr;
+		input_port_lsu[0].value_data = MemoryData::getInstance()->read(fake_lsu.front().value_addr);///////////////////这个里面memory还没有赋值///////////
+//		input_port_lsu[0].value_data = fake_lsu.front().value_addr;
 		input_port_lsu[0].tag=tag_counter;
 	}
 }
@@ -629,16 +629,11 @@ void Loadstore_element::sedSimStep2()
 	if (nextlsu_bp)
 	{
 		if (!firstlsu) {
-			//if(inbuffer->entity)
-			//inbuffer->reset(0);
 			outbuffer->resetTag(sended_tag);
 			coupleSeReset(sended_tag);
-//			maintain_order[sended_tag] = true;
+			nextlsu_bp = false;
 		}
-//		if (temp.valid) {
-			//if (firstlsu) {
-			//	firstlsu = false;
-			//}
+	//	nextlsu_bp = false;
 		
 	}
 	//对于写请求来说，需要实现一个匹配的过程
@@ -648,32 +643,17 @@ void Loadstore_element::sedSimStep2()
 	vecs.push_back(std::move(validAddrIndex));
 
 	match_tag = Util::findSameValueInVectors<uint>(vecs);
-//	const auto match_tag = Util::findSameValueInVectors<uint>(vecs);
+
 	vecs.clear();
 	if (match_tag != UINT_MAX)
 	{
-		if (nextlsu_bp)
-		{
-			//if (!firstlsu) {
-			//	//if(inbuffer->entity)
-			//	//inbuffer->reset(0);
-			//	outbuffer->reset(sended_tag);
-			//	coupleSeReset(sended_tag);
-			//}
+//		if (nextlsu_bp)
+//		{
 			if (firstlsu) {
 				firstlsu = false;/////////////////////////应该在找到这个tag后才置firstlsu为false，没找到的时候不能瞎清////////
 			}
-//			else
-//				lsuReset = true;
-			nextlsu_bp = false;//找到了之后才能发，这时候才能置这个bp为false
-//			outbuffer->output_ack(temp, match_tag);
-//			CoupleSeOutput(temp2, match_tag);
-			//if (temp.valid) {
-			//	if (firstlsu) {
-			//		firstlsu = false;
-			//	}			
-			//}
-		}
+//			nextlsu_bp = false;//找到了之后才能发，这时候才能置这个bp为false
+//		}
 		outbuffer->output_ack(output_port_2array, match_tag);
 		CoupleSeOutput(couple_se->output_port_2array, match_tag);
 		

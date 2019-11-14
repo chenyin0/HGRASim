@@ -173,7 +173,7 @@ namespace Simulator::Array
 	{
 	public:
 		Bufferlse_out(const Simulator::Preprocess::ArrayPara para);
-		Bufferlse_out(const Simulator::Preprocess::ArrayPara para, Simulator::BufferSize size);
+		Bufferlse_out(const Simulator::Preprocess::ArrayPara para, Simulator::BufferSize size,Simulator::LSMode lsmode);
 		~Bufferlse_out() = default;
 		bool output_ack(Port_inout& output, uint tag) override;      //按tag输出
 //		void output(Port_inout& output, uint tag) override;         //按tag输出

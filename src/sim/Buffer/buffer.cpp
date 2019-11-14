@@ -681,21 +681,39 @@ Bufferlse_in::Bufferlse_in(const Simulator::Preprocess::ArrayPara para):Buffer_i
 
 	ack = { false };
 }
-Bufferlse_out::Bufferlse_out(const Simulator::Preprocess::ArrayPara para, Simulator::BufferSize size) :Buffer_out(para)
+Bufferlse_out::Bufferlse_out(const Simulator::Preprocess::ArrayPara para, Simulator::BufferSize size,Simulator::LSMode lsmode) :Buffer_out(para)
 {
-	switch (size)
-	{
-	case BufferSize::small:
-		depth = system_parameter.le_outbuffer_depth_small;
-		break;
-	case BufferSize::middle:
-		depth = system_parameter.le_outbuffer_depth_middle;
-		break;
-	case BufferSize::large:
-		depth = system_parameter.le_outbuffer_depth_large;
-		break;
-	default:
-		DEBUG_ASSERT(false);
+	if (lsmode != Simulator::LSMode::dummy) {
+		switch (size)
+		{
+		case BufferSize::small:
+			depth = system_parameter.le_outbuffer_depth_small;
+			break;
+		case BufferSize::middle:
+			depth = system_parameter.le_outbuffer_depth_middle;
+			break;
+		case BufferSize::large:
+			depth = system_parameter.le_outbuffer_depth_large;
+			break;
+		default:
+			DEBUG_ASSERT(false);
+		}
+	}
+	else {
+		switch (size)
+		{
+		case BufferSize::small:
+			depth = system_parameter.le_outbuffer_depth_small + system_parameter.lse_inbuffer_depth;
+			break;
+		case BufferSize::middle:
+			depth = system_parameter.le_outbuffer_depth_middle + system_parameter.lse_inbuffer_depth;
+			break;
+		case BufferSize::large:
+			depth = system_parameter.le_outbuffer_depth_large + system_parameter.lse_inbuffer_depth;
+			break;
+		default:
+			DEBUG_ASSERT(false);
+		}
 	}
 
 //	depth = system_parameter.le_outbuffer_depth_large;

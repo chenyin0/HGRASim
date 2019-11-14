@@ -23,7 +23,7 @@ int main()
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\NW.xml)");
 	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\DFG_edge_detect.xml)");
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\no_balance.xml)");
-//	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\aluin_test.xml)");
+	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\aluin_test.xml)");
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\condition.xml)");
 //    GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\continue_test.xml)");
 	GlobalPara::getInstance()->setInputAddr(InputAddr::parameter_xml_addr, R"(.\resource\input\system.xml)");
