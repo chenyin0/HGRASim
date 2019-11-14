@@ -219,7 +219,7 @@ void Processing_element::simStep1(uint i)
 						local_reg[1]->input(input_port[i]);
 						inbuffer->input(input_port[i], i);
 						//							local_reg[1]->reg_v = true;
-						first_loop = false;
+					//	first_loop = false;
 					}
 				}
 				else {
@@ -235,7 +235,7 @@ void Processing_element::simStep1(uint i)
 								local_reg[1]->input(input_port[i]);
 								inbuffer->input(input_port[1], 1);
 								//local_reg[1]->reg_v = true;
-								first_loop = true;
+								//first_loop = true;
 							}
 							else {
 								//inbuffer->input(input_port[0], 1);
@@ -259,22 +259,24 @@ void Processing_element::simStep1(uint i)
 					else {
 						//if (attribution->lr_from == LocalregFrom::in1 && i == 1&& !local_reg->reg_v)
 						//	local_reg->input(input_port[i]);{
-						if (i == 0 && attribution->control_mode == ControlMode::loop_activate && attribution->input_bypass != InputBypass::bypass) {
+/*						if (i == 0 && attribution->control_mode == ControlMode::loop_activate && attribution->input_bypass != InputBypass::bypass) {
 							if (local_reg[1]->reg_v&& input_port[i].valid && !input_port[i].last) { inbuffer->input(input_port[0], 1); }
 							else { ; }
 						}
-						else if (i == 0 && attribution->control_mode == ControlMode::calc_activate && attribution->input_bypass != InputBypass::bypass) {
+						else */if (i == 0 && attribution->control_mode == ControlMode::calc_activate|| attribution->control_mode == ControlMode::loop_activate 
+							&& attribution->input_bypass != InputBypass::bypass) {
 							if (local_reg[1]->reg_v ) { inbuffer->input(input_port[0], 1); }
 							else { ; }
 						}
 						else {
-							if(i == 2 && attribution->control_mode == ControlMode::loop_activate && attribution->input_bypass != InputBypass::bypass) {
+/*							if(i == 2 && attribution->control_mode == ControlMode::loop_activate && attribution->input_bypass != InputBypass::bypass) {
 								if (attribution->buffer_mode[i] == BufferMode::buffer && attribution->inbuffer_from[2] == InBufferFrom::in2) {
 									if (input_port[i].valid && !input_port[i].last) { inbuffer->input(input_port[i], i); }
 									else { ; }
 								}
 							}
-							else if (i == 2 && attribution->control_mode == ControlMode::calc_activate && attribution->input_bypass != InputBypass::bypass) {
+							else */if (i == 2 && attribution->control_mode == ControlMode::calc_activate || attribution->control_mode == ControlMode::loop_activate 
+										&& attribution->input_bypass != InputBypass::bypass) {
 								if (attribution->buffer_mode[i] == BufferMode::buffer && attribution->inbuffer_from[2] == InBufferFrom::in2) {
 									if (input_port[i].valid ) { inbuffer->input(input_port[i], i); }
 									else { ; }
@@ -321,7 +323,7 @@ void Processing_element::getAluInput()
 	//alu输入 其中aluin[2]用于mux选择端或用于控制
 	if (allAluOperandsGot())
 	{
-		first_loop = false;
+		//first_loop = false;
 		if (stall_one) {
 			stall_one = false;
 			return;
@@ -392,11 +394,35 @@ void Processing_element::getAluInput()
 				//		if (oprand_collected) {
 				//			if (control_value.valid && !control_value.value_data)
 				//				alu_flag = true;
-				//			//if (control_value.valid && !control_value.value_data)
-				//			//	alu_flag = true;
+				//			if (control_value.valid && !control_value.value_data)
+				//				alu_flag = true;
 				//		}
 				//	}
 				//}
+				else if (attribution->control_mode == ControlMode::loop_activate) {//bind对last的操作有所不同
+					//if (aluin[0].valid && aluin[0].last) {
+					//	alu_flag = true;
+					//}
+					//else {
+					if (!first_loop) {
+						for (auto& k : aluin) {
+							if (k.valid && k.last)
+							{
+								oprand_collected = false;
+								break;
+							}
+						}
+						
+					}
+					else {
+						if (aluin[2].valid && aluin[2].last)
+						{
+							oprand_collected = false;
+						}
+						first_loop = false;
+					}
+
+				}
 				else if (attribution->control_mode == ControlMode::break_post || attribution->control_mode == ControlMode::break_pre || attribution->control_mode == ControlMode::continue_) {
 					if (break_state[0]) {
 						oprand_collected = false;
@@ -461,7 +487,9 @@ void Processing_element::getAluInput()
 			//}
 		//	if (attribution->control_mode != ControlMode::bind) {
 				for (auto& aluinOne : aluin) {
-					if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) {
+					if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) 
+//					if ( (aluin[2].valid && aluin[2].last)) {
+						first_loop = true;
 						alu_flag = true;
 						for (uint i = 0; i < in_num; i++) {
 							if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)

@@ -29,7 +29,7 @@ namespace Simulator::Array
 //		Localreg* local_reg;
 		vector<Localreg*> local_reg;
 		Instructionbuffer* instruction_buffer;
-		bool first_loop;
+		bool first_loop=true;
 
 		//aluµÄ²Ù×÷Êýmask
 		vector<Bool> alu_mask;
