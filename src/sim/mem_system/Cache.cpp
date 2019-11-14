@@ -7,7 +7,7 @@ Cache::Cache()
 {
 	//state = 0;
 	if (Simulator::Array::ClkDomain::getInstance()->getClk() >= Simulator::Array::Debug::getInstance()->print_file_begin && Simulator::Array::ClkDomain::getInstance()->getClk() < Simulator::Array::Debug::getInstance()->print_file_end)
-		print_screen = true;
+		print_screen = false;
 	bus_enable = 1;
 	cache_allhit = 0;
 	misscounter = 0;

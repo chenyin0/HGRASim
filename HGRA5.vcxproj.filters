@@ -473,6 +473,9 @@
     <Xml Include="resource\input\NW.xml">
       <Filter>resource\input</Filter>
     </Xml>
+    <Xml Include="resource\input\no_balance.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\backupFile\KNN.txt">
@@ -500,6 +503,9 @@
       <Filter>resource\output</Filter>
     </Text>
     <Text Include="resource\input\NW_memoryInFile.txt">
+      <Filter>resource\input</Filter>
+    </Text>
+    <Text Include="resource\input\memoryInfileCond.txt">
       <Filter>resource\input</Filter>
     </Text>
   </ItemGroup>

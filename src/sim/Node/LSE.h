@@ -30,12 +30,14 @@ namespace Simulator::Array
 		uint match_tag;
 		bool addr_v = true;
 		Port_inout outport;
+		Port_inout lastout;
 		Port_inout outport2;
 		//wire signal
 		vector<Port_inout> input_port_pe;
 		vector<Port_inout_lsu> input_port_lsu;
 		vector<uint> validDataIndex;
 		vector<uint> validAddrIndex;
+		vector<Bool> maintain_order;
 		vector<vector<uint>> vecs;
 		vector<Bool> nextpe_bp;
 		Port_inout inbuffer_out;

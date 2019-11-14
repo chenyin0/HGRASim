@@ -16,7 +16,7 @@
         <input type="null"/>
         <!-- mux,loop_bound,step -->
         <reg value="0" />
-        <reg value="3" />
+        <reg value="10" />
         <reg value="1" />
         <placement cord="[0, 0]"/>
     </node>

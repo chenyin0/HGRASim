@@ -6,7 +6,7 @@
         <aluInNum>3 </aluInNum>
         <peInBufferDepth>2</peInBufferDepth>
         <peBufferBp>credit</peBufferBp>
-        <peOutBufferDepth>2</peOutBufferDepth>
+        <peOutBufferDepth>1</peOutBufferDepth>
         <dataPortType>d32_b1_v1</dataPortType>
         <boolPortType>d1_v1</boolPortType>
         <dataInPortNum>2</dataInPortNum>
@@ -16,7 +16,7 @@
 
         <!-- LSE -->>
         <lseNum>32</lseNum>
-        <lseInBufferDepth>2</lseInBufferDepth>
+        <lseInBufferDepth>3</lseInBufferDepth>
         <lseDataInBreadth>1</lseDataInBreadth>
         <lseBoolInBreadth>0</lseBoolInBreadth>
         <leDataOutBreadth>1</leDataOutBreadth>
@@ -51,7 +51,7 @@
         <printscreen>false</printscreen>
         <stallMode>none</stallMode>
         <attachMemory>true</attachMemory>
-        <maxClk>4000000</maxClk>
+        <maxClk>1000000</maxClk>
         <maxMemoryDepth>100000</maxMemoryDepth>
       
     </array>
