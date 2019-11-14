@@ -37,11 +37,11 @@
     </node>
     <node type="pe" index="0" opcode="add" controlMode="data_flow">
         <inner_connection 
-            buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer" buffer0_from="null" buffer1_from="aluin1" buffer2_from="null"
+            buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer" buffer0_from="in0" buffer1_from="aluin1" buffer2_from="in2"
             input_bypass="inbuffer" output_from="outbuffer"/>  
         <input type="lc" index="1" port="1"/>
         <input type="lc" index="0" port="1"/>
-        <input type="null"/>
+        <input type="lc" index="1" port="1"/>
         <reg value="null" /> <reg value="null" /> <reg value="null" /> 
         <placement cord="[5, 4]"/>
     </node>

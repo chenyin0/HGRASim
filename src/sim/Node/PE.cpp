@@ -488,8 +488,10 @@ void Processing_element::getAluInput()
 			if (attribution->control_mode != ControlMode::loop_activate) {
 				for (auto& aluinOne : aluin) {					
 					if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) {
-//					if ( (aluin[2].valid && aluin[2].last)) {
-						
+	//				if ( (aluin[2].valid && aluin[2].last)) {
+						if ((aluinOne.valid && aluinOne.last) && !(control_value.valid && control_value.last)) {
+							except = true;
+						}
 						//first_loop = true;
 						alu_flag = true;
 						for (uint i = 0; i < in_num; i++) {
@@ -892,6 +894,7 @@ void Processing_element::wireReset()
 		i.reset();
 	control_value.reset();
 	oprand_collected = false;
+	except = false;
 }
 void Processing_element::print_lr(std::ofstream & file) {
 	file << "----LocalReg Element----" << std::endl;
@@ -937,7 +940,8 @@ void Processing_element::wirePrint(std::ofstream & file)
 		debugPrint->vecPrint<Port_inout>(output_port, "output");
 		debugPrint->linePrint("   this is step2");
 		//	alu->print();
-		Debug::getInstance()->getPortFile() << "pe" << index << " "<<first_loop << std::endl;
+		Debug::getInstance()->getPortFile() << "pe" << attribution->index << " "<<first_loop << std::endl;
+		Debug::getInstance()->getPortFile() << "pe" << attribution->index << "except" << except << std::endl;
 		debugPrint->onePrint<Port_inout>(control_value, "control");
 		debugPrint->vecPrint<Port_inout>(reg_out, "regout");
 		debugPrint->vecPrint<Bool>(break_state, "break_state");

@@ -101,13 +101,14 @@ namespace Simulator::Array
 		//bool everybp(threeBp);
 		//static returnBp Menu[];
 		bool isSpecial() {
-			return attribution->control_mode == ControlMode::cb
+			return attribution->control_mode == ControlMode::cb||attribution->inbuffer_from[1]==InBufferFrom::aluin1
 				|| attribution->control_mode == ControlMode::cinvb || attribution->control_mode == ControlMode::break_pre
 				|| attribution->control_mode == ControlMode::break_post || attribution->control_mode == ControlMode::loop_activate
 				|| std::find(attribution->buffer_mode.begin(), attribution->buffer_mode.end(), BufferMode::lr_out) != attribution->buffer_mode.end()
 				|| attribution->control_mode == ControlMode::trans|| attribution->control_mode == ControlMode::continue_
 				;
 		}
+		bool except;
 		void print_lr(std::ofstream& file);
 		void outReset();
 		//这两个函数在节点间调用，即并不属于节点内部update行为，类似于上一版的stepc
