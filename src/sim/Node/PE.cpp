@@ -487,7 +487,7 @@ void Processing_element::getAluInput()
 			//}
 		//	if (attribution->control_mode != ControlMode::bind) {
 				for (auto& aluinOne : aluin) {
-					if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) 
+					if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) {
 //					if ( (aluin[2].valid && aluin[2].last)) {
 						first_loop = true;
 						alu_flag = true;
@@ -904,6 +904,7 @@ void Processing_element::wirePrint(std::ofstream & file)
 		debugPrint->vecPrint<Port_inout>(output_port, "output");
 		debugPrint->linePrint("   this is step2");
 		//	alu->print();
+		Debug::getInstance()->getPortFile() << "pe" << index << " "<<first_loop << std::endl;
 		debugPrint->onePrint<Port_inout>(control_value, "control");
 		debugPrint->vecPrint<Port_inout>(reg_out, "regout");
 		debugPrint->vecPrint<Bool>(break_state, "break_state");
