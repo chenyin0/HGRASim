@@ -941,7 +941,8 @@ void Processing_element::wirePrint(std::ofstream & file)
 		debugPrint->linePrint("   this is step2");
 		//	alu->print();
 		Debug::getInstance()->getPortFile() << "pe" << attribution->index << " "<<first_loop << std::endl;
-		Debug::getInstance()->getPortFile() << "pe" << attribution->index << "except" << except << std::endl;
+		if(except)
+			Debug::getInstance()->getPortFile() << "pe" << attribution->index << "except" << except << std::endl;
 		debugPrint->onePrint<Port_inout>(control_value, "control");
 		debugPrint->vecPrint<Port_inout>(reg_out, "regout");
 		debugPrint->vecPrint<Bool>(break_state, "break_state");
