@@ -317,10 +317,10 @@ void Loadstore_element::leSimStep2()
 		//tag match, matchset的仿真是多LE级的，适合放在更高层次执行
 		//不放在le函数内执行
 	}
-	if (lastout.valid&& output_port_2array.valid&&lastout.last != true && output_port_2array.last != true)
-		DEBUG_ASSERT(output_port_2array.value_data - lastout.value_data == 1);
-	if(!output_port_2array.last)
-		lastout = output_port_2array;
+	//if (lastout.valid&& output_port_2array.valid&&lastout.last != true && output_port_2array.last != true)
+	//	DEBUG_ASSERT(output_port_2array.value_data - lastout.value_data == 1);
+	//if(!output_port_2array.last)
+	//	lastout = output_port_2array;
 
 
 	if (nextlsu_bp)

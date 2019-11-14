@@ -83,8 +83,8 @@ int main()
 	
 	uint debug_level;
 	
-	std::ifstream memoryInFile("");
-//	std::ifstream memoryInFile("resource/input/NW_memoryInFile.txt");
+//	std::ifstream memoryInFile("");
+	std::ifstream memoryInFile("resource/input/NW_memoryInFile.txt");
 //	std::ifstream memoryInFile("resource/input/memoryInFile_edge.txt");
 //	std::ifstream memoryInFile("resource/input/memoryInFileCond.txt");
 	std::ofstream memoryWritefile("resource/output/memorywrite.txt");
