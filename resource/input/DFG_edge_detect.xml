@@ -403,7 +403,37 @@
         <reg value="16" />
         <placement cord="[1, 2]"/>
     </node>
-   
+
+  <!--<node type="ls" index="11" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+    <input type="pe" index="9" port="0"/>
+    <input type="null"/>
+    <placement cord="[2, 9]"/>
+  </node>-->
+  <!--<node type="ls" index="12" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+    <input type="pe" index="11" port="0"/>
+    <input type="null"/>
+    <placement cord="[3, 9]"/>
+  </node>
+  <node type="ls" index="13" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+    <input type="pe" index="12" port="0"/>
+    <input type="null"/>
+    <placement cord="[2, 9]"/>
+  </node>
+  <node type="ls" index="14" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+    <input type="pe" index="13" port="0"/>
+    <input type="null"/>
+    <placement cord="[2, 9]"/>
+  </node>
+  <node type="ls" index="15" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+    <input type="pe" index="14" port="0"/>
+    <input type="null"/>
+    <placement cord="[3, 9]"/>
+  </node>
+  <node type="ls" index="16" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+    <input type="pe" index="15" port="0"/>
+    <input type="null"/>
+    <placement cord="[2, 9]"/>
+  </node>-->
     <!-- 新增加,用于计算se地址偏移 -->
     <node type="pe" index="29" opcode="add" controlMode="data_flow">
       <inner_connection

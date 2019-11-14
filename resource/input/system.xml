@@ -53,7 +53,7 @@
         <attachMemory>true</attachMemory>
         <maxClk>1000000</maxClk>
         <maxMemoryDepth>100000</maxMemoryDepth>
-      
+        
     </array>
     <arch>
 

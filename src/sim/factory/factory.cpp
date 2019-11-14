@@ -22,9 +22,9 @@ Buffer* Buffer_factory::createLseInBuffer(Simulator::Preprocess::ArrayPara para)
 	return new Bufferlse_in(para);
 }
 
-Buffer* Buffer_factory::createLseBuffer(Simulator::Preprocess::ArrayPara para, Simulator::BufferSize size)
+Buffer* Buffer_factory::createLseBuffer(Simulator::Preprocess::ArrayPara para, Simulator::BufferSize size,Simulator::LSMode lsmode)
 {
-	return new Bufferlse_out(para,size);
+	return new Bufferlse_out(para,size,lsmode);
 }
 
 
