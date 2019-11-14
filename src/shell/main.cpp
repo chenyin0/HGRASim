@@ -20,10 +20,10 @@ int main()
 {
 	// ÉèÖÃÂ·¾¶
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\break_test.xml)");
-//	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\NW.xml)");
+	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\NW.xml)");
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\DFG_edge_detect.xml)");
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\no_balance.xml)");
-	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\aluin_test.xml)");
+//	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\aluin_test.xml)");
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\condition.xml)");
 //    GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\continue_test.xml)");
 	GlobalPara::getInstance()->setInputAddr(InputAddr::parameter_xml_addr, R"(.\resource\input\system.xml)");
@@ -83,9 +83,9 @@ int main()
 	
 	uint debug_level;
 	
-	std::ifstream memoryInFile("");
-//	std::ifstream memoryInFile("resource/input/NW_memoryInFile.txt");
-//	std::ifstream memoryInFile("resource/input/memoryInFile_edge.txt");
+//	std::ifstream memoryInFile("");
+	std::ifstream memoryInFile("resource/input/NW_memoryInFile.txt");
+//	std::ifstream memoryInFile("resource/input/memoryInFile_edge_detect.txt");
 //	std::ifstream memoryInFile("resource/input/memoryInFileCond.txt");
 	std::ofstream memoryWritefile("resource/output/memorywrite.txt");
 //	memoryInFile.open("memoryInFile.txt");
@@ -97,5 +97,7 @@ int main()
 	Simulator::Array::HgraArray sim_single(app_graph);
 	sim_single.run();
 	Simulator::Array::MemoryData::getInstance()->writeToFile(memoryWritefile);
+	cout << "clk=" << Simulator::Array::ClkDomain::getInstance()->getClk() << endl;
+	system("pause");
 	return 0;
 }

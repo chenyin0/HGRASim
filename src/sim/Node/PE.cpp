@@ -485,12 +485,12 @@ void Processing_element::getAluInput()
 			//if (control_value.valid && !control_value.condition) {
 			//	rs_cd = true;
 			//}
-		//	if (attribution->control_mode != ControlMode::bind) {
-				for (auto& aluinOne : aluin) {
-					
+			if (attribution->control_mode != ControlMode::loop_activate) {
+				for (auto& aluinOne : aluin) {					
 					if ((aluinOne.valid && aluinOne.last) || (control_value.valid && control_value.last)) {
 //					if ( (aluin[2].valid && aluin[2].last)) {
-						first_loop = true;
+						
+						//first_loop = true;
 						alu_flag = true;
 						for (uint i = 0; i < in_num; i++) {
 							if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
@@ -504,7 +504,23 @@ void Processing_element::getAluInput()
 					}
 				}
 
-//			}
+			}
+			else {
+				if ( (aluin[2].valid && aluin[2].last)) {
+
+				first_loop = true;
+				alu_flag = true;
+					for (uint i = 0; i < in_num; i++) {
+						if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)
+							local_reg[i]->reg_v = false;
+						else if ((attribution->inbuffer_from[i] == InBufferFrom::aluin1) && attribution->inbuffer_from[i] != InBufferFrom::flr)
+							local_reg[i]->reg_v = false;
+						else if ((attribution->control_mode == ControlMode::loop_activate) || attribution->control_mode == ControlMode::calc_activate && (i == 1))
+							local_reg[i]->reg_v = false;
+					}
+				
+				}
+			}
 		}
 	}
 }
@@ -616,8 +632,13 @@ void Processing_element::gatherOperands()
 					alu_out.valid = true;
 				}
 				if (attribution->control_mode == ControlMode::bind) {
-					if (!aluin[1].value_data)
+					if (!aluin[1].value_data) {
 						alu_out.last = true;
+						alu_out.value_data= aluin[0].value_data;
+						local_reg[0]->reg_v = false;
+						local_reg[1]->reg_v = false;
+						local_reg[2]->reg_v = false;
+					}
 				}
 				for (uint i = 0; i < system_parameter.bool_outport_breadth + system_parameter.data_outport_breadth; ++i)
 				{
@@ -652,8 +673,18 @@ void Processing_element::aluUpdate()
 	if (attribution->opcode != PEOpcode::null) {
 		alu->compute(alu_out);
 		if (attribution->control_mode == ControlMode::bind) {
-			if (alu_out.valid&&alu_out.value_data == 0)
-				alu_out.last = 1;
+			if (alu_out.valid) {
+				if (alu_out.value_data == 0) {
+					alu_out.last = true;
+					//				alu_out.value_data = alu->pipeline.front().data1;
+					local_reg[0]->reg_v = false;
+					local_reg[1]->reg_v = false;
+					local_reg[2]->reg_v = false;
+				}
+				else {
+					alu_out.value_data = alu->pipeline.front().data1;
+				}
+			}
 		}
 		if (attribution->output_from[0] == OutputFrom::outbuffer) {
 			if (outbuffer->isBufferNotFull(0)) {
@@ -801,7 +832,7 @@ bool Processing_element::allAluOperandsGot()
 		for (uint i = 0; i < alu_num; ++i) {
 			int search_index = (alu_num == 1 ? 1 : i);
 			if ((attribution->buffer_mode[search_index] == BufferMode::buffer || (attribution->inbuffer_from[search_index] == InBufferFrom::aluin1) || 
-			(attribution->buffer_mode[search_index] == BufferMode::lr_out)|| (attribution->control_mode == ControlMode::loop_activate)||attribution->control_mode == ControlMode::calc_activate) )
+			(attribution->buffer_mode[search_index] == BufferMode::lr_out)|| (attribution->control_mode == ControlMode::loop_activate||attribution->control_mode == ControlMode::calc_activate)) )
 			{
 				if ( attribution->input_bypass == InputBypass::inbuffer) {
 					if (!inbuffer->isBufferNotEmpty(search_index))
@@ -855,6 +886,7 @@ void Processing_element::wireReset()
 	for (auto& i : reg_out)
 		i.reset();
 	alu_out.reset();
+	alu_flag = false;
 	rs_cd = false;
 	for (auto& i : output_port)///////////////////////////////加了这个之后输出就无效了，不能把out清空//
 		i.reset();

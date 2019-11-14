@@ -81,6 +81,7 @@ namespace Simulator::Array
 		void wirePrint(std::ofstream& file);
 	public:
 		friend class Pebp;
+	//	friend class Pro;
 		bool stall_one;
 		Processing_element(const Preprocess::ArrayPara para, uint index);
 		~Processing_element();

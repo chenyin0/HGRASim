@@ -508,6 +508,9 @@
     <Text Include="resource\input\memoryInfileCond.txt">
       <Filter>resource\input</Filter>
     </Text>
+    <Text Include="resource\input\memoryInFile_edge_detect.txt">
+      <Filter>resource\input</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\output\DebugReg.txt">

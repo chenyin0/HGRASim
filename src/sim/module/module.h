@@ -47,7 +47,7 @@ namespace Simulator::Array
 		//uint mask;
 
 	public:
-
+		friend class Processing_element;
 		Pealu(PEOpcode opcode);
 		Pealu();
 		~Pealu() = default;
