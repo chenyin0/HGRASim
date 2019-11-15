@@ -718,9 +718,13 @@ void Processing_element::simStep2()
 //	toOutBuffer();
 	aluUpdate();
 	toOutBuffer();//因为是ack机制，所以后面的要清掉,而且按照正常来说，这一周期出数，这一周期就应该收数,如果不收,下周期alu进不了数.而且aluupdate和tooutbuffer实际上是在一个寄存器周期里面做的
-	if (attribution->input_bypass != InputBypass::bypass) {
+	if (attribution->input_bypass != InputBypass::bypass&&system_parameter.stall_mode==stallType::none) {
 		controlBlock();//从inbuffer进alu
 	}
+	else if (system_parameter.stall_mode == stallType::inbuffer_stall) {
+		controlBlock();
+	}
+	else { ; }
 }
 
 void Processing_element::aluPop()

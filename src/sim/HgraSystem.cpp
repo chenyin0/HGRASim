@@ -146,7 +146,7 @@ void HgraArray::nextStep1(type_index type_in,uint port)
 						pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->stall_one = true;//如果是环状结构,由于仿真顺序的限制,此时不能拿step1进的数做运算
 					}
 #endif // stall
-					if (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->getAttr()->input_bypass == InputBypass::bypass)
+					if (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->getAttr()->input_bypass == InputBypass::bypass&&system_para.stall_mode==stallType::none)//如果下一层是bypass,那么这个时候做下一层的step1应该把数据灌进alu
 						pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->controlBlock();
 					pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
 				}
