@@ -491,6 +491,8 @@ void MemoryController::update()
 
 	}
 
+
+	//把transactionQueue中的trans加入commandqueue,包括DATA_READ,DATA_WRITE,RETURN_DATA三种类型,转换成bus_type就是READ_P,READ,WRITE_P,WRITE
 	for (size_t i=0;i<transactionQueue.size();i++)
 	{
 		//pop off top transaction from queue

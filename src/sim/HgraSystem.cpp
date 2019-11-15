@@ -146,6 +146,8 @@ void HgraArray::nextStep1(type_index type_in,uint port)
 						pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->stall_one = true;//如果是环状结构,由于仿真顺序的限制,此时不能拿step1进的数做运算
 					}
 #endif // stall
+					if (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->getAttr()->input_bypass == InputBypass::bypass)
+						pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->controlBlock();
 					pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
 				}
 				else if (nextLo.type == NodeType::ls) {
@@ -278,6 +280,7 @@ void HgraArray::run()
 						}
 					}
 					pe_map[order2index[i].second]->simStep3();
+					pe_map[order2index[i].second]->simStep2();
 					if (sendOutput(config_order[i].type, order2index[i].second))        //·µ»Ø1Ê±ÈÎÎñ½áÊø
 					{
 						task_finish = true;
@@ -285,7 +288,8 @@ void HgraArray::run()
 					for (uint port = 0; port < system_para.data_outport_breadth + system_para.bool_outport_breadth; ++port) {
 						nextStep1(config_order[i], port);
 					}
-					pe_map[order2index[i].second]->simStep2();//´ÓÐ´µÄµÚÒ»¸öÀ´·Ã
+					//if()
+			//		pe_map[order2index[i].second]->simStep2();//´ÓÐ´µÄµÚÒ»¸öÀ´·Ã
 					pe_map[order2index[i].second]->simBp();
 					for (uint port = 0; port < system_para.bool_inport_breadth+ system_para.data_inport_breadth; port++)
 						bridge.setBp(pe_map[order2index[i].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[i].second]->getAttr()->index, port);

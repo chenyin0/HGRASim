@@ -52,7 +52,7 @@ namespace Simulator::Array
 
 //		void simStep2(); //inbuffer2alu2outbuffer    breakstate拉高位于step2
 		//{
-		/**/void controlBlock();
+	//	/**/void controlBlock();
 		/*--*/void loopControlParse();
 		/*--*/void getAluInput();
 		/*--*/void gatherOperands();
@@ -89,6 +89,7 @@ namespace Simulator::Array
 		void simStep3();
 		void bufferprint();
 		void simStep2();
+		void controlBlock();
 		void simStep1(uint i);
 		void simStep1();
 		void print();

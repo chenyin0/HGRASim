@@ -89,7 +89,7 @@
     <inner_connection
         buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer"
         buffer0_from="null" buffer1_from="in1" buffer2_from="in2"
-        input_bypass="inbuffer" output_from="outbuffer"/>
+        input_bypass="inbuffer" output_from="alu"/>
     <input type="pe" index="34" port="0"/>
     <input type="pe" index="3" port="0"/>
     <input type="pe" index="36" port="0"/>
@@ -116,7 +116,7 @@
     <inner_connection
         buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
         buffer0_from="in0" buffer1_from="null" buffer2_from="null"
-        input_bypass="inbuffer" output_from="outbuffer"/>
+        input_bypass="bypass" output_from="alu"/>
     <input type="pe" index="33" port="0"/>
     <input type="null"/>
     <input type="null"/>

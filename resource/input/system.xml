@@ -51,7 +51,7 @@
         <printscreen>false</printscreen>
         <stallMode>none</stallMode>
         <attachMemory>false</attachMemory>
-        <maxClk>20000</maxClk>
+        <maxClk>200</maxClk>
         <maxMemoryDepth>100000</maxMemoryDepth>
         
     </array>
