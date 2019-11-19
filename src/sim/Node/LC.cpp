@@ -23,9 +23,9 @@ LoopControl::LoopControl(const Simulator::Preprocess::ArrayPara para, uint index
 	end_reg.resize(system_parameter.lc_endin_num);
 	muxout_buffer = Buffer_factory::createLcBuffer(para);
 	first_loop = true;
-	if (system_parameter.stall_mode == stallType::none) {
-		#define stall
-	}
+	//if (system_parameter.stall_mode == stallType::none) {
+	//	#define stall
+	//}
 	thisbp_end.resize(system_parameter.lc_endin_num);
 	thisbp_reg.resize(system_parameter.lc_regin_num);
 	//nextbp.resize(system_parameter.lc_output_num);
@@ -88,6 +88,7 @@ void LoopControl::wirePrint()
 		debugPrint->linePrint("   this is step1");
 		debugPrint->vecPrint<Port_inout>(reg_input, "reg_input");
 		debugPrint->vecPrint<Port_inout>(end_input, "end_input");
+		debugPrint->vecPrint<Bool>(end_flag, "end_flag");
 		debugPrint->vecPrint<Bool>(nextbp, "nextbp");
 		debugPrint->vecPrint<Bool>(thisbp_end, "thisbp_end");
 		debugPrint->vecPrint<Bool>(thisbp_reg, "thisbp_reg");
@@ -209,18 +210,19 @@ void LoopControl::simStep1(uint i)
 			regInput(reg_input[i], i);
 	}
 	else {
-#ifdef stall
-		if (relay_input[i - reg_input.size()].valid) {//ֻ��last��ʱ����ܽ�end_reg
-			endInput(relay_input[i - reg_input.size()], i - reg_input.size());
+		if (system_parameter.stall_mode == stallType::none) {
+			if (relay_input[i - reg_input.size()].valid) {//ֻ��last��ʱ����ܽ�end_reg
+				endInput(relay_input[i - reg_input.size()], i - reg_input.size());
+			}
+			relay_input[i - reg_input.size()] = end_input[i - reg_input.size()];
 		}
-		relay_input[i - reg_input.size()] = end_input[i - reg_input.size()];
-#endif // stall
 
-#ifndef stall
-		if (end_input[i - reg_input.size()].valid) {
-			endInput(end_input[i - reg_input.size()], i - reg_input.size());
+		else {
+			if (end_input[i - reg_input.size()].valid) {
+				endInput(end_input[i - reg_input.size()], i - reg_input.size());
+			}
 		}
-#endif // !stall
+
 
 	}
 

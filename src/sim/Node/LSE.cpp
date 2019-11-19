@@ -273,17 +273,21 @@ void Loadstore_element::LSEcallback(uint addr, uint64_t cycle, short tag)
 			input_port_lsu[i].value_addr = addr;
 			input_port_lsu[i].valid = true;
 			input_port_lsu[i].tag = tag;
-//			input_port_lsu[i].value_data = addr;
-			input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////
+			input_port_lsu[i].value_data = addr;
+//			input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////
 			input_port_lsu[i].rdwr = false;
 		}
 		for (uint i = 0; i < input_port_lsu.size(); ++i)
 			if (input_port_lsu[i].valid) {
 				if (outbuffer->input_tag_lsu(input_port_lsu[i], i, input_port_lsu[i].tag)) { ; }////////////////////这个地方是需要bp判断的吧
-				else { DEBUG_ASSERT(false); }
-#ifdef order_force
-				maintain_order[input_port_lsu[i].tag] = true;
-#endif
+				else {
+					uint clk = ClkDomain::getInstance()->getClk();
+					Debug::getInstance()->getPortFile() << "outbuffer can no in kls" <<attribution->index<<" " <<ClkDomain::getInstance()->getClk()<< std::endl;
+//					DEBUG_ASSERT(false); 
+				}
+//#ifdef order_force
+//				maintain_order[input_port_lsu[i].tag] = true;
+//#endif
 			}
 	}
 	else
@@ -308,12 +312,27 @@ void Loadstore_element::leSimStep2()
 		//输出到pe
 	if (nextpe_bp[0])
 	{
-		if (!attribution->match)
+		if (!attribution->match) {
+#ifdef order_force
+			if (outbuffer->entity[outbuffer->head_ptr[0]][0].valid)
+			{
+				maintain_order[outbuffer->head_ptr[0]] = true;
+			}
+#endif
 			outbuffer->output(output_port_2array, 0);//这里输出了
+
+		}
 		//tag match, matchset的仿真是多LE级的，适合放在更高层次执行
 		//不放在le函数内执行
-		else
+		else {
+#ifdef order_force
+			if (outbuffer->entity[tag_counter][0].valid)
+			{
+				maintain_order[tag_counter] = true;
+			}
+#endif
 			outbuffer->outputTag(output_port_2array, tag_counter);/////////这里是有问题的
+		}
 		//tag match, matchset的仿真是多LE级的，适合放在更高层次执行
 		//不放在le函数内执行
 	}
@@ -385,13 +404,18 @@ void Loadstore_element::leSimStep2()
 #endif
 			if (outbuffer->input_tag(inbuffer_out, 0, tag_counter))////////////////暗含了inbuffer_out.valid信息/////////////
 			{
+				maintain_order[tag_counter] = false;
 				//		tag_counter_update();
 				nextlsu_bp = true;
 				//			inbuffer->reset(0);
 				//			if (attribution->match)
 				//////////////////////////////////////////////////////在所有情况都需要tag_counter_update()///////////////
 			}
-			else { DEBUG_ASSERT(false); }
+			else { 
+				//nextlsu_bp = false;
+				Debug::getInstance()->getPortFile() << "outbuffer can no in ls" <<attribution->index<<" "<< ClkDomain::getInstance()->getClk() << std::endl; 
+			//	DEBUG_ASSERT(false); 
+			}
 #ifdef order_force
 		}
 		else{ nextlsu_bp = false; }
@@ -515,8 +539,8 @@ void Loadstore_element::readNoMemory()
 		fake_lsu.push_back(output_port_2lsu);
 
 		input_port_lsu[0] = fake_lsu.front();
-		input_port_lsu[0].value_data = MemoryData::getInstance()->read(fake_lsu.front().value_addr);///////////////////这个里面memory还没有赋值///////////
-//		input_port_lsu[0].value_data = fake_lsu.front().value_addr;
+//		input_port_lsu[0].value_data = MemoryData::getInstance()->read(fake_lsu.front().value_addr);///////////////////这个里面memory还没有赋值///////////
+		input_port_lsu[0].value_data = fake_lsu.front().value_addr;
 		input_port_lsu[0].tag=tag_counter;
 	}
 }
@@ -581,7 +605,7 @@ void Loadstore_element::wirePrint()
 			debugPrint->onePrint<Port_inout>(inbuffer_out, "inbuffer_out");
 			Debug::getInstance()->getPortFile() << "lse" << index<<" ";
 			debugPrint->onePrint<Port_inout_lsu>(output_port_2lsu, "output_port_2lsu");
-			debugPrint->onePrint<Bool>(maintain_order[output_port_2lsu.tag], "output_port_2lsu.order");
+		//	debugPrint->onePrint<Bool>(maintain_order[output_port_2lsu.tag], "output_port_2lsu.order");
 			Debug::getInstance()->getPortFile() << "lse" << index<< "output_port_2lsu.tag" << output_port_2lsu.tag << " "<<std::endl;
 			Debug::getInstance()->getPortFile() << "lse" << index<<" ";
 			debugPrint->onePrint<Port_inout_lsu>(input_port_lsu[0], "input_port_lsu");
@@ -589,6 +613,7 @@ void Loadstore_element::wirePrint()
 			debugPrint->onePrint<Port_inout>(output_port_2array, "output_pe");
 			debugPrint->linePrint("   this is step1");
 			debugPrint->vecPrint<Port_inout>(input_port_pe, "input_pe");
+			debugPrint->vecPrint<Bool>(maintain_order, "maintain_order");
 			debugPrint->vecPrint<Bool>(nextpe_bp, "nextpe_bp");
 			debugPrint->vecPrint<Bool>(this_bp, "this_bp");
 		}
@@ -715,15 +740,21 @@ void Loadstore_element::sedSimStep2()
 
 void Loadstore_element::simBp()
 {
-	if (attribution->ls_mode == LSMode::load)
-	{
+	if (attribution->ls_mode == LSMode::dummy) {
 		for (uint i = 0; i < this_bp.size(); ++i)
-			this_bp[i] = inbuffer_bp->getBpTag(i,tag_counter);
+			this_bp[i] = outbuffer->isBufferNotFull(0);
 	}
-	else
-	{
-		for (uint i = 0; i < this_bp.size(); ++i)
-			this_bp[i] = outbuffer_bp->getBpTag(i, tag_counter);
+	else {
+		if (attribution->ls_mode == LSMode::load)
+		{
+			for (uint i = 0; i < this_bp.size(); ++i)
+				this_bp[i] = inbuffer_bp->getBpTag(i, tag_counter);
+		}
+		else
+		{
+			for (uint i = 0; i < this_bp.size(); ++i)
+				this_bp[i] = outbuffer_bp->getBpTag(i, tag_counter);
+		}
 	}
 }
 

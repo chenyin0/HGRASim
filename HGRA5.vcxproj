@@ -264,6 +264,7 @@
     <Xml Include="resource\input\DFGTest.xml" />
     <Xml Include="resource\input\DFG_84.xml" />
     <Xml Include="resource\input\DFG_edge_detect.xml" />
+    <Xml Include="resource\input\MD.xml" />
     <Xml Include="resource\input\no_balance.xml" />
     <Xml Include="resource\input\NW.xml" />
     <Xml Include="resource\input\system.xml">
@@ -281,6 +282,7 @@
   <ItemGroup>
     <Text Include="..\..\项目源码理解\ConditionCase\01_ConditionCase\MemoryInFile.txt" />
     <Text Include="resource\backupFile\KNN.txt" />
+    <Text Include="resource\input\MD_memoryInFile.txt" />
     <Text Include="resource\input\memoryInfileCond.txt" />
     <Text Include="resource\input\memoryInFile_edge_detect.txt" />
     <Text Include="resource\input\NW_memoryInFile.txt" />

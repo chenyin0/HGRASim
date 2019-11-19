@@ -30,6 +30,7 @@ namespace Simulator::Array
 		//virtual void bufferInput(Port_inout input, uint port) = 0;
 		
 	public:
+		friend class Loadstore_element;
 		virtual bool input(Port_inout input, uint port) = 0;
 		virtual bool input_tag_lsu(Port_inout_lsu input, uint port, uint tag) = 0;
 		virtual bool input_tag(Port_inout input, uint port, uint tag) = 0;

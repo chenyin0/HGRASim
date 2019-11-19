@@ -205,7 +205,7 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 	{
 		for (uint i = 0; i < pe_map[index]->output_port.size(); i++) {
 			bridge.setNextInput(pe_map[index]->output_port[i], NodeType::pe, pe_map[index]->getAttr()->index, i);
-			if (clk < Debug::getInstance()->print_screen_end && pe_map[index]->output_port[i].valid)
+			if (clk> Debug::getInstance()->print_screen_begin&&clk < Debug::getInstance()->print_screen_end && pe_map[index]->output_port[i].valid)
 			{
 				if (pe_map[index]->output_port[i].last)
 					data_flow[make_tuple(NodeType::pe, pe_map[index]->getAttr()->index,i)].push_back(make_tuple(clk, pe_map[index]->output_port[i].value_data, true));
@@ -218,7 +218,7 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 	{
 		for (uint i = 0; i < lc_map[index]->lc_output.size(); i++) {
 			bridge.setNextInput(lc_map[index]->lc_output[i], NodeType::lc, lc_map[index]->getAttr()->index, i);
-			if (clk<Debug::getInstance()->print_screen_end &&lc_map[index]->lc_output[i].valid)
+			if (clk > Debug::getInstance()->print_screen_begin && clk<Debug::getInstance()->print_screen_end &&lc_map[index]->lc_output[i].valid)
 			{
 				if (lc_map[index]->lc_output[i].last)
 					data_flow[make_tuple(NodeType::lc, lc_map[index]->getAttr()->index, i)].push_back(make_tuple(clk, lc_map[index]->lc_output[i].value_data, true));
@@ -235,7 +235,7 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 	}
 	else if (type == NodeType::ls) {
 		bridge.setNextInput(lse_map[index]->output_port_2array, NodeType::ls, lse_map[index]->getAttr()->index, 0);
-		if (clk < Debug::getInstance()->print_screen_end && lse_map[index]->output_port_2array.valid)
+		if (clk > Debug::getInstance()->print_screen_begin && clk < Debug::getInstance()->print_screen_end && lse_map[index]->output_port_2array.valid)
 		{
 			if (lse_map[index]->output_port_2array.last)
 				data_flow[make_tuple(NodeType::ls, lse_map[index]->getAttr()->index, 0)].push_back(make_tuple(clk, lse_map[index]->output_port_2array.value_data, true));
@@ -453,7 +453,20 @@ void HgraArray::run()
 					}
 				
 					for (uint port = 0; port < system_para.le_dataout_breadth + system_para.le_boolout_breadth; ++port) {
-						reverseStep1(config_order[i], port);
+						if (lse_map[order2index[i].second]->getAttr()->ls_mode != LSMode::store_addr) {
+							if (lse_map[order2index[i].second]->getAttr()->ls_mode == LSMode::store_data) {
+								for (uint port = 0; port < system_para.data_outport_breadth + system_para.bool_outport_breadth; ++port) {
+									reverseStep1(config_order[i], port);
+									reverseStep1(config_order[i - 1], port);
+								}
+							}
+							else {
+								for (uint port = 0; port < system_para.data_outport_breadth + system_para.bool_outport_breadth; ++port) {
+									reverseStep1(config_order[i - 1], port);
+								}
+							}
+						}
+						
 					}
 					//lse_map[order2index[i].second]->simBp();
 					for (uint port = 0; port < lse_map[order2index[i].second]->this_bp.size(); port++)
@@ -560,9 +573,11 @@ void HgraArray::run()
 		for (const auto& every_cycle : single_out.second) {
 			if (get<2>(every_cycle)) {
 				Debug::getInstance()->getdataFlowFile() << get<1>(every_cycle) << "(" << get<0>(every_cycle) << ")" << "(last)" << endl;
+//				Debug::getInstance()->getdataFlowFile() << get<1>(every_cycle)  << "(last)" << endl;
 				pr_ct = 0;
 			}
 			else {
+//				Debug::getInstance()->getdataFlowFile() << get<1>(every_cycle);
 				Debug::getInstance()->getdataFlowFile() << get<1>(every_cycle) << "(" << get<0>(every_cycle) << ")";
 				if (pr_ct == 5) {
 					Debug::getInstance()->getdataFlowFile() << endl;
