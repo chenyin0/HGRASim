@@ -23,7 +23,7 @@ Pealu::Pealu(Simulator::PEOpcode opcode) {
 	{
 	case PEOpcode::null:
 	//	DEBUG_ASSERT(false);
-		depth= 1;
+		depth= 0;
 		break;
 	case PEOpcode::add:
 		depth = 1;
@@ -90,6 +90,12 @@ Pealu::Pealu(Simulator::PEOpcode opcode) {
 		break;
 	case PEOpcode::merge:
 		depth = 1;
+		break;
+	case PEOpcode::hlt:
+		depth = 0;
+		break;
+	case PEOpcode::hadd:
+		depth = 0;
 		break;
 	default:
 		DEBUG_ASSERT(false);

@@ -41,7 +41,7 @@ namespace Simulator::Array
 	private:
 		Alutrans newtrans;
 		vector<Alutrans> pipeline;
-		uint depth;
+		//uint depth;
 		//PEOpcode opcode;
 		//uint delay;
 		//uint mask;
@@ -50,6 +50,7 @@ namespace Simulator::Array
 		friend class Processing_element;
 		Pealu(PEOpcode opcode);
 		Pealu();
+		uint depth;
 		~Pealu() = default;
 		void update();
 		void print();//想看pipeline

@@ -139,16 +139,81 @@ void HgraArray::nextStep1(type_index type_in,uint port)
 		if (nextLocaVec.size() != 0) {
 			for (auto& nextLo : nextLocaVec) {
 				if (nextLo.type == NodeType::pe) {
-#ifdef stall					
-					if (ele2order[{NodeType::pe, nextLo.node_index}] < ele2order[{type_in.type, type_in.index}]
-						&& pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->input_port[nextLo.port_index].valid)//成环之后的内部循环
-					{
-						pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->stall_one = true;//如果是环状结构,由于仿真顺序的限制,此时不能拿step1进的数做运算
+					if (system_para.stall_mode == stallType::none){
+						if (ele2order[{NodeType::pe, nextLo.node_index}] < ele2order[{type_in.type, type_in.index}]
+							&& pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->input_port[nextLo.port_index].valid)//成环之后的内部循环
+						{
+							if(!pe_map[index2order[{type_in.type, type_in.index}]]->all_comb)
+								pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->stall_one = true;//如果是环状结构,由于仿真顺序的限制,此时不能拿step1进的数做运算
+						}
 					}
-#endif // stall
-					if (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->getAttr()->input_bypass == InputBypass::bypass&&system_para.stall_mode==stallType::none)//如果下一层是bypass,那么这个时候做下一层的step1应该把数据灌进alu
-						pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->controlBlock();
-					pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
+//#endif // stall
+					//pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
+
+					if (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->all_comb
+						|| (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->getAttr()->input_bypass == InputBypass::bypass)&& system_para.stall_mode == stallType::none) {
+						//pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->controlBlock();
+						if (!((pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->attribution->buffer_mode[nextLo.port_index] == BufferMode::lr)
+							|| (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->attribution->buffer_mode[nextLo.port_index] == BufferMode::keep))) {
+							pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->controlBlock();
+							if (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->oprand_collected) {
+								if(pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->all_comb){ 
+									//pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->stall_one = false;
+									pe_update(ele2order[{NodeType::pe, nextLo.node_index}]); 
+								}//这种情况下要保证下周期不能堵,这个仿真顺序不太一样
+								update_flag = true;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         								update_flag = true;//这是发到下一级的lr
+							}
+						}
+						else {
+							//pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
+							//if (update_flag) {
+							////	pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
+							//	if (reserved_nodes.size()) {
+							//		for (auto& i : reserved_nodes) {
+							//			pe_map[index2order[i]]->simStep1(nextLo.port_index);
+							//		}
+							//		reserved_nodes.clear();
+							//	}
+							//}
+							//else {
+								//Simulator::Bridge::Location reserved_node = { NodeType::pe, nextLo.node_index,nextLo.port_index };
+								reserved_nodes.push_back(nextLo);
+							//}
+						}
+					}
+					else{
+						pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
+					}
+					//if (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->getAttr()->input_bypass == InputBypass::bypass&& system_para.stall_mode == stallType::none) {//如果下一层是bypass,那么这个时候做下一层的step1应该把数据灌进alu
+					//	if (!((pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->attribution->buffer_mode[nextLo.port_index] == BufferMode::lr) || (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->attribution->buffer_mode[nextLo.port_index] == BufferMode::keep))) {
+					//		pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->controlBlock();
+					//		if (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->all_comb) {
+					//			if (pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->oprand_collected) {
+					//				pe_update(ele2order[{NodeType::pe, nextLo.node_index}]);
+					//				update_flag = true;//这是发到下一级的lr
+					//				
+					//			}
+					//		}
+					//	}
+					//	else {
+					//		if (update_flag) {
+					//			pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
+					//			if (reserved_nodes.size()) {
+					//				for (auto& i : reserved_nodes) {
+					//					pe_map[index2order[i]]->simStep1(nextLo.port_index);
+					//				}
+					//				reserved_nodes.clear();
+					//			}
+					//		}
+					//		else {
+					//			std::pair<NodeType, uint> reserved_node = { NodeType::pe, nextLo.node_index };
+					//			reserved_nodes.push_back(reserved_node);
+					//		}
+					//	}
+					//}
+					//else {
+					//	pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
+					//}
 				}
 				else if (nextLo.type == NodeType::ls) {
 					lse_map[index2order[{NodeType::ls, nextLo.node_index}]]->simStep1(nextLo.port_index);
@@ -246,6 +311,33 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 
 	return false;
 }
+void HgraArray::pe_update(uint config_index) {
+	if (config_order[config_index].type == NodeType::pe) {
+		for (uint port = 0; port < Preprocess::Para::getInstance()->getArrayPara().data_outport_breadth + Preprocess::Para::getInstance()->getArrayPara().bool_outport_breadth; ++port) {
+			Bridge::Location self_location{ NodeType::pe,config_order[config_index].index,port };
+			if (bridge._bp_temporary_buffer.find(self_location) != bridge._bp_temporary_buffer.end()) {
+				bridge.recvOneBp({ self_location.type, self_location.node_index, self_location.port_index }, bridge._bp_temporary_buffer[self_location]);
+			}
+		}
+		pe_map[order2index[config_index].second]->simStep3();
+		pe_map[order2index[config_index].second]->simStep2();
+		if (sendOutput(config_order[config_index].type, order2index[config_index].second))        //·µ»Ø1Ê±ÈÎÎñ½áÊø
+		{
+			task_finish = true;
+		}
+		pe_map[order2index[config_index].second]->simBp();
+		for (uint port = 0; port < Preprocess::Para::getInstance()->getArrayPara().bool_inport_breadth + Preprocess::Para::getInstance()->getArrayPara().data_inport_breadth; port++)
+			bridge.setBp(pe_map[order2index[config_index].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[config_index].second]->getAttr()->index, port);
+		for (uint port = 0; port < Preprocess::Para::getInstance()->getArrayPara().data_outport_breadth + Preprocess::Para::getInstance()->getArrayPara().bool_outport_breadth; ++port) {
+			nextStep1(config_order[config_index], port);
+		}
+		//if()
+////		pe_map[order2index[i].second]->simStep2();//´ÓÐ´µÄµÚÒ»¸öÀ´·Ã
+//		pe_map[order2index[config_index].second]->simBp();
+//		for (uint port = 0; port < Preprocess::Para::getInstance()->getArrayPara().bool_inport_breadth + Preprocess::Para::getInstance()->getArrayPara().data_inport_breadth; port++)
+//			bridge.setBp(pe_map[order2index[config_index].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[config_index].second]->getAttr()->index, port);
+	}
+}
 
 //È±ÉÙ·ÂÕæË³ÐòÐÅÏ¢
 void HgraArray::run()
@@ -260,7 +352,7 @@ void HgraArray::run()
 				i.second.clear();
 			}
 			clk = ClkDomain::getInstance()->getClk();
-			bool task_finish = false;
+	//		bool task_finish = false;
 			if (ClkDomain::getInstance()->getClk() == 0)
 			{
 				DEBUG_ASSERT(config_order[0].type == NodeType::lc && config_order[0].index == 0);
@@ -285,14 +377,19 @@ void HgraArray::run()
 					{
 						task_finish = true;
 					}
+					pe_map[order2index[i].second]->simBp();
+					for (uint port = 0; port < system_para.bool_inport_breadth + system_para.data_inport_breadth; port++)
+						bridge.setBp(pe_map[order2index[i].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[i].second]->getAttr()->index, port);
 					for (uint port = 0; port < system_para.data_outport_breadth + system_para.bool_outport_breadth; ++port) {
 						nextStep1(config_order[i], port);
 					}
+					//pe_map[order2index[i].second]->getInbuffer();
+					Simulator::Array::Buffer *buffer = pe_map[5]->getInbuffer();
 					//if()
-			//		pe_map[order2index[i].second]->simStep2();//´ÓÐ´µÄµÚÒ»¸öÀ´·Ã
-					pe_map[order2index[i].second]->simBp();
-					for (uint port = 0; port < system_para.bool_inport_breadth+ system_para.data_inport_breadth; port++)
-						bridge.setBp(pe_map[order2index[i].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[i].second]->getAttr()->index, port);
+			////		pe_map[order2index[i].second]->simStep2();//´ÓÐ´µÄµÚÒ»¸öÀ´·Ã
+			//		pe_map[order2index[i].second]->simBp();
+			//		for (uint port = 0; port < system_para.bool_inport_breadth+ system_para.data_inport_breadth; port++)
+			//			bridge.setBp(pe_map[order2index[i].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[i].second]->getAttr()->index, port);
 				}
 				else if (config_order[i].type == NodeType::ls) {
 					for (uint port = 0; port < system_para.le_dataout_breadth + system_para.le_boolout_breadth; ++port) {
@@ -349,7 +446,12 @@ void HgraArray::run()
 				lsu->update();//lsu->updateÒª·ÅÔÚ×îÉÏÃæ£¬ÕâÑùlsu°ÑÊä³ö·ÅÔÚ¶Ë¿ÚÉÏ¾ÍÄÜÊÕµ½
 			}
 
-
+			if (reserved_nodes.size()) {
+				for (auto& i : reserved_nodes) {
+					pe_map[index2order[{i.type, i.node_index}]]->simStep1(i.port_index);
+				}
+				reserved_nodes.clear();
+			}
 
 			for (int i = config_order.size() - 1; i >= 0; i--) {
 				if (config_order[i].type == NodeType::pe) {
@@ -397,7 +499,12 @@ void HgraArray::run()
 				Debug::getInstance()->getPortFile() << "clk" << clk << std::endl;
 				break;
 			}
-
+			//if (reserved_nodes.size()) {
+			//	for (auto& i : reserved_nodes) {
+			//		pe_map[index2order[{i.type,i.node_index}]]->simStep1(i.port_index);
+			//	}
+			//	reserved_nodes.clear();
+			//}
 			ClkDomain::getInstance()->selfAdd();
 		}
 	}
@@ -436,8 +543,25 @@ void HgraArray::run()
 					for (uint port = 0; port < system_para.data_outport_breadth + system_para.bool_outport_breadth; ++port) {
 						reverseStep1(config_order[i], port);
 					}
-					for (uint port = 0; port < system_para.bool_inport_breadth + system_para.data_inport_breadth; port++)
-						bridge.setBp(pe_map[order2index[i].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[i].second]->getAttr()->index, port);
+					for (uint port = 0; port < system_para.bool_inport_breadth + system_para.data_inport_breadth; port++) {
+						if (!((pe_map[order2index[i].second]->attribution->buffer_mode[port] == BufferMode::buffer || pe_map[order2index[i].second]->attribution->buffer_mode[port] == BufferMode::lr_out)
+							&& (pe_map[order2index[i].second]->all_comb == true))) {
+							uint index = pe_map[order2index[i].second]->attribution->index;
+							bridge.setBp(pe_map[order2index[i].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[i].second]->attribution->index, port);
+							Simulator::Bridge::Location maybe_comb = bridge.findPreNode(NodeType::pe, pe_map[order2index[i].second]->attribution->index, port);
+							if (maybe_comb.type == NodeType::pe) {
+								if (pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->all_comb)
+								{
+									for (uint port_inner = 0; port_inner < system_para.bool_inport_breadth + system_para.data_inport_breadth; port_inner++) {
+										if (pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->buffer_mode[port_inner] != BufferMode::keep
+											&& pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->buffer_mode[port_inner] != BufferMode::lr)
+											//bool value = pe_map[order2index[i].second]->thispe_bp[port];
+											bridge.setBp(pe_map[order2index[i].second]->thispe_bp[port], NodeType::pe, pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->index, port_inner);
+									}
+								}
+							}
+						}
+					}
 				}
 				else if (config_order[i].type == NodeType::ls) {
 					lse_map[order2index[i].second]->update();
@@ -469,8 +593,22 @@ void HgraArray::run()
 						
 					}
 					//lse_map[order2index[i].second]->simBp();
-					for (uint port = 0; port < lse_map[order2index[i].second]->this_bp.size(); port++)
+					for (uint port = 0; port < lse_map[order2index[i].second]->this_bp.size(); port++) {
 						bridge.setBp(lse_map[order2index[i].second]->this_bp[port], NodeType::ls, lse_map[order2index[i].second]->getAttr()->index, port);
+						Simulator::Bridge::Location maybe_comb = bridge.findPreNode(NodeType::ls, lse_map[order2index[i].second]->getAttr()->index, port);
+						uint index = pe_map[order2index[i].second]->attribution->index;
+						if (maybe_comb.type == NodeType::pe) {
+							if (pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->all_comb)
+							{
+								for (uint port_inner = 0; port_inner < system_para.bool_inport_breadth + system_para.data_inport_breadth; port_inner++) {
+									if (pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->buffer_mode[port_inner] != BufferMode::keep
+										&& pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->buffer_mode[port_inner] != BufferMode::lr)
+										//bool value = lse_map[order2index[i].second]->this_bp[port];
+									bridge.setBp(lse_map[order2index[i].second]->this_bp[port], NodeType::pe, pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->index, port_inner);
+								}
+							}
+						}
+					}
 				}					
 				else if (config_order[i].type == NodeType::lc) {
 					lc_map[order2index[i].second]->update();
@@ -495,10 +633,36 @@ void HgraArray::run()
 					//	lc_map[order2index[i].second]->simStep1(0);///¶ÔÓÚÍ·²¿lc£¬ÐèÒª½«Íâ²¿regÊäÈë
 					//}
 					//lc_map[order2index[i].second]->simBp();
-					for (uint port = 0; port < lc_map[order2index[i].second]->thisbp_reg.size(); port++)
+					for (uint port = 0; port < lc_map[order2index[i].second]->thisbp_reg.size(); port++) {
 						bridge.setBp(lc_map[order2index[i].second]->thisbp_reg[port], NodeType::lc, lc_map[order2index[i].second]->getAttr()->index, port);
-					for (uint port = 0; port < lc_map[order2index[i].second]->thisbp_end.size(); port++)
+						Simulator::Bridge::Location maybe_comb = bridge.findPreNode(NodeType::lc, lc_map[order2index[i].second]->attribution->index, port);
+						if (maybe_comb.type == NodeType::pe) {
+							if (pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->all_comb)
+							{
+								for (uint port_inner = 0; port_inner < system_para.bool_inport_breadth + system_para.data_inport_breadth; port_inner++) {
+									if (pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->buffer_mode[port_inner] != BufferMode::keep
+										&& pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->buffer_mode[port_inner] != BufferMode::lr)
+										//bool value = lc_map[order2index[i].second]->thisbp_end[port];
+										bridge.setBp(lc_map[order2index[i].second]->thisbp_end[port], NodeType::lc, pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->index, port_inner);
+								}
+							}
+						}
+					}
+					for (uint port = 0; port < lc_map[order2index[i].second]->thisbp_end.size(); port++) {
 						bridge.setBp(lc_map[order2index[i].second]->thisbp_end[port], NodeType::lc, lc_map[order2index[i].second]->getAttr()->index, port + lc_map[order2index[i].second]->thisbp_reg.size());
+						Simulator::Bridge::Location maybe_comb = bridge.findPreNode(NodeType::lc, lc_map[order2index[i].second]->attribution->index, port + lc_map[order2index[i].second]->thisbp_reg.size());
+						if (maybe_comb.type == NodeType::pe) {
+							if (pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->all_comb)
+							{
+								for (uint port_inner = 0; port_inner < system_para.bool_inport_breadth + system_para.data_inport_breadth; port_inner++) {
+									if (pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->buffer_mode[port_inner] != BufferMode::keep
+										&& pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->buffer_mode[port_inner] != BufferMode::lr)
+										//bool value = lc_map[order2index[i].second]->thisbp_end[port];
+									bridge.setBp(lc_map[order2index[i].second]->thisbp_end[port], NodeType::lc, pe_map[index2order[{maybe_comb.type, maybe_comb.node_index}]]->attribution->index, port_inner);
+								}
+							}
+						}
+					}
 				}
 					
 

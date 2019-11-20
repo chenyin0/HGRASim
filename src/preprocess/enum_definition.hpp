@@ -49,7 +49,9 @@ namespace Simulator
 		neq,
 		lte,
 		bit_not,
-		merge
+		merge,
+		hlt,
+		hadd
 	};
 
 	enum class BpType

@@ -81,8 +81,10 @@ namespace Simulator::Array
 		void wirePrint(std::ofstream& file);
 	public:
 		friend class Pebp;
+		friend class HgraArray;
 	//	friend class Pro;
 		bool stall_one;
+		bool all_comb;
 		Processing_element(const Preprocess::ArrayPara para, uint index);
 		~Processing_element();
 		void update();
@@ -117,7 +119,9 @@ namespace Simulator::Array
 		void getInput(uint port, Port_inout input) override;  //port之间来源不同，解耦合；但inbuffer的写入仍保持耦合
 		void getBp(uint port, bool input) override;
 //		auto isSpecial();
-		Bufferpe_in* getInbuffer() { return static_cast<Simulator::Array::Bufferpe_in*>(inbuffer); }
+		Bufferpe_in* getInbuffer() { 
+			return static_cast<Simulator::Array::Bufferpe_in*>(inbuffer);
+		}
 		Bufferpe_out* getOutbuffer() { return static_cast<Simulator::Array::Bufferpe_out*>(outbuffer); }
 //		Buffer* getInbuffer() { return inbuffer; };
 		const Preprocess::DFGNode<NodeType::pe>* getAttr(){ return attribution; };

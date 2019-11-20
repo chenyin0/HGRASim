@@ -31,6 +31,7 @@ Processing_element::Processing_element(const Simulator::Preprocess::ArrayPara pa
 	ctrl_index = in_num - 1;
 	next_bp.resize(system_parameter.data_outport_breadth + system_parameter.bool_outport_breadth);
 	output_port.resize(system_parameter.data_outport_breadth + system_parameter.bool_outport_breadth);
+	all_comb = (attribution->input_bypass == InputBypass::bypass) && (alu->depth == 0) && (attribution->output_from[0] == OutputFrom::alu);
 	//	in_num = system_parameter.data_inport_breadth + system_parameter.bool_inport_breadth;
 	switch (attribution->opcode)
 	{
@@ -45,6 +46,12 @@ Processing_element::Processing_element(const Simulator::Preprocess::ArrayPara pa
 		alu_num = 2;
 		break;
 	case PEOpcode::sub:
+		alu_num = 2;
+		break;
+	case PEOpcode::hadd:
+		alu_num = 2;
+		break;
+	case PEOpcode::hlt:
 		alu_num = 2;
 		break;
 	case PEOpcode::div:
@@ -324,22 +331,26 @@ void Processing_element::getAluInput()
 	if (allAluOperandsGot())
 	{
 		//first_loop = false;
-		if (stall_one) {
-			stall_one = false;
-			return;
-		}
-		else {
+		
 			oprand_collected = true;
 
 
 			for (uint i = 0; i < in_num; ++i) {
 				//					int search_index = alu_num == 1 ? 1 : i;
-				if (attribution->opcode == PEOpcode::null) {
-					if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::inbuffer &&
-						(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
-							|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
-						inbuffer->output(aluin[i], i);
-					else if (outbuffer->isBufferNotFull(0) &&
+				if (alu->depth == 0) {
+					if (attribution->output_from[0] == OutputFrom::outbuffer) {
+						if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::inbuffer &&
+							(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
+								|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
+							inbuffer->output(aluin[i], i);
+					}
+					else if (attribution->output_from[0] == OutputFrom::alu) {
+						if (next_bp[0] && attribution->input_bypass == InputBypass::inbuffer &&
+							(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
+								|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
+							inbuffer->output(aluin[i], i);
+					}
+					if (outbuffer->isBufferNotFull(0) &&
 						(attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr
 							))//alu来源于lr
 						aluin[i] = reg_out[i];
@@ -412,7 +423,6 @@ void Processing_element::getAluInput()
 								break;
 							}
 						}
-						
 					}
 					else {
 						if (aluin[2].valid && aluin[2].last)
@@ -524,7 +534,7 @@ void Processing_element::getAluInput()
 				}
 			}
 		}
-	}
+	
 }
 
 //进行控制判断后输入alu
@@ -593,7 +603,7 @@ void Processing_element::gatherOperands()
 	////}
 	//else      //其他情况下，bool口不需要控制alu的行为
 	//{
-		if (attribution->opcode != PEOpcode::null) {
+		if (alu->depth != 0) {
 			if (alu->canReceiveInput()) {
 				//		bool alu_flag = false;
 				for (auto& alun : aluin) {
@@ -615,31 +625,55 @@ void Processing_element::gatherOperands()
 				if (alun.valid && alun.last) { alu_flag = true; break; }
 			}
 			if (aluin[1].valid) {
-				if ((rs_cd || alu_flag)) {
-					if (rs_cd) {
+				switch (attribution->opcode) {
+				case PEOpcode::hadd:
+					if (aluin[0].valid) {
+						alu_out.value_data = aluin[0].value_data +aluin[1].value_data;
+						alu_out.valid = true;
+					}
+					break;
+				case PEOpcode::hlt:
+					if (aluin[0].valid) {
+						alu_out.value_data = aluin[0].value_data<aluin[1].value_data;
+						alu_out.valid = true;
+					}
+					break;
+				case PEOpcode::null:					
 						alu_out.value_data = aluin[1].value_data;
 						alu_out.valid = true;
+					break;
+				default: 
+					DEBUG_ASSERT(false);
+					break;				
+				}
+				if ((rs_cd || alu_flag)) {
+					if (rs_cd) {
+						
+						
 						alu_out.condition = false;
 					}
 					if (alu_flag) {
-						alu_out.value_data = aluin[1].value_data;
-						alu_out.valid = true;
+						
+						
 						alu_out.last = true;
 						alu_flag = false;
 					}
 				}
-				else {
-					alu_out.value_data = aluin[1].value_data;
-					//alu_out.value_bool = aluin[0].value_bool;
-					alu_out.valid = true;
-				}
+			//	else {
+			////		alu_out.value_data = aluin[1].value_data;
+			//		//alu_out.value_bool = aluin[0].value_bool;
+			//		alu_out.valid = true;
+			//	}
 				if (attribution->control_mode == ControlMode::bind) {
-					if (!aluin[1].value_data) {
+					if (!alu_out.value_data) {
 						alu_out.last = true;
 						alu_out.value_data= aluin[0].value_data;
 						local_reg[0]->reg_v = false;
 						local_reg[1]->reg_v = false;
 						local_reg[2]->reg_v = false;
+					}
+					else {
+						alu_out.value_data = aluin[0].value_data;
 					}
 				}
 				for (uint i = 0; i < system_parameter.bool_outport_breadth + system_parameter.data_outport_breadth; ++i)
@@ -672,13 +706,13 @@ void Processing_element::breakoccur()
 
 void Processing_element::aluUpdate()
 {
-	if (attribution->opcode != PEOpcode::null) {
+	if (alu->depth != 0) {
 		alu->compute(alu_out);
 		if (attribution->control_mode == ControlMode::bind) {
 			if (alu_out.valid) {
 				if (alu_out.value_data == 0) {
 					alu_out.last = true;
-					//				alu_out.value_data = alu->pipeline.front().data1;
+					alu_out.value_data = alu->pipeline.front().data1;
 					local_reg[0]->reg_v = false;
 					local_reg[1]->reg_v = false;
 					local_reg[2]->reg_v = false;
@@ -739,7 +773,7 @@ void Processing_element::outReset()
 }
 void Processing_element::toOutBuffer()
 {
-	if (attribution->opcode != PEOpcode::null) {
+	if (alu->depth != 0) {
 		for (uint i = 0; i < system_parameter.bool_outport_breadth + system_parameter.data_outport_breadth; ++i)
 		{
 			if (attribution->output_from[i] == OutputFrom::outbuffer) {
@@ -857,7 +891,10 @@ bool Processing_element::allAluOperandsGot()
 					return false;
 			}
 		}
-
+		if (stall_one) {  
+			stall_one = false; 
+			return false;
+		}
 //	}
 
 	//else {

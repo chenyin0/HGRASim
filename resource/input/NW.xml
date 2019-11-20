@@ -112,7 +112,7 @@
         <reg value="null" />
         <placement cord="[5, 5]"/>
     </node> -->
-  <node type="pe" index="34" opcode="add" controlMode="data_flow">
+  <node type="pe" index="34" opcode="hadd" controlMode="data_flow">
     <inner_connection
         buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
         buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -124,11 +124,11 @@
     <placement cord="[5, 5]"/>
   </node>
 
-  <node type="pe" index="36" opcode="lt" controlMode="bind">
+  <node type="pe" index="36" opcode="hlt" controlMode="bind">
     <inner_connection
         buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
         buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
-        input_bypass="inbuffer" output_from="alu"/>
+        input_bypass="bypass" output_from="alu"/>
     <input type="pe" index="33" port="0"/>
     <!-- 数据来源为in1 -->
     <input type="pe" index="2" port="0"/>

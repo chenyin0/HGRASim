@@ -52,9 +52,11 @@ bool Ackbp_lr::getBp()
 bool Pebp::getBp(uint port)
 {
 	if (port == 0) {
-		if (pe->attribution->control_mode == ControlMode::loop_activate) {
-			if (pe->inbuffer->isBufferNotFull(port)) { return true; }
-			else { return false; }
+		if (pe->attribution->control_mode == ControlMode::loop_activate|| pe->attribution->control_mode == ControlMode::calc_activate) {
+			//if (pe->attribution->control_mode == ControlMode::calc_activate) { return true; }
+			//else if (pe->inbuffer->isBufferNotFull(1)) { return true; }
+			//else { return false; }
+			return true;
 		}
 		else if (pe->attribution->input_bypass==InputBypass::inbuffer) {/////注意这里是alu来源于inbuffer的情况，即input需要进inbuffer
 //			if (pe->attribution->ob_from[0] == OutBufferFrom::alu) {
@@ -77,7 +79,7 @@ bool Pebp::getBp(uint port)
 //			}
 		}
 		else if (pe->attribution->input_bypass == InputBypass::bypass) {
-			if(pe->attribution->opcode!=PEOpcode::null)
+			if(pe->alu->depth!=0)
 				return(pe->alu->canReceiveInput());
 			else {
 				if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
@@ -100,7 +102,7 @@ bool Pebp::getBp(uint port)
 			if (pe->attribution->inbuffer_from[1] == InBufferFrom::aluin1) {
 				return !(pe->local_reg[1]->reg_v);
 			}
-			else if (pe->attribution->control_mode == ControlMode::loop_activate) {
+			else if (pe->attribution->control_mode == ControlMode::loop_activate || pe->attribution->control_mode == ControlMode::calc_activate) {
 				return !(pe->local_reg[1]->reg_v);
 			}
 			else if (pe->attribution->buffer_mode[1] == BufferMode::lr) {
@@ -122,7 +124,14 @@ bool Pebp::getBp(uint port)
 			}
 		}
 		else if (pe->attribution->input_bypass == InputBypass::bypass) {
-			return(pe->alu->canReceiveInput());
+			 if (pe->alu->depth != 0)
+				 return(pe->alu->canReceiveInput());
+			 else {
+				 if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
+					 return(pe->outbuffer->isBufferNotFull(0));
+				 else if (pe->attribution->output_from[0] == OutputFrom::alu)
+					 return(pe->next_bp[0]);
+			 }
 		}
 		else { return false; }//还需要写alu直接来自inport的情况，此时bp由alu决定
 	}
@@ -149,7 +158,14 @@ bool Pebp::getBp(uint port)
 			}
 		}
 		else if (pe->attribution->input_bypass == InputBypass::bypass) {
-			return(pe->alu->canReceiveInput());
+			if (pe->alu->depth != 0)
+				return(pe->alu->canReceiveInput());
+			else {
+				if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
+					return(pe->outbuffer->isBufferNotFull(0));
+				else if (pe->attribution->output_from[0] == OutputFrom::alu)
+					return(pe->next_bp[0]);
+			}
 		}
 		else { return false; } 
 	}

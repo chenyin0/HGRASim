@@ -209,6 +209,10 @@ namespace Simulator
 		{
 			if (type_ == PEOpcode::null)
 				return "nop";
+			if (type_ == PEOpcode::hadd)
+				return "hadd";
+			if (type_ == PEOpcode::hlt)
+				return "hlt";
 			if (type_ == PEOpcode::add)
 				return "add";
 			if (type_ == PEOpcode::mul)
@@ -281,6 +285,10 @@ namespace Simulator
 				return PEOpcode::mac;
 			if (s_ == "add1")
 				return PEOpcode::add1;
+			if (s_ == "hadd")
+				return PEOpcode::hadd;
+			if (s_ == "hlt")
+				return PEOpcode::hlt;
 			if (s_ == "leshift")
 				return PEOpcode::leshift;
 			if (s_ == "rishift")

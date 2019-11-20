@@ -16,7 +16,7 @@
 
         <!-- LSE -->>
         <lseNum>32</lseNum>
-        <lseInBufferDepth>3</lseInBufferDepth>
+        <lseInBufferDepth>2</lseInBufferDepth>
         <lseDataInBreadth>1</lseDataInBreadth>
         <lseBoolInBreadth>0</lseBoolInBreadth>
         <leDataOutBreadth>1</leDataOutBreadth>
@@ -51,7 +51,7 @@
         <printscreen>false</printscreen>
         <stallMode>inbuffer_stall</stallMode>
         <attachMemory>true</attachMemory>
-        <maxClk>15000</maxClk>
+        <maxClk>500000</maxClk>
         <maxMemoryDepth>100000</maxMemoryDepth>
         
     </array>
