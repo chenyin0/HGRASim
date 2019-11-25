@@ -201,7 +201,34 @@ namespace Simulator
 			return FGMode::null;
 		}
 	};
+	class VecmodeConverter 
+	{
+	public:
+		static auto toString(VecMode type_)->string
+		{
+			if (type_ == VecMode::null)
+				return "null";
+			if (type_ == VecMode::vect)
+				return "vect";
+			if (type_ == VecMode::vecr)
+				return "vecr";
+			DEBUG_ASSERT(false);
+			return "";
+		}
 
+		static auto toEnum(string s_)->VecMode
+		{
+			if (s_ == "null")
+				return VecMode::null;
+			if (s_ == "vect")
+				return VecMode::vect;
+			if (s_ == "vecr")
+				return VecMode::vecr;
+			throw std::runtime_error("your configuration is boom(vecmode)");
+			DEBUG_ASSERT(false);
+			return VecMode::null;
+		}
+	};
 	class PEOpcodeConverter
 	{
 	public:

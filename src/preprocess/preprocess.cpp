@@ -276,10 +276,24 @@ namespace Simulator::Preprocess
 			manual_cord = Cord::stringAnalysis(static_cast<string>(manual_placement_xml->FindAttribute("cord")->Value()));
 
 		// build
-		DFGNode<NodeType::ls>* ptr = new DFGNode<NodeType::ls>(index, ls_mode, tag_bind,
-			dae, fifo_step, size, match, input_vec, manual_cord);
+		if (node_xml_->FindAttribute("vecmode")) {
+			VecMode vecmode=VecmodeConverter::toEnum(node_xml_->FindAttribute("vecmode")->Value());
+			string pss = static_cast<string>(node_xml_->FindAttribute("pss")->Value());
+			vector<string> vec_pss = Util::splitString(pss, "_", true);
+			if (vec_pss.size() != 3) {
+				throw std::runtime_error("your configuration is boom(pss)");
+			}
+			DFGNode<NodeType::ls>* ptr = new DFGNode<NodeType::ls>(index, ls_mode, tag_bind,
+				dae, fifo_step, size, match, input_vec, manual_cord,vecmode, std::stoi(vec_pss[0]), std::stoi(vec_pss[1]), std::stoi(vec_pss[2]));
+			return dynamic_cast<DFGNodeInterface*>(ptr);
+		}
+		else {
+			DFGNode<NodeType::ls>* ptr = new DFGNode<NodeType::ls>(index, ls_mode, tag_bind,
+				dae, fifo_step, size, match, input_vec, manual_cord);
+			return dynamic_cast<DFGNodeInterface*>(ptr);
+		}
 
-		return dynamic_cast<DFGNodeInterface*>(ptr);
+		//return dynamic_cast<DFGNodeInterface*>(ptr);
 	}
 
 	auto DFG::lvRead(XMLElement* node_xml_) const -> DFGNodeInterface*

@@ -54,6 +54,12 @@ namespace Simulator
 		hadd
 	};
 
+	enum class VecMode
+	{
+		vect,
+		vecr,
+		null
+	};
 	enum class BpType
 	{
 		ack,

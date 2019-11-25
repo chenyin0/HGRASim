@@ -32,19 +32,28 @@ typedef struct vec_msg {
 }Vec_Msg;
 
 typedef struct offset_line {
-	std::vector <Comb_Offset> offset;
-//	bool round;
+	short tag;
 	bool valid;
+	short pointer;
 }Offset_Line;
-
 typedef struct bus_tran {
 	uint64_t addr;
 	bool rdwr;
 	short cycle;
 }Bus_Tran;
-
+typedef struct co_unit {
+	bool valid;
+	int addr;
+	std::vector<Offset_Line> line;
+}Coleasor_Unit;
 namespace DRAMSim
 {
+	//CONFIG FOR COLEASOR
+#define COLEASORSIZE    8
+#define COLEASORDEPTH   8
+#define KICKCOUNT       10  
+#define SENDCOUNT       20
+#define MAXCOUNT        30
 	class TabLine
 	{
 	private:
@@ -61,11 +70,10 @@ namespace DRAMSim
 		uint32_t TAG_;   //pointer
 		uint32_t pe_tag;
 		bool complete;
+		bool bypass;
 		bool pref;
 		int transid;
 		bool vec;
-		vector <Comb_Offset> offset;                 //maskÍ¨¹ıÎ»ÖÃ±íÊ¾
-		vector <Comb_Offset_4> offset_4;
 		void reset();
 	};
 
@@ -86,10 +94,11 @@ namespace DRAMSim
 		uint32_t valid;
 		bool rdwr;
 		uint32_t pe_tag;
-//		bool pe_round;                      //ºÍtagÒ»ÑùÈ«³Ì±£³Ö²»±ä·µ»Ø
+		bool bypass;
+//		bool pe_round;                      //ï¿½ï¿½tagÒ»ï¿½ï¿½È«ï¿½Ì±ï¿½ï¿½Ö²ï¿½ï¿½ä·µï¿½ï¿½
 											//uint32_t round_counter;
 		bool pref;
-		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG);
+		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG, bool bypass);
 		void returnACK();
 		void getInput(uint port, Simulator::Array::Port_inout input) override {};
 		void getBp(uint port, bool input) override {};
@@ -105,12 +114,37 @@ namespace DRAMSim
 
 	public:
 		uint32_t pointer;
-		std::map<uint, uint> lse2relse;
 	//	bool print_screen;
+		std::map<uint, uint> lse2relse;
 		vector<ArbitratorLine*> ArbitratorLines;
 		Arbitrator(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map);
 		~Arbitrator();
-		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG);
+		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG,bool bypass);
+		void getInput(uint port, Simulator::Array::Port_inout input) override {};
+		void getBp(uint port, bool input) override {};
+	};
+	class Coleasor :public Simulator::Array::Node
+	{
+	private:
+		short size;
+		short depth;
+		vector<Coleasor_Unit> Coleasor_Line;
+		vector<short> counter;
+		//MultiChannelMemorySystem *mem;
+		//vector <TabLine *> mshr;
+		//vector <vector<Offset_Line>> mshr_table;
+		Lsu* lsu;
+		bool coleasor_full(short index);
+		
+	public:
+		Coleasor(const Simulator::Preprocess::ArrayPara para,Lsu* lsu);
+//		Coleasor(Lsu* lsu);
+		~Coleasor();
+		bool AddTrans(TabLine* line);
+		//bool Coleasor()
+		void update();
+		void print();
+		void reset(short line);
 		void getInput(uint port, Simulator::Array::Port_inout input) override {};
 		void getBp(uint port, bool input) override {};
 	};
@@ -121,28 +155,27 @@ namespace DRAMSim
 	private:
 		Arbitrator* arbitrator;
 		uint32_t completetran;
+		Coleasor* coleasor;
 		vector<int> config_reg;
 		bool NotSameBlock(uint32_t addr_);
 		int IsVecTran(uint32_t pointer);
 		bool IsPrefTran(uint32_t pointer);
-		bool IsRTran(uint32_t pointer);
-		list<uint> last_pref;                               //ÓÃÓÚ¼ÇÂ¼Ö®Ç°µÄprefÇëÇó£¬Éî¶ÈÓëtagbits¶ÔÓ¦
-		vector<uint> pref_pointer;                            //¼ÇÂ¼Ô¤È¡µÄ¶Ë¿Ú
-		vector<uint> r_pointer;
-		int send_pointer;    //ÓÃÓÚÖ¸ÏòÏÂÒ»ÌõÒª·¢ËÍµÄÇëÇó
+		list<uint> last_pref;                               //ç”¨äºè®°å½•ä¹‹å‰çš„prefè¯·æ±‚ï¼Œæ·±åº¦ä¸tagbitså¯¹åº”
+		vector<uint> pref_pointer;                            //è®°å½•é¢„å–çš„ç«¯å£
+		int send_pointer;    //ç”¨äºæŒ‡å‘ä¸‹ä¸€æ¡è¦å‘é€çš„è¯·æ±‚
 		uint lseSize;
 		bool PostNotFull();
 	public:
 		Lsu(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map);
 		~Lsu() ;
 		Cache* cache;
-		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint TAG);
+		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint TAG, bool bypass);
 		void AttachMem(DRAMSim::MultiChannelMemorySystem* memory);
 		void update();     //synchronic
-		void config_in(map<uint, Simulator::Array::Loadstore_element*> lse_map);
-		void read_miss_complete(uint32_t addr);            //±»¶¯Ê½miss£¬Íê³ÉºóÍ¨Öªtable½øĞĞ·ÃÎÊcache£¨ĞèÕ¼ÓÃcache port²¢½«cache stateÀ­¸ß£©
+
+		void read_miss_complete(uint32_t addr);            //è¢«åŠ¨å¼missï¼Œå®Œæˆåé€šçŸ¥tableè¿›è¡Œè®¿é—®cacheï¼ˆéœ€å ç”¨cache portå¹¶å°†cache stateæ‹‰é«˜ï¼‰
 		void write_miss_complete(uint32_t addr);
-		void read_hit_complete(uint32_t addr);             //Ö÷¶¯Ê½hit£¬Íê³Éºó½øÈëregËÑË÷
+		void read_hit_complete(uint32_t addr);             //ä¸»åŠ¨å¼hitï¼Œå®Œæˆåè¿›å…¥regæœç´¢
 		void write_hit_complete(uint32_t addr);
 
 		DRAMSim::MultiChannelMemorySystem* mem;
@@ -164,15 +197,15 @@ namespace DRAMSim
 		uint32_t finished_pref;
 		uint32_t total_wr;
 		uint32_t total_rd;
-		int transid;                                          //Î¨Ò»±êÊ¶£¡
-		vector<Vec_Msg> vec_pointer;                          //¼ÇÂ¼Ã¿¸öÏòÁ¿¶Ë¿ÚÅäÖÃµÄindex¡¢step¡¢sizeĞÅÏ¢
-		vector<uint32_t> poped_addr;                              //±íÊ¾ÉĞÎ´Íê³ÉµÄmiss¿é
+		int transid;                                          //Î¨Ò»ï¿½ï¿½Ê¶ï¿½ï¿½
+		vector<Vec_Msg> vec_pointer;                          //ï¿½ï¿½Â¼Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½Ãµï¿½indexï¿½ï¿½stepï¿½ï¿½sizeï¿½ï¿½Ï¢
+		vector<uint32_t> poped_addr;                              //ï¿½ï¿½Ê¾ï¿½ï¿½Î´ï¿½ï¿½Éµï¿½missï¿½ï¿½
 		list <Bus_Tran> bus;
 		void bus_update();
 		void config_in(vector<int> config);
 
 		uint32_t cache_rd_reg;
-		vector <TabLine*> inflight_reg;                              //ÈôÎªpipeline_cacheÔòÊÇ¼Ä´æÆ÷×é¶ø²»ÊÇÒ»¸ö¼Ä´æÆ÷
+		vector <TabLine*> inflight_reg;                              //ï¿½ï¿½Îªpipeline_cacheï¿½ï¿½ï¿½Ç¼Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
 		bool addTrans2post(TabLine* line);
 		bool addreserve2post(TabLine* line);
 		//bool RegMshrConflict();

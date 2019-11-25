@@ -7,6 +7,7 @@
 #include <iostream>
 //#include "../typedef.h"
 #include "../debug.h"
+#include "../Node/Node.h"
 //extern bool PRINT_SCREEN;
 typedef struct cache_trans {
 	uint32_t addr;
@@ -96,7 +97,7 @@ namespace DRAMSim
 	class Lsu;
 
 
-	class Cache
+	class Cache :public Simulator::Array::Node
 	{
 	private:
 		Lsu* lsunit;
@@ -110,8 +111,10 @@ namespace DRAMSim
 
 
 	public:
-		Cache();
+		Cache(const Simulator::Preprocess::ArrayPara para);
 		~Cache();
+		void getInput(uint port, Simulator::Array::Port_inout input) override {};
+		void getBp(uint port, bool input) override {};
 		bool addtranscation(uint32_t adr, uint32_t rw);
 		short counter[CACHE_BANK][CACHE_WAYS_NUM][CACHE_LINE_EACH_WAY];  // priority
 		uint32_t CacheTopology[CACHE_BANK][CACHE_WAYS_NUM][CACHE_LINE_EACH_WAY];   //用于存放标记、UPDATE位、valid位 

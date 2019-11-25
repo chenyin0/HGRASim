@@ -89,12 +89,15 @@ namespace DRAMSim {
 		//	ssize = seNums;
 	//	lseSize = lse_map.size();
 		pointer = 0;
+		uint relse_counter = 0;
 
-
-		for (uint32_t i = 0; i < system_parameter.lse_num; i++)
+		for (uint32_t i = 0; i < lse_map.size(); i++)
 		{
-			ArbitratorLine* arbline = new ArbitratorLine(para, lse_map[i], i);                       //隐含了ArbitratorLines的下标即为TAG的意思
-			ArbitratorLines.push_back(arbline);
+			if (lse_map[i]->getAttr()->ls_mode != Simulator::LSMode::dummy) {
+				lse2relse[i] = relse_counter;
+				ArbitratorLine* arbline = new ArbitratorLine(para, lse_map[i], relse_counter++);                       //隐含了ArbitratorLines的下标即为TAG的意思
+				ArbitratorLines.push_back(arbline);
+			}
 		}
 
 		/*	for (uint32_t i = 0; i < ssize; i++)
@@ -107,7 +110,7 @@ namespace DRAMSim {
 
 	Arbitrator::~Arbitrator()
 	{
-		for (uint32_t i = 0; i < system_parameter.lse_num; i++)
+		for (uint32_t i = 0; i < ArbitratorLines.size(); i++)
 		{
 			delete ArbitratorLines[i];
 		}
@@ -149,7 +152,7 @@ namespace DRAMSim {
 		Arbitrator* arb = new Arbitrator(para, lse_map);
 		arbitrator = arb;
 
-		cache = new Cache();
+		cache = new Cache(para);
 		cache->attach(this);
 		//pre_fifo.resize(system_parameter.fifoline_num);
 		post_table.resize(system_parameter.tabline_num);
@@ -176,6 +179,7 @@ namespace DRAMSim {
 			post_offset[i].resize(system_parameter.post_offset_depth);
 
 		pre_fifo.resize(CACHE_BANK);
+		config_in(lse_map);
 //		for(auto &i)
 	}
 
@@ -493,7 +497,7 @@ namespace DRAMSim {
 					}
 					else                                                                               //reserve请求直接发送到table而不需要去inflight_reg
 					{
-						if (addreserve2post(pre_fifo[bank][0]))
+						if (addreserve2post(pre_fifo[bank][0]))//是同一个block
 						{
 							delete pre_fifo[bank].front();
 							pre_fifo[bank].erase(pre_fifo[bank].begin());
@@ -550,7 +554,7 @@ namespace DRAMSim {
 					if (inflight_reg[bank]->offset[j].valid && !channel_occupy[inflight_reg[bank]->offset[j].pointer])
 					{
 						//cbk_addr在步长为1时才有效，用于debug
-						(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->pe_tag);
+						(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->offset[j].tag);
 						inflight_reg[bank]->offset[j].valid = 0;
 						channel_occupy[inflight_reg[bank]->offset[j].pointer] = 1;
 					}
@@ -583,7 +587,7 @@ namespace DRAMSim {
 
 	//update the table-fifo and send trans from arbitrator to table	                    第2步
 	//uint32_t cyclepointer = arbitrator->pointer;
-	uint32_t cyclepointer = ClockCycle % lseSize;
+	uint32_t cyclepointer = ClockCycle % arbitrator->ArbitratorLines.size();
 	arbitrator->pointer = cyclepointer;
 	uint32_t blank_tabline = system_parameter.fifoline_num - pre_fifo.size();////////////////////20-8??????????????//////////////
 	uint32_t in_num = blank_tabline < system_parameter.in_num ? blank_tabline : system_parameter.in_num;       //由于vec请求会产生多项，不一定准
@@ -596,18 +600,37 @@ namespace DRAMSim {
 	list<int> p_order;
 	while (1)                           //寻找合适数量的trans进入table
 	{
-		if (arbitrator->ArbitratorLines[arbitrator->pointer]->valid == 1)
+		if (arbitrator->ArbitratorLines[arbitrator->pointer]->valid == 1&&(!IsRTran(arbitrator->pointer)))
 		{
-			if (p_order.size() < in_num)
-			{
-				p_order.push_back(arbitrator->pointer);
+			uint seek_index = 0;
+			if ((seek_index=IsVecTran(arbitrator->pointer)) != -1) {
+				if (p_order.size() < in_num)
+				{
+					bool can_add = true;
+					for (uint this_pointer = arbitrator->pointer; this_pointer < arbitrator->pointer + vec_pointer[seek_index].size; this_pointer++)
+					{
+						if (arbitrator->ArbitratorLines[arbitrator->pointer]->valid != 1) {
+							can_add = false;
+						}
+					}
+					if(can_add)
+						p_order.push_back(arbitrator->pointer);
+				}
+				else if (p_order.size() == in_num)                              //pointer停在上次满足入口要求后的地方！
+					break;
 			}
-			else if (p_order.size() == in_num)                              //pointer停在上次满足入口要求后的地方！
-				break;
+			else {
+				if (p_order.size() < in_num)
+				{
+					p_order.push_back(arbitrator->pointer);
+				}
+				else if (p_order.size() == in_num)                              //pointer停在上次满足入口要求后的地方！
+					break;
+			}
 		}
-		if (arbitrator->pointer < (system_parameter.lse_num - 1))
+		if (arbitrator->pointer < (arbitrator->ArbitratorLines.size() - 1))
 			arbitrator->pointer++;
-		else if (arbitrator->pointer == (system_parameter.lse_num - 1))
+		else if (arbitrator->pointer == (arbitrator->ArbitratorLines.size() - 1))
 			arbitrator->pointer = 0;
 		if (arbitrator->pointer == cyclepointer)                             //扫描完一遍，结束
 			break;
@@ -719,21 +742,22 @@ namespace DRAMSim {
 
 			if (size_ok)          //有空
 			{
-				arbitrator->ArbitratorLines[index]->returnACK();     //take the trans and return ACK to LE
-				arbitrator->ArbitratorLines[index]->valid = 0;
-
+				for (int k = 0; k < size; k++) {
+					arbitrator->ArbitratorLines[index+k]->returnACK();     //take the trans and return ACK to LE
+					arbitrator->ArbitratorLines[index+k]->valid = 0;
+				}
 				uint head_addr;                                             //head_addr表示每条合并请求的头部地址
 				uint fir_addr = arbitrator->ArbitratorLines[index]->ADDR_;  //fir_addr表示每个VLE请求的基地址
 
 				TabLine* new_line = new TabLine();
 				short mask1 = fir_addr % CACHE_LINE_SIZE;
 				new_line->offset[mask1].valid = 1;
-				new_line->offset[mask1].pointer = arbitrator->ArbitratorLines[index]->TAG_ + 1;
+				new_line->offset[mask1].pointer = arbitrator->ArbitratorLines[index]->TAG_;
 				new_line->offset[mask1].tag = arbitrator->ArbitratorLines[index]->pe_tag;
 
 				new_line->ADDR_ = fir_addr - fir_addr % CACHE_LINE_SIZE;
 				new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
-//					new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
+				new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
 				new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
 				new_line->valid = 1;
 				new_line->pref = 0;
@@ -753,7 +777,7 @@ namespace DRAMSim {
 					{
 						mask2 = addr % CACHE_LINE_SIZE;
 						new_line->offset[mask2].valid = 1;
-						new_line->offset[mask2].pointer = arbitrator->ArbitratorLines[index]->TAG_ + j + 1;
+						new_line->offset[mask2].pointer = arbitrator->ArbitratorLines[index]->TAG_ + j ;
 						new_line->offset[mask2].tag = arbitrator->ArbitratorLines[index]->pe_tag;
 					}
 					else
@@ -765,7 +789,7 @@ namespace DRAMSim {
 						head_addr = addr;
 
 						mask2 = addr % CACHE_LINE_SIZE;
-						new_line->offset[mask2].pointer = arbitrator->ArbitratorLines[index]->TAG_ + j + 1;
+						new_line->offset[mask2].pointer = arbitrator->ArbitratorLines[index]->TAG_ + j ;
 						new_line->offset[mask2].tag = arbitrator->ArbitratorLines[index]->pe_tag;
 						new_line->offset[mask2].valid = 1;
 
@@ -788,11 +812,11 @@ namespace DRAMSim {
 					cout << "vec_tran send from arbitratorline " << index << " to fifo " << endl;
 			}
 		}
+		else if (IsRTran(arbitrator->ArbitratorLines[index]->TAG_)) { DEBUG_ASSERT(false); }
 		else
 		{
 			if (system_parameter.fifoline_num > pre_fifo[bank].size())
 			{
-
 				TabLine* new_line = new TabLine();
 				short addr_offset = arbitrator->ArbitratorLines[index]->ADDR_ % CACHE_LINE_SIZE;
 				new_line->ADDR_ = arbitrator->ArbitratorLines[index]->ADDR_ - addr_offset;
@@ -1118,6 +1142,23 @@ void Lsu::config_in(vector<int> config)
 		}
 	}
 }
+void Lsu::config_in(map<uint, Simulator::Array::Loadstore_element*> lse_map)
+{
+	for (auto &i : lse_map)
+	{
+		if (i.second->getAttr()->vec_mode == Simulator::VecMode::vect) {
+			Vec_Msg msg;
+			msg.pointer = arbitrator->lse2relse[i.second->getAttr()->pointer];
+			msg.step = i.second->getAttr()->step;
+			msg.size = i.second->getAttr()->vec_size;
+			vec_pointer.push_back(msg);
+		}
+		else if (i.second->getAttr()->vec_mode == Simulator::VecMode::vecr) {
+			r_pointer.push_back(arbitrator->lse2relse[i.second->getAttr()->index]);
+		}
+		
+	}
+}
 
 bool Lsu::IsPrefTran(uint32_t pointer)
 {
@@ -1137,6 +1178,16 @@ int Lsu::IsVecTran(uint32_t pointer)
 			return i;
 	}
 	return -1;
+}
+
+bool Lsu::IsRTran(uint32_t pointer)
+{
+	for (int i = 0; i < r_pointer.size(); i++)
+	{
+		if (r_pointer[i] == pointer)
+			return true;
+	}
+	return false;
 }
 
 bool Lsu::addTrans2post(TabLine * line)

@@ -165,18 +165,6 @@ void HgraArray::nextStep1(type_index type_in,uint port)
 							}
 						}
 						else {
-							//pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
-							//if (update_flag) {
-							////	pe_map[index2order[{NodeType::pe, nextLo.node_index}]]->simStep1(nextLo.port_index);
-							//	if (reserved_nodes.size()) {
-							//		for (auto& i : reserved_nodes) {
-							//			pe_map[index2order[i]]->simStep1(nextLo.port_index);
-							//		}
-							//		reserved_nodes.clear();
-							//	}
-							//}
-							//else {
-								//Simulator::Bridge::Location reserved_node = { NodeType::pe, nextLo.node_index,nextLo.port_index };
 								reserved_nodes.push_back(nextLo);
 							//}
 						}
@@ -331,11 +319,6 @@ void HgraArray::pe_update(uint config_index) {
 		for (uint port = 0; port < Preprocess::Para::getInstance()->getArrayPara().data_outport_breadth + Preprocess::Para::getInstance()->getArrayPara().bool_outport_breadth; ++port) {
 			nextStep1(config_order[config_index], port);
 		}
-		//if()
-////		pe_map[order2index[i].second]->simStep2();//´ÓÐ´µÄµÚÒ»¸öÀ´·Ã
-//		pe_map[order2index[config_index].second]->simBp();
-//		for (uint port = 0; port < Preprocess::Para::getInstance()->getArrayPara().bool_inport_breadth + Preprocess::Para::getInstance()->getArrayPara().data_inport_breadth; port++)
-//			bridge.setBp(pe_map[order2index[config_index].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[config_index].second]->getAttr()->index, port);
 	}
 }
 
@@ -385,11 +368,6 @@ void HgraArray::run()
 					}
 					//pe_map[order2index[i].second]->getInbuffer();
 					Simulator::Array::Buffer *buffer = pe_map[5]->getInbuffer();
-					//if()
-			////		pe_map[order2index[i].second]->simStep2();//´ÓÐ´µÄµÚÒ»¸öÀ´·Ã
-			//		pe_map[order2index[i].second]->simBp();
-			//		for (uint port = 0; port < system_para.bool_inport_breadth+ system_para.data_inport_breadth; port++)
-			//			bridge.setBp(pe_map[order2index[i].second]->thispe_bp[port], NodeType::pe, pe_map[order2index[i].second]->getAttr()->index, port);
 				}
 				else if (config_order[i].type == NodeType::ls) {
 					for (uint port = 0; port < system_para.le_dataout_breadth + system_para.le_boolout_breadth; ++port) {
@@ -499,12 +477,6 @@ void HgraArray::run()
 				Debug::getInstance()->getPortFile() << "clk" << clk << std::endl;
 				break;
 			}
-			//if (reserved_nodes.size()) {
-			//	for (auto& i : reserved_nodes) {
-			//		pe_map[index2order[{i.type,i.node_index}]]->simStep1(i.port_index);
-			//	}
-			//	reserved_nodes.clear();
-			//}
 			ClkDomain::getInstance()->selfAdd();
 		}
 	}

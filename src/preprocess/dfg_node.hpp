@@ -180,9 +180,13 @@ namespace Simulator::Preprocess
 		bool match;
 		vector<Input> input_vec;
 		Cord manual_placement;
+		VecMode vec_mode;
+		uint pointer;
+		uint step;
+		uint vec_size;
 
 		DFGNode(uint index_, LSMode ls_mode_, bool tag_bind_, bool dae_, uint fifo_step_, BufferSize size_,
-			bool match_, vector<Input> input_vec_, Cord manual_placement_)
+			bool match_, vector<Input> input_vec_, Cord manual_placement_,VecMode vec_mode_ = VecMode::null,uint pointer_=0, uint step_ = 0, uint thesize_=0)
 			: index(index_)
 			, ls_mode(ls_mode_)
 			, tag_bind(tag_bind_)
@@ -192,6 +196,10 @@ namespace Simulator::Preprocess
 			, match(match_)
 			, input_vec(input_vec_)
 			, manual_placement(std::move(manual_placement_))
+			,vec_mode(vec_mode_)
+			,pointer(pointer_)
+			,step(step_)
+			,vec_size(thesize_)
 		{
 		}
 

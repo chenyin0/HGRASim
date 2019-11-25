@@ -3,12 +3,12 @@
 
 using namespace DRAMSim;
 
-Cache::Cache()
+Cache::Cache(const Simulator::Preprocess::ArrayPara para):Node(para)
 {
 	//state = 0;
-	if (Simulator::Array::ClkDomain::getInstance()->getClk() >= Simulator::Array::Debug::getInstance()->print_file_begin && Simulator::Array::ClkDomain::getInstance()->getClk() < Simulator::Array::Debug::getInstance()->print_file_end)
-		print_screen = false;
-	bus_enable = 1;
+	//if (Simulator::Array::ClkDomain::getInstance()->getClk() >= Simulator::Array::Debug::getInstance()->print_file_begin && Simulator::Array::ClkDomain::getInstance()->getClk() < Simulator::Array::Debug::getInstance()->print_file_end)
+	//	print_screen = false;
+	//system_parameter.bus_enable = 1;
 	cache_allhit = 0;
 	misscounter = 0;
 	non_pref_miss = 0;
@@ -116,7 +116,7 @@ bool Cache::do_lookup(uint32_t addr)
 				counter[bank][lineWay][lineIndex] = CACHE_WAYS_NUM - 1;
 			}
 		}
-		if (print_screen)
+		if (system_parameter.print_screen)
 			cout << "cache hit!" << endl;
 
 		break;
@@ -236,7 +236,7 @@ void Cache::do_replacement(uint32_t addr)   //还需要检查UPDATE位，看是�
 
 void Cache::do_readhit(uint32_t addr)
 {
-	if (print_screen)
+	if (system_parameter.print_screen)
 	{
 		uint32_t bank = (addr & BANK_BITS) >> ADDR_BANK;
 		uint32_t lineIndex = (addr & INDEX_BITS) >> ADDR_INDEX;
@@ -292,7 +292,7 @@ void Cache::do_writehit(uint32_t addr)
 															   //printf("hit and write data %x \n",CacheTopoFindWord[lineWay][lineIndex][lineWord]);
 
 															   //std::cout << "write data " << hex << CacheTopoFindWord[i][lineIndex][lineWord] << std::endl;
-	if (print_screen)
+	if (system_parameter.print_screen)
 	{
 		cout << "打印第  " << lineIndex << " 组cache中的tag和update " << endl;
 		for (int i = 0; i < CACHE_WAYS_NUM; i++)
@@ -320,11 +320,11 @@ void Cache::do_writeback(uint32_t ReplaceWay, uint32_t lineIndex, uint32_t bank)
 	//整个块的回写
 	//printf("write back.\n");
 	lsunit->cachefile << "write back" << endl;
-	if (!bus_enable)
+	if (!system_parameter.bus_enable)
 	{
 		lsunit->mem->addTransaction(true, (uint64_t(RepAdr) << 2));
 	}
-	else if (bus_enable)
+	else if (system_parameter.bus_enable)
 	{
 		Bus_Tran tran;
 		tran.addr = (uint64_t(RepAdr) << 2);
@@ -339,11 +339,11 @@ void Cache::do_writeback(uint32_t ReplaceWay, uint32_t lineIndex, uint32_t bank)
 void Cache::do_writethrough(uint32_t addr)
 {
 	//cycle = cycle + WRITETHROUGH_DELAY;
-	if (!bus_enable)
+	if (!system_parameter.bus_enable)
 	{
 		lsunit->mem->addTransaction(true, (uint64_t(addr) << 2));
 	}                                                                       //注意writethrough和writeback产生的callback！
-	else if (bus_enable)
+	else if (system_parameter.bus_enable)
 	{
 		Bus_Tran tran;
 		tran.addr = (uint64_t(addr) << 2);
@@ -429,7 +429,7 @@ void Cache::update()                                           //利用宏实现
 				lookup_trans[i].cycle = 0;
 				hitfifo[i].push_back(lookup_trans[i]);
 				lookup_trans[i].valid = 0;
-				if (print_screen)
+				if (system_parameter.print_screen)
 				{
 					//cout << "addr " << lookup_trans.addr << " hit!" << endl;
 				}
@@ -478,42 +478,23 @@ void Cache::update()                                           //利用宏实现
 						if (do_lookup(hitfifo[i].front().addr))    //若命中
 						{
 							state[i] = 0;
-							if (lsunit->MSHR_STATE == 3)
+							if (hitfifo[i].front().rdwr)
 							{
-								lsunit->MSHR_STATE = 1;
+								lsunit->write_hit_complete(hitfifo[i].front().addr);
+								do_writehit(hitfifo[i].front().addr);
+								lsunit->cachefile << "RD Cache hit in Addr " << hitfifo[i].front().addr << " at Mem Cycle " << lsunit->ClockCycle << endl;
 							}
 							else
 							{
-								if (hitfifo[i].front().rdwr)
-								{
-									lsunit->write_hit_complete(hitfifo[i].front().addr);
-									do_writehit(hitfifo[i].front().addr);
-									lsunit->cachefile << "RD Cache hit in Addr " << hitfifo[i].front().addr << " at Mem Cycle " << lsunit->ClockCycle << endl;
-								}
-								else
-								{
-									lsunit->read_hit_complete(hitfifo[i].front().addr);
-									do_readhit(hitfifo[i].front().addr);
-									lsunit->cachefile << "WR Cache hit in Addr " << hitfifo[i].front().addr << " at Mem Cycle " << lsunit->ClockCycle << endl;
-								}
+								lsunit->read_hit_complete(hitfifo[i].front().addr);
+								do_readhit(hitfifo[i].front().addr);
+								lsunit->cachefile << "WR Cache hit in Addr " << hitfifo[i].front().addr << " at Mem Cycle " << lsunit->ClockCycle << endl;
 							}
 							hitfifo[i].pop_back();
 						}
 						else                                        //miss
 						{
-							if (lsunit->MSHR_STATE == 3)
-							{
-								lsunit->post_table[lsunit->miss_index]->complete = 0;
-								lsunit->miss_finished_cnter--;
-								if (lsunit->miss_finished_cnter)
-									lsunit->MSHR_STATE = 2;
-								else
-									lsunit->MSHR_STATE = 0;
-							}
-							//else
-								//lsunit->poped_addr.push_back(hitfifo[i].front().addr);
-
-							if (!bus_enable)
+							if (!system_parameter.bus_enable)
 							{
 								if (!hitfifo[i].front().rdwr)         //只有读请求才能进入MSHR！！！
 								{
@@ -524,27 +505,27 @@ void Cache::update()                                           //利用宏实现
 										transcation->rdwr = lsunit->inflight_reg[i]->rdwr;
 										transcation->transid = lsunit->inflight_reg[i]->transid;
 										transcation->complete = lsunit->inflight_reg[i]->complete;
-										transcation->offset = lsunit->inflight_reg[i]->offset;
+//										transcation->offset = lsunit->inflight_reg[i]->offset;
 //										transcation->offset_4 = lsunit->inflight_reg[i]->offset_4;
 //										transcation->pe_round = lsunit->inflight_reg[i]->pe_round;
 										transcation->pe_tag = lsunit->inflight_reg[i]->pe_tag;
-										transcation->pref = lsunit->inflight_reg[i]->pref;
+//										transcation->pref = lsunit->inflight_reg[i]->pref;
 										transcation->TAG_ = lsunit->inflight_reg[i]->TAG_;
 										transcation->valid = lsunit->inflight_reg[i]->valid;
-										transcation->vec = lsunit->inflight_reg[i]->vec;
+//										transcation->vec = lsunit->inflight_reg[i]->vec;
 										lsunit->pre_fifo[i].push_back(transcation);                                           //table满时返回fifo底部
 									}
 									else
 									{
 										lsunit->mem->addTransaction(hitfifo[i].front().rdwr, uint64_t(hitfifo[i].front().addr << 2));    //一个字4字节，所以左移2位
 										lsunit->poped_addr.push_back(hitfifo[i].front().addr);
-										if (!lsunit->inflight_reg[i]->pref)
-											non_pref_miss++;
+										// if (!lsunit->inflight_reg[i]->pref)
+										// 	non_pref_miss++;
 									}
 								}
 								lsunit->inflight_reg[i]->reset();
 							}
-							else if (bus_enable)
+							else if (system_parameter.bus_enable)
 							{
 								if (!hitfifo[i].front().rdwr)
 									if (!lsunit->addTrans2post(lsunit->inflight_reg[i]))
@@ -554,10 +535,10 @@ void Cache::update()                                           //利用宏实现
 										transcation->rdwr = lsunit->inflight_reg[i]->rdwr;
 										transcation->transid = lsunit->inflight_reg[i]->transid;
 										transcation->complete = lsunit->inflight_reg[i]->complete;
-										transcation->offset = lsunit->inflight_reg[i]->offset;
+//						transcation->offset = lsunit->inflight_reg[i]->offset;
 //										transcation->offset_4 = lsunit->inflight_reg[i]->offset_4;
 //										transcation->pe_round = lsunit->inflight_reg[i]->pe_round;
-										transcation->pe_tag = lsunit->inflight_reg[i]->pe_tag;
+										transcation->pe_tag= lsunit->inflight_reg[i]->pe_tag;
 										transcation->pref = lsunit->inflight_reg[i]->pref;
 										transcation->TAG_ = lsunit->inflight_reg[i]->TAG_;
 										transcation->valid = lsunit->inflight_reg[i]->valid;
@@ -573,8 +554,8 @@ void Cache::update()                                           //利用宏实现
 										lsunit->bus.push_back(tran);
 										lsunit->poped_addr.push_back(hitfifo[i].front().addr);
 										//统计非预取的miss
-										if (!lsunit->inflight_reg[i]->pref)
-											non_pref_miss++;
+										// if (!lsunit->inflight_reg[i]->pref)
+										// 	non_pref_miss++;
 									}
 								lsunit->inflight_reg[i]->reset();
 							}
@@ -606,7 +587,7 @@ void Cache::mem_read_complete(unsigned id, uint64_t address, uint64_t clock_cycl
 	//uint32_t j;
 	//printf("[Callback] read complete from mem: %d 0x%llx cycle=%llu\n", id, address, clock_cycle);
 	uint32_t addr = (uint32_t)address >> 2;                 //字节->字
-	if (print_screen)
+	if (system_parameter.print_screen)
 		std::cout << "[Callback] read complete from mem: " << id << " " << addr << " " << clock_cycle << endl;
 	uint32_t temp1 = 0;
 
@@ -621,7 +602,7 @@ void Cache::mem_write_complete(unsigned id, uint64_t address, uint64_t clock_cyc
 	//uint32_t j;
 	//printf("[Callback] read complete from mem: %d 0x%llx cycle=%llu\n", id, address, clock_cycle);
 	uint32_t addr = (uint32_t)address >> 2;
-	if (print_screen)
+	if (system_parameter.print_screen)
 		std::cout << "[Callback] read complete from mem: " << id << " " << addr << " " << clock_cycle << endl;
 	uint32_t temp1 = 0;
 
@@ -630,7 +611,7 @@ void Cache::mem_write_complete(unsigned id, uint64_t address, uint64_t clock_cyc
 	{
 		if (*it == addr)
 		{
-			if (print_screen)
+			if (system_parameter.print_screen)
 			{
 				cout << "write_back or write_through completed" << endl;
 			}
