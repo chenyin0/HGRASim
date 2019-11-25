@@ -505,7 +505,7 @@ void Cache::update()                                           //利用宏实现
 										transcation->rdwr = lsunit->inflight_reg[i]->rdwr;
 										transcation->transid = lsunit->inflight_reg[i]->transid;
 										transcation->complete = lsunit->inflight_reg[i]->complete;
-//										transcation->offset = lsunit->inflight_reg[i]->offset;
+										transcation->offset = lsunit->inflight_reg[i]->offset;
 //										transcation->offset_4 = lsunit->inflight_reg[i]->offset_4;
 //										transcation->pe_round = lsunit->inflight_reg[i]->pe_round;
 										transcation->pe_tag = lsunit->inflight_reg[i]->pe_tag;
@@ -535,7 +535,7 @@ void Cache::update()                                           //利用宏实现
 										transcation->rdwr = lsunit->inflight_reg[i]->rdwr;
 										transcation->transid = lsunit->inflight_reg[i]->transid;
 										transcation->complete = lsunit->inflight_reg[i]->complete;
-//						transcation->offset = lsunit->inflight_reg[i]->offset;
+										transcation->offset = lsunit->inflight_reg[i]->offset;
 //										transcation->offset_4 = lsunit->inflight_reg[i]->offset_4;
 //										transcation->pe_round = lsunit->inflight_reg[i]->pe_round;
 										transcation->pe_tag= lsunit->inflight_reg[i]->pe_tag;

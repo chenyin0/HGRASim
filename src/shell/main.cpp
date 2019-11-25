@@ -21,8 +21,8 @@ int main()
 	// ÉèÖÃÂ·¾¶
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\break_test.xml)");
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\NW.xml)");
-//	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\MD.xml)");
-	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\DFG_edge_detect.xml)");
+	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\MD.xml)");
+//	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\DFG_edge_detect.xml)");
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\no_balance.xml)");
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\aluin_test.xml)");
 //	GlobalPara::getInstance()->setInputAddr(InputAddr::DFG_xml_addr, R"(.\resource\input\condition.xml)");
@@ -86,8 +86,8 @@ int main()
 	
 //	std::ifstream memoryInFile("");
 //	std::ifstream memoryInFile("resource/input/NW_memoryInFile.txt");
-//	std::ifstream memoryInFile("resource/input/MD_memoryInFile.txt");
-	std::ifstream memoryInFile("resource/input/memoryInFile_edge_detect.txt");
+	std::ifstream memoryInFile("resource/input/MD_memoryInFile.txt");
+//	std::ifstream memoryInFile("resource/input/memoryInFile_edge_detect.txt");
 //	std::ifstream memoryInFile("resource/input/memoryInFileCond.txt");
 	std::ofstream memoryWritefile("resource/output/memorywrite.txt");
 //	memoryInFile.open("memoryInFile.txt");

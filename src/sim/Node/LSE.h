@@ -70,6 +70,7 @@ namespace Simulator::Array
 	public:
 		Loadstore_element(const Preprocess::ArrayPara para, uint index, DRAMSim::Lsu* lsu);
 		friend class Lsebp;
+		friend class Lsu;
 		~Loadstore_element();
 		void simStep2();
 		void simStep1();

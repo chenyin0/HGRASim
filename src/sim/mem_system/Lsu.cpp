@@ -122,15 +122,15 @@ namespace DRAMSim {
 	}
 
 	//利用TAG寻找相应进行动作的tabline
-	bool Arbitrator::AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG)
+	bool Arbitrator::AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t lse_index)
 	{
-		if ((TAG >= system_parameter.lse_num))
+		if ((lse_index >= system_parameter.lse_num))
 		{
-			cout << "error occurs in Arbitrator:: AddTrans, the tag is " << TAG << endl;
+			cout << "error occurs in Arbitrator:: AddTrans, the tag is " << lse2relse[lse_index] << endl;
 			return false;
 		}
 		else
-			return ArbitratorLines[TAG]->AddTrans(input, TAG);
+			return ArbitratorLines[lse2relse[lse_index]]->AddTrans(input, lse2relse[lse_index]);
 	}
 
 
@@ -1148,13 +1148,13 @@ void Lsu::config_in(map<uint, Simulator::Array::Loadstore_element*> lse_map)
 	{
 		if (i.second->getAttr()->vec_mode == Simulator::VecMode::vect) {
 			Vec_Msg msg;
-			msg.pointer = arbitrator->lse2relse[i.second->getAttr()->pointer];
+			msg.pointer = arbitrator->lse2relse[i.second->index];
 			msg.step = i.second->getAttr()->step;
 			msg.size = i.second->getAttr()->vec_size;
 			vec_pointer.push_back(msg);
 		}
 		else if (i.second->getAttr()->vec_mode == Simulator::VecMode::vecr) {
-			r_pointer.push_back(arbitrator->lse2relse[i.second->getAttr()->index]);
+			r_pointer.push_back(arbitrator->lse2relse[i.second->index]);
 		}
 		
 	}
