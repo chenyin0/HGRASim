@@ -55,8 +55,9 @@
         <debugLevel>2</debugLevel>
         <printscreen>false</printscreen>
         <stallMode>none</stallMode>
-        <attachMemory>true</attachMemory>
+        <attachMemory>false</attachMemory>
         <maxClk>500000</maxClk>
+        <profiling>true</profiling>
         <maxMemoryDepth>100000</maxMemoryDepth>
         
     </array>

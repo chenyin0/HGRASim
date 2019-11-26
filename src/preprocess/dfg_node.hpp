@@ -73,6 +73,7 @@ namespace Simulator::Preprocess
 		InputBypass input_bypass;
 		vector<InBufferFrom> inbuffer_from;
 		CondMode cond_mode;
+		bool key_cal;
 		//DFGNode(uint index_, PEOpcode opcode_, ControlMode control_mode_, LocalregFrom lr_from_,
 		//	vector<AluInFrom> alu_in_from_, vector<OutBufferFrom> ob_from_, vector<OutputFrom> output_from_,
 		//	vector<Input> input_vec_, int reg_, Cord manual_placement_)
@@ -90,7 +91,7 @@ namespace Simulator::Preprocess
 		//}
 		DFGNode(uint index_, PEOpcode opcode_, ControlMode control_mode_,
 		vector<OutputFrom> output_from_,vector<Input> input_vec_, vector<int> reg_vec_, Cord manual_placement_, 
-		vector<BufferMode> buffer_mode_, InputBypass input_bypass_, vector<InBufferFrom> inbuffer_from_)
+		vector<BufferMode> buffer_mode_, InputBypass input_bypass_, vector<InBufferFrom> inbuffer_from_,bool key_cal_=false)
 		: index(index_)
 		, opcode(opcode_)
 		, control_mode(control_mode_)
@@ -101,6 +102,7 @@ namespace Simulator::Preprocess
 		, buffer_mode(buffer_mode_)
 		, input_bypass(input_bypass_)
 		, inbuffer_from(inbuffer_from_)
+		, key_cal(key_cal_)
 		{
 		}
 

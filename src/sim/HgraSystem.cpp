@@ -79,6 +79,7 @@ HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_g
 	for (auto& lse : lse_map)
 		lse.second->attachLsu(lsu);
 	match_set = new Match_set(system_para, lse_map);
+	total_key_pe = number_key_pe();
 }
 
 HgraArray::~HgraArray()
@@ -472,7 +473,7 @@ void HgraArray::run()
 				}
 				else { DEBUG_ASSERT(false); }
 			}
-
+			calc_data();
 			if (task_finish) {
 				Debug::getInstance()->getPortFile() << "clk" << clk << std::endl;
 				break;
@@ -692,7 +693,7 @@ void HgraArray::run()
 				else { DEBUG_ASSERT(false); }
 			}
 
-
+			calc_data();
 			if (task_finish) {
 				Debug::getInstance()->getPortFile() << "clk" << clk << std::endl;
 				break;
@@ -701,6 +702,7 @@ void HgraArray::run()
 			ClkDomain::getInstance()->selfAdd();
 		}
 	}
+	
 	Debug::getInstance()->getPortFile() << "clk" << clk << std::endl;
 	for (const auto& single_out : data_flow) {
 		uint pr_ct = 0;
@@ -726,6 +728,7 @@ void HgraArray::run()
 			}
 		}
 	}
+	std::cout << "pe ultilization:" << float(pe_ulti_cnt) / float(total_key_pe* clk) << endl;
 }
 
 void HgraArray::sendBpOut(Simulator::NodeType type, uint index)
@@ -748,6 +751,27 @@ void HgraArray::sendBpOut(Simulator::NodeType type, uint index)
 		for (uint i = 0; i < lse_map[index]->this_bp.size(); i++)
 			bridge.setBp(lse_map[index]->this_bp[i], NodeType::ls, lse_map[index]->getAttr()->index, i);
 	}
+}
+void HgraArray::calc_data()
+{
+	for (auto& pe : pe_map)
+	{
+		if (pe.second->alu_busy()&& pe.second->attribution->key_cal) {
+			pe_ulti_cnt++;
+		}
+	}
+}
+
+uint HgraArray::number_key_pe()
+{
+	uint cnt=0;
+	for (auto& pe : pe_map)
+	{
+		if (pe.second->attribution->key_cal) {
+			cnt++;
+		}
+	}
+	return cnt;
 }
 
 

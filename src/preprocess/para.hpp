@@ -15,6 +15,7 @@ namespace Simulator::Preprocess
 		uint debug_level;
 		bool print_screen;
 		bool attach_memory;
+		bool profiling;
 		uint maxclk;
 		uint max_memory_depth;
 		stallType stall_mode;

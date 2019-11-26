@@ -85,9 +85,11 @@ namespace Simulator::Array
 	//	friend class Pro;
 		bool stall_one;
 		bool all_comb;
+		uint ulti_cnt;
 		Processing_element(const Preprocess::ArrayPara para, uint index);
 		~Processing_element();
 		void update();
+		bool alu_busy();
 		void simStep3();
 		void bufferprint();
 		void simStep2();

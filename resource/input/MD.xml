@@ -428,7 +428,7 @@
         <placement cord="[0, 1]"/>
     </node>
 
-    <node type="pe" index="25" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="25" opcode="mul" controlMode="data_flow" >
         <inner_connection 
             buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer" buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
             input_bypass="inbuffer" output_from="outbuffer"/>

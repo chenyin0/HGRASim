@@ -151,8 +151,10 @@ namespace Simulator::Preprocess
 	{
 		// attributes
 		uint index = std::stoi(node_xml_->FindAttribute("index")->Value());
+		bool key_cal = false;
 		PEOpcode opcode = PEOpcodeConverter::toEnum(node_xml_->FindAttribute("opcode")->Value());
 		ControlMode control_mode = ControlModeConverter::toEnum(node_xml_->FindAttribute("controlMode")->Value());
+	//	bool key_cal = static_cast<string>(node_xml_->FindAttribute("controlMode")->Value()) == string("true");
 	//	InputBypass input_bypass= InputBypassConverter::toEnum(node_xml_->FindAttribute("input_bypass")->Value());
 		// inner connection
 		XMLElement* inner_connection_xml = node_xml_->FirstChildElement("inner_connection");
@@ -234,7 +236,10 @@ namespace Simulator::Preprocess
 		// build
 		//DFGNode<NodeType::pe>* ptr = new DFGNode<NodeType::pe>(index, opcode, control_mode, lr_from, alu_in_from, 
 		//	ob_from, output_from, input_vec, reg_value, manual_cord);
-		DFGNode<NodeType::pe>* ptr = new DFGNode<NodeType::pe>(index, opcode, control_mode, output_from, input_vec, reg_vec, manual_cord, buffer_mode,input_bypass,inbuffer_from);
+		if (node_xml_->FindAttribute("key_cal")) {
+			key_cal = static_cast<string>(node_xml_->FindAttribute("key_cal")->Value()) == string("true");
+		}
+		DFGNode<NodeType::pe>* ptr = new DFGNode<NodeType::pe>(index, opcode, control_mode, output_from, input_vec, reg_vec, manual_cord, buffer_mode, input_bypass, inbuffer_from, key_cal);
 		return dynamic_cast<DFGNodeInterface*>(ptr);
 	}
 
@@ -429,6 +434,7 @@ namespace Simulator::Preprocess
 		_array_para.tagbits = std::stoi(array_xml->FirstChildElement("tagbits")->GetText());
 		_array_para.overlap_print = (array_xml->FirstChildElement("overlap_print")->GetText() == string("true"));//=true不能正确判断，需要用string做类型转换
 		_array_para.bus_enable = (array_xml->FirstChildElement("bus_enable")->GetText() == string("true"));
+		_array_para.profiling = (array_xml->FirstChildElement("profiling")->GetText() == string("true"));
 		_array_para.bus_delay = std::stoi(array_xml->FirstChildElement("bus_delay")->GetText());
 		_array_para.print_bus = (array_xml->FirstChildElement("print_bus")->GetText() == string("true"));
 

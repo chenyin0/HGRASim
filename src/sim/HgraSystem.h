@@ -42,6 +42,9 @@ namespace Simulator::Array
 		DRAMSim::MultiChannelMemorySystem* mem;
 		vector<type_index> config_order;
 		uint clk;
+		uint pe_ulti;
+		uint pe_ulti_cnt;
+		uint total_key_pe;
 		vector<Simulator::Bridge::Location> reserved_nodes;
 		std::map<uint, std::pair<NodeType, uint>> order2index;//config_order转换成pe_map中的以pe_map的index为索引的元素
 		std::map< std::pair<NodeType, uint>,uint> ele2order;
@@ -59,6 +62,8 @@ namespace Simulator::Array
 		bool update_flag = false;
 		const char* maps[7] = { "pe","fg","ls","lv","lc","null","begin" };
 		void run();
+		void calc_data();
+		uint number_key_pe();
 		void pe_update(uint);
 		void nextStep1(type_index type_in,uint port);
 		void reverseStep1(type_index type_in, uint port);

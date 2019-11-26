@@ -57,7 +57,7 @@
 
     <!-- div的功能仿真暂时没有？ -->
 
-    <node type="pe" index="11" opcode="add" controlMode="data_flow">
+    <node type="pe" index="11" opcode="add" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
