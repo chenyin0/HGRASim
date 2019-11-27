@@ -259,7 +259,7 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 	{
 		for (uint i = 0; i < pe_map[index]->output_port.size(); i++) {
 			bridge.setNextInput(pe_map[index]->output_port[i], NodeType::pe, pe_map[index]->getAttr()->index, i);
-			if (clk> Debug::getInstance()->print_screen_begin&&clk < Debug::getInstance()->print_screen_end && pe_map[index]->output_port[i].valid)
+			if (clk> Debug::getInstance()->print_flow_begin&&clk < Debug::getInstance()->print_flow_end && pe_map[index]->output_port[i].valid)
 			{
 				if (pe_map[index]->output_port[i].last)
 					data_flow[make_tuple(NodeType::pe, pe_map[index]->getAttr()->index,i)].push_back(make_tuple(clk, pe_map[index]->output_port[i].value_data, true));
@@ -272,7 +272,7 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 	{
 		for (uint i = 0; i < lc_map[index]->lc_output.size(); i++) {
 			bridge.setNextInput(lc_map[index]->lc_output[i], NodeType::lc, lc_map[index]->getAttr()->index, i);
-			if (clk > Debug::getInstance()->print_screen_begin && clk<Debug::getInstance()->print_screen_end &&lc_map[index]->lc_output[i].valid)
+			if (clk > Debug::getInstance()->print_flow_begin && clk<Debug::getInstance()->print_flow_end &&lc_map[index]->lc_output[i].valid)
 			{
 				if (lc_map[index]->lc_output[i].last)
 					data_flow[make_tuple(NodeType::lc, lc_map[index]->getAttr()->index, i)].push_back(make_tuple(clk, lc_map[index]->lc_output[i].value_data, true));
@@ -289,7 +289,7 @@ bool HgraArray::sendOutput(Simulator::NodeType type, uint index)
 	}
 	else if (type == NodeType::ls) {
 		bridge.setNextInput(lse_map[index]->output_port_2array, NodeType::ls, lse_map[index]->getAttr()->index, 0);
-		if (clk > Debug::getInstance()->print_screen_begin && clk < Debug::getInstance()->print_screen_end && lse_map[index]->output_port_2array.valid)
+		if (clk > Debug::getInstance()->print_flow_begin && clk < Debug::getInstance()->print_flow_end && lse_map[index]->output_port_2array.valid)
 		{
 			if (lse_map[index]->output_port_2array.last)
 				data_flow[make_tuple(NodeType::ls, lse_map[index]->getAttr()->index, 0)].push_back(make_tuple(clk, lse_map[index]->output_port_2array.value_data, true));

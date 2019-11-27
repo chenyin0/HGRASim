@@ -101,6 +101,7 @@ namespace DRAMSim
 	{
 	private:
 		Lsu* lsunit;
+		bool print_enable;
 		//uint32_t line;
 		//uint32_t data;    //数据 读和写  
 		//vector<FIFOLINE *> fifo;

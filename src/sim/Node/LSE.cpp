@@ -491,8 +491,8 @@ void Loadstore_element::leSimStep2NoMem()
 void Loadstore_element::sedSimStep2NoMem()
 {
 	//对于写请求来说，需要实现一个匹配的过程
-	outbuffer->getTagMatchIndex(validDataIndex, 0);
-	couple_se->outbuffer->getTagMatchIndex(validAddrIndex, 0);
+	outbuffer->getTagMatchIndex(validDataIndex, 0,0);
+	couple_se->outbuffer->getTagMatchIndex(validAddrIndex, 0,0);
 	vecs.push_back(std::move(validDataIndex));
 	vecs.push_back(std::move(validAddrIndex));
 	uint clk = ClkDomain::getInstance()->getClk();
@@ -558,7 +558,7 @@ void Loadstore_element::printBuffer()
 			if (attribution->ls_mode == LSMode::load) {
 				Debug::getInstance()->getLseFile() << "--------LE " << attribution->index << " clk " << ClkDomain::getInstance()->getClk() << "--------" << std::endl;
 				inbuffer->print(Debug::getInstance()->getLseFile());
-				outbuffer->print(Debug::getInstance()->getLseFile());
+				outbuffer->print_valid(Debug::getInstance()->getLseFile());
 				//			Debug::getInstance()->getPortFile() << "--------LE " << attribution->index << " clk " << ClkDomain::getInstance()->getClk() << "--------" << std::endl;
 				//			wirePrint();
 	//			Debug::getInstance()->getPortFile() << "--------LE " << attribution->index << " clk " << ClkDomain::getInstance()->getClk() << "--------" << std::endl;
@@ -567,7 +567,7 @@ void Loadstore_element::printBuffer()
 			else {
 				Debug::getInstance()->getLseFile() << "--------SE " << attribution->index << " clk " << ClkDomain::getInstance()->getClk() << "--------" << std::endl;
 				inbuffer->print(Debug::getInstance()->getLseFile());
-				outbuffer->print(Debug::getInstance()->getLseFile());
+				outbuffer->print_valid(Debug::getInstance()->getLseFile());
 				//			Debug::getInstance()->getPortFile() << "--------SE " << attribution->index << " clk " << ClkDomain::getInstance()->getClk() << "--------" << std::endl;
 				//			wirePrint();
 			}
@@ -648,6 +648,28 @@ void Loadstore_element::wirePrint()
 		}
 	}
 }
+void Loadstore_element::value_update(uint &update_tag,const uint &last_tag)
+{
+	update_tag = last_tag + 1;
+
+	switch (attribution->size)
+	{
+	case BufferSize::small:
+		if (last_tag == system_parameter.le_outbuffer_depth_small-1)
+			update_tag = 0;
+		break;
+
+	case BufferSize::middle:
+		if (last_tag == system_parameter.le_outbuffer_depth_middle-1)
+			update_tag = 0;
+		break;
+
+	case BufferSize::large:
+		if (last_tag == system_parameter.le_outbuffer_depth_large-1)
+			update_tag = 0;
+		break;
+	}
+}
 void Loadstore_element::sedSimStep2()
 {
 	uint clk = ClkDomain::getInstance()->getClk();
@@ -657,13 +679,12 @@ void Loadstore_element::sedSimStep2()
 			outbuffer->resetTag(sended_tag);
 			coupleSeReset(sended_tag);
 			nextlsu_bp = false;
+			value_update(first_seektag,sended_tag);
 		}
-	//	nextlsu_bp = false;
-		
 	}
 	//对于写请求来说，需要实现一个匹配的过程
-	outbuffer->getTagMatchIndex(validDataIndex, 0);
-	couple_se->outbuffer->getTagMatchIndex(validAddrIndex, 0);
+	outbuffer->getTagMatchIndex(validDataIndex, 0, first_seektag);
+	couple_se->outbuffer->getTagMatchIndex(validAddrIndex, 0, first_seektag);
 	vecs.push_back(std::move(validDataIndex));
 	vecs.push_back(std::move(validAddrIndex));
 
@@ -686,6 +707,7 @@ void Loadstore_element::sedSimStep2()
 		{
 			outbuffer->resetTag(match_tag);
 			coupleSeReset(match_tag);
+			value_update(first_seektag, match_tag);
 		}
 		else if (couple_se->output_port_2array.last || output_port_2array.last)
 		{
@@ -694,6 +716,7 @@ void Loadstore_element::sedSimStep2()
 			output_port_2array.last = true;
 			outbuffer->resetTag(match_tag);
 			coupleSeReset(match_tag);
+			value_update(first_seektag, match_tag);
 		}
 		else
 		{
@@ -821,7 +844,7 @@ void Match_set::update()
 	for (uint i = 0; i < lse_set.size(); i++)
 	{
 		vector<uint> temp;
-		lse_set[i]->outbuffer->getTagMatchIndex(temp, 0);
+		lse_set[i]->outbuffer->getTagMatchIndex(temp, 0,0);
 		valid_tag_set[i] = std::move(temp);
 	}
 	uint match_tag = Util::findSameValueInVectors<uint>(valid_tag_set);

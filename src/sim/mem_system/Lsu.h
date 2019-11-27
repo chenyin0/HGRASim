@@ -45,6 +45,14 @@ typedef struct bus_tran {
 
 namespace DRAMSim
 {
+#define OUTPUT_LOG
+#ifdef OUTPUT_LOG //输出到文件还是屏幕
+	#define PRINTM(str)  { Simulator::Array::Debug::getInstance()->getlsuFile()<<str<<std::endl; }
+	#define PRINTMN(str) {  Simulator::Array::Debug::getInstance()->getlsuFile() <<str; }
+#else
+	#define PRINTM(str)  if(SHOW_SIM_OUTPUT) { std::cout <<str<<std::endl; }
+	#define PRINTMN(str) if(SHOW_SIM_OUTPUT) { std::cout <<str; }
+#endif
 	class TabLine
 	{
 	private:
@@ -131,6 +139,7 @@ namespace DRAMSim
 		vector<uint> r_pointer;
 		int send_pointer;    //用于指向下一条要发送的请求
 		uint lseSize;
+		bool print_enable;
 		bool PostNotFull();
 	public:
 		Lsu(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map);

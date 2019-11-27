@@ -48,8 +48,9 @@ namespace Simulator::Array
 		virtual void update() = 0;
 		virtual bool isInputSuccess(uint port) = 0;           //”√”⁄ackbp
 		virtual bool isBufferNotEmpty(uint port) = 0;
-		virtual void getTagMatchIndex(vector<uint>& vec, uint port) = 0;
+		virtual void getTagMatchIndex(vector<uint>& vec, uint port,uint tag) = 0;
 		virtual void print(std::ofstream& file);
+		virtual void print_valid(std::ofstream& file);
 
 		Buffer(const Preprocess::ArrayPara para) { system_parameter = para; }
 		virtual ~Buffer() = default;
@@ -101,7 +102,7 @@ namespace Simulator::Array
 		virtual bool isInputSuccess(uint port) override;
 		virtual void update() override;
 		virtual bool isBufferNotEmpty(uint port) override;
-		void getTagMatchIndex(vector<uint>& vec, uint port) override;
+		void getTagMatchIndex(vector<uint>& vec, uint port,uint tag) override;
 	};
 
 	class Bufferpe_in: public Buffer_in
@@ -167,7 +168,7 @@ namespace Simulator::Array
 		bool isInputSuccess(uint port) override;
 		void update() override;
 		bool isBufferNotEmpty(uint port) override;
-		void getTagMatchIndex(vector<uint>& vec, uint port) override;
+		void getTagMatchIndex(vector<uint>& vec, uint port,uint tag) override;
 	};
 
 	class Bufferlse_out:public Buffer_out

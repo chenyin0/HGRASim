@@ -7,7 +7,7 @@ Cache::Cache(const Simulator::Preprocess::ArrayPara para):Node(para)
 {
 	//state = 0;
 	//if (Simulator::Array::ClkDomain::getInstance()->getClk() >= Simulator::Array::Debug::getInstance()->print_file_begin && Simulator::Array::ClkDomain::getInstance()->getClk() < Simulator::Array::Debug::getInstance()->print_file_end)
-	//	print_screen = false;
+	//	system_parameter.print_screen = false;
 	//system_parameter.bus_enable = 1;
 	cache_allhit = 0;
 	misscounter = 0;
@@ -116,8 +116,8 @@ bool Cache::do_lookup(uint32_t addr)
 				counter[bank][lineWay][lineIndex] = CACHE_WAYS_NUM - 1;
 			}
 		}
-		if (system_parameter.print_screen)
-			cout << "cache hit!" << endl;
+		if (print_enable)
+			PRINTM("cache hit!");
 
 		break;
 	}
@@ -236,7 +236,7 @@ void Cache::do_replacement(uint32_t addr)   //还需要检查UPDATE位，看是�
 
 void Cache::do_readhit(uint32_t addr)
 {
-	if (system_parameter.print_screen)
+	if (print_enable)
 	{
 		uint32_t bank = (addr & BANK_BITS) >> ADDR_BANK;
 		uint32_t lineIndex = (addr & INDEX_BITS) >> ADDR_INDEX;
@@ -244,10 +244,10 @@ void Cache::do_readhit(uint32_t addr)
 		uint32_t lineWord = (addr & WORD_BITS) >> ADDR_WORD;
 		uint32_t lineWay;
 
-		cout << "打印第  " << lineIndex << " 组cache中的tag和update " << endl;
+		PRINTM( "打印第  " << lineIndex << " 组cache中的tag和update ");
 		for (int i = 0; i < CACHE_WAYS_NUM; i++)
 		{
-			cout << CacheTopology[bank][i][lineIndex] << " " << i << "way" << endl;
+			PRINTM(CacheTopology[bank][i][lineIndex] << " " << i << "way");
 		}
 	}
 }
@@ -276,7 +276,7 @@ void Cache::do_writehit(uint32_t addr)
 	}
 	if (!find && !cache_allhit)
 	{
-		cout << "在hit延时期间命中的块被替换了！" << endl;
+		PRINTM("在hit延时期间命中的块被替换了！");
 		system("pause");
 	}
 
@@ -292,12 +292,12 @@ void Cache::do_writehit(uint32_t addr)
 															   //printf("hit and write data %x \n",CacheTopoFindWord[lineWay][lineIndex][lineWord]);
 
 															   //std::cout << "write data " << hex << CacheTopoFindWord[i][lineIndex][lineWord] << std::endl;
-	if (system_parameter.print_screen)
+	if (print_enable)
 	{
-		cout << "打印第  " << lineIndex << " 组cache中的tag和update " << endl;
+		PRINTM("打印第  " << lineIndex << " 组cache中的tag和update ");
 		for (int i = 0; i < CACHE_WAYS_NUM; i++)
 		{
-			cout << CacheTopology[bank][i][lineIndex] << " i way" << endl;
+			PRINTM(CacheTopology[bank][i][lineIndex] << " i way");
 		}
 	}
 }
@@ -407,7 +407,8 @@ void Cache::update()                                           //利用宏实现
 	if (hitfifo.size())
 	lsunit->cachefile << "hit_fifo size = " << hitfifo.size() << "and the front is " << hitfifo.front().addr << hitfifo.front().cycle << endl;
 	*/
-
+	print_enable = system_parameter.print_screen && Simulator::Array::ClkDomain::getInstance()->getClk() >= Simulator::Array::Debug::getInstance()->print_screen_begin
+		&& Simulator::Array::ClkDomain::getInstance()->getClk() < Simulator::Array::Debug::getInstance()->print_screen_end;
 	for (int i = 0; i < CACHE_BANK; i++)
 	{
 		if (state[i] == 0)
@@ -429,7 +430,7 @@ void Cache::update()                                           //利用宏实现
 				lookup_trans[i].cycle = 0;
 				hitfifo[i].push_back(lookup_trans[i]);
 				lookup_trans[i].valid = 0;
-				if (system_parameter.print_screen)
+				if (print_enable)
 				{
 					//cout << "addr " << lookup_trans.addr << " hit!" << endl;
 				}
@@ -587,8 +588,8 @@ void Cache::mem_read_complete(unsigned id, uint64_t address, uint64_t clock_cycl
 	//uint32_t j;
 	//printf("[Callback] read complete from mem: %d 0x%llx cycle=%llu\n", id, address, clock_cycle);
 	uint32_t addr = (uint32_t)address >> 2;                 //字节->字
-	if (system_parameter.print_screen)
-		std::cout << "[Callback] read complete from mem: " << id << " " << addr << " " << clock_cycle << endl;
+	if (print_enable)
+		PRINTM("[Callback] read complete from mem: " << id << " " << addr << " " << clock_cycle);
 	uint32_t temp1 = 0;
 
 	do_replacement(addr);                                //从mem读完成后才进行替换！
@@ -602,8 +603,8 @@ void Cache::mem_write_complete(unsigned id, uint64_t address, uint64_t clock_cyc
 	//uint32_t j;
 	//printf("[Callback] read complete from mem: %d 0x%llx cycle=%llu\n", id, address, clock_cycle);
 	uint32_t addr = (uint32_t)address >> 2;
-	if (system_parameter.print_screen)
-		std::cout << "[Callback] read complete from mem: " << id << " " << addr << " " << clock_cycle << endl;
+	if (print_enable)
+		PRINTM("[Callback] read complete from mem: " << id << " " << addr << " " << clock_cycle);
 	uint32_t temp1 = 0;
 
 	bool misstrans = 1;
@@ -611,9 +612,9 @@ void Cache::mem_write_complete(unsigned id, uint64_t address, uint64_t clock_cyc
 	{
 		if (*it == addr)
 		{
-			if (system_parameter.print_screen)
+			if (print_enable)
 			{
-				cout << "write_back or write_through completed" << endl;
+				PRINTM("write_back or write_through completed");
 			}
 			misstrans = 0;
 			WB_table.erase(it);

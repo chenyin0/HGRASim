@@ -19,7 +19,7 @@ namespace Simulator::Array
 		//输入输出端口超过这两类时在子类中扩展
 
 	public:
-		explicit Node(const Preprocess::ArrayPara para);    //读取system.xml来确定输入输出类型
+		explicit Node(const Preprocess::ArrayPara &para);    //读取system.xml来确定输入输出类型
 		//virtual void print() = 0;
 		virtual ~Node() = default;
 		virtual void getInput(uint port, Port_inout input) = 0;

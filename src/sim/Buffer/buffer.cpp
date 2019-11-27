@@ -5,36 +5,7 @@ using namespace Simulator::Array;
 void Buffer::print(std::ofstream& file)
 {
 	file << "----Buffer Element----" << std::endl;
-	//file.width(15);
 	file <<std::setw(20)<< "valid control data bool" << std::endl;
-	//file << std::setw(10) << "valid0";
-	//file << std::setw(10) << "control0";
-	//file << std::setw(10) << "data0";
-	//file << std::setw(10) << "bool0";
-	//file << std::setw(10) << "valid1";
-	//file << std::setw(10) << "control1";
-	//file << std::setw(10) << "data1";
-	//file << std::setw(10) << "bool1";
-	//file << std::setw(10) << "valid2";
-	//file << std::setw(10) << "control2";
-	//file << std::setw(10) << "data2";
-	//file << std::setw(10) << "bool2";
-
-
-		
-	//file << std::endl;
-	//for (uint i = 0; i < entity.size(); i++)
-	//{
-	//	for (uint j = 0; j < entity[i].size(); j++)
-	//	{
-	//		file << std::setw(10) << entity[i][j].valid;
-	//		file << std::setw(9) << entity[i][j].condition << entity[i][j].last;
-	//		file << std::setw(10) << entity[i][j].valued;
-	//		file << std::setw(10) << entity[i][j].valueb;
-	//	}
-	//	file << std::endl;
-	//}
-//	file << std::endl;;
 	for (uint i = 0; i < entity.size(); i++)
 	{
 		for (uint j = 0; j < entity[i].size(); j++)
@@ -48,6 +19,31 @@ void Buffer::print(std::ofstream& file)
 		file << std::endl;	
 	}
 	file << "head_ptr" << head_ptr[0] ;
+	file << std::endl;
+}
+
+void Buffer::print_valid(std::ofstream& file)
+{
+	file << "----Buffer Element----" << std::endl;
+	file << std::setw(20) << "valid control data bool" << std::endl;
+	for (uint i = 0; i < entity.size(); i++)
+	{
+		bool some_valid = false;
+		for (uint j = 0; j < entity[i].size(); j++)
+		{
+			if (entity[i][j].valid) {
+				file << "bufferdep" <<i<< std::setw(2) << entity[i][j].valid;
+				file << std::setw(4) << entity[i][j].condition << entity[i][j].last;
+				file << std::setw(7) << entity[i][j].valued;
+				file << std::setw(4) << entity[i][j].valueb;
+				some_valid = true;
+				file << "      ";
+			}
+		}
+		if(some_valid)
+			file << std::endl;
+	}
+	file << "head_ptr" << head_ptr[0];
 	file << std::endl;
 }
  
@@ -302,7 +298,7 @@ bool Buffer_in::isBufferNotEmpty(uint port)
 	return !port_empty[port];
 }
 
-void Buffer_in::getTagMatchIndex(vector<uint>& vec, uint port)
+void Buffer_in::getTagMatchIndex(vector<uint>& vec, uint port,uint tag)
 {
 	DEBUG_ASSERT(true);
 }
@@ -590,13 +586,26 @@ bool Buffer_out::isBufferNotEmpty(uint port)
 	return !port_empty[port];
 }
 
-void Buffer_out::getTagMatchIndex(vector<uint>& vec, uint port)
+void Buffer_out::getTagMatchIndex(vector<uint>& vec, uint port,uint tag)
 {
-	for(uint i = 0; i < entity.size(); i++)
-	{
+	uint i = tag;
+	if (entity[i][port].valid)
+		vec.push_back(i);
+	i++;
+	if (i == depth)
+		i = 0;
+	while (i != tag) {
 		if (entity[i][port].valid)
 			vec.push_back(i);
+		i++;
+		if (i == depth)
+			i = 0;
 	}
+	//for(uint i = 0; i < entity.size(); i++)
+	//{
+	//	if (entity[i][port].valid)
+	//		vec.push_back(i);
+	//}
 }
 
 

@@ -28,6 +28,7 @@ namespace Simulator::Array
 		bool wait_for_data;
 		uint index;
 		uint match_tag;
+		uint first_seektag;
 		bool addr_v = true;
 		Port_inout outport;
 		Port_inout lastout;
@@ -77,6 +78,7 @@ namespace Simulator::Array
 		void simStep1(uint i);
 		void simBp();
 		void print();
+		void value_update(uint &update_tag,const uint &last_tag);
 		void printBuffer();
 		void lseReset();
 		void wireReset();

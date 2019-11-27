@@ -11,6 +11,7 @@ namespace Simulator::Array
 		std::ofstream regfile;
 		std::ofstream portfile;
 		std::ofstream lseRegfile;
+		std::ofstream lsufile;
 		std::ofstream dataFlowfile;
 	public:
 		friend Singleton<Debug>;
@@ -24,6 +25,8 @@ namespace Simulator::Array
 		//file set
 		uint print_file_begin;
 		uint print_file_end;
+		uint print_flow_begin;
+		uint print_flow_end;
 		uint print_file_interval;
 		template<typename T>
 		void onePrint(const T& wire, string name) { ; }
@@ -148,11 +151,12 @@ namespace Simulator::Array
 			portfile << name;
 			portfile << std::endl;
 		}
-		Debug():print_screen_begin(0), print_screen_end(15000), print_screen_interval(1),
-			print_file_begin(0), print_file_end(1000), print_file_interval(1) {
+		Debug():print_screen_begin(1500), print_screen_end(1600), print_flow_begin(0), print_flow_end(500000),print_screen_interval(1),
+			print_file_begin(1450), print_file_end(1600), print_file_interval(1) {
 			const auto& system_para = Preprocess::Para::getInstance()->getArrayPara();
 			debug_level = system_para.debug_level;
-			regfile.open(".\\resource\\output\\DebugReg.txt"); portfile.open(".\\resource\\output\\DebugWire.txt"); lseRegfile.open(".\\resource\\output\\Debuglseout.txt");dataFlowfile.open(".\\resource\\output\\dataflow.txt");
+			regfile.open(".\\resource\\output\\DebugReg.txt"); portfile.open(".\\resource\\output\\DebugWire.txt"); lseRegfile.open(".\\resource\\output\\Debuglseout.txt");
+			dataFlowfile.open(".\\resource\\output\\dataflow.txt"); lsufile.open(".\\resource\\output\\cache_lsu.txt");
 //			regfile.open("F:\\lab\\reconfig\\HGRA5\\resource\\DebugReg.txt"); portfile.open("F:\\lab\\reconfig\\HGRA5\\resource\\DebugWire.txt");
 	//	F:\lab\reconfig\HGRA5\resource
 		}
@@ -168,5 +172,6 @@ namespace Simulator::Array
 		std::ofstream& getPortFile() { return portfile; }
 		std::ofstream& getLseFile() { return lseRegfile;}
 		std::ofstream& getdataFlowFile() { return dataFlowfile; }
+		std::ofstream& getlsuFile() { return lsufile; }
 	};
 }

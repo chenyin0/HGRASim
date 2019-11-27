@@ -44,7 +44,7 @@
         <fifolinen_num>20</fifolinen_num>
         <offset_depth>4</offset_depth>
         <post_offset_depth>8</post_offset_depth>
-        <in_num>4</in_num>
+        <in_num>8</in_num>
         <tagbits>6</tagbits>
         <overlap_print>false</overlap_print>
         <bus_enable>true</bus_enable>
@@ -55,7 +55,7 @@
         <debugLevel>2</debugLevel>
         <printscreen>false</printscreen>
         <stallMode>none</stallMode>
-        <attachMemory>false</attachMemory>
+        <attachMemory>true</attachMemory>
         <maxClk>500000</maxClk>
         <profiling>true</profiling>
         <maxMemoryDepth>100000</maxMemoryDepth>

@@ -240,13 +240,15 @@ namespace Simulator
 			vector<Type> temp = vec_[0];
 			auto curr = temp.begin();
 			while (curr != temp.end()) {
+				bool break_flag = false;
 				for (uint j = 1; j < vec_.size(); j++) {
 					if (std::find(vec_[j].begin(), vec_[j].end(), *curr) == vec_[j].end()) {
 						curr=temp.erase(curr);
+						break_flag = true;
 						break;
 					}
-					else { ++curr; }
 				}
+				if(!break_flag){ ++curr; }
 			}
 			if (temp.size())
 				return temp.front();

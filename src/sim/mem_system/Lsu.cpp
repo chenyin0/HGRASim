@@ -7,7 +7,7 @@
 
 using namespace DRAMSim;
 
-//extern bool print_screen;
+//extern bool system_parameter.print_screen;
 namespace DRAMSim {
 	TabLine::TabLine()
 	{
@@ -79,7 +79,7 @@ namespace DRAMSim {
 	/*	else if (TAG_ >= leNums && TAG_ < (leNums + seNums))
 			se_->callbackACK();*/
 		else
-			cout << "error occurs in ArbitratorLine::returnACK()" << endl;
+			PRINTM("error occurs in ArbitratorLine::returnACK()");
 	}
 
 
@@ -126,7 +126,7 @@ namespace DRAMSim {
 	{
 		if ((lse_index >= system_parameter.lse_num))
 		{
-			cout << "error occurs in Arbitrator:: AddTrans, the tag is " << lse2relse[lse_index] << endl;
+			PRINTM("error occurs in Arbitrator:: AddTrans, the tag is " << lse2relse[lse_index]);
 			return false;
 		}
 		else
@@ -211,6 +211,15 @@ namespace DRAMSim {
 
 	void Lsu::update()   //´ÓºóÍùÇ°£¬²¢¼ÓÈëtimingÐÅÏ¢
 	{
+		print_enable = system_parameter.print_screen && Simulator::Array::ClkDomain::getInstance()->getClk() >= Simulator::Array::Debug::getInstance()->print_screen_begin
+			&& Simulator::Array::ClkDomain::getInstance()->getClk() < Simulator::Array::Debug::getInstance()->print_screen_end;
+		if (print_enable) {
+			PRINTM("--------------------arbitrtor-----------------------");
+			for (auto& i : arbitrator->ArbitratorLines)
+			{
+				PRINTM(i->valid << "_" << i->ADDR_ << "_" << i->pe_tag);
+			}
+		}
 		memset(channel_occupy, 0, system_parameter.lse_num * sizeof(bool));
 		ClockCycle++;
 		mem->update();
@@ -354,6 +363,8 @@ namespace DRAMSim {
 								if (!channel_occupy[post_table[index]->offset[i].pointer])
 								{
 									(arbitrator->ArbitratorLines[post_table[index]->offset[i].pointer]->lse_)->LSEcallback(post_table[index]->ADDR_ + i, ClockCycle, post_table[index]->offset[i].tag);
+									if(print_enable)
+										PRINTM("return mshr data to " << arbitrator->ArbitratorLines[post_table[index]->offset[i].pointer]->lse_->attribution->index << " " << post_table[index]->ADDR_ + i);
 									post_table[index]->offset[i].valid = 0;
 									channel_occupy[post_table[index]->offset[i].pointer] = 1;
 									sended = 1;
@@ -380,6 +391,8 @@ namespace DRAMSim {
 										if (!channel_occupy[post_offset[index][i].offset[j].pointer])
 										{
 											(arbitrator->ArbitratorLines[post_offset[index][i].offset[j].pointer]->lse_)->LSEcallback(post_table[index]->ADDR_ + j, ClockCycle, post_offset[index][i].offset[j].tag);
+											if (print_enable)
+												PRINTM("return mshrpost_offset data to " << arbitrator->ArbitratorLines[post_offset[index][i].offset[j].pointer]->lse_->attribution->index << " " << post_table[index]->ADDR_ + j );
 											post_offset[index][i].offset[j].valid = 0;
 											channel_occupy[post_offset[index][i].offset[j].pointer] = 1;
 											sended = 1;
@@ -451,20 +464,20 @@ namespace DRAMSim {
 					inflight_reg[bank] = pre_fifo[bank].front();                            //ÕýÔÚ·ÃÎÊcacheµÄÇëÇó½øÈëinflight_reg
 					if (!cache->addtranscation(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->rdwr))
 					{
-						cout << "error occurs for cache is busy when add trans!" << endl;
+						PRINTM("error occurs for cache is busy when add trans!");
 						system("pause");
 					}
 					//poped_addr.push_back(pre_fifo.front()->ADDR_);
 					pre_fifo[bank].erase(pre_fifo[bank].begin());
 
-					if (print_screen)
-						cout << "WR transcation poped to cache from fifo " << endl;
+					if (print_enable)
+						PRINTM("WR transcation poped to cache from fifo ");
 				}
 				else
 				{
-					if (print_screen)
+					if (print_enable)
 					{
-						cout << "inflight_reg blocking!" << endl;
+						PRINTM("inflight_reg blocking!");
 					}
 				}
 			}
@@ -480,7 +493,7 @@ namespace DRAMSim {
 							inflight_reg[bank] = pre_fifo[bank].front();                                          //ÕýÔÚ·ÃÎÊcacheµÄÇëÇó½øÈëinflight_reg
 							if (!cache->addtranscation(pre_fifo[bank][0]->ADDR_, pre_fifo[bank][0]->rdwr))
 							{
-								cout << "error occurs for cache is busy when add trans!" << endl;
+								PRINTM("error occurs for cache is busy when add trans!");
 								system("pause");
 							}
 							//poped_addr.push_back(pre_fifo[0]->ADDR_);
@@ -488,9 +501,9 @@ namespace DRAMSim {
 						}
 						else                                                  //blockingµÄÇé¿öÏÂ²»×ö²Ù×÷
 						{
-							if (print_screen)
+							if (print_enable)
 							{
-								cout << "inflight_reg blocking!" << endl;
+								PRINTM("inflight_reg blocking!");
 								//system("pause");
 							}
 						}
@@ -519,20 +532,20 @@ namespace DRAMSim {
 							inflight_reg[bank] = pre_fifo[bank].front();                                                    //ÕýÔÚ·ÃÎÊcacheµÄÇëÇó½øÈëinflight_reg
 							if (!cache->addtranscation(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->rdwr))
 							{
-								cout << "error occurs for cache is busy when add trans!" << endl;
+								PRINTM("error occurs for cache is busy when add trans!");
 								system("pause");
 							}
 							//poped_addr.push_back(pre_fifo.front()->ADDR_);
 							pre_fifo[bank].erase(pre_fifo[bank].begin());
 
-							if (print_screen)
-								cout << "PRF transcation send to cache from table " << endl;
+							if (print_enable)
+								PRINTM("PRF transcation send to cache from table ");
 						}
 						else
 						{
-							if (print_screen)
+							if (print_enable)
 							{
-								cout << "inflight_reg blocking!" << endl;
+								PRINTM("inflight_reg blocking!");
 							}
 						}
 					}
@@ -555,6 +568,8 @@ namespace DRAMSim {
 					{
 						//cbk_addrÔÚ²½³¤Îª1Ê±²ÅÓÐÐ§£¬ÓÃÓÚdebug
 						(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->offset[j].tag);
+						if(print_enable)
+							PRINTM("return inflight_reg data to " << arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_->attribution->index << " " << inflight_reg[bank]->ADDR_ + j);
 						inflight_reg[bank]->offset[j].valid = 0;
 						channel_occupy[inflight_reg[bank]->offset[j].pointer] = 1;
 					}
@@ -590,7 +605,8 @@ namespace DRAMSim {
 	uint32_t cyclepointer = ClockCycle % arbitrator->ArbitratorLines.size();
 	arbitrator->pointer = cyclepointer;
 	uint32_t blank_tabline = system_parameter.fifoline_num - pre_fifo.size();////////////////////20-8??????????????//////////////
-	uint32_t in_num = blank_tabline < system_parameter.in_num ? blank_tabline : system_parameter.in_num;       //ÓÉÓÚvecÇëÇó»á²úÉú¶àÏî£¬²»Ò»¶¨×¼
+//	uint32_t in_num = blank_tabline < system_parameter.in_num ? blank_tabline : system_parameter.in_num;       //ÓÉÓÚvecÇëÇó»á²úÉú¶àÏî£¬²»Ò»¶¨×¼
+	uint32_t in_num = system_parameter.in_num;
 
 
 
@@ -609,7 +625,7 @@ namespace DRAMSim {
 					bool can_add = true;
 					for (uint this_pointer = arbitrator->pointer; this_pointer < arbitrator->pointer + vec_pointer[seek_index].size; this_pointer++)
 					{
-						if (arbitrator->ArbitratorLines[arbitrator->pointer]->valid != 1) {
+						if (arbitrator->ArbitratorLines[this_pointer]->valid != 1) {
 							can_add = false;
 						}
 					}
@@ -635,8 +651,8 @@ namespace DRAMSim {
 		if (arbitrator->pointer == cyclepointer)                             //É¨ÃèÍêÒ»±é£¬½áÊø
 			break;
 	}
-	if (p_order.size() == 0 && print_screen)
-		cout << "no trans moved to table from ArbitratorLine" << endl;
+	if (p_order.size() == 0 && print_enable)
+		PRINTM("no trans moved to table from ArbitratorLine");
 
 
 
@@ -702,11 +718,11 @@ namespace DRAMSim {
 						}
 						else
 						{
-							cout << "error occurs in last_pref!" << endl;
+							PRINTM("error occurs in last_pref!");
 						}
 
-						if (print_screen)
-							cout << "pref send from arbitratorline " << index << " to fifo!" << endl;
+						if (print_enable)
+							PRINTM("pref send from arbitratorline " << index << " to fifo!");
 					}
 				}
 
@@ -807,9 +823,8 @@ namespace DRAMSim {
 					}
 				}
 				pre_fifo[bank].push_back(new_line);                                                   //Ìø³öÑ­»·ºó»¹ÓÐ×îºóÒ»Ìõ
-
-				if (print_screen)
-					cout << "vec_tran send from arbitratorline " << index << " to fifo " << endl;
+				if (print_enable)
+					PRINTM("vec_tran send from arbitratorline " << index << " to fifo ");
 			}
 		}
 		else if (IsRTran(arbitrator->ArbitratorLines[index]->TAG_)) { DEBUG_ASSERT(false); }
@@ -839,8 +854,8 @@ namespace DRAMSim {
 				arbitrator->ArbitratorLines[index]->returnACK();     //take the data and return ACK to LE/SE
 				arbitrator->ArbitratorLines[index]->valid = 0;
 
-				if (print_screen)
-					cout << "trans send from arbitratorline " << index << " to fifo!" << endl;
+				if (print_enable)
+					PRINTM("trans send from arbitratorline " << index << " to fifo!");
 			}
 		}
 
@@ -851,23 +866,23 @@ namespace DRAMSim {
 
 		if (!p_order.empty())
 		{
-			cout << "error occurs for !p_order.empty() after step3!" << endl;
+			PRINTM("error occurs for !p_order.empty() after step3!");
 			cachefile << "error occurs for !p_order.empty() after step3!" << endl;
 		}
 
-		if (print_screen)
+		if (print_enable)
 		{
-			cout << "MSHR_STATE = " << MSHR_STATE << endl;
+			PRINTM("MSHR_STATE = " << MSHR_STATE);
 			if (MSHR_STATE == 1)
 				//cout << "finishing the post_table " << miss_index << endl;
 
-			cout << "------------FIFO-------------" << endl;
+			PRINTM("------------FIFO-------------" );
 			for (int bank = 0; bank < CACHE_BANK; bank++)
 			{
-				cout << "-----BANK " << bank << "-----" << endl;
+				PRINTM("-----BANK " << bank << "-----");
 				for (uint32_t i = 0; i < pre_fifo[bank].size(); i++)
 				{
-					cout << "fifo " << i << " transid " << pre_fifo[bank][i]->transid << " valid =" << pre_fifo[bank][i]->valid << " addr "
+					PRINTM("fifo " << i << " transid " << pre_fifo[bank][i]->transid << " valid =" << pre_fifo[bank][i]->valid << " addr "
 						<< "=" << pre_fifo[bank][i]->ADDR_ <<" offset "<< pre_fifo[bank][i]->offset[0].valid<<" "<< pre_fifo[bank][i]->offset[0].pointer<<" "<< pre_fifo[bank][i]->offset[0].tag
 						<< "  " << pre_fifo[bank][i]->offset[1].valid << " " << pre_fifo[bank][i]->offset[1].pointer << " " << pre_fifo[bank][i]->offset[1].tag
 						<< "  " << pre_fifo[bank][i]->offset[2].valid << " " << pre_fifo[bank][i]->offset[2].pointer << " " << pre_fifo[bank][i]->offset[2].tag
@@ -876,47 +891,47 @@ namespace DRAMSim {
 						<< "  " << pre_fifo[bank][i]->offset[5].valid << " " << pre_fifo[bank][i]->offset[5].pointer << " " << pre_fifo[bank][i]->offset[5].tag
 						<< "  " << pre_fifo[bank][i]->offset[6].valid << " " << pre_fifo[bank][i]->offset[6].pointer << " " << pre_fifo[bank][i]->offset[6].tag
 						<< "  " << pre_fifo[bank][i]->offset[7].valid << " " << pre_fifo[bank][i]->offset[7].pointer << " " << pre_fifo[bank][i]->offset[7].tag
-						<< " rdwr " << "=" << pre_fifo[bank][i]->rdwr << " pointer = " << pre_fifo[bank][i]->TAG_ << " pref = " << pre_fifo[bank][i]->pref << endl;
+						<< " rdwr " << "=" << pre_fifo[bank][i]->rdwr << " pointer = " << pre_fifo[bank][i]->TAG_ << " pref = " << pre_fifo[bank][i]->pref);
 				}
 			}
 
-			cout << "------------INFLIGHT-------------" << endl;
+			PRINTM("------------INFLIGHT-------------" );
 			for (int bank = 0; bank < CACHE_BANK; bank++)
-				cout << "reg " << bank << " transid " << inflight_reg[bank]->transid << " valid =" << inflight_reg[bank]->valid << " addr "
-				<< "=" << inflight_reg[bank]->ADDR_ << " pref = " << inflight_reg[bank]->pref << endl;
+				PRINTM("reg " << bank << " transid " << inflight_reg[bank]->transid << " valid =" << inflight_reg[bank]->valid << " addr "
+				<< "=" << inflight_reg[bank]->ADDR_ << " pref = " << inflight_reg[bank]->pref);
 
 
-			cout << endl << "------------TABLE-------------" << endl;
+			PRINTM(endl << "------------TABLE-------------");
 			for (uint32_t i = 0; i < post_table.size(); i++)
 			{
-				cout << "table " << i << " transid " << post_table[i]->transid << " valid =" << post_table[i]->valid << " addr "
-					<< "=" << post_table[i]->ADDR_ << " rdwr " << "=" << post_table[i]->rdwr << " complete = " << post_table[i]->complete;
-				cout << " offset valid = ";
+				PRINTMN("table " << i << " transid " << post_table[i]->transid << " valid =" << post_table[i]->valid << " addr "
+					<< "=" << post_table[i]->ADDR_ << " rdwr " << "=" << post_table[i]->rdwr << " complete = " << post_table[i]->complete);
+				PRINTMN(" offset valid = ");
 				for (int j = 0; j < system_parameter.post_offset_depth; j++)
 				{
-					cout << post_offset[i][j].valid << " ";
+					PRINTMN(post_offset[i][j].valid << " ");
 				}
-				cout << endl;
+				PRINTMN(endl);
 			}
 
-			cout << "poped_addr size = " << poped_addr.size() << "; ";
+			PRINTMN("poped_addr size = " << poped_addr.size() << "; ");
 			for (vector<uint32_t>::iterator it = poped_addr.begin(); it < poped_addr.end(); it++)
 			{
-				cout << *it << " ";
+				PRINTMN(*it << " ");
 			}
-			cout << endl;
+			PRINTMN(endl);
 
-			cout << "WB_table size = " << cache->WB_table.size() << "; ";
+			PRINTMN("WB_table size = " << cache->WB_table.size() << "; ");
 			for (vector<uint32_t>::iterator it = cache->WB_table.begin(); it < cache->WB_table.end(); it++)
 			{
-				cout << *it << " ";
+				PRINTMN(*it << " ");
 			}
-			cout << endl;
+			PRINTMN(endl);
 
-			cout << "miss_finished_cnter = " << miss_finished_cnter << endl;
+			PRINTM("miss_finished_cnter = " << miss_finished_cnter );
 
-			cout << "----------" << ClockCycle << "CYCLE END----------" << endl;
-			cout << endl;
+			PRINTMN("----------" << ClockCycle << "CYCLE END----------");
+			PRINTM(endl);
 		}
 
 		if (profiling)
@@ -973,6 +988,10 @@ void Lsu::read_hit_complete(uint32_t addr)
 				{
 					//cbk_addrÔÚ²½³¤Îª1Ê±²ÅÓÐÐ§£¬ÓÃÓÚdebug
 					(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->pe_tag);
+					if (print_enable)
+					{
+						PRINTM("return hit data to " << arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_->attribution->index <<" "<< inflight_reg[bank]->ADDR_ + j );
+					}
 					inflight_reg[bank]->offset[j].valid = 0;
 					channel_occupy[inflight_reg[bank]->offset[j].pointer] = 1;
 				}
@@ -998,7 +1017,7 @@ void Lsu::read_hit_complete(uint32_t addr)
 	}
 	else
 	{
-		cout << "error occurs for that readhit trans and inflight reg dont match!" << endl;
+		PRINTM("error occurs for that readhit trans and inflight reg dont match!");
 		system("pause");
 	}
 }
@@ -1014,7 +1033,7 @@ void Lsu::write_hit_complete(uint32_t addr)
 	}
 	else
 	{
-		cout << "error occurs for that writehit trans and inflight reg dont match!" << endl;
+		PRINTM("error occurs for that writehit trans and inflight reg dont match!");
 		system("pause");
 	}
 }
@@ -1050,13 +1069,13 @@ void Lsu::read_miss_complete(uint32_t addr)    //±»¶¯Ê½µÄmiss£¬Í¨ÖªMSHRÖÐµÄÍ¬¿éÇ
 	}
 	if (temp1 < 1)
 	{
-		cout << "prf finished or error occurs in LSUnit::mem_read_complete() for no tableline finished when mem rdcallback " << endl;
-		cout << "returned addr is " << addr << endl;
+		PRINTM("prf finished or error occurs in LSUnit::mem_read_complete() for no tableline finished when mem rdcallback ");
+		PRINTM("returned addr is " << addr );
 		release_poped_addr(addr);   //ÈôÎ´ÕÒµ½£¬ËµÃ÷ÎªprefÇëÇó
 	}
 	else if (temp1 > 1)
 	{
-		cout << "error occurs in LSUnit::mem_read_complete() for more than one tableline finished when mem rdcallback " << endl;
+		PRINTM("error occurs in LSUnit::mem_read_complete() for more than one tableline finished when mem rdcallback ");
 		cachefile << "error occurs in LSUnit::mem_read_complete() for more than one tableline finished when mem rdcallback " << endl;
 	}
 }
@@ -1106,12 +1125,12 @@ void Lsu::bus_update()
 
 		if (system_parameter.print_bus)
 		{
-			cout << "-------fifo-------" << endl;
+			PRINTM("-------fifo-------");
 			for (list<Bus_Tran>::iterator it = bus.begin(); it != bus.end(); it++)
 			{
-				cout << (*it).rdwr << " " << (*it).addr << " " << (*it).cycle << endl;
+				PRINTM((*it).rdwr << " " << (*it).addr << " " << (*it).cycle);
 			}
-			cout << endl;
+			PRINTMN(endl);
 		}
 	}
 }
@@ -1137,7 +1156,7 @@ void Lsu::config_in(vector<int> config)
 		else if ((*it) == 2) {}
 		else
 		{
-			cout << "error occurs in void LSUnit::config_in!" << endl;
+			PRINTM("error occurs in void LSUnit::config_in!");
 			std::system("pause");
 		}
 	}
@@ -1304,7 +1323,7 @@ void Lsu::release_poped_addr(uint32_t addr)
 			return;
 		}
 	}
-	cout << "error occurs in LSUnit::release_poped_addr! addr = " << addr << endl;
+	PRINTM("error occurs in LSUnit::release_poped_addr! addr = " << addr );
 	system("pause");
 }
 }
