@@ -762,7 +762,8 @@ void Processing_element::simStep2()
 }
 bool Processing_element::alu_busy()
 {
-	return (alu->pipeline.size() > 0);
+//	return (alu->pipeline.size() > 0);
+	return (alu->pipeline.size() > 0&&alu->pipeline[0].valid);
 }
 void Processing_element::aluPop()
 {
