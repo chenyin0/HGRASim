@@ -145,6 +145,8 @@ namespace DRAMSim
 		Lsu(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map);
 		~Lsu() ;
 		Cache* cache;
+		uint conflict_times;
+		uint add_times;
 		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint TAG);
 		void AttachMem(DRAMSim::MultiChannelMemorySystem* memory);
 		void update();     //synchronic

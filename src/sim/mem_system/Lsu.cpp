@@ -656,13 +656,14 @@ namespace DRAMSim {
 
 
 
-
+	set<short> exist_banks;
 	while (!p_order.empty())  //table满不能阻止请求进入v_table              
 	{
 		int index = p_order.front();
 		int vec_index;
 		uint32_t addr = arbitrator->ArbitratorLines[index]->ADDR_;
 		short bank = (addr & BANK_BITS) >> ADDR_BANK;
+		//set<short> exist_banks;
 		if (IsPrefTran(arbitrator->ArbitratorLines[index]->TAG_))
 		{
 			if (pre_fifo[bank].size() < system_parameter.fifoline_num)
@@ -799,7 +800,13 @@ namespace DRAMSim {
 					else
 					{
 						pre_fifo[bank].push_back(new_line);
-
+						if (!new_line->rdwr) {
+						//	exist_banks.insert(bank);
+							if (exist_banks.find(bank) != exist_banks.end())
+								conflict_times++;
+							exist_banks.insert(bank);
+							add_times++;
+						}
 						bank = (addr & BANK_BITS) >> ADDR_BANK;
 						new_line = new TabLine();
 						head_addr = addr;
@@ -822,7 +829,14 @@ namespace DRAMSim {
 						transid++;
 					}
 				}
-				pre_fifo[bank].push_back(new_line);                                                   //跳出循环后还有最后一条
+				pre_fifo[bank].push_back(new_line);
+				if (!new_line->rdwr) {
+					//exist_banks.insert(bank);
+					if (exist_banks.find(bank) != exist_banks.end())
+						conflict_times++;
+					exist_banks.insert(bank);
+					add_times++;//跳出循环后还有最后一条
+				}
 				if (print_enable)
 					PRINTM("vec_tran send from arbitratorline " << index << " to fifo ");
 			}
@@ -850,6 +864,13 @@ namespace DRAMSim {
 				transid++;                                            //只有一开始table入数的时候赋值
 
 				pre_fifo[bank].push_back(new_line);
+				if (!new_line->rdwr) {
+				//	exist_banks.insert(bank);
+					if (exist_banks.find(bank) != exist_banks.end())
+						conflict_times++;
+					exist_banks.insert(bank);
+					add_times++;
+				}
 
 				arbitrator->ArbitratorLines[index]->returnACK();     //take the data and return ACK to LE/SE
 				arbitrator->ArbitratorLines[index]->valid = 0;
@@ -872,6 +893,7 @@ namespace DRAMSim {
 
 		if (print_enable)
 		{
+			PRINTM("conflict times: "<<conflict_times<<" total times: "<< add_times)
 			PRINTM("MSHR_STATE = " << MSHR_STATE);
 			if (MSHR_STATE == 1)
 				//cout << "finishing the post_table " << miss_index << endl;

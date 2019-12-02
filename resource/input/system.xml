@@ -22,7 +22,7 @@
         <leDataOutBreadth>1</leDataOutBreadth>
         <leBoolOutBreadth>0</leBoolOutBreadth>
         <leOutBufferDepthSmall>32</leOutBufferDepthSmall>
-        <leOutBufferDepthMiddle>64</leOutBufferDepthMiddle>
+        <leOutBufferDepthMiddle>2048</leOutBufferDepthMiddle>
         <leOutBufferDepthLarge>128</leOutBufferDepthLarge>
 
         <!-- LC -->>
@@ -35,13 +35,14 @@
         <lcRegInNum>4</lcRegInNum>
 
         <!-- LSU -->>
-        <!--<tabline_num>20</tabline_num>
+      <!--要测量bankconflict，把leOutBufferDepthMiddle,fifolinen_num,post_offset_depth设的尽量大，可设成2048-->
+      <!--<tabline_num>20</tabline_num>
         <fifolinen_num>20</fifolinen_num>
         <offset_depth>4</offset_depth>
         <post_offset_depth>8</post_offset_depth>
         <in_num>16</in_num>-->
         <tabline_num>50</tabline_num>
-        <fifolinen_num>20</fifolinen_num>
+        <fifolinen_num>2048</fifolinen_num>
         <offset_depth>4</offset_depth>
         <post_offset_depth>8</post_offset_depth>
         <in_num>8</in_num>
@@ -53,9 +54,9 @@
            
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>
-        <printscreen>false</printscreen>
+        <printscreen>true</printscreen>
         <stallMode>none</stallMode>
-        <attachMemory>false</attachMemory>
+        <attachMemory>true</attachMemory>
         <maxClk>500000</maxClk>
         <profiling>true</profiling>
         <maxMemoryDepth>100000</maxMemoryDepth>

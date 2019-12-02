@@ -729,6 +729,7 @@ void HgraArray::run()
 		}
 	}
 	std::cout << "pe ultilization:" << float(pe_ulti_cnt) / float(total_key_pe* clk) << endl;
+	std::cout << "lsu bank conflict rate:" << float(lsu->conflict_times) / float(lsu->add_times) << endl;
 }
 
 void HgraArray::sendBpOut(Simulator::NodeType type, uint index)

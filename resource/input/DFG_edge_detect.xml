@@ -157,7 +157,7 @@
         <placement cord="[4, 7]"/>
     </node>
 
-    <node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vect" pss="0_1_3">
+    <!--<node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vect" pss="0_1_3">
         <input type="pe" index="11" port="0"/>
         <input type="null"/>
         <placement cord="[0, 1]"/>
@@ -201,9 +201,9 @@
         <input type="pe" index="19" port="0"/>
         <input type="null"/>
         <placement cord="[1, 9]"/>
-    </node>
+    </node>-->
 
-  <!--<node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
     <input type="pe" index="11" port="0"/>
     <input type="null"/>
     <placement cord="[0, 1]"/>
@@ -247,7 +247,7 @@
     <input type="pe" index="19" port="0"/>
     <input type="null"/>
     <placement cord="[1, 9]"/>
-  </node>-->
+  </node>
   
     <node type="pe" index="20" opcode="mul" controlMode="data_flow">
       <inner_connection
