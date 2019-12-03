@@ -9,7 +9,7 @@ Cache::Cache(const Simulator::Preprocess::ArrayPara para):Node(para)
 	//if (Simulator::Array::ClkDomain::getInstance()->getClk() >= Simulator::Array::Debug::getInstance()->print_file_begin && Simulator::Array::ClkDomain::getInstance()->getClk() < Simulator::Array::Debug::getInstance()->print_file_end)
 	//	system_parameter.print_screen = false;
 	//system_parameter.bus_enable = 1;
-	cache_allhit = 0;
+	cache_allhit = true;
 	misscounter = 0;
 	non_pref_miss = 0;
 	WB_table.resize(0);

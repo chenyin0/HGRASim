@@ -44,7 +44,7 @@
         <tabline_num>50</tabline_num>
         <fifolinen_num>2048</fifolinen_num>
         <offset_depth>4</offset_depth>
-        <post_offset_depth>8</post_offset_depth>
+        <post_offset_depth>2048</post_offset_depth>
         <in_num>8</in_num>
         <tagbits>6</tagbits>
         <overlap_print>false</overlap_print>
