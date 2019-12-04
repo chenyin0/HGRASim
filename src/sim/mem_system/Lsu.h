@@ -46,6 +46,8 @@ typedef struct bus_tran {
 namespace DRAMSim
 {
 #define OUTPUT_LOG
+#define PRINTERRORM(str)  { Simulator::Array::Debug::getInstance()->getlsuFile()<<str<<std::endl; std::cout <<str<<std::endl;}
+#define PRINTERRORMN(str)  { Simulator::Array::Debug::getInstance()->getlsuFile()<<str; std::cout <<str;}
 #ifdef OUTPUT_LOG //输出到文件还是屏幕
 	#define PRINTM(str)  { Simulator::Array::Debug::getInstance()->getlsuFile()<<str<<std::endl; }
 	#define PRINTMN(str) {  Simulator::Array::Debug::getInstance()->getlsuFile() <<str; }
@@ -132,6 +134,7 @@ namespace DRAMSim
 		Arbitrator* arbitrator;
 		uint32_t completetran;
 		vector<int> config_reg;
+		bool NotSameBlock(uint32_t addr_,bool bypass);
 		bool NotSameBlock(uint32_t addr_);
 		int IsVecTran(uint32_t pointer);
 		bool IsPrefTran(uint32_t pointer);
@@ -201,8 +204,8 @@ namespace DRAMSim
 		//bool fifo_pause_signal;
 
 		short MSHR_STATE;
-		short miss_index;
-		short miss_finished_cnter;
+		uint miss_index;
+		uint miss_finished_cnter;
 		bool state3_reg;
 
 

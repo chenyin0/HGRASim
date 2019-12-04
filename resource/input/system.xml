@@ -22,7 +22,7 @@
         <leDataOutBreadth>1</leDataOutBreadth>
         <leBoolOutBreadth>0</leBoolOutBreadth>
         <leOutBufferDepthSmall>32</leOutBufferDepthSmall>
-        <leOutBufferDepthMiddle>2048</leOutBufferDepthMiddle>
+        <leOutBufferDepthMiddle>64</leOutBufferDepthMiddle>
         <leOutBufferDepthLarge>128</leOutBufferDepthLarge>
 
         <!-- LC -->>
@@ -42,9 +42,9 @@
         <post_offset_depth>8</post_offset_depth>
         <in_num>16</in_num>-->
         <tabline_num>50</tabline_num>
-        <fifolinen_num>2048</fifolinen_num>
+        <fifolinen_num>20</fifolinen_num>
         <offset_depth>4</offset_depth>
-        <post_offset_depth>2048</post_offset_depth>
+        <post_offset_depth>8</post_offset_depth>
         <in_num>8</in_num>
         <tagbits>6</tagbits>
         <overlap_print>false</overlap_print>
@@ -57,7 +57,7 @@
         <printscreen>true</printscreen>
         <stallMode>none</stallMode>
         <attachMemory>true</attachMemory>
-        <maxClk>500000</maxClk>
+        <maxClk>500</maxClk>
         <profiling>true</profiling>
         <maxMemoryDepth>100000</maxMemoryDepth>
         

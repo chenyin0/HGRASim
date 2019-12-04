@@ -519,7 +519,7 @@ void Cache::update()                                           //利用宏实现
 									else
 									{
 										lsunit->mem->addTransaction(hitfifo[i].front().rdwr, uint64_t(hitfifo[i].front().addr << 2));    //一个字4字节，所以左移2位
-										lsunit->poped_addr.push_back(hitfifo[i].front().addr);
+										lsunit->addpoped_addr(hitfifo[i].front().addr, false);
 										// if (!lsunit->inflight_reg[i]->pref)
 										// 	non_pref_miss++;
 									}
@@ -553,7 +553,7 @@ void Cache::update()                                           //利用宏实现
 										tran.rdwr = hitfifo[i].front().rdwr;
 										tran.cycle = 0;
 										lsunit->bus.push_back(tran);
-										lsunit->poped_addr.push_back(hitfifo[i].front().addr);
+										lsunit->addpoped_addr(hitfifo[i].front().addr, false);
 										//统计非预取的miss
 										// if (!lsunit->inflight_reg[i]->pref)
 										// 	non_pref_miss++;
@@ -591,8 +591,11 @@ void Cache::mem_read_complete(unsigned id, uint64_t address, uint64_t clock_cycl
 	if (print_enable)
 		PRINTM("[Callback] read complete from mem: " << id << " " << addr << " " << clock_cycle);
 	uint32_t temp1 = 0;
-
-	do_replacement(addr);                                //从mem读完成后才进行替换！
+	if (lsunit->poped_addr.find(addr) != lsunit->poped_addr.end()) {
+		if (!(lsunit->poped_addr[addr] == Simulator::RecallMode::nocache)) {
+			do_replacement(addr);                                //从mem读完成后才进行替换！
+		}
+	}
 
 	lsunit->read_miss_complete(addr);                        //向lsu返回读完成
 }
@@ -604,7 +607,7 @@ void Cache::mem_write_complete(unsigned id, uint64_t address, uint64_t clock_cyc
 	//printf("[Callback] read complete from mem: %d 0x%llx cycle=%llu\n", id, address, clock_cycle);
 	uint32_t addr = (uint32_t)address >> 2;
 	if (print_enable)
-		PRINTM("[Callback] read complete from mem: " << id << " " << addr << " " << clock_cycle);
+		PRINTM("[Callback] write complete from mem: " << id << " " << addr << " " << clock_cycle);
 	uint32_t temp1 = 0;
 
 	bool misstrans = 1;
@@ -624,7 +627,11 @@ void Cache::mem_write_complete(unsigned id, uint64_t address, uint64_t clock_cyc
 
 	if (misstrans)
 	{
-		do_replacement(addr);                                //从mem读完成后才进行替换！
+		if (lsunit->poped_addr.find(addr) != lsunit->poped_addr.end()) {
+			if (!(lsunit->poped_addr[addr] == Simulator::RecallMode::nocache)) {
+				do_replacement(addr);                                //从mem读完成后才进行替换！
+			}
+		}
 		lsunit->write_miss_complete(addr);                        //向lsu返回读完成
 	}
 

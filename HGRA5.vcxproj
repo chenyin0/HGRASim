@@ -286,6 +286,7 @@
     <Text Include="resource\input\memoryInfileCond.txt" />
     <Text Include="resource\input\memoryInFile_edge_detect.txt" />
     <Text Include="resource\input\NW_memoryInFile.txt" />
+    <Text Include="resource\output\cache_lsu.txt" />
     <Text Include="resource\output\dataflow.txt" />
     <Text Include="resource\output\Debuglseout.txt" />
     <Text Include="resource\output\DebugReg.txt" />

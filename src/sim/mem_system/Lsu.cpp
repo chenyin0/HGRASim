@@ -380,65 +380,164 @@ namespace DRAMSim {
 		{
 			if (pre_fifo[bank].front()->rdwr && pre_fifo[bank].front()->valid)              //Ð´ÇëÇó
 			{
-				if (!inflight_reg[bank]->valid && cache->trans_v[bank] == 0 && MSHR_STATE != 3)
-				{
-					delete inflight_reg[bank];
-					inflight_reg[bank] = pre_fifo[bank].front();                            //ÕýÔÚ·ÃÎÊcacheµÄÇëÇó½øÈëinflight_reg
-					if (!cache->addtranscation(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->rdwr))
+				if (!pre_fifo[bank].front()->bypass) {
+					if (!inflight_reg[bank]->valid && cache->trans_v[bank] == 0)
 					{
-						PRINTM("error occurs for cache is busy when add trans!");
-						system("pause");
-					}
-					//poped_addr.push_back(pre_fifo.front()->ADDR_);
-					pre_fifo[bank].erase(pre_fifo[bank].begin());
+						delete inflight_reg[bank];
+						inflight_reg[bank] = pre_fifo[bank].front();                            //ÕýÔÚ·ÃÎÊcacheµÄÇëÇó½øÈëinflight_reg
+						if (!cache->addtranscation(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->rdwr))
+						{
+							PRINTERRORM("error occurs for cache is busy when add trans!");
+							system("pause");
+						}
+						//poped_addr.push_back(pre_fifo.front()->ADDR_);
+						pre_fifo[bank].erase(pre_fifo[bank].begin());
 
-					if (print_enable)
-						PRINTM("WR transcation poped to cache from fifo ");
-				}
-				else
-				{
-					if (print_enable)
-					{
-						PRINTM("inflight_reg blocking!");
+						if (print_enable)
+							PRINTM("WR transcation poped to cache from fifo ");
 					}
+					else
+					{
+						if (print_enable)
+						{
+							PRINTM("inflight_reg blocking!");
+						}
+					}
+				}
+				else {
+					if (print_enable)
+						PRINTM("WR transcation poped to mem from fifo addr"<< pre_fifo[bank].front()->ADDR_);
+					mem->addTransaction(true, uint64_t(pre_fifo[bank].front()->ADDR_) << 2);
+					addpoped_addr(pre_fifo[bank].front()->ADDR_,false);
+					delete(pre_fifo[bank].front());
+					pre_fifo[bank].erase(pre_fifo[bank].begin());
 				}
 			}
 			else                                                             //¶ÁÇëÇó
 			{
 				if (pre_fifo[bank].front()->valid && !pre_fifo[bank].front()->pref && !pre_fifo[bank].front()->rdwr)
 				{
-					if (NotSameBlock((pre_fifo[bank].front()->ADDR_)))                                      //·ÇreserveÇëÇó·¢ËÍµ½cacheºÍinflight_rag
-					{
-						if (!inflight_reg[bank]->valid && cache->trans_v[bank] == 0 && MSHR_STATE != 3)
+					if (!(pre_fifo[bank].front()->bypass)) {
+						if (NotSameBlock(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->bypass))                                      //·ÇreserveÇëÇó·¢ËÍµ½cacheºÍinflight_rag
 						{
-							delete inflight_reg[bank];
-							inflight_reg[bank] = pre_fifo[bank].front();                                          //ÕýÔÚ·ÃÎÊcacheµÄÇëÇó½øÈëinflight_reg
-							if (!cache->addtranscation(pre_fifo[bank][0]->ADDR_, pre_fifo[bank][0]->rdwr))
+							if (!inflight_reg[bank]->valid && cache->trans_v[bank] == 0)
 							{
-								PRINTM("error occurs for cache is busy when add trans!");
-								system("pause");
+								delete inflight_reg[bank];
+								inflight_reg[bank] = pre_fifo[bank].front();                                          //ÕýÔÚ·ÃÎÊcacheµÄÇëÇó½øÈëinflight_reg
+								if (!cache->addtranscation(pre_fifo[bank][0]->ADDR_, pre_fifo[bank][0]->rdwr))
+								{
+									PRINTERRORM("error occurs for cache is busy when add trans!");
+									system("pause");
+								}
+								//poped_addr.push_back(pre_fifo[0]->ADDR_);
+								pre_fifo[bank].erase(pre_fifo[bank].begin());
 							}
-							//poped_addr.push_back(pre_fifo[0]->ADDR_);
-							pre_fifo[bank].erase(pre_fifo[bank].begin());
-						}
-						else                                                  //blockingµÄÇé¿öÏÂ²»×ö²Ù×÷
-						{
-							if (print_enable)
+							else                                                  //blockingµÄÇé¿öÏÂ²»×ö²Ù×÷
 							{
-								PRINTM("inflight_reg blocking!");
-								//system("pause");
+								if (print_enable)
+								{
+									PRINTM("inflight_reg blocking!");
+									//system("pause");
+								}
+							}
+						}
+						else                                                                               //reserveÇëÇóÖ±½Ó·¢ËÍµ½table¶ø²»ÐèÒªÈ¥inflight_reg
+						{
+							if (addreserve2post(pre_fifo[bank][0]))//ÊÇÍ¬Ò»¸öblock
+							{
+								delete pre_fifo[bank].front();
+								pre_fifo[bank].erase(pre_fifo[bank].begin());
+							}
+							else                                        //offsetÂú,»Øµ½Î²²¿          //mshrÃ»ÓÐ¿ÕÎ»ÁË£¬Òò´ËÖ»ÄÜ´ÓfifoÍ·»Øµ½fifoÎ²
+							{
+								pre_fifo[bank].push_back(pre_fifo[bank].front());
+								pre_fifo[bank].erase(pre_fifo[bank].begin());
 							}
 						}
 					}
-					else                                                                               //reserveÇëÇóÖ±½Ó·¢ËÍµ½table¶ø²»ÐèÒªÈ¥inflight_reg
-					{
-						if (addreserve2post(pre_fifo[bank][0]))//ÊÇÍ¬Ò»¸öblock
-						{
+					else {
+						bool sended = false;
+						if (!NotSameBlock(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->bypass)) {
+							for (int i = 0; i < post_table.size(); i++) {
+								if (post_table[i]->valid && (post_table[i]->ADDR_ / CACHE_LINE_SIZE == pre_fifo[bank].front()->ADDR_ / CACHE_LINE_SIZE) && post_table[i]->bypass) {
+									for (int j = 0; j < system_parameter.post_offset_depth; j++) {
+										if (!post_offset[i][j].valid) {
+											//if (!system_parameter.bus_enable)
+											//{
+											//	//if (NotSameBlock(pre_fifo[bank].front()->ADDR_)) {
+											//	//	mem->addTransaction(false, uint64_t(pre_fifo[bank].front()->ADDR_) << 2);    //Ò»¸ö×Ö4×Ö½Ú£¬ËùÒÔ×óÒÆ2Î»
+											//	//}
+											//	addpoped_addr(pre_fifo[bank].front()->ADDR_, true);
+											//}
+											//else if (system_parameter.bus_enable)
+											//{
+											//	//if (NotSameBlock(pre_fifo[bank].front()->ADDR_)) {
+											//	//	Bus_Tran tran;
+											//	//	tran.addr = uint64_t(pre_fifo[bank].front()->ADDR_ << 2);
+											//	//	tran.rdwr = 0;
+											//	//	tran.cycle = 0;
+											//	//	bus.push_back(tran);
+											//	//}
+											//	addpoped_addr(pre_fifo[bank].front()->ADDR_, true);
+											//}
+											post_offset[i][j].valid = true;
+											post_offset[i][j].offset = pre_fifo[bank].front()->offset;
+											sended = true;
+											break;
+										}
+									}
+									if (sended)
+										break;
+								}
+							}
+						}
+						else {
+							for (int i = 0; i < post_table.size(); i++) {
+								if (!post_table[i]->valid) {
+									bool blank = true;
+									for (short j = 0; j < CACHE_LINE_SIZE; j++)
+									{
+										if (post_offset[i][j].valid)
+											blank = false;
+									}
+									if (blank)
+									{
+										post_table[i]->ADDR_ = pre_fifo[bank].front()->ADDR_;
+										post_table[i]->complete = pre_fifo[bank].front()->complete;
+										post_table[i]->offset = pre_fifo[bank].front()->offset;
+										//				post_table[i]->pe_round = line->pe_round;
+										post_table[i]->pe_tag = pre_fifo[bank].front()->pe_tag;
+										post_table[i]->rdwr = pre_fifo[bank].front()->rdwr;
+										post_table[i]->bypass = pre_fifo[bank].front()->bypass;
+										post_table[i]->TAG_ = pre_fifo[bank].front()->TAG_;
+										post_table[i]->transid = pre_fifo[bank].front()->transid;
+										post_table[i]->valid = pre_fifo[bank].front()->valid;
+										post_table[i]->vec = pre_fifo[bank].front()->vec;
+										if (!system_parameter.bus_enable)
+										{
+											mem->addTransaction(false, uint64_t(pre_fifo[bank].front()->ADDR_) << 2);    //Ò»¸ö×Ö4×Ö½Ú£¬ËùÒÔ×óÒÆ2Î»
+											addpoped_addr(pre_fifo[bank].front()->ADDR_, true);
+										}
+										else if (system_parameter.bus_enable)
+										{
+											bus_tran tran;
+											tran.addr = uint64_t(pre_fifo[bank].front()->ADDR_ << 2);
+											tran.rdwr = 0;
+											tran.cycle = 0;
+											bus.push_back(tran);
+											addpoped_addr(pre_fifo[bank].front()->ADDR_, true);
+										}
+										sended = true;
+										break;
+									}
+								}
+							}
+						}
+						if (sended) {
 							delete pre_fifo[bank].front();
 							pre_fifo[bank].erase(pre_fifo[bank].begin());
 						}
-						else                                        //offsetÂú,»Øµ½Î²²¿          //mshrÃ»ÓÐ¿ÕÎ»ÁË£¬Òò´ËÖ»ÄÜ´ÓfifoÍ·»Øµ½fifoÎ²
-						{
+						else {
 							pre_fifo[bank].push_back(pre_fifo[bank].front());
 							pre_fifo[bank].erase(pre_fifo[bank].begin());
 						}
@@ -446,7 +545,7 @@ namespace DRAMSim {
 				}
 				else if (pre_fifo[bank].front()->valid && pre_fifo[bank].front()->pref && !pre_fifo[bank].front()->rdwr)       //pref
 				{
-					if (NotSameBlock((pre_fifo[bank].front()->ADDR_)))///////////////////////////////·ÇÍ¬Ò»block?????/////////
+					if (NotSameBlock(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->bypass))///////////////////////////////·ÇÍ¬Ò»block?????/////////
 					{
 						if (!inflight_reg[bank]->valid && MSHR_STATE != 3)
 						{
@@ -454,7 +553,7 @@ namespace DRAMSim {
 							inflight_reg[bank] = pre_fifo[bank].front();                                                    //ÕýÔÚ·ÃÎÊcacheµÄÇëÇó½øÈëinflight_reg
 							if (!cache->addtranscation(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->rdwr))
 							{
-								PRINTM("error occurs for cache is busy when add trans!");
+								PRINTERRORM("error occurs for cache is busy when add trans!");
 								system("pause");
 							}
 							//poped_addr.push_back(pre_fifo.front()->ADDR_);
@@ -619,6 +718,7 @@ namespace DRAMSim {
 						new_line->pref = 1;
 						new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
 						new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
+						new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
 //							new_line->pe_round = arbitrator->ArbitratorLines[index]->pe_round;
 
 						new_line->transid = transid;                          //ÕâÁ½¾ä°óËÀ£¬Ã¿¸öÇëÇóÓµÓÐÎ¨Ò»µÄtransid±êÊ¶£¡
@@ -696,6 +796,7 @@ namespace DRAMSim {
 
 				new_line->ADDR_ = fir_addr - fir_addr % CACHE_LINE_SIZE;
 				new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
+				new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
 				new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
 				new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
 				new_line->valid = 1;
@@ -740,6 +841,7 @@ namespace DRAMSim {
 
 						new_line->ADDR_ = addr - addr % CACHE_LINE_SIZE;
 						new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
+						new_line->bypass= arbitrator->ArbitratorLines[index]->bypass;
 //							new_line->pe_round = arbitrator->ArbitratorLines[index]->pe_round;
 						new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
 						new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
@@ -775,6 +877,7 @@ namespace DRAMSim {
 				new_line->valid = 1;
 				new_line->pref = arbitrator->ArbitratorLines[index]->pref;
 				new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
+				new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
 				new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
 //					new_line->pe_round = arbitrator->ArbitratorLines[index]->pe_round;
 
@@ -909,16 +1012,29 @@ namespace DRAMSim {
 }
 
 
+bool Lsu::NotSameBlock(uint32_t addr_,bool bypass)
+{
+	for (auto iter = poped_addr.begin(); iter != poped_addr.end(); ++iter)
+	{
+		if (int(addr_ / CACHE_LINE_SIZE) == int((*iter).first / CACHE_LINE_SIZE)) {
+			if(bypass&&((*iter).second==Simulator::RecallMode::both|| (*iter).second == Simulator::RecallMode::nocache))
+				return 0;
+			if (!bypass && ((*iter).second == Simulator::RecallMode::both || (*iter).second == Simulator::RecallMode::cached))
+				return 0;
+		}
+	}
+	return 1;
+}
 bool Lsu::NotSameBlock(uint32_t addr_)
 {
 	for (auto iter = poped_addr.begin(); iter != poped_addr.end(); ++iter)
 	{
-		if (int(addr_ / CACHE_LINE_SIZE) == int((*iter).first / CACHE_LINE_SIZE))
-			return 0;
+		if (int(addr_ / CACHE_LINE_SIZE) == int((*iter).first / CACHE_LINE_SIZE)) {
+				return 0;
+		}
 	}
 	return 1;
 }
-
 void Lsu::read_hit_complete(uint32_t addr)
 {
 	short bank = (addr & BANK_BITS) >> ADDR_BANK;
@@ -961,7 +1077,7 @@ void Lsu::read_hit_complete(uint32_t addr)
 	}
 	else
 	{
-		PRINTM("error occurs for that readhit trans and inflight reg dont match!");
+		PRINTERRORM("error occurs for that readhit trans and inflight reg dont match!");
 		system("pause");
 	}
 }
@@ -977,7 +1093,7 @@ void Lsu::write_hit_complete(uint32_t addr)
 	}
 	else
 	{
-		PRINTM("error occurs for that writehit trans and inflight reg dont match!");
+		PRINTERRORM("error occurs for that writehit trans and inflight reg dont match!");
 		system("pause");
 	}
 }
@@ -988,7 +1104,7 @@ void Lsu::read_miss_complete(uint32_t addr)    //±»¶¯Ê½µÄmiss£¬Í¨ÖªMSHRÖÐµÄÍ¬¿éÇ
 
 	for (uint32_t i = 0; i < system_parameter.tabline_num; i++)
 	{
-		if (addr == post_table[i]->ADDR_ && !post_table[i]->rdwr && post_table[i]->valid == 1 && post_table[i]->complete == 0)
+		if (addr/CACHE_LINE_SIZE == post_table[i]->ADDR_ / CACHE_LINE_SIZE && !post_table[i]->rdwr && post_table[i]->valid == 1 && post_table[i]->complete == 0)
 		{
 			temp1++;
 			post_table[i]->complete = 1;
@@ -1017,11 +1133,11 @@ void Lsu::read_miss_complete(uint32_t addr)    //±»¶¯Ê½µÄmiss£¬Í¨ÖªMSHRÖÐµÄÍ¬¿éÇ
 		PRINTM("returned addr is " << addr );
 		release_poped_addr(addr);   //ÈôÎ´ÕÒµ½£¬ËµÃ÷ÎªprefÇëÇó
 	}
-	else if (temp1 > 1)
-	{
-		PRINTM("error occurs in LSUnit::mem_read_complete() for more than one tableline finished when mem rdcallback ");
-		cachefile << "error occurs in LSUnit::mem_read_complete() for more than one tableline finished when mem rdcallback " << endl;
-	}
+	//else if (temp1 > 1)
+	//{
+	//	PRINTM("error occurs in LSUnit::mem_read_complete() for more than one tableline finished when mem rdcallback ");
+	//	cachefile << "error occurs in LSUnit::mem_read_complete() for more than one tableline finished when mem rdcallback " << endl;
+	//}
 }
 
 void Lsu::write_miss_complete(uint32_t addr)
@@ -1047,7 +1163,7 @@ void Lsu::bus_update()
 			}
 			else if (bus.front().cycle > system_parameter.bus_delay)
 			{
-				cout << "error occurs in bus!" << endl;
+				PRINTERRORM ("error occurs in bus!");
 				system("pause");
 			}
 			else if (bus.front().cycle < system_parameter.bus_delay)
@@ -1060,7 +1176,7 @@ void Lsu::bus_update()
 		{
 			if ((*it).cycle >= system_parameter.bus_delay)
 			{
-				cout << "error occurs in bus!" << endl;
+				PRINTERRORM("error occurs in bus!" );
 				system("pause");
 			}
 			else
@@ -1100,7 +1216,7 @@ void Lsu::config_in(vector<int> config)
 		else if ((*it) == 2) {}
 		else
 		{
-			PRINTM("error occurs in void LSUnit::config_in!");
+			PRINTERRORM("error occurs in void LSUnit::config_in!");
 			std::system("pause");
 		}
 	}
@@ -1262,13 +1378,13 @@ void Lsu::release_poped_addr(uint32_t addr)
 {
 	for (auto it = poped_addr.begin(); it != poped_addr.end(); it++)
 	{
-		if ((*it).first/CACHE_LINE_SIZE == addr/ CACHE_LINE_SIZE)
+		if ((*it).first == addr)
 		{
 			poped_addr.erase(it);
 			return;
 		}
 	}
-	PRINTM("error occurs in LSUnit::release_poped_addr! addr = " << addr );
-	system("pause");
+	PRINTERRORM("error occurs in LSUnit::release_poped_addr! addr = " << addr );
+//	system("pause");
 }
 }

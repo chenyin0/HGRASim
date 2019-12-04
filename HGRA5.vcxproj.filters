@@ -517,6 +517,9 @@
     <Text Include="resource\input\MD_memoryInFile.txt">
       <Filter>resource\input</Filter>
     </Text>
+    <Text Include="resource\output\cache_lsu.txt">
+      <Filter>resource\output</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\output\DebugReg.txt">
