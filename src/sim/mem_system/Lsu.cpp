@@ -20,6 +20,7 @@ namespace DRAMSim {
 //		pe_round = 0;
 		vec = 0;
 		complete = 0;
+		bypass = false;
 		offset.resize(CACHE_LINE_SIZE);
 		//	offset_4.resize(OFFSET_DEPTH);
 		for (vector<Comb_Offset>::iterator it = offset.begin(); it < offset.end(); it++)
@@ -42,6 +43,7 @@ namespace DRAMSim {
 		pref = 0;
 		transid = 0;
 		complete = 0;
+		bypass = false;
 		for (int i = 0; i < CACHE_LINE_SIZE; i++)         //清小valid
 			offset[i].valid = 0;
 
@@ -60,7 +62,7 @@ namespace DRAMSim {
 	}
 
 
-	bool ArbitratorLine::AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG)
+	bool ArbitratorLine::AddTrans(Simulator::Array::Port_inout_lsu input,uint32_t TAG , bool bypass)
 	{
 		valid = input.valid;
 		ADDR_ = input.value_addr;
@@ -68,6 +70,7 @@ namespace DRAMSim {
 		rdwr = input.rdwr;
 	//	pe_round = PE_ROUND;
 		TAG_ = TAG;
+		this->bypass = bypass;
 		pref = 0;
 		return true;
 	}
@@ -122,7 +125,7 @@ namespace DRAMSim {
 	}
 
 	//利用TAG寻找相应进行动作的tabline
-	bool Arbitrator::AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t lse_index)
+	bool Arbitrator::AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t lse_index, bool bypass)
 	{
 		if ((lse_index >= system_parameter.lse_num))
 		{
@@ -130,10 +133,38 @@ namespace DRAMSim {
 			return false;
 		}
 		else
-			return ArbitratorLines[lse2relse[lse_index]]->AddTrans(input, lse2relse[lse_index]);
+			return ArbitratorLines[lse2relse[lse_index]]->AddTrans(input, lse2relse[lse_index],bypass);
 	}
 
-
+	void Lsu::addpoped_addr(int addr, bool bypass)
+	{
+		if (poped_addr.find(addr) != poped_addr.end()) {
+			if (bypass == true) {
+				if (poped_addr[addr] == Simulator::RecallMode::cached) {
+					poped_addr[addr] = Simulator::RecallMode::both;
+				}
+				else {
+					poped_addr[addr] = Simulator::RecallMode::nocache;
+				}
+			}
+			else {
+				if (poped_addr[addr] == Simulator::RecallMode::nocache) {
+					poped_addr[addr] = Simulator::RecallMode::both;
+				}
+				else {
+					poped_addr[addr] = Simulator::RecallMode::cached;
+				}
+			}
+		}
+		else {
+			if (bypass == true) {
+				poped_addr[addr] = Simulator::RecallMode::nocache;
+			}
+			else {
+				poped_addr[addr] = Simulator::RecallMode::cached;
+			}
+		}
+	}
 
 	Lsu::Lsu(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map) :Node(para)
 	{
@@ -196,10 +227,10 @@ namespace DRAMSim {
 	}
 
 
-	bool Lsu::AddTrans(Simulator::Array::Port_inout_lsu input,uint TAG)
+	bool Lsu::AddTrans(Simulator::Array::Port_inout_lsu input,uint TAG,bool bypass)
 	{
 //		return arbitrator->AddTrans(input.value_addr, TAG, input.valid, input.tag);
-		return arbitrator->AddTrans(input, TAG);
+		return arbitrator->AddTrans(input, TAG,bypass);
 	}
 
 
@@ -828,9 +859,9 @@ namespace DRAMSim {
 			}
 
 			PRINTMN("poped_addr size = " << poped_addr.size() << "; ");
-			for (vector<uint32_t>::iterator it = poped_addr.begin(); it < poped_addr.end(); it++)
+			for (auto it = poped_addr.begin(); it != poped_addr.end(); it++)
 			{
-				PRINTMN(*it << " ");
+				PRINTMN((*it).first<<"_"<< static_cast<int>((*it).second)<< " ");
 			}
 			PRINTMN(endl);
 
@@ -880,9 +911,9 @@ namespace DRAMSim {
 
 bool Lsu::NotSameBlock(uint32_t addr_)
 {
-	for (vector<uint32_t>::iterator iter = poped_addr.begin(); iter != poped_addr.end(); ++iter)
+	for (auto iter = poped_addr.begin(); iter != poped_addr.end(); ++iter)
 	{
-		if (int(addr_ / CACHE_LINE_SIZE) == int(*iter / CACHE_LINE_SIZE))
+		if (int(addr_ / CACHE_LINE_SIZE) == int((*iter).first / CACHE_LINE_SIZE))
 			return 0;
 	}
 	return 1;
@@ -1142,6 +1173,7 @@ bool Lsu::addTrans2post(TabLine * line)
 //				post_table[i]->pe_round = line->pe_round;
 				post_table[i]->pe_tag = line->pe_tag;
 				post_table[i]->rdwr = line->rdwr;
+				post_table[i]->bypass = line->bypass;
 				post_table[i]->TAG_ = line->TAG_;
 				post_table[i]->transid = line->transid;
 				post_table[i]->valid = line->valid;
@@ -1169,7 +1201,7 @@ bool Lsu::addreserve2post(TabLine * line)
 {
 	for (short i = 0; i < system_parameter.tabline_num; i++)
 	{
-		if (post_table[i]->valid && (line->ADDR_) / CACHE_LINE_SIZE == (post_table[i]->ADDR_) / CACHE_LINE_SIZE)
+		if (post_table[i]->valid && (line->ADDR_) / CACHE_LINE_SIZE == (post_table[i]->ADDR_) / CACHE_LINE_SIZE&&line->bypass== post_table[i]->bypass)
 		{
 			for (short j = 0; j < system_parameter.post_offset_depth; j++)
 			{
@@ -1228,9 +1260,9 @@ bool LSUnit::RegMshrConflict()                            //应使用按通道划分的of
 */
 void Lsu::release_poped_addr(uint32_t addr)
 {
-	for (vector<uint32_t>::iterator it = poped_addr.begin(); it < poped_addr.end(); it++)
+	for (auto it = poped_addr.begin(); it != poped_addr.end(); it++)
 	{
-		if (*it == addr)
+		if ((*it).first/CACHE_LINE_SIZE == addr/ CACHE_LINE_SIZE)
 		{
 			poped_addr.erase(it);
 			return;

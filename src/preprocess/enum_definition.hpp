@@ -60,6 +60,12 @@ namespace Simulator
 		vecr,
 		null
 	};
+	enum class RecallMode
+	{
+		cached,
+		nocache,
+		both
+	};
 	enum class BpType
 	{
 		ack,

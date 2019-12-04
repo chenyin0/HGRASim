@@ -65,6 +65,7 @@ namespace DRAMSim
 		~TabLine() {};
 //		bool pe_round;
 		uint32_t ADDR_;
+		bool bypass;
 		uint32_t entry;
 		uint32_t TAG_;   //pointer
 		uint32_t pe_tag;
@@ -93,11 +94,12 @@ namespace DRAMSim
 		~ArbitratorLine() {};
 		uint32_t valid;
 		bool rdwr;
+		bool bypass;
 		uint32_t pe_tag;
 //		bool pe_round;                      //和tag一样全程保持不变返回
 											//uint32_t round_counter;
 		bool pref;
-		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG);
+		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG,bool bypass);
 		void returnACK();
 		void getInput(uint port, Simulator::Array::Port_inout input) override {};
 		void getBp(uint port, bool input) override {};
@@ -118,7 +120,7 @@ namespace DRAMSim
 		vector<ArbitratorLine*> ArbitratorLines;
 		Arbitrator(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map);
 		~Arbitrator();
-		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG);
+		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG,bool bypass);
 		void getInput(uint port, Simulator::Array::Port_inout input) override {};
 		void getBp(uint port, bool input) override {};
 	};
@@ -147,9 +149,10 @@ namespace DRAMSim
 		Cache* cache;
 		uint conflict_times;
 		uint add_times;
-		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint TAG);
+		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint TAG,bool bypass);
 		void AttachMem(DRAMSim::MultiChannelMemorySystem* memory);
 		void update();     //synchronic
+		void addpoped_addr(int addr, bool bypass);
 		void config_in(map<uint, Simulator::Array::Loadstore_element*> lse_map);
 		void read_miss_complete(uint32_t addr);            //被动式miss，完成后通知table进行访问cache（需占用cache port并将cache state拉高）
 		void write_miss_complete(uint32_t addr);
@@ -177,7 +180,7 @@ namespace DRAMSim
 		uint32_t total_rd;
 		int transid;                                          //唯一标识！
 		vector<Vec_Msg> vec_pointer;                          //记录每个向量端口配置的index、step、size信息
-		vector<uint32_t> poped_addr;                              //表示尚未完成的miss块
+		unordered_map<uint32_t, Simulator::RecallMode>poped_addr;                              //表示尚未完成的miss块
 		list <Bus_Tran> bus;
 		void bus_update();
 		void config_in(vector<int> config);
