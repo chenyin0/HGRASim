@@ -520,6 +520,9 @@
     <Text Include="resource\output\cache_lsu.txt">
       <Filter>resource\output</Filter>
     </Text>
+    <Text Include="resource\output\whole_cache_lsu.txt">
+      <Filter>resource\output</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\output\DebugReg.txt">

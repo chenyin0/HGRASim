@@ -386,7 +386,7 @@ void Loadstore_element::leSimStep2()
 #ifdef order_force
 		if (maintain_order[output_port_2lsu.tag]) {
 #endif
-			lsu->AddTrans(output_port_2lsu, index,false);
+			lsu->AddTrans(output_port_2lsu, index, system_parameter.read_bypass);
 #ifdef order_force
 			maintain_order[output_port_2lsu.tag] = false;
 
@@ -727,7 +727,7 @@ void Loadstore_element::sedSimStep2()
 			output_port_2lsu.rdwr = true;
 			output_port_2lsu.dae = attribution->dae;
 			output_port_2lsu.tag = match_tag;
-			lsu->AddTrans(output_port_2lsu, index,true);////////////给output_port_2lsu赋值////////////////
+			lsu->AddTrans(output_port_2lsu, index,system_parameter.write_bypass);////////////给output_port_2lsu赋值////////////////
 			MemoryData::getInstance()->write(output_port_2lsu.value_addr, output_port_2lsu.value_data);
 			sended_tag = match_tag;
 		}

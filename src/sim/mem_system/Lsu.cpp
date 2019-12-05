@@ -405,10 +405,11 @@ namespace DRAMSim {
 					}
 				}
 				else {
+					DEBUG_ASSERT(false);
 					if (print_enable)
 						PRINTM("WR transcation poped to mem from fifo addr"<< pre_fifo[bank].front()->ADDR_);
-					mem->addTransaction(true, uint64_t(pre_fifo[bank].front()->ADDR_) << 2);
-					addpoped_addr(pre_fifo[bank].front()->ADDR_,false);
+					mem->addTransaction(true, uint64_t(pre_fifo[bank].front()->ADDR_) << 2);////////////////////////////////////////ÓÐÎÊÌâ!!!!!!!!!!!!!!!!!!!!!!//////////////
+					//addpoped_addr(pre_fifo[bank].front()->ADDR_,false);
 					delete(pre_fifo[bank].front());
 					pre_fifo[bank].erase(pre_fifo[bank].begin());
 				}
@@ -683,225 +684,245 @@ namespace DRAMSim {
 		int index = p_order.front();
 		int vec_index;
 		uint32_t addr = arbitrator->ArbitratorLines[index]->ADDR_;
-		short bank = (addr & BANK_BITS) >> ADDR_BANK;
-		//set<short> exist_banks;
-		if (IsPrefTran(arbitrator->ArbitratorLines[index]->TAG_))
-		{
-			if (pre_fifo[bank].size() < system_parameter.fifoline_num)
+		if (arbitrator->ArbitratorLines[index]->valid&& arbitrator->ArbitratorLines[index]->rdwr&& arbitrator->ArbitratorLines[index]->bypass) {
+			//if (!system_parameter.bus_enable)
+			//{
+			//	mem->addTransaction(true, uint64_t(arbitrator->ArbitratorLines[index]->ADDR_) << 2);    //Ò»¸ö×Ö4×Ö½Ú£¬ËùÒÔ×óÒÆ2Î»
+			//	//addpoped_addr(pre_fifo[bank].front()->ADDR_, true);
+			//}
+			//else
+			//{
+			//	bus_tran tran;
+			//	tran.addr = uint64_t(arbitrator->ArbitratorLines[index]->ADDR_ << 2);
+			//	tran.rdwr = true;
+			//	tran.cycle = 0;
+			//	bus.push_back(tran);
+			//	//addpoped_addr(pre_fifo[bank].front()->ADDR_, true);
+			//}
+			arbitrator->ArbitratorLines[index]->returnACK();
+			arbitrator->ArbitratorLines[index]->valid=false;
+		}
+		else {
+			short bank = (addr & BANK_BITS) >> ADDR_BANK;
+			//set<short> exist_banks;
+			if (IsPrefTran(arbitrator->ArbitratorLines[index]->TAG_))
 			{
-				bool same_block = 0;
+				if (pre_fifo[bank].size() < system_parameter.fifoline_num)
 				{
-					if (last_pref.size())
+					bool same_block = 0;
 					{
-						for (list<uint>::iterator it = last_pref.begin(); it != last_pref.end(); it++)
+						if (last_pref.size())
 						{
-							if (*it / CACHE_LINE_SIZE == arbitrator->ArbitratorLines[index]->ADDR_ / CACHE_LINE_SIZE)
+							for (list<uint>::iterator it = last_pref.begin(); it != last_pref.end(); it++)
 							{
-								same_block = 1;
-								break;
+								if (*it / CACHE_LINE_SIZE == arbitrator->ArbitratorLines[index]->ADDR_ / CACHE_LINE_SIZE)
+								{
+									same_block = 1;
+									break;
+								}
 							}
 						}
 					}
-				}
-				if (same_block)
-				{
-					//cachefile << "same block pref happend in " << ClockCycle << endl;
-				}
-				else
-				{
-					if (system_parameter.fifoline_num > pre_fifo[bank].size())                       //ÓÉÓÚÓÐvecÇëÇó£¬ÐèÒªÏÈ¼ì²âÊÇ·ñÂúÁË
+					if (same_block)
 					{
-						TabLine* new_line = new TabLine();
-						new_line->ADDR_ = arbitrator->ArbitratorLines[index]->ADDR_;
-						new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
-						new_line->valid = 1;
-						new_line->pref = 1;
-						new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
-						new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
-						new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
-//							new_line->pe_round = arbitrator->ArbitratorLines[index]->pe_round;
-
-						new_line->transid = transid;                          //ÕâÁ½¾ä°óËÀ£¬Ã¿¸öÇëÇóÓµÓÐÎ¨Ò»µÄtransid±êÊ¶£¡
-						transid++;                                            //Ö»ÓÐÒ»¿ªÊ¼tableÈëÊýµÄÊ±ºò¸³Öµ	
-
-						pre_fifo[bank].push_back(new_line);
-
-						if (last_pref.size() && last_pref.size() != pref_history)
-						{
-							last_pref.push_back(new_line->ADDR_);                //pref_table¼ÇÂ¼ÕýÔÚtableÖÐµÄÔ¤È¡ÇëÇó»¹ÊÇ¼ÇÂ¼ËùÓÐÒÑÓÐµÄÔ¤È¡ÇëÇó£¿
-						}
-						else if (!last_pref.size())       //µÚÒ»´ÎprefÊ±´¥·¢
-						{
-							last_pref.push_back(new_line->ADDR_);
-						}
-						else if (last_pref.size() == pref_history)
-						{
-							last_pref.pop_front();
-							last_pref.push_back(new_line->ADDR_);
-						}
-						else
-						{
-							PRINTM("error occurs in last_pref!");
-						}
-
-						if (print_enable)
-							PRINTM("pref send from arbitratorline " << index << " to fifo!");
-					}
-				}
-
-				arbitrator->ArbitratorLines[index]->returnACK();     //take the trans and return ACK to LE
-				arbitrator->ArbitratorLines[index]->valid = 0;
-			}
-		}
-		else if ((vec_index = IsVecTran(arbitrator->ArbitratorLines[index]->TAG_)) != -1)
-		{
-			int step = vec_pointer[vec_index].step;
-			int size = vec_pointer[vec_index].size;
-			short pointer = vec_pointer[vec_index].pointer;
-
-			uint32_t max_addr = arbitrator->ArbitratorLines[index]->ADDR_ + step * size;
-			short trans_num = max_addr / CACHE_LINE_SIZE - arbitrator->ArbitratorLines[index]->ADDR_ / CACHE_LINE_SIZE + 1;
-
-			//¼ì²âfifoÊÇ·ñ·ÅµÃÏÂ
-			int bank_index = (arbitrator->ArbitratorLines[index]->ADDR_ & BANK_BITS) >> ADDR_BANK;
-			int trannum[CACHE_BANK] = { 0 };
-			bool size_ok = 1;
-			for (int num = 0; num < trans_num; num++)
-			{
-				if (bank_index == CACHE_BANK)
-					bank_index = 0;
-				trannum[bank_index]++;
-				bank_index++;
-			}
-			for (int bankind = 0; bankind < CACHE_BANK; bankind++)
-			{
-				if (system_parameter.fifoline_num - pre_fifo[bankind].size() < trannum[bankind])
-					size_ok = 0;
-			}
-
-			if (size_ok)          //ÓÐ¿Õ
-			{
-				for (int k = 0; k < size; k++) {
-					arbitrator->ArbitratorLines[index+k]->returnACK();     //take the trans and return ACK to LE
-					arbitrator->ArbitratorLines[index+k]->valid = 0;
-				}
-				uint head_addr;                                             //head_addr±íÊ¾Ã¿ÌõºÏ²¢ÇëÇóµÄÍ·²¿µØÖ·
-				uint fir_addr = arbitrator->ArbitratorLines[index]->ADDR_;  //fir_addr±íÊ¾Ã¿¸öVLEÇëÇóµÄ»ùµØÖ·
-
-				TabLine* new_line = new TabLine();
-				short mask1 = fir_addr % CACHE_LINE_SIZE;
-				new_line->offset[mask1].valid = 1;
-				new_line->offset[mask1].pointer = arbitrator->ArbitratorLines[index]->TAG_;
-				new_line->offset[mask1].tag = arbitrator->ArbitratorLines[index]->pe_tag;
-
-				new_line->ADDR_ = fir_addr - fir_addr % CACHE_LINE_SIZE;
-				new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
-				new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
-				new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
-				new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
-				new_line->valid = 1;
-				new_line->pref = 0;
-				new_line->vec = 1;
-
-				new_line->transid = transid;                          //ÕâÁ½¾ä°óËÀ£¬Ã¿¸öÇëÇóÓµÓÐÎ¨Ò»µÄtransid±êÊ¶£¡
-				transid++;
-
-				head_addr = fir_addr;
-
-				for (int j = 1; j < size; j++)
-				{
-					uint addr;
-					short mask2;
-					addr = fir_addr + j * step;
-					if (addr / CACHE_LINE_SIZE == head_addr / CACHE_LINE_SIZE)
-					{
-						mask2 = addr % CACHE_LINE_SIZE;
-						new_line->offset[mask2].valid = 1;
-						new_line->offset[mask2].pointer = arbitrator->ArbitratorLines[index]->TAG_ + j ;
-						new_line->offset[mask2].tag = arbitrator->ArbitratorLines[index]->pe_tag;
+						//cachefile << "same block pref happend in " << ClockCycle << endl;
 					}
 					else
 					{
-						pre_fifo[bank].push_back(new_line);
-						if (!new_line->rdwr) {
-						//	exist_banks.insert(bank);
-							if (exist_banks.find(bank) != exist_banks.end())
-								conflict_times++;
-							exist_banks.insert(bank);
-							add_times++;
+						if (system_parameter.fifoline_num > pre_fifo[bank].size())                       //ÓÉÓÚÓÐvecÇëÇó£¬ÐèÒªÏÈ¼ì²âÊÇ·ñÂúÁË
+						{
+							TabLine* new_line = new TabLine();
+							new_line->ADDR_ = arbitrator->ArbitratorLines[index]->ADDR_;
+							new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
+							new_line->valid = 1;
+							new_line->pref = 1;
+							new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
+							new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
+							new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
+							//							new_line->pe_round = arbitrator->ArbitratorLines[index]->pe_round;
+
+							new_line->transid = transid;                          //ÕâÁ½¾ä°óËÀ£¬Ã¿¸öÇëÇóÓµÓÐÎ¨Ò»µÄtransid±êÊ¶£¡
+							transid++;                                            //Ö»ÓÐÒ»¿ªÊ¼tableÈëÊýµÄÊ±ºò¸³Öµ	
+
+							pre_fifo[bank].push_back(new_line);
+
+							if (last_pref.size() && last_pref.size() != pref_history)
+							{
+								last_pref.push_back(new_line->ADDR_);                //pref_table¼ÇÂ¼ÕýÔÚtableÖÐµÄÔ¤È¡ÇëÇó»¹ÊÇ¼ÇÂ¼ËùÓÐÒÑÓÐµÄÔ¤È¡ÇëÇó£¿
+							}
+							else if (!last_pref.size())       //µÚÒ»´ÎprefÊ±´¥·¢
+							{
+								last_pref.push_back(new_line->ADDR_);
+							}
+							else if (last_pref.size() == pref_history)
+							{
+								last_pref.pop_front();
+								last_pref.push_back(new_line->ADDR_);
+							}
+							else
+							{
+								PRINTM("error occurs in last_pref!");
+							}
+
+							if (print_enable)
+								PRINTM("pref send from arbitratorline " << index << " to fifo!");
 						}
-						bank = (addr & BANK_BITS) >> ADDR_BANK;
-						new_line = new TabLine();
-						head_addr = addr;
-
-						mask2 = addr % CACHE_LINE_SIZE;
-						new_line->offset[mask2].pointer = arbitrator->ArbitratorLines[index]->TAG_ + j ;
-						new_line->offset[mask2].tag = arbitrator->ArbitratorLines[index]->pe_tag;
-						new_line->offset[mask2].valid = 1;
-
-						new_line->ADDR_ = addr - addr % CACHE_LINE_SIZE;
-						new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
-						new_line->bypass= arbitrator->ArbitratorLines[index]->bypass;
-//							new_line->pe_round = arbitrator->ArbitratorLines[index]->pe_round;
-						new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
-						new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
-						new_line->valid = 1;
-						new_line->pref = 0;
-						new_line->vec = 1;
-
-						new_line->transid = transid;                          //ÕâÁ½¾ä°óËÀ£¬Ã¿¸öÇëÇóÓµÓÐÎ¨Ò»µÄtransid±êÊ¶£¡
-						transid++;
 					}
+
+					arbitrator->ArbitratorLines[index]->returnACK();     //take the trans and return ACK to LE
+					arbitrator->ArbitratorLines[index]->valid = 0;
 				}
-				pre_fifo[bank].push_back(new_line);
-				if (!new_line->rdwr) {
-					//exist_banks.insert(bank);
-					if (exist_banks.find(bank) != exist_banks.end())
-						conflict_times++;
-					exist_banks.insert(bank);
-					add_times++;//Ìø³öÑ­»·ºó»¹ÓÐ×îºóÒ»Ìõ
-				}
-				if (print_enable)
-					PRINTM("vec_tran send from arbitratorline " << index << " to fifo ");
 			}
-		}
-		else if (IsRTran(arbitrator->ArbitratorLines[index]->TAG_)) { DEBUG_ASSERT(false); }
-		else
-		{
-			if (system_parameter.fifoline_num > pre_fifo[bank].size())
+			else if ((vec_index = IsVecTran(arbitrator->ArbitratorLines[index]->TAG_)) != -1)
 			{
-				TabLine* new_line = new TabLine();
-				short addr_offset = arbitrator->ArbitratorLines[index]->ADDR_ % CACHE_LINE_SIZE;
-				new_line->ADDR_ = arbitrator->ArbitratorLines[index]->ADDR_ - addr_offset;
-				new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
-				new_line->valid = 1;
-				new_line->pref = arbitrator->ArbitratorLines[index]->pref;
-				new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
-				new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
-				new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
-//					new_line->pe_round = arbitrator->ArbitratorLines[index]->pe_round;
+				int step = vec_pointer[vec_index].step;
+				int size = vec_pointer[vec_index].size;
+				short pointer = vec_pointer[vec_index].pointer;
 
-				new_line->offset[addr_offset].valid = 1;
-				new_line->offset[addr_offset].pointer = arbitrator->ArbitratorLines[index]->TAG_;
-				new_line->offset[addr_offset].tag = arbitrator->ArbitratorLines[index]->pe_tag;
+				uint32_t max_addr = arbitrator->ArbitratorLines[index]->ADDR_ + step * size;
+				short trans_num = max_addr / CACHE_LINE_SIZE - arbitrator->ArbitratorLines[index]->ADDR_ / CACHE_LINE_SIZE + 1;
 
-				new_line->transid = transid;                          //ÕâÁ½¾ä°óËÀ£¬Ã¿¸öÇëÇóÓµÓÐÎ¨Ò»µÄtransid±êÊ¶£¡
-				transid++;                                            //Ö»ÓÐÒ»¿ªÊ¼tableÈëÊýµÄÊ±ºò¸³Öµ
-
-				pre_fifo[bank].push_back(new_line);
-				if (!new_line->rdwr) {
-				//	exist_banks.insert(bank);
-					if (exist_banks.find(bank) != exist_banks.end())
-						conflict_times++;
-					exist_banks.insert(bank);
-					add_times++;
+				//¼ì²âfifoÊÇ·ñ·ÅµÃÏÂ
+				int bank_index = (arbitrator->ArbitratorLines[index]->ADDR_ & BANK_BITS) >> ADDR_BANK;
+				int trannum[CACHE_BANK] = { 0 };
+				bool size_ok = 1;
+				for (int num = 0; num < trans_num; num++)
+				{
+					if (bank_index == CACHE_BANK)
+						bank_index = 0;
+					trannum[bank_index]++;
+					bank_index++;
+				}
+				for (int bankind = 0; bankind < CACHE_BANK; bankind++)
+				{
+					if (system_parameter.fifoline_num - pre_fifo[bankind].size() < trannum[bankind])
+						size_ok = 0;
 				}
 
-				arbitrator->ArbitratorLines[index]->returnACK();     //take the data and return ACK to LE/SE
-				arbitrator->ArbitratorLines[index]->valid = 0;
+				if (size_ok)          //ÓÐ¿Õ
+				{
+					for (int k = 0; k < size; k++) {
+						arbitrator->ArbitratorLines[index + k]->returnACK();     //take the trans and return ACK to LE
+						arbitrator->ArbitratorLines[index + k]->valid = 0;
+					}
+					uint head_addr;                                             //head_addr±íÊ¾Ã¿ÌõºÏ²¢ÇëÇóµÄÍ·²¿µØÖ·
+					uint fir_addr = arbitrator->ArbitratorLines[index]->ADDR_;  //fir_addr±íÊ¾Ã¿¸öVLEÇëÇóµÄ»ùµØÖ·
 
-				if (print_enable)
-					PRINTM("trans send from arbitratorline " << index << " to fifo!");
+					TabLine* new_line = new TabLine();
+					short mask1 = fir_addr % CACHE_LINE_SIZE;
+					new_line->offset[mask1].valid = 1;
+					new_line->offset[mask1].pointer = arbitrator->ArbitratorLines[index]->TAG_;
+					new_line->offset[mask1].tag = arbitrator->ArbitratorLines[index]->pe_tag;
+
+					new_line->ADDR_ = fir_addr - fir_addr % CACHE_LINE_SIZE;
+					new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
+					new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
+					new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
+					new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
+					new_line->valid = 1;
+					new_line->pref = 0;
+					new_line->vec = 1;
+
+					new_line->transid = transid;                          //ÕâÁ½¾ä°óËÀ£¬Ã¿¸öÇëÇóÓµÓÐÎ¨Ò»µÄtransid±êÊ¶£¡
+					transid++;
+
+					head_addr = fir_addr;
+
+					for (int j = 1; j < size; j++)
+					{
+						uint addr;
+						short mask2;
+						addr = fir_addr + j * step;
+						if (addr / CACHE_LINE_SIZE == head_addr / CACHE_LINE_SIZE)
+						{
+							mask2 = addr % CACHE_LINE_SIZE;
+							new_line->offset[mask2].valid = 1;
+							new_line->offset[mask2].pointer = arbitrator->ArbitratorLines[index]->TAG_ + j;
+							new_line->offset[mask2].tag = arbitrator->ArbitratorLines[index]->pe_tag;
+						}
+						else
+						{
+							pre_fifo[bank].push_back(new_line);
+							if (!new_line->rdwr) {
+								//	exist_banks.insert(bank);
+								if (exist_banks.find(bank) != exist_banks.end())
+									conflict_times++;
+								exist_banks.insert(bank);
+								add_times++;
+							}
+							bank = (addr & BANK_BITS) >> ADDR_BANK;
+							new_line = new TabLine();
+							head_addr = addr;
+
+							mask2 = addr % CACHE_LINE_SIZE;
+							new_line->offset[mask2].pointer = arbitrator->ArbitratorLines[index]->TAG_ + j;
+							new_line->offset[mask2].tag = arbitrator->ArbitratorLines[index]->pe_tag;
+							new_line->offset[mask2].valid = 1;
+
+							new_line->ADDR_ = addr - addr % CACHE_LINE_SIZE;
+							new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
+							new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
+							//							new_line->pe_round = arbitrator->ArbitratorLines[index]->pe_round;
+							new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
+							new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
+							new_line->valid = 1;
+							new_line->pref = 0;
+							new_line->vec = 1;
+
+							new_line->transid = transid;                          //ÕâÁ½¾ä°óËÀ£¬Ã¿¸öÇëÇóÓµÓÐÎ¨Ò»µÄtransid±êÊ¶£¡
+							transid++;
+						}
+					}
+					pre_fifo[bank].push_back(new_line);
+					if (!new_line->rdwr) {
+						//exist_banks.insert(bank);
+						if (exist_banks.find(bank) != exist_banks.end())
+							conflict_times++;
+						exist_banks.insert(bank);
+						add_times++;//Ìø³öÑ­»·ºó»¹ÓÐ×îºóÒ»Ìõ
+					}
+					if (print_enable)
+						PRINTM("vec_tran send from arbitratorline " << index << " to fifo ");
+				}
+			}
+			else if (IsRTran(arbitrator->ArbitratorLines[index]->TAG_)) { DEBUG_ASSERT(false); }
+			else
+			{
+				if (system_parameter.fifoline_num > pre_fifo[bank].size())
+				{
+					TabLine* new_line = new TabLine();
+					short addr_offset = arbitrator->ArbitratorLines[index]->ADDR_ % CACHE_LINE_SIZE;
+					new_line->ADDR_ = arbitrator->ArbitratorLines[index]->ADDR_ - addr_offset;
+					new_line->rdwr = arbitrator->ArbitratorLines[index]->rdwr;
+					new_line->valid = 1;
+					new_line->pref = arbitrator->ArbitratorLines[index]->pref;
+					new_line->pe_tag = arbitrator->ArbitratorLines[index]->pe_tag;
+					new_line->bypass = arbitrator->ArbitratorLines[index]->bypass;
+					new_line->TAG_ = arbitrator->ArbitratorLines[index]->TAG_;
+					//					new_line->pe_round = arbitrator->ArbitratorLines[index]->pe_round;
+
+					new_line->offset[addr_offset].valid = 1;
+					new_line->offset[addr_offset].pointer = arbitrator->ArbitratorLines[index]->TAG_;
+					new_line->offset[addr_offset].tag = arbitrator->ArbitratorLines[index]->pe_tag;
+
+					new_line->transid = transid;                          //ÕâÁ½¾ä°óËÀ£¬Ã¿¸öÇëÇóÓµÓÐÎ¨Ò»µÄtransid±êÊ¶£¡
+					transid++;                                            //Ö»ÓÐÒ»¿ªÊ¼tableÈëÊýµÄÊ±ºò¸³Öµ
+
+					pre_fifo[bank].push_back(new_line);
+					if (!new_line->rdwr) {
+						//	exist_banks.insert(bank);
+						if (exist_banks.find(bank) != exist_banks.end())
+							conflict_times++;
+						exist_banks.insert(bank);
+						add_times++;
+					}
+
+					arbitrator->ArbitratorLines[index]->returnACK();     //take the data and return ACK to LE/SE
+					arbitrator->ArbitratorLines[index]->valid = 0;
+
+					if (print_enable)
+						PRINTM("trans send from arbitratorline " << index << " to fifo!");
+				}
 			}
 		}
 
@@ -1142,7 +1163,7 @@ void Lsu::read_miss_complete(uint32_t addr)    //±»¶¯Ê½µÄmiss£¬Í¨ÖªMSHRÖÐµÄÍ¬¿éÇ
 
 void Lsu::write_miss_complete(uint32_t addr)
 {
-	release_poped_addr(addr);
+	//release_poped_addr(addr);
 }
 
 void Lsu::bus_update()

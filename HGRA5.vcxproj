@@ -295,6 +295,7 @@
     <Text Include="resource\output\wholeDebuglseout.txt" />
     <Text Include="resource\output\wholeDebugReg.txt" />
     <Text Include="resource\output\wholeDebugWire.txt" />
+    <Text Include="resource\output\whole_cache_lsu.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
