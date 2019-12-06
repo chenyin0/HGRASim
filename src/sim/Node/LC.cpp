@@ -66,7 +66,7 @@ void LoopControl::update()
 	
 }
 
-//ʹ��debug��Ĵ�ӡ�������д�ӡ
+
 void LoopControl::wirePrint()
 {
 	const auto& debugPrint = Debug::getInstance();
@@ -245,7 +245,7 @@ void LoopControl::simStep1(uint i)
 //	}
 //}
 
-//lc�ڲ�����û��inbuffer��ʹ��ack���ƣ�muxbuffer���յ��������һ����������Ϊ
+
 void LoopControl::simStep2()
 {
 	//loopbegin
@@ -254,7 +254,7 @@ void LoopControl::simStep2()
 		loopbegin.valid = true;
 	//else if (attribution->outermost)
 	//{
-	//	loopbegin.valid =              //ȫ��begin�ڵ�����룡   //INSPECTION
+	//	loopbegin.valid =              
 	//}
 
 	loopbegin.value_bool = first_loop;
@@ -298,8 +298,8 @@ void LoopControl::simStep2()
 
 	if (muxout_buffer->isBufferNotFull(0))
 	{
-	//	if (muxout.valid && muxout.last)         //��combine���Ϊ10ʱ����ѭ������
-	//		reg[0].valid = false;                         //iֵ��Ч��
+	//	if (muxout.valid && muxout.last)         
+	//		reg[0].valid = false;                        
 
 		if(muxout_buffer->input(muxout, 0))
 			first_loop = false;
@@ -320,7 +320,7 @@ void LoopControl::simStep3()
     //step calculate
 	if (reg[3].valid)
 	{
-		if (!bufferout.last&&bufferout.value_data < reg[2].valued) {//�����ٽ�ֵ�����Ͳ�Ҫ������
+		if (!bufferout.last&&bufferout.value_data < reg[2].valued) {
 			stepout.valid = bufferout.valid;
 			stepout.value_data = bufferout.value_data + reg[3].valued;
 		}
@@ -328,18 +328,18 @@ void LoopControl::simStep3()
 			stepout.valid = false;
 		}
 	}
-	if (bufferout.value_data >= reg[2].valued||bufferout.last) {//һ��reg[0].last����Զ�岻����
+	if (bufferout.value_data >= reg[2].valued||bufferout.last) {
 		reg[0].valid = false;
 		reg[0].valued = 0;
 		reg[0].valueb = false;
-		reg[0].last = false;//��Ҫ���last���鿴�Ƿ����
+		reg[0].last = false;
 		reg[0].condition = true;
 	}
 	//compare calculate
 	if (reg[2].valid)
 	{
 		combout.valid = bufferout.valid;
-		combout.value_bool = bufferout.value_data < reg[2].valued;//stepout��combout�Ƿ���Ժϲ���lastӦ����muxout�ź��Ͻ����ж�
+		combout.value_bool = bufferout.value_data < reg[2].valued;
 /*		if (!combout.value_bool)
 			stepout.last = true;*/
 	}
@@ -347,14 +347,15 @@ void LoopControl::simStep3()
 	//i
 //	if(bufferout.last)
 //	lc_output[0].valid = combout.valid & combout.value_bool & reg[0].valid;
-	lc_output[0].valid = false;
-	lc_output[0].value_data = reg[0].valued;
-	lc_output[0].last = bufferout.last ? true: !combout.value_bool;
+	//lc_output[0].valid = false;
+	//lc_output[0].value_data = reg[0].valued;
+	//lc_output[0].last = bufferout.last ? true: !combout.value_bool;
+	lc_output[0] = reg_input[0];
 	//if(reg[0].valid&&reg[0].condition==false)
 	//	lc_output[0].last = true;
-	lc_output[0].value_bool = false;
-//	lc_output[0].condition = combout.value_bool;
-	lc_output[0].condition = bufferout.condition;
+//	lc_output[0].value_bool = false;
+////	lc_output[0].condition = combout.value_bool;
+//	lc_output[0].condition = bufferout.condition;
 	//j
 	lc_output[1].valid = bufferout.valid;
 	lc_output[1].value_data = bufferout.value_data;

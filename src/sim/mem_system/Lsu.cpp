@@ -385,7 +385,7 @@ namespace DRAMSim {
 					{
 						delete inflight_reg[bank];
 						inflight_reg[bank] = pre_fifo[bank].front();                            //正在访问cache的请求进入inflight_reg
-						if (!cache->addtranscation(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->rdwr))
+						if (!cache->addtranscation(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->rdwr,bank))
 						{
 							PRINTERRORM("error occurs for cache is busy when add trans!");
 							system("pause");
@@ -425,7 +425,7 @@ namespace DRAMSim {
 							{
 								delete inflight_reg[bank];
 								inflight_reg[bank] = pre_fifo[bank].front();                                          //正在访问cache的请求进入inflight_reg
-								if (!cache->addtranscation(pre_fifo[bank][0]->ADDR_, pre_fifo[bank][0]->rdwr))
+								if (!cache->addtranscation(pre_fifo[bank][0]->ADDR_, pre_fifo[bank][0]->rdwr,bank))
 								{
 									PRINTERRORM("error occurs for cache is busy when add trans!");
 									system("pause");
@@ -552,7 +552,7 @@ namespace DRAMSim {
 						{
 							delete inflight_reg[bank];
 							inflight_reg[bank] = pre_fifo[bank].front();                                                    //正在访问cache的请求进入inflight_reg
-							if (!cache->addtranscation(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->rdwr))
+							if (!cache->addtranscation(pre_fifo[bank].front()->ADDR_, pre_fifo[bank].front()->rdwr,bank))
 							{
 								PRINTERRORM("error occurs for cache is busy when add trans!");
 								system("pause");
@@ -703,7 +703,13 @@ namespace DRAMSim {
 			arbitrator->ArbitratorLines[index]->valid=false;
 		}
 		else {
-			short bank = (addr & BANK_BITS) >> ADDR_BANK;
+			short bank;
+			if (system_parameter.cache_mode) {
+				bank = (addr & BANK_BITS) >> ADDR_BANK;
+			}
+			else {
+				bank = seek_bank();
+			}
 			//set<short> exist_banks;
 			if (IsPrefTran(arbitrator->ArbitratorLines[index]->TAG_))
 			{
@@ -786,17 +792,25 @@ namespace DRAMSim {
 				int bank_index = (arbitrator->ArbitratorLines[index]->ADDR_ & BANK_BITS) >> ADDR_BANK;
 				int trannum[CACHE_BANK] = { 0 };
 				bool size_ok = 1;
-				for (int num = 0; num < trans_num; num++)
-				{
-					if (bank_index == CACHE_BANK)
-						bank_index = 0;
-					trannum[bank_index]++;
-					bank_index++;
+				if (system_parameter.cache_mode) {
+					for (int num = 0; num < trans_num; num++)
+					{
+						if (bank_index == CACHE_BANK)
+							bank_index = 0;
+						trannum[bank_index]++;
+						bank_index++;
+					}
+					for (int bankind = 0; bankind < CACHE_BANK; bankind++)
+					{
+						if (system_parameter.fifoline_num - pre_fifo[bankind].size() < trannum[bankind])
+							size_ok = 0;
+					}
 				}
-				for (int bankind = 0; bankind < CACHE_BANK; bankind++)
-				{
-					if (system_parameter.fifoline_num - pre_fifo[bankind].size() < trannum[bankind])
-						size_ok = 0;
+				else {
+					if (!receive_enable(trans_num))
+					{
+						size_ok = false;
+					}
 				}
 
 				if (size_ok)          //有空
@@ -850,7 +864,12 @@ namespace DRAMSim {
 								exist_banks.insert(bank);
 								add_times++;
 							}
-							bank = (addr & BANK_BITS) >> ADDR_BANK;
+							if (system_parameter.cache_mode) {
+								bank = (addr & BANK_BITS) >> ADDR_BANK;
+							}
+							else {
+								bank = seek_bank();
+							}
 							new_line = new TabLine();
 							head_addr = addr;
 
@@ -1056,9 +1075,15 @@ bool Lsu::NotSameBlock(uint32_t addr_)
 	}
 	return 1;
 }
-void Lsu::read_hit_complete(uint32_t addr)
+void Lsu::read_hit_complete(uint32_t addr,uint32_t i)
 {
-	short bank = (addr & BANK_BITS) >> ADDR_BANK;
+	short bank;
+	if (system_parameter.cache_mode) {
+		bank = (addr & BANK_BITS) >> ADDR_BANK;
+	}
+	else {
+		bank = i;
+	}
 	if (inflight_reg[bank]->ADDR_ == addr && inflight_reg[bank]->valid && !inflight_reg[bank]->rdwr)
 	{
 		if (!inflight_reg[bank]->pref)
@@ -1103,10 +1128,15 @@ void Lsu::read_hit_complete(uint32_t addr)
 	}
 }
 
-void Lsu::write_hit_complete(uint32_t addr)
+void Lsu::write_hit_complete(uint32_t addr, uint32_t i)
 {
-	short bank = (addr & BANK_BITS) >> ADDR_BANK;
-
+	short bank;
+	if (system_parameter.cache_mode) {
+		bank = (addr & BANK_BITS) >> ADDR_BANK;
+	}
+	else {
+		bank = i;
+	}
 	if (inflight_reg[bank]->ADDR_ == addr && inflight_reg[bank]->valid && inflight_reg[bank]->rdwr)
 	{
 		//release_poped_addr(addr);
@@ -1356,7 +1386,34 @@ bool Lsu::addreserve2post(TabLine * line)
 	}
 	return 0;
 }
-
+uint Lsu::seek_bank()
+{
+	uint min_index = 0, min_value = pre_fifo[0].size();
+	for (int bank = 0; bank < CACHE_BANK; bank++)
+	{
+		if (pre_fifo[bank].size() < min_value)
+		{
+			min_index = bank;
+			min_value = pre_fifo[min_index].size();
+		}
+	}
+	return min_index;
+}
+uint Lsu::receive_enable(uint transnum)
+{
+	uint total_empty = 0;;
+	for (int bank = 0; bank < CACHE_BANK; bank++)
+	{
+		uint empty_entry = 0;
+		empty_entry = system_parameter.fifoline_num - pre_fifo[bank].size();
+		total_empty += empty_entry;
+		if (total_empty >= transnum)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 /*
 bool LSUnit::RegMshrConflict()                            //应使用按通道划分的offset来减少这一步的复杂度
 {

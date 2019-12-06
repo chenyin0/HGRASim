@@ -152,8 +152,12 @@ namespace DRAMSim
 		Cache* cache;
 		uint conflict_times;
 		uint add_times;
+		uint seek_bank();
+		uint receive_enable(uint transnum);
 		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint TAG,bool bypass);
 		void AttachMem(DRAMSim::MultiChannelMemorySystem* memory);
+		void write_hit_complete(uint32_t addr, uint32_t i);
+		void read_hit_complete(uint32_t addr, uint32_t i);
 		void update();     //synchronic
 		void addpoped_addr(int addr, bool bypass);
 		void config_in(map<uint, Simulator::Array::Loadstore_element*> lse_map);

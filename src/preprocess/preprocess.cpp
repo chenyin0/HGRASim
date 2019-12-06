@@ -439,6 +439,7 @@ namespace Simulator::Preprocess
 		_array_para.print_bus = (array_xml->FirstChildElement("print_bus")->GetText() == string("true"));
 		_array_para.read_bypass = (array_xml->FirstChildElement("read_bypass")->GetText() == string("true"));
 		_array_para.write_bypass = (array_xml->FirstChildElement("write_bypass")->GetText() == string("true"));
+		_array_para.cache_mode = (array_xml->FirstChildElement("cache_mode")->GetText() == string("true"));
 
 		//system
 		_array_para.debug_level = std::stoi(array_xml->FirstChildElement("debugLevel")->GetText());

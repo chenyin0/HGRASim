@@ -63,6 +63,23 @@ bool Cache::addtranscation(uint32_t adr, uint32_t rw)
 	}
 }
 
+bool Cache::addtranscation(uint32_t adr, uint32_t rw, uint32_t bank)
+{
+	//short bank = (adr & BANK_BITS) >> ADDR_BANK;
+	if (trans_v[bank] == 0)
+	{
+		addr_in[bank] = adr;
+		rdwr_in[bank] = rw;
+		trans_v[bank] = 1;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
 
 
 
@@ -462,13 +479,13 @@ void Cache::update()                                           //利用宏实现
 						state[i] = 0;
 						if (hitfifo[i].front().rdwr)
 						{
-							lsunit->write_hit_complete(hitfifo[i].front().addr);
+							lsunit->write_hit_complete(hitfifo[i].front().addr,i);
 							//do_writehit(hitfifo[i].front().addr);
 							lsunit->cachefile << "RD Cache hit in Addr " << hitfifo[i].front().addr << " at Mem Cycle " << lsunit->ClockCycle << endl;
 						}
 						else
 						{
-							lsunit->read_hit_complete(hitfifo[i].front().addr);
+							lsunit->read_hit_complete(hitfifo[i].front().addr,i);
 							do_readhit(hitfifo[i].front().addr);
 							lsunit->cachefile << "WR Cache hit in Addr " << hitfifo[i].front().addr << " at Mem Cycle " << lsunit->ClockCycle << endl;
 						}
@@ -481,13 +498,13 @@ void Cache::update()                                           //利用宏实现
 							state[i] = 0;
 							if (hitfifo[i].front().rdwr)
 							{
-								lsunit->write_hit_complete(hitfifo[i].front().addr);
+								lsunit->write_hit_complete(hitfifo[i].front().addr,i);
 								do_writehit(hitfifo[i].front().addr);
 								lsunit->cachefile << "RD Cache hit in Addr " << hitfifo[i].front().addr << " at Mem Cycle " << lsunit->ClockCycle << endl;
 							}
 							else
 							{
-								lsunit->read_hit_complete(hitfifo[i].front().addr);
+								lsunit->read_hit_complete(hitfifo[i].front().addr,i);
 								do_readhit(hitfifo[i].front().addr);
 								lsunit->cachefile << "WR Cache hit in Addr " << hitfifo[i].front().addr << " at Mem Cycle " << lsunit->ClockCycle << endl;
 							}

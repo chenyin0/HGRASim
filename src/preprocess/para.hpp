@@ -18,6 +18,7 @@ namespace Simulator::Preprocess
 		bool profiling;
 		bool read_bypass;
 		bool write_bypass;
+		bool cache_mode;
 		uint maxclk;
 		uint max_memory_depth;
 		stallType stall_mode;

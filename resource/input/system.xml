@@ -51,8 +51,9 @@
         <bus_enable>true</bus_enable>
         <bus_delay>5</bus_delay>
         <print_bus>false</print_bus>
-        <read_bypass>true</read_bypass>
+        <read_bypass>false</read_bypass>
         <write_bypass>true</write_bypass>
+        <cache_mode>true</cache_mode>
            
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>

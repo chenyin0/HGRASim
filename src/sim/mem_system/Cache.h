@@ -138,6 +138,7 @@ namespace DRAMSim
 		void do_readhit(uint32_t addr);
 		void do_writehit(uint32_t addr);
 		bool do_lookup(uint32_t addr);
+		bool addtranscation(uint32_t adr, uint32_t rw, uint32_t bank);
 		bool print_screen;
 		bool bus_enable;
 		bool cache_allhit;
