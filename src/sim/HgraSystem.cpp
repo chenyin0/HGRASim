@@ -500,6 +500,9 @@ void HgraArray::run()
 			bridge.InitBp();
 			for (int i= 0;i <= config_order.size()-1; i++)
 			{
+				if (i == 24 && clk == 125) {
+					std::cout << endl;
+				}
 				if (config_order[i].type == NodeType::pe) {
 					pe_map[order2index[i].second]->update();
 					//pe_map[order2index[i].second]->simStep3();

@@ -13,7 +13,7 @@
       <input type="null"/>
       <input type="null"/>
       <reg value="0" />
-      <reg value="254" />
+      <reg value="256" />
       <reg value="1" />
       <placement cord="[0, 0]"/>
     </node>
@@ -43,21 +43,39 @@
       <reg value="1" />
       <placement cord="[9, 9]"/>
     </node>
-    <node type="pe" index="9" opcode="add" controlMode="data_flow">
+
+    <node type="ls" index="12" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
+        <input type="lc" index="1" port="1"/>
+        <input type="null"/>
+        <placement cord="[0, 1]"/>
+    </node>      
+
+    <!--<node type="ls" index="13" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
+        <input type="pe" index="7" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 1]"/>
+    </node>-->  
+
+    <node type="pe" index="9" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
           input_bypass="inbuffer" output_from="outbuffer"/>
-        <input type="lc" index="1" port="1"/>
+        <input type="ls" index="12" port="0"/>
         <input type="pe" index="7" port="0"/>
         <input type="null"/>
         <reg value="null" />
         <placement cord="[1, 3]"/>
     </node>
 
+    <node type="ls" index="13" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
+        <input type="pe" index="9" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 1]"/>
+    </node>  
     <!-- div的功能仿真暂时没有？ -->
 
-    <node type="pe" index="11" opcode="add" controlMode="data_flow" key_cal="true">
+    <node type="pe" index="11" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -68,7 +86,7 @@
         <reg value="0" />
         <placement cord="[1, 6]"/>
     </node>
-    <node type="pe" index="12" opcode="add" controlMode="data_flow">
+    <node type="pe" index="12" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -79,7 +97,7 @@
         <reg value="1" />
         <placement cord="[1, 7]"/>
     </node>
-    <node type="pe" index="13" opcode="add" controlMode="data_flow">
+    <node type="pe" index="13" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -90,7 +108,7 @@
         <reg value="2" />
         <placement cord="[1, 8]"/>
     </node>
-    <node type="pe" index="14" opcode="add" controlMode="data_flow">
+    <node type="pe" index="14" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -101,7 +119,7 @@
         <reg value="256" />
         <placement cord="[2, 8]"/>
     </node>
-    <node type="pe" index="15" opcode="add" controlMode="data_flow">
+    <node type="pe" index="15" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -112,7 +130,7 @@
         <reg value="257" />
         <placement cord="[3, 8]"/>
     </node>
-    <node type="pe" index="16" opcode="add" controlMode="data_flow">
+    <node type="pe" index="16" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -123,7 +141,7 @@
         <reg value="258" />
         <placement cord="[4, 8]"/>
     </node>
-    <node type="pe" index="17" opcode="add" controlMode="data_flow">
+    <node type="pe" index="17" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -134,7 +152,7 @@
         <reg value="512" />
         <placement cord="[2, 6]"/>
     </node>
-    <node type="pe" index="18" opcode="add" controlMode="data_flow">
+    <node type="pe" index="18" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -145,7 +163,7 @@
         <reg value="513" />
         <placement cord="[3, 7]"/>
     </node>
-    <node type="pe" index="19" opcode="add" controlMode="data_flow">
+    <node type="pe" index="19" opcode="add" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -157,99 +175,100 @@
         <placement cord="[4, 7]"/>
     </node>
 
-    <!--<node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vect" pss="0_1_3">
+    <node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false" vecmode="vect" pss="0_1_3">
         <input type="pe" index="11" port="0"/>
         <input type="null"/>
         <placement cord="[0, 1]"/>
     </node>
-    <node type="ls" index="1" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vecr" pss="0_0_0">
+    <node type="ls" index="1" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false" vecmode="vecr" pss="0_0_0">
         <input type="pe" index="12" port="0"/>
         <input type="null"/>
         <placement cord="[0, 2]"/>
     </node>
-    <node type="ls" index="2" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vecr" pss="0_0_0">
+    <node type="ls" index="2" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false" vecmode="vecr" pss="0_0_0">
         <input type="pe" index="13" port="0"/>
         <input type="null"/>
         <placement cord="[0, 3]"/>
     </node>
-    <node type="ls" index="3" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vect" pss="3_1_3">
+    <node type="ls" index="3" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false" vecmode="vect" pss="3_1_3">
         <input type="pe" index="14" port="0"/>
         <input type="null"/>
         <placement cord="[0, 4]"/>
     </node>
-    <node type="ls" index="4" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vecr" pss="0_0_0">
+    <node type="ls" index="4" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false" vecmode="vecr" pss="0_0_0">
         <input type="pe" index="15" port="0"/>
         <input type="null"/>
         <placement cord="[0, 5]"/>
     </node>
-    <node type="ls" index="5" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vecr" pss="0_0_0">
+    <node type="ls" index="5" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false" vecmode="vecr" pss="0_0_0">
         <input type="pe" index="16" port="0"/>
         <input type="null"/>
         <placement cord="[0, 6]"/>
     </node> 
-    <node type="ls" index="6" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vect" pss="6_1_3">
+    <node type="ls" index="6" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false" vecmode="vect" pss="6_1_3">
         <input type="pe" index="17" port="0"/>
         <input type="null"/>
         <placement cord="[0, 7]"/>
     </node>
-    <node type="ls" index="7" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vecr" pss="0_0_0">
+    <node type="ls" index="7" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false" vecmode="vecr" pss="0_0_0">
         <input type="pe" index="18" port="0"/>
+
         <input type="null"/>
         <placement cord="[0, 8]"/>
     </node>
-    <node type="ls" index="8" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false" vecmode="vecr" pss="0_0_0">
+    <node type="ls" index="8" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false" vecmode="vecr" pss="0_0_0">
         <input type="pe" index="19" port="0"/>
         <input type="null"/>
         <placement cord="[1, 9]"/>
-    </node>-->
+    </node>
 
-  <node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <!--<node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
     <input type="pe" index="11" port="0"/>
     <input type="null"/>
     <placement cord="[0, 1]"/>
   </node>
-  <node type="ls" index="1" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <node type="ls" index="1" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
     <input type="pe" index="12" port="0"/>
     <input type="null"/>
     <placement cord="[0, 2]"/>
   </node>
-  <node type="ls" index="2" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <node type="ls" index="2" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
     <input type="pe" index="13" port="0"/>
     <input type="null"/>
     <placement cord="[0, 3]"/>
   </node>
-  <node type="ls" index="3" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <node type="ls" index="3" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
     <input type="pe" index="14" port="0"/>
     <input type="null"/>
     <placement cord="[0, 4]"/>
   </node>
-  <node type="ls" index="4" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <node type="ls" index="4" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
     <input type="pe" index="15" port="0"/>
     <input type="null"/>
     <placement cord="[0, 5]"/>
   </node>
-  <node type="ls" index="5" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <node type="ls" index="5" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
     <input type="pe" index="16" port="0"/>
     <input type="null"/>
     <placement cord="[0, 6]"/>
   </node>
-  <node type="ls" index="6" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <node type="ls" index="6" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
     <input type="pe" index="17" port="0"/>
     <input type="null"/>
     <placement cord="[0, 7]"/>
   </node>
-  <node type="ls" index="7" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <node type="ls" index="7" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
     <input type="pe" index="18" port="0"/>
     <input type="null"/>
     <placement cord="[0, 8]"/>
   </node>
-  <node type="ls" index="8" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+  <node type="ls" index="8" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
     <input type="pe" index="19" port="0"/>
     <input type="null"/>
     <placement cord="[1, 9]"/>
-  </node>
+  </node>-->
   
-    <node type="pe" index="20" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="20" opcode="mul" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -260,7 +279,7 @@
         <reg value="1" />
         <placement cord="[2, 5]"/>
     </node>
-    <node type="pe" index="21" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="21" opcode="mul" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -271,7 +290,7 @@
         <reg value="1" />
         <placement cord="[3, 5]"/>
     </node>
-    <node type="pe" index="22" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="22" opcode="mul" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -282,7 +301,7 @@
         <reg value="1" />
         <placement cord="[4, 5]"/>
     </node>
-    <node type="pe" index="23" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="23" opcode="mul" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -293,7 +312,7 @@
         <reg value="1" />
         <placement cord="[6, 8]"/>
     </node>
-    <node type="pe" index="24" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="24" opcode="mul" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -304,7 +323,7 @@
         <reg value="1" />
         <placement cord="[7, 8]"/>
     </node>
-    <node type="pe" index="25" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="25" opcode="mul" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -315,7 +334,7 @@
         <reg value="1" />
         <placement cord="[8, 8]"/>
     </node>
-    <node type="pe" index="26" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="26" opcode="mul" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -326,7 +345,7 @@
         <reg value="1" />
         <placement cord="[2, 2]"/>
     </node>
-    <node type="pe" index="27" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="27" opcode="mul" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -337,7 +356,7 @@
         <reg value="1" />
         <placement cord="[2, 4]"/>
     </node>
-    <node type="pe" index="28" opcode="mul" controlMode="data_flow">
+    <node type="pe" index="28" opcode="mul" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -349,7 +368,7 @@
         <placement cord="[5, 7]"/>
     </node>
   
-    <node type="pe" index="10" opcode="add" controlMode="data_flow">
+    <node type="pe" index="10" opcode="add" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
@@ -360,7 +379,7 @@
         <reg value="100" />
         <placement cord="[1, 4]"/>
     </node>
-    <node type="pe" index="0" opcode="add" controlMode="data_flow">
+    <node type="pe" index="0" opcode="add" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
@@ -371,7 +390,7 @@
         <reg value="100" />
         <placement cord="[5, 4]"/>
     </node>
-    <node type="pe" index="1" opcode="add" controlMode="data_flow">
+    <node type="pe" index="1" opcode="add" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
@@ -382,7 +401,7 @@
         <reg value="100" />
         <placement cord="[5, 3]"/>
     </node>
-    <node type="pe" index="2" opcode="add" controlMode="data_flow">
+    <node type="pe" index="2" opcode="add" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
@@ -393,7 +412,7 @@
         <reg value="100" />
         <placement cord="[6, 3]"/>
     </node>
-    <node type="pe" index="3" opcode="add" controlMode="data_flow">
+    <node type="pe" index="3" opcode="add" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
@@ -404,7 +423,7 @@
         <reg value="100" />
         <placement cord="[8, 4]"/>
     </node>
-    <node type="pe" index="4" opcode="add" controlMode="data_flow">
+    <node type="pe" index="4" opcode="add" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
@@ -415,7 +434,7 @@
         <reg value="100" />
         <placement cord="[1, 1]"/>
     </node>
-    <node type="pe" index="5" opcode="add" controlMode="data_flow">
+    <node type="pe" index="5" opcode="add" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
@@ -426,19 +445,24 @@
         <reg value="100" />
         <placement cord="[1, 5]"/>
     </node>
-    <node type="pe" index="6" opcode="add" controlMode="data_flow">
+    <node type="ls" index="11" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
+        <input type="pe" index="28" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 1]"/>
+    </node>
+    <node type="pe" index="6" opcode="add" controlMode="data_flow" key_cal="true">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="buffer" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="in1" buffer2_from="null"
           input_bypass="inbuffer" output_from="outbuffer"/>
         <input type="pe" index="5" port="0"/>
-        <input type="pe" index="28" port="0"/>
+        <input type="ls" index="11" port="0"/>
         <input type="null"/>
         <reg value="100" />
         <placement cord="[8, 2]"/>
     </node>
     <!-- 以上部分用于计算sum -->
-    <node type="pe" index="8" opcode="div" controlMode="data_flow">
+    <node type="pe" index="8" opcode="div" controlMode="data_flow" key_cal="false">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
@@ -450,54 +474,24 @@
         <placement cord="[1, 2]"/>
     </node>
 
-  <!--<node type="ls" index="11" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
-    <input type="pe" index="9" port="0"/>
-    <input type="null"/>
-    <placement cord="[2, 9]"/>
-  </node>-->
-  <!--<node type="ls" index="12" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
-    <input type="pe" index="11" port="0"/>
-    <input type="null"/>
-    <placement cord="[3, 9]"/>
-  </node>
-  <node type="ls" index="13" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
-    <input type="pe" index="12" port="0"/>
-    <input type="null"/>
-    <placement cord="[2, 9]"/>
-  </node>
-  <node type="ls" index="14" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
-    <input type="pe" index="13" port="0"/>
-    <input type="null"/>
-    <placement cord="[2, 9]"/>
-  </node>
-  <node type="ls" index="15" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
-    <input type="pe" index="14" port="0"/>
-    <input type="null"/>
-    <placement cord="[3, 9]"/>
-  </node>
-  <node type="ls" index="16" ls_mode="dummy" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
-    <input type="pe" index="15" port="0"/>
-    <input type="null"/>
-    <placement cord="[2, 9]"/>
-  </node>-->
     <!-- 新增加,用于计算se地址偏移 -->
     <node type="pe" index="29" opcode="add" controlMode="data_flow">
       <inner_connection
           buffer0_mode="buffer" buffer1_mode="lr" buffer2_mode="buffer"
           buffer0_from="in0" buffer1_from="null" buffer2_from="null"
           input_bypass="inbuffer" output_from="outbuffer"/>
-        <input type="pe" index="9" port="0"/>
+        <input type="ls" index="13" port="0"/>
         <input type="null"/>
         <input type="null"/>
-        <reg value="1024" />
+        <reg value="1072" />
         <placement cord="[5, 8]"/>
     </node>
-    <node type="ls" index="9" ls_mode="store_addr" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+    <node type="ls" index="9" ls_mode="store_addr" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
         <input type="pe" index="29" port="0"/>
         <input type="null"/>
         <placement cord="[2, 9]"/>
     </node>
-    <node type="ls" index="10" ls_mode="store_data" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
+    <node type="ls" index="10" ls_mode="store_data" tag_mode="true" dae="true" fifo_step="1" buffer_size="large" match="false">
         <input type="pe" index="8" port="0"/>
         <input type="null"/>
         <placement cord="[3, 9]"/>

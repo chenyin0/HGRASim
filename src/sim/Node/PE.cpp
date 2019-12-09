@@ -726,6 +726,11 @@ void Processing_element::aluUpdate()
 			if (outbuffer->isBufferNotFull(0)) {
 				alu->update();      //alu流水更新以及输出
 			}
+			else {
+				if (alu->pipeline.front().cycle < alu->depth-1) {
+					alu->update();
+				}
+			}
 		}
 		else if (attribution->output_from[0] == OutputFrom::alu) 
 		{

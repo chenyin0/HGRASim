@@ -479,6 +479,9 @@
     <Xml Include="resource\input\MD.xml">
       <Filter>resource\input</Filter>
     </Xml>
+    <Xml Include="resource\input\EDGE.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resource\backupFile\KNN.txt">

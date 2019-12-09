@@ -51,6 +51,7 @@ bool Ackbp_lr::getBp()
 
 bool Pebp::getBp(uint port)
 {
+	uint clk = ClkDomain::getInstance()->getClk();
 	if (port == 0) {
 		if (pe->attribution->control_mode == ControlMode::loop_activate|| pe->attribution->control_mode == ControlMode::calc_activate) {
 			//if (pe->attribution->control_mode == ControlMode::calc_activate) { return true; }
@@ -61,17 +62,22 @@ bool Pebp::getBp(uint port)
 		else if (pe->attribution->input_bypass==InputBypass::inbuffer) {/////注意这里是alu来源于inbuffer的情况，即input需要进inbuffer
 //			if (pe->attribution->ob_from[0] == OutBufferFrom::alu) {
 			if (pe->attribution->buffer_mode[0] == BufferMode::buffer || pe->attribution->buffer_mode[0] == BufferMode::lr_out) {
-//					if (pe->inbuffer->isBufferNotFull(port) || (pe->alu->canReceiveInput() && pe->allAluOperandsGot()) || pe->getOutbuffer()->isBufferNotFull(port) && pe->allAluOperandsGot()) {
-				if (pe->inbuffer->isBufferNotFull(port)) {
-					return true;
+				if (Preprocess::Para::getInstance()->getArrayPara().stall_mode == stallType::none) {
+					if (pe->inbuffer->isBufferNotFull(port)) { return true; }
+					else { return false; }
 				}
-//					if(pe->alu->canReceiveInput() && pe->allAluOperandsGot()){ return true; Debug::getInstance()->getPortFile() << "this pe alu can not receive input"; }
-//					if(pe->getOutbuffer()->isBufferNotFull(port)){ return true; Debug::getInstance()->getPortFile() << "this pe outbuffer can not receive input"; }
-				else {
-//					if(ClkDomain::getInstance()->getClk() >= Debug::getInstance()->print_file_begin && ClkDomain::getInstance()->getClk() < Debug::getInstance()->print_file_end)
-	//					Debug::getInstance()->getPortFile() << "this pe is boom shakalaka";
-					return false;
+				else if (Preprocess::Para::getInstance()->getArrayPara().stall_mode == stallType::inbuffer_stall) {
+					if (pe->inbuffer->isBufferNotFull(port)) {
+						return true;
+					}
+					else if (pe->alu->depth != 0 && pe->alu->canReceiveInput() && pe->allAluOperandsGot()) { return true; }
+					else if (pe->alu->depth == 0 && pe->outbuffer->isBufferNotFull(0)) { return true; }
+					else if (pe->alu->depth != 0 && pe->allAluOperandsGot() && pe->outbuffer->isBufferNotFull(0) && !pe->alu->canReceiveInput() && pe->attribution->opcode == PEOpcode::mul) {
+						return true;
+					}
+					else { return false; }
 				}
+				
 			}
 			else if (pe->attribution->buffer_mode[0] == BufferMode::keep) {
 				return !(pe->local_reg[0]->reg_v);
@@ -110,16 +116,20 @@ bool Pebp::getBp(uint port)
 				return !(pe->local_reg[1]->reg_v);//总是要给lr进值，只要有效就不能进
 			}
 			else if (pe->attribution->buffer_mode[1] == BufferMode::buffer || pe->attribution->buffer_mode[port] == BufferMode::lr_out) {/////注意这里是alu来源于inbuffer的情况，即input需要进inbuffer
-//				if (pe->attribution->ob_from[0] == OutBufferFrom::alu) {
-//				if (pe->attribution->alu_in_from[1] == AluInFrom::inbuffer) {
-					//				if (pe->inbuffer->isBufferNotFull(port) || (pe->alu->canReceiveInput() && pe->allAluOperandsGot()) || (pe->allAluOperandsGot()&& pe->getOutbuffer()->isBufferNotFull(0))) {//alu可以往下推
-				if (pe->inbuffer->isBufferNotFull(port)) {
-					return true;
+				if (Preprocess::Para::getInstance()->getArrayPara().stall_mode == stallType::none) {
+					if (pe->inbuffer->isBufferNotFull(port)) { return true; }
+					else { return false; }
 				}
-				else {
-	//				if (ClkDomain::getInstance()->getClk() >= Debug::getInstance()->print_file_begin && ClkDomain::getInstance()->getClk() < Debug::getInstance()->print_file_end)
-	//					Debug::getInstance()->getPortFile() << "this pe is full" << std::endl;
-					return false;
+				else if (Preprocess::Para::getInstance()->getArrayPara().stall_mode == stallType::inbuffer_stall) {
+					if (pe->inbuffer->isBufferNotFull(port)) {
+						return true;
+					}
+					else if (pe->alu->depth != 0 && pe->alu->canReceiveInput() && pe->allAluOperandsGot()) { return true; }
+					else if (pe->alu->depth == 0 && pe->outbuffer->isBufferNotFull(0)) { return true; }
+					else if (pe->alu->depth != 0 && pe->allAluOperandsGot() && pe->outbuffer->isBufferNotFull(0) && !pe->alu->canReceiveInput() && pe->attribution->opcode == PEOpcode::mul) {
+						return true;
+					}
+					else { return false; }
 				}
 			}
 		}
@@ -142,19 +152,21 @@ bool Pebp::getBp(uint port)
 				return !(pe->local_reg[2]->reg_v);//总是要给lr进值，只要有效就不能进
 			}
 			else if (pe->attribution->buffer_mode[port] == BufferMode::buffer|| pe->attribution->buffer_mode[port] == BufferMode::lr_out) {/////注意这里是alu来源于inbuffer的情况，即input需要进inbuffer
-//				if (pe->attribution->ob_from[0] == OutBufferFrom::alu) {
-//				if (pe->attribution->alu_in_from[1] == AluInFrom::inbuffer) {
-					//				if (pe->inbuffer->isBufferNotFull(port) || (pe->alu->canReceiveInput() && pe->allAluOperandsGot()) || (pe->allAluOperandsGot()&& pe->getOutbuffer()->isBufferNotFull(0))) {//alu可以往下推
-				if (pe->inbuffer->isBufferNotFull(port)) {
-					return true;
+				if (Preprocess::Para::getInstance()->getArrayPara().stall_mode == stallType::none) {
+					if (pe->inbuffer->isBufferNotFull(port)) { return true; }
+					else { return false; }
 				}
-				else {
-					return false;
-	//				if (ClkDomain::getInstance()->getClk() >= Debug::getInstance()->print_file_begin && ClkDomain::getInstance()->getClk() < Debug::getInstance()->print_file_end)
-	//					Debug::getInstance()->getPortFile() << "this pe is full" << std::endl;
+				else if (Preprocess::Para::getInstance()->getArrayPara().stall_mode == stallType::inbuffer_stall) {
+					if (pe->inbuffer->isBufferNotFull(port)) {
+						return true;
+					}
+					else if (pe->alu->depth != 0 && pe->alu->canReceiveInput() && pe->allAluOperandsGot()) { return true; }
+					else if (pe->alu->depth == 0 && pe->outbuffer->isBufferNotFull(0)) { return true; }
+					else if (pe->alu->depth != 0 && pe->allAluOperandsGot() && pe->outbuffer->isBufferNotFull(0) && !pe->alu->canReceiveInput() && pe->attribution->opcode == PEOpcode::mul) {
+						return true;
+					}
+					else { return false; }
 				}
-				//				}
-				//				}
 			}
 		}
 		else if (pe->attribution->input_bypass == InputBypass::bypass) {

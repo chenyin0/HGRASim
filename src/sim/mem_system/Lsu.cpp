@@ -1462,7 +1462,7 @@ void Lsu::release_poped_addr(uint32_t addr)
 			return;
 		}
 	}
-	PRINTERRORM("error occurs in LSUnit::release_poped_addr! addr = " << addr );
+	PRINTM("error occurs in LSUnit::release_poped_addr! addr = " << addr );
 //	system("pause");
 }
 }

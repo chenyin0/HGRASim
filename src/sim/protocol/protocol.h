@@ -92,7 +92,7 @@ namespace Simulator::Array
 	private:
 		Processing_element * pe;
 	public:
-		Pebp(Processing_element* pe) { this->pe = pe; }
+		Pebp( Processing_element* pe) { this->pe = pe; }
 		bool getBp(uint port) override;
 		bool getBp() override
 		{
