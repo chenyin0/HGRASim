@@ -194,6 +194,7 @@ namespace DRAMSim
 
 		uint32_t cache_rd_reg;
 		vector <TabLine*> inflight_reg;                              //若为pipeline_cache则是寄存器组而不是一个寄存器
+		vector<TabLine> pending_inflight;
 		bool addTrans2post(TabLine* line);
 		bool addreserve2post(TabLine* line);
 		//bool RegMshrConflict();

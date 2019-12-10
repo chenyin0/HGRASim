@@ -16,7 +16,7 @@
 
         <!-- LSE -->>
         <lseNum>32</lseNum>
-        <lseInBufferDepth>2</lseInBufferDepth>
+        <lseInBufferDepth>3</lseInBufferDepth>
         <lseDataInBreadth>1</lseDataInBreadth>
         <lseBoolInBreadth>0</lseBoolInBreadth>
         <leDataOutBreadth>1</leDataOutBreadth>
@@ -44,7 +44,7 @@
         <tabline_num>50</tabline_num>
         <fifolinen_num>30</fifolinen_num>
         <offset_depth>4</offset_depth>
-        <post_offset_depth>8</post_offset_depth>
+        <post_offset_depth>20</post_offset_depth>
         <in_num>10</in_num>
         <tagbits>6</tagbits>
         <overlap_print>false</overlap_print>
@@ -52,15 +52,15 @@
         <bus_delay>5</bus_delay>
         <print_bus>false</print_bus>
         <read_bypass>false</read_bypass>
-        <write_bypass>true</write_bypass>
+        <write_bypass>false</write_bypass>
         <cache_mode>true</cache_mode>
-           
+        <inflight_blocking>true</inflight_blocking>
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>
         <printscreen>true</printscreen>
-        <stallMode>none</stallMode>
+        <stallMode>inbuffer_stall</stallMode>
         <attachMemory>true</attachMemory>
-        <maxClk>500000</maxClk>
+        <maxClk>200000</maxClk>
         <profiling>true</profiling>
         <maxMemoryDepth>100000</maxMemoryDepth>
         

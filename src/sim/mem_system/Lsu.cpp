@@ -258,7 +258,52 @@ namespace DRAMSim {
 		//std::cout << "update!" << " " << ClockCycle << std::endl;
 		//this_index = next_index;
 		//this_index_v = next_index_v;
-
+		if (!system_parameter.inflight_block) {
+			for (auto& entry : pending_inflight) {
+				if (entry.valid && entry.complete)
+				{                                                        //当inflight请求阻塞且完成时，检测MSHR的next_index,若不冲突，则将阻塞的inflight请求完成
+					if (!entry.pref)                       //非预取
+					{
+						for (short j = 0; j < CACHE_LINE_SIZE; j++)
+						{
+							if (entry.offset[j].valid && !channel_occupy[entry.offset[j].pointer])
+							{
+								//cbk_addr在步长为1时才有效，用于debug
+								(arbitrator->ArbitratorLines[entry.offset[j].pointer]->lse_)->LSEcallback(entry.ADDR_ + j, ClockCycle, entry.offset[j].tag);
+								if (print_enable)
+									PRINTM("return inflight_reg data to " << arbitrator->ArbitratorLines[entry.offset[j].pointer]->lse_->attribution->index << " " << entry.ADDR_ + j);
+								entry.offset[j].valid = 0;
+								channel_occupy[entry.offset[j].pointer] = 1;
+							}
+						}
+						//release_poped_addr(inflight_reg->ADDR_);
+						entry.complete = 1;
+						bool remain = 0;
+						for (short j = 0; j < CACHE_LINE_SIZE; j++)
+						{
+							if (entry.offset[j].valid)
+								remain = 1;
+						}
+						//if (!remain)
+						//	pending_inflight.push_back(*(inflight_reg[bank]));
+						if (!remain)
+							entry.reset();
+					}
+					else if (entry.pref)
+					{
+						entry.reset();
+					}
+				}
+			}
+			vector<TabLine>::iterator iter = pending_inflight.begin();
+			if (pending_inflight.size()) {
+				while (iter != pending_inflight.end())
+				{
+					if ((*iter).valid == false) { iter = pending_inflight.erase(iter); }
+					else { iter++; }
+				}
+			}
+		}
 		cache->update();
 
 
@@ -496,7 +541,7 @@ namespace DRAMSim {
 							for (int i = 0; i < post_table.size(); i++) {
 								if (!post_table[i]->valid) {
 									bool blank = true;
-									for (short j = 0; j < CACHE_LINE_SIZE; j++)
+									for (short j = 0; j < system_parameter.post_offset_depth; j++)
 									{
 										if (post_offset[i][j].valid)
 											blank = false;
@@ -579,40 +624,41 @@ namespace DRAMSim {
 				}
 			}
 		}
-		//被阻塞的inflight请求更新！
-		if (inflight_reg[bank]->valid && inflight_reg[bank]->complete)
-		{                                                        //当inflight请求阻塞且完成时，检测MSHR的next_index,若不冲突，则将阻塞的inflight请求完成
-			if (!inflight_reg[bank]->pref)                       //非预取
-			{
-				for (short j = 0; j < CACHE_LINE_SIZE; j++)
+		if (system_parameter.inflight_block) {
+			//被阻塞的inflight请求更新！
+			if (inflight_reg[bank]->valid && inflight_reg[bank]->complete)
+			{                                                        //当inflight请求阻塞且完成时，检测MSHR的next_index,若不冲突，则将阻塞的inflight请求完成
+				if (!inflight_reg[bank]->pref)                       //非预取
 				{
-					if (inflight_reg[bank]->offset[j].valid && !channel_occupy[inflight_reg[bank]->offset[j].pointer])
+					for (short j = 0; j < CACHE_LINE_SIZE; j++)
 					{
-						//cbk_addr在步长为1时才有效，用于debug
-						(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->offset[j].tag);
-						if(print_enable)
-							PRINTM("return inflight_reg data to " << arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_->attribution->index << " " << inflight_reg[bank]->ADDR_ + j);
-						inflight_reg[bank]->offset[j].valid = 0;
-						channel_occupy[inflight_reg[bank]->offset[j].pointer] = 1;
+						if (inflight_reg[bank]->offset[j].valid && !channel_occupy[inflight_reg[bank]->offset[j].pointer])
+						{
+							//cbk_addr在步长为1时才有效，用于debug
+							(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->offset[j].tag);
+							if(print_enable)
+								PRINTM("return inflight_reg data to " << arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_->attribution->index << " " << inflight_reg[bank]->ADDR_ + j);
+							inflight_reg[bank]->offset[j].valid = 0;
+							channel_occupy[inflight_reg[bank]->offset[j].pointer] = 1;
+						}
 					}
+					//release_poped_addr(inflight_reg->ADDR_);
+					inflight_reg[bank]->complete = 1;
+					bool remain = 0;
+					for (short j = 0; j < CACHE_LINE_SIZE; j++)
+					{
+						if (inflight_reg[bank]->offset[j].valid)
+							remain = 1;
+					}
+					if (!remain)						
+						inflight_reg[bank]->reset();
 				}
-				//release_poped_addr(inflight_reg->ADDR_);
-				inflight_reg[bank]->complete = 1;
-				bool remain = 0;
-				for (short j = 0; j < CACHE_LINE_SIZE; j++)
+				else if (inflight_reg[bank]->pref)
 				{
-					if (inflight_reg[bank]->offset[j].valid)
-						remain = 1;
-				}
-				if (!remain)
 					inflight_reg[bank]->reset();
-			}
-			else if (inflight_reg[bank]->pref)
-			{
-				inflight_reg[bank]->reset();
+				}
 			}
 		}
-
 		bank++;
 		if (bank == CACHE_BANK)
 			bank = 0;
@@ -1000,7 +1046,18 @@ namespace DRAMSim {
 				}
 				PRINTMN(endl);
 			}
-
+			PRINTM(endl << "------------pending-------------");
+			for (uint32_t i = 0; i < pending_inflight.size(); i++)
+			{
+				PRINTMN("table " << i << " transid " << pending_inflight[i].transid << " valid =" << pending_inflight[i].valid << " addr "
+					<< "=" << pending_inflight[i].ADDR_ << " rdwr " << "=" << pending_inflight[i].rdwr << " complete = " << pending_inflight[i].complete);
+				PRINTMN(" offset valid = ");
+				for (int j = 0; j < system_parameter.post_offset_depth; j++)
+				{
+					PRINTMN(pending_inflight[i].offset[j].valid << " ");
+				}
+				PRINTMN(endl);
+			}
 			PRINTMN("poped_addr size = " << poped_addr.size() << "; ");
 			for (auto it = poped_addr.begin(); it != poped_addr.end(); it++)
 			{
@@ -1110,8 +1167,16 @@ void Lsu::read_hit_complete(uint32_t addr,uint32_t i)
 				if (inflight_reg[bank]->offset[j].valid)
 					remain = 1;
 			}
-			if (!remain)
+			if (!system_parameter.inflight_block) {
+				if (remain)
+					pending_inflight.push_back(*(inflight_reg[bank]));
 				inflight_reg[bank]->reset();
+			}
+			else {
+				if (!remain)
+					inflight_reg[bank]->reset();
+			}
+			//if(!remain)
 		}
 		else if (inflight_reg[bank]->pref)
 		{
@@ -1327,7 +1392,7 @@ bool Lsu::addTrans2post(TabLine * line)
 		bool blank = 1;
 		if (!post_table[i]->valid && !post_table[i]->complete)
 		{
-			for (short j = 0; j < CACHE_LINE_SIZE; j++)
+			for (short j = 0; j < system_parameter.post_offset_depth; j++)
 			{
 				if (post_offset[i][j].valid)
 					blank = 0;
