@@ -264,6 +264,7 @@
     <Xml Include="resource\input\DFGTest.xml" />
     <Xml Include="resource\input\DFG_84.xml" />
     <Xml Include="resource\input\DFG_edge_detect.xml" />
+    <Xml Include="resource\input\DFG_edge_detect_noconflict.xml" />
     <Xml Include="resource\input\EDGE.xml" />
     <Xml Include="resource\input\MD.xml" />
     <Xml Include="resource\input\no_balance.xml" />
