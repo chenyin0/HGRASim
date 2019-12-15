@@ -616,6 +616,7 @@ void Processing_element::gatherOperands()
 				}
 				else {
 					alu->input(aluin, attribution->opcode, true, rs_cd);
+					alu_havein = true;
 				}
 			}
 		}
@@ -727,8 +728,10 @@ void Processing_element::aluUpdate()
 				alu->update();      //alu流水更新以及输出
 			}
 			else {
-				if (alu->pipeline.front().cycle < alu->depth-1) {
-					alu->update();
+				if (alu->pipeline.size()) {
+					if (alu->pipeline.front().cycle < alu->depth - 1) {
+						alu->update();
+					}
 				}
 			}
 		}

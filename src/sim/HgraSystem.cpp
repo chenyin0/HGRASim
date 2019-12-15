@@ -760,8 +760,9 @@ void HgraArray::calc_data()
 {
 	for (auto& pe : pe_map)
 	{
-		if (pe.second->alu_busy()&& pe.second->attribution->key_cal) {
+		if (pe.second->alu_havein&& pe.second->attribution->key_cal) {
 			pe_ulti_cnt++;
+			pe.second->alu_havein = false;
 		}
 	}
 }

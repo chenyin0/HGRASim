@@ -903,13 +903,13 @@ namespace DRAMSim {
 						else
 						{
 							pre_fifo[bank].push_back(new_line);
-							if (!new_line->rdwr) {
+						//	if (!new_line->rdwr) {
 								//	exist_banks.insert(bank);
 								if (exist_banks.find(bank) != exist_banks.end())
 									conflict_times++;
 								exist_banks.insert(bank);
 								add_times++;
-							}
+						//	}
 							if (system_parameter.cache_mode) {
 								bank = (addr & BANK_BITS) >> ADDR_BANK;
 							}
@@ -939,13 +939,13 @@ namespace DRAMSim {
 						}
 					}
 					pre_fifo[bank].push_back(new_line);
-					if (!new_line->rdwr) {
+				//	if (!new_line->rdwr) {
 						//exist_banks.insert(bank);
 						if (exist_banks.find(bank) != exist_banks.end())
 							conflict_times++;
 						exist_banks.insert(bank);
 						add_times++;//跳出循环后还有最后一条
-					}
+				//	}
 					if (print_enable)
 						PRINTM("vec_tran send from arbitratorline " << index << " to fifo ");
 				}
@@ -974,13 +974,13 @@ namespace DRAMSim {
 					transid++;                                            //只有一开始table入数的时候赋值
 
 					pre_fifo[bank].push_back(new_line);
-					if (!new_line->rdwr) {
+				//	if (!new_line->rdwr) {
 						//	exist_banks.insert(bank);
 						if (exist_banks.find(bank) != exist_banks.end())
 							conflict_times++;
 						exist_banks.insert(bank);
 						add_times++;
-					}
+				//	}
 
 					arbitrator->ArbitratorLines[index]->returnACK();     //take the data and return ACK to LE/SE
 					arbitrator->ArbitratorLines[index]->valid = 0;

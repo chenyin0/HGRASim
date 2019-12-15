@@ -15,6 +15,7 @@ namespace Simulator::Array
 		uint index;                  //logic index
 		uint alu_num;
 		bool alu_flag;
+		bool alu_havein;
 		uint ctrl_index;
 		uint in_num;
 		bool rs_cd;

@@ -53,7 +53,7 @@
         <print_bus>false</print_bus>
         <read_bypass>false</read_bypass>
         <write_bypass>false</write_bypass>
-        <cache_mode>true</cache_mode>
+        <cache_mode>false</cache_mode>
         <inflight_blocking>true</inflight_blocking>
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>
