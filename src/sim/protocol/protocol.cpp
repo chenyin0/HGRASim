@@ -85,13 +85,18 @@ bool Pebp::getBp(uint port)
 //			}
 		}
 		else if (pe->attribution->input_bypass == InputBypass::bypass) {
-			if(pe->alu->depth!=0)
-				return(pe->alu->canReceiveInput());
+			if (pe->attribution->buffer_mode[0] == BufferMode::keep) {
+				return !(pe->local_reg[0]->reg_v);
+			}
 			else {
-				if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
-					return(pe->outbuffer->isBufferNotFull(0));
-				else if(pe->attribution->output_from[0] == OutputFrom::alu)
-					return(pe->next_bp[0]);
+				if (pe->alu->depth != 0)
+					return(pe->alu->canReceiveInput());
+				else {
+					if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
+						return(pe->outbuffer->isBufferNotFull(0));
+					else if (pe->attribution->output_from[0] == OutputFrom::alu)
+						return(pe->next_bp[0]);
+				}
 			}
 		}
 //		else if(pe->inbuffer->isBufferNotFull(port)) { return true; }
@@ -134,13 +139,18 @@ bool Pebp::getBp(uint port)
 			}
 		}
 		else if (pe->attribution->input_bypass == InputBypass::bypass) {
-			 if (pe->alu->depth != 0)
-				 return(pe->alu->canReceiveInput());
+			 if (pe->attribution->buffer_mode[1] == BufferMode::lr) {
+				 return !(pe->local_reg[1]->reg_v);
+			 }
 			 else {
-				 if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
-					 return(pe->outbuffer->isBufferNotFull(0));
-				 else if (pe->attribution->output_from[0] == OutputFrom::alu)
-					 return(pe->next_bp[0]);
+				 if (pe->alu->depth != 0)
+					 return(pe->alu->canReceiveInput());
+				 else {
+					 if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
+						 return(pe->outbuffer->isBufferNotFull(0));
+					 else if (pe->attribution->output_from[0] == OutputFrom::alu)
+						 return(pe->next_bp[0]);
+				 }
 			 }
 		}
 		else { return false; }//还需要写alu直接来自inport的情况，此时bp由alu决定
@@ -170,13 +180,18 @@ bool Pebp::getBp(uint port)
 			}
 		}
 		else if (pe->attribution->input_bypass == InputBypass::bypass) {
-			if (pe->alu->depth != 0)
-				return(pe->alu->canReceiveInput());
+			if (pe->attribution->buffer_mode[2] == BufferMode::keep) {
+				return !(pe->local_reg[2]->reg_v);
+			}
 			else {
-				if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
-					return(pe->outbuffer->isBufferNotFull(0));
-				else if (pe->attribution->output_from[0] == OutputFrom::alu)
-					return(pe->next_bp[0]);
+				if (pe->alu->depth != 0)
+					return(pe->alu->canReceiveInput());
+				else {
+					if (pe->attribution->output_from[0] == OutputFrom::outbuffer)
+						return(pe->outbuffer->isBufferNotFull(0));
+					else if (pe->attribution->output_from[0] == OutputFrom::alu)
+						return(pe->next_bp[0]);
+				}
 			}
 		}
 		else { return false; } 

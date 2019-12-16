@@ -562,7 +562,7 @@ void HgraArray::run()
 							}
 							else {
 								for (uint port = 0; port < system_para.data_outport_breadth + system_para.bool_outport_breadth; ++port) {
-									reverseStep1(config_order[i - 1], port);
+									reverseStep1(config_order[i], port);
 								}
 							}
 						}
