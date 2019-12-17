@@ -21,7 +21,13 @@ void Buffer::print(std::ofstream& file)
 	file << "head_ptr" << head_ptr[0] ;
 	file << std::endl;
 }
-
+bool Buffer::haveFalseC(uint port)
+{
+	if (entity[head_ptr[port]][port].valid && !entity[head_ptr[port]][port].condition) {
+		return true;
+	}
+	return false;
+}
 void Buffer::print_valid(std::ofstream& file)
 {
 	file << "----Buffer Element----" << std::endl;

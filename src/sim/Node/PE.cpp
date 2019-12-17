@@ -333,7 +333,10 @@ void Processing_element::getAluInput()
 		//first_loop = false;
 		
 			oprand_collected = true;
-
+			bool have_falsec = false;
+			if (attribution->inbuffer_from[1] == InBufferFrom::aluin1 && inbuffer->haveFalseC(0)) {
+				have_falsec = true;
+			}
 
 			for (uint i = 0; i < in_num; ++i) {
 				//					int search_index = alu_num == 1 ? 1 : i;
@@ -342,13 +345,26 @@ void Processing_element::getAluInput()
 						if (outbuffer->isBufferNotFull(0) && attribution->input_bypass == InputBypass::inbuffer &&
 							(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
 								|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
-							inbuffer->output(aluin[i], i);
+						{
+							if (i == 1 && have_falsec)
+								inbuffer->output_ack(aluin[i], i);
+							else {
+								inbuffer->output(aluin[i], i);
+							}
+						}
+							
 					}
 					else if (attribution->output_from[0] == OutputFrom::alu) {
 						if (next_bp[0] && attribution->input_bypass == InputBypass::inbuffer &&
 							(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
 								|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
-							inbuffer->output(aluin[i], i);
+						{
+							if (i == 1 && have_falsec)
+								inbuffer->output_ack(aluin[i], i);
+							else {
+								inbuffer->output(aluin[i], i);
+							}
+						}
 					}
 					if (outbuffer->isBufferNotFull(0) &&
 						(attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr
@@ -361,7 +377,13 @@ void Processing_element::getAluInput()
 					if (alu->canReceiveInput() && attribution->input_bypass == InputBypass::inbuffer &&
 						(attribution->buffer_mode[i] == BufferMode::lr_out || attribution->buffer_mode[i] == BufferMode::buffer
 							|| (attribution->inbuffer_from[i] == InBufferFrom::aluin1)))//alu来源于inbuffer
-						inbuffer->output(aluin[i], i);
+					{
+						if (i == 1 && have_falsec)
+							inbuffer->output_ack(aluin[i], i);
+						else {
+							inbuffer->output(aluin[i], i);
+						}
+					}
 					else if (alu->canReceiveInput() &&
 						(attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr
 							))//alu来源于lr

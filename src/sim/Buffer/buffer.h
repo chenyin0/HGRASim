@@ -49,6 +49,7 @@ namespace Simulator::Array
 		virtual bool isInputSuccess(uint port) = 0;           //”√”⁄ackbp
 		virtual bool isBufferNotEmpty(uint port) = 0;
 		virtual void getTagMatchIndex(vector<uint>& vec, uint port,uint tag) = 0;
+		virtual bool haveFalseC(uint port);
 		virtual void print(std::ofstream& file);
 		virtual void print_valid(std::ofstream& file);
 
