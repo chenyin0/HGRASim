@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="lib\tinyxml2">
+      <UniqueIdentifier>{52ae72df-8220-4101-ab95-6139026a1ad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{c074daaa-5cdd-4d5a-9a6d-ea400c58e56f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app_graph">
+      <UniqueIdentifier>{e3a17e86-8d72-4d2f-ba13-c399c77958f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{dcdd19b9-ccdd-4e04-be64-a3241d40cdf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sim">
+      <UniqueIdentifier>{b87290a1-035e-4b33-93cc-cd804a6c6f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sim\memory">
+      <UniqueIdentifier>{0462e9c5-c6d0-429e-ba2d-7116c059ab85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sim\Node">
+      <UniqueIdentifier>{11c4449b-0830-4a4d-9dfb-ec86057e8085}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sim\protocol">
+      <UniqueIdentifier>{3828156a-ee07-42ff-a17b-cb49563e947c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sim\module">
+      <UniqueIdentifier>{4f9f20aa-a179-4b7e-9507-f8e9b4d9be16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sim\factory">
+      <UniqueIdentifier>{a937414d-99a7-4d0c-bfbf-554e3712327a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sim\Buffer">
+      <UniqueIdentifier>{d584ef97-12df-47f6-b790-204c6cff84aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\preprocess">
+      <UniqueIdentifier>{bcfe1f9c-fd4f-4bec-9a9e-579314d7ae75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pr\mapping">
+      <UniqueIdentifier>{bddb2872-a4a2-445e-b5d2-48b45775d0a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pr">
+      <UniqueIdentifier>{af0d46cd-4f8f-4562-9663-b6ccdc1dd6b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pr\mapping\simulate_anneal">
+      <UniqueIdentifier>{7bfee5a7-12b9-490d-a035-ce1bd3a2e34a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pr\mapping\routing_engine">
+      <UniqueIdentifier>{1bc28108-9635-4add-b703-22d406f40716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pr\resource_graph">
+      <UniqueIdentifier>{861ca92f-7828-4a2a-a0db-f9ef528500cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\shell">
+      <UniqueIdentifier>{caeb43ca-e3d1-4f24-a175-bdbc058cf93a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\bridge">
+      <UniqueIdentifier>{a2f7c799-ba39-432f-8992-9b39b9f91213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pr\global">
+      <UniqueIdentifier>{9fd454ad-3641-44b3-bd62-bb2b0b79d9e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\define">
+      <UniqueIdentifier>{6d620015-d135-4617-9208-cd25013c2337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\fp">
+      <UniqueIdentifier>{d7070f05-c7f2-4d6c-b6d4-d5f71a7c2898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util">
+      <UniqueIdentifier>{e13c8c8a-afc4-403d-9ff8-1b1a27015f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\input">
+      <UniqueIdentifier>{a0a92586-6379-4f48-8b17-bf823d750c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{9db7b9b8-581a-4e79-9966-5789abd02501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\output">
+      <UniqueIdentifier>{7debe2e2-d37d-44a2-9e66-440df531e9ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\backupFile">
+      <UniqueIdentifier>{8a81c0f6-592a-4ed0-a635-f33907d22062}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pr\mapping\simulate_anneal\engine">
+      <UniqueIdentifier>{9088d6b6-edfa-46af-887a-32d4d5858f87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\sim\mem_system">
+      <UniqueIdentifier>{090ede88-2a36-4138-a62c-dbec7bd7252b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\input\DRAMSimini">
+      <UniqueIdentifier>{88188dac-eeba-4aa4-85a5-45066a3136a6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="lib\tinyxml2\tinyxml2.cpp">
+      <Filter>lib\tinyxml2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\HgraSystem.cpp">
+      <Filter>src\sim</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\memory\MemoryData.cpp">
+      <Filter>src\sim\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\Node\LC.cpp">
+      <Filter>src\sim\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\Node\LSE.cpp">
+      <Filter>src\sim\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\Node\Node.cpp">
+      <Filter>src\sim\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\Node\PE.cpp">
+      <Filter>src\sim\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\protocol\protocol.cpp">
+      <Filter>src\sim\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\module\module.cpp">
+      <Filter>src\sim\module</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\factory\factory.cpp">
+      <Filter>src\sim\factory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\Buffer\buffer.cpp">
+      <Filter>src\sim\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\preprocess\preprocess.cpp">
+      <Filter>src\preprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pr\mapping\simulate_anneal\simulate_anneal.cpp">
+      <Filter>src\pr\mapping\simulate_anneal</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pr\mapping\routing_engine\routing_engine.cpp">
+      <Filter>src\pr\mapping\routing_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pr\resource_graph\pr_res_graph.cpp">
+      <Filter>src\pr\resource_graph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pr\resource_graph\pr_res_graph_element.cpp">
+      <Filter>src\pr\resource_graph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pr\resource_graph\pr_res_graph_monitor.cpp">
+      <Filter>src\pr\resource_graph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shell\main.cpp">
+      <Filter>src\shell</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bridge\bridge.cpp">
+      <Filter>src\bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app_graph\app_graph.cpp">
+      <Filter>src\app_graph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pr\mapping\mixed_mapping.cpp">
+      <Filter>src\pr\mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pr\mapping\simulate_anneal\engine\graph_analysis.cpp">
+      <Filter>src\pr\mapping\simulate_anneal\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pr\mapping\simulate_anneal\engine\placement_board.cpp">
+      <Filter>src\pr\mapping\simulate_anneal\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pr\mapping\simulate_anneal\engine\sa_engine.cpp">
+      <Filter>src\pr\mapping\simulate_anneal\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\AddressMapping.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\Bank.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\BankState.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\BusPacket.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\Cache.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\ClockDomain.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\CommandQueue.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\IniReader.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\MemoryController.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\MemorySystem.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\MultiChannelMemorySystem.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\PrintMacros.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\Rank.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\SimulatorObject.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\Transaction.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\mem_system\Lsu.cpp">
+      <Filter>src\sim\mem_system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\ClkDomain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\tinyxml2\tinyxml2.h">
+      <Filter>lib\tinyxml2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\inout.h">
+      <Filter>src\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\HgraSystem.h">
+      <Filter>src\sim</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\memory\MemoryData.h">
+      <Filter>src\sim\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\Node\LC.h">
+      <Filter>src\sim\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\Node\LSE.h">
+      <Filter>src\sim\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\Node\Node.h">
+      <Filter>src\sim\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\Node\PE.h">
+      <Filter>src\sim\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\protocol\protocol.h">
+      <Filter>src\sim\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\module\module.h">
+      <Filter>src\sim\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\factory\factory.h">
+      <Filter>src\sim\factory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\Buffer\buffer.h">
+      <Filter>src\sim\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\preprocess\arch_block_net.hpp">
+      <Filter>src\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="src\preprocess\dfg_node.hpp">
+      <Filter>src\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="src\preprocess\enum_converter.hpp">
+      <Filter>src\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="src\preprocess\enum_definition.hpp">
+      <Filter>src\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="src\preprocess\para.hpp">
+      <Filter>src\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="src\preprocess\preprocess.h">
+      <Filter>src\preprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\mapping\simulate_anneal\simulate_anneal.h">
+      <Filter>src\pr\mapping\simulate_anneal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\mapping\routing_engine\routing_engine.h">
+      <Filter>src\pr\mapping\routing_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\resource_graph\pr_res_graph.h">
+      <Filter>src\pr\resource_graph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\resource_graph\pr_res_graph_element.h">
+      <Filter>src\pr\resource_graph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\resource_graph\pr_res_graph_monitor.h">
+      <Filter>src\pr\resource_graph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\global\global.hpp">
+      <Filter>src\pr\global</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bridge\bridge.h">
+      <Filter>src\bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="src\define\define.hpp">
+      <Filter>src\define</Filter>
+    </ClInclude>
+    <ClInclude Include="src\define\global.hpp">
+      <Filter>src\define</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fp\FP_lib.hpp">
+      <Filter>src\fp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\cord.hpp">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\txt_read.hpp">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\util.hpp">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app_graph\app_graph.h">
+      <Filter>src\app_graph</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\mapping\mixed_mapping.h">
+      <Filter>src\pr\mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\mapping\simulate_anneal\sa_cost_function.hpp">
+      <Filter>src\pr\mapping\simulate_anneal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\mapping\simulate_anneal\sa_temperature_function.hpp">
+      <Filter>src\pr\mapping\simulate_anneal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\mapping\simulate_anneal\engine\graph_analysis.h">
+      <Filter>src\pr\mapping\simulate_anneal\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\mapping\simulate_anneal\engine\placement_board.h">
+      <Filter>src\pr\mapping\simulate_anneal\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pr\mapping\simulate_anneal\engine\sa_engine.h">
+      <Filter>src\pr\mapping\simulate_anneal\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\AddressMapping.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\Bank.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\BankState.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\BusPacket.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\Cache.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\Callback.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\ClockDomain.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\CommandQueue.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\CSVWriter.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\IniReader.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\MemoryController.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\MemorySystem.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\MultiChannelMemorySystem.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\PrintMacros.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\Rank.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\resource.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\SimulatorObject.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\SystemConfiguration.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\Transaction.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\unistd.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\Lsu.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\mem_system\define.h">
+      <Filter>src\sim\mem_system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\ClkDomain.h" />
+    <ClInclude Include="src\sim\debug.hpp" />
+    <ClInclude Include="src\util\address.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="resource\input\system.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\output\Block.xml">
+      <Filter>resource\output</Filter>
+    </Xml>
+    <Xml Include="resource\output\Placement.xml">
+      <Filter>resource\output</Filter>
+    </Xml>
+    <Xml Include="resource\output\Port.xml">
+      <Filter>resource\output</Filter>
+    </Xml>
+    <Xml Include="resource\output\Routing.xml">
+      <Filter>resource\output</Filter>
+    </Xml>
+    <Xml Include="resource\output\Segment.xml">
+      <Filter>resource\output</Filter>
+    </Xml>
+    <Xml Include="resource\output\Wire.xml">
+      <Filter>resource\output</Filter>
+    </Xml>
+    <Xml Include="resource\backupFile\DFGConfig.xml">
+      <Filter>resource\backupFile</Filter>
+    </Xml>
+    <Xml Include="resource\backupFile\system.xml">
+      <Filter>resource\backupFile</Filter>
+    </Xml>
+    <Xml Include="resource\input\DFGTest.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\DFG_73.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\DFG_23.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\DFG_70.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\DFG_84.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\DFG_42_nw_dp.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\DFG_42_adpcm.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\ArchConfig.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\ArchConfig_nols.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\DFG_edge_detect.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\condition.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\aluin_test.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\break_test.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\continue_test.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\NW.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\no_balance.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\MD.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\EDGE.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+    <Xml Include="resource\input\DFG_edge_detect_noconflict.xml">
+      <Filter>resource\input</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resource\backupFile\KNN.txt">
+      <Filter>resource\backupFile</Filter>
+    </Text>
+    <Text Include="resource\output\wholeDebugReg.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+    <Text Include="resource\output\wholeDebugWire.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+    <Text Include="resource\output\Debuglseout.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+    <Text Include="resource\output\wholeDebuglseout.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+    <Text Include="..\..\项目源码理解\ConditionCase\01_ConditionCase\MemoryInFile.txt">
+      <Filter>resource\input</Filter>
+    </Text>
+    <Text Include="resource\output\dataflow.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+    <Text Include="resource\output\wholedata.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+    <Text Include="resource\input\NW_memoryInFile.txt">
+      <Filter>resource\input</Filter>
+    </Text>
+    <Text Include="resource\input\memoryInfileCond.txt">
+      <Filter>resource\input</Filter>
+    </Text>
+    <Text Include="resource\input\memoryInFile_edge_detect.txt">
+      <Filter>resource\input</Filter>
+    </Text>
+    <Text Include="resource\input\MD_memoryInFile.txt">
+      <Filter>resource\input</Filter>
+    </Text>
+    <Text Include="resource\output\cache_lsu.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+    <Text Include="resource\output\whole_cache_lsu.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resource\output\DebugReg.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+    <Text Include="resource\output\DebugWire.txt">
+      <Filter>resource\output</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\input\ini\DDR2_micron_16M_8b_x8_sg3E.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\DDR2_micron_32M_4B_x4_sg3E.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\DDR2_micron_32M_8B_x4_sg25E.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\DDR3_micron_8M_8B_x16_sg15.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\DDR3_micron_16M_8B_x8_sg15.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\DDR3_micron_32M_8B_x4_sg15.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\DDR3_micron_32M_8B_x4_sg125.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\DDR3_micron_32M_8B_x8_sg15.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\DDR3_micron_32M_8B_x8_sg25E.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\DDR3_micron_64M_8B_x4_sg15.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="resource\input\ini\system.ini">
+      <Filter>resource\input\DRAMSimini</Filter>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

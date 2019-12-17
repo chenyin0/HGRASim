@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<parameter>
+    <array>
+        <!-- PE -->
+        <peNum>64</peNum>
+        <aluInNum>3 </aluInNum>
+        <peInBufferDepth>2</peInBufferDepth>
+        <peBufferBp>credit</peBufferBp>
+        <peOutBufferDepth>1</peOutBufferDepth>
+        <dataPortType>d32_b1_v1</dataPortType>
+        <boolPortType>d1_v1</boolPortType>
+        <dataInPortNum>2</dataInPortNum>
+        <boolInPortNum>1</boolInPortNum>
+        <dataOutPortNum>1</dataOutPortNum>
+        <boolOutPortNum>0</boolOutPortNum>
+
+        <!-- LSE -->>
+        <lseNum>32</lseNum>
+        <lseInBufferDepth>3</lseInBufferDepth>
+        <lseDataInBreadth>1</lseDataInBreadth>
+        <lseBoolInBreadth>0</lseBoolInBreadth>
+        <leDataOutBreadth>1</leDataOutBreadth>
+        <leBoolOutBreadth>0</leBoolOutBreadth>
+        <leOutBufferDepthSmall>32</leOutBufferDepthSmall>
+        <leOutBufferDepthMiddle>64</leOutBufferDepthMiddle>
+        <leOutBufferDepthLarge>128</leOutBufferDepthLarge>
+
+        <!-- LC -->>
+        <lcNum>4</lcNum>
+        <lcOutputNum>4</lcOutputNum>
+        <lcBufferDepth>1</lcBufferDepth>
+        <lcBufferBoolBreadth>0</lcBufferBoolBreadth>
+        <lcBufferDataBreadth>1</lcBufferDataBreadth>
+        <lcEndInNum>8</lcEndInNum>
+        <lcRegInNum>4</lcRegInNum>
+
+        <!-- LSU -->>
+      <!--要测量bankconflict，把leOutBufferDepthMiddle,fifolinen_num,post_offset_depth设的尽量大，可设成2048-->
+      <!--<tabline_num>20</tabline_num>
+        <fifolinen_num>20</fifolinen_num>
+        <offset_depth>4</offset_depth>
+        <post_offset_depth>8</post_offset_depth>
+        <in_num>16</in_num>-->
+        <tabline_num>50</tabline_num>
+        <fifolinen_num>30</fifolinen_num>
+        <offset_depth>4</offset_depth>
+        <post_offset_depth>20</post_offset_depth>
+        <in_num>10</in_num>
+        <tagbits>6</tagbits>
+        <overlap_print>false</overlap_print>
+        <bus_enable>true</bus_enable>
+        <bus_delay>5</bus_delay>
+        <print_bus>false</print_bus>
+        <read_bypass>false</read_bypass>
+        <write_bypass>false</write_bypass>
+        <cache_mode>false</cache_mode>
+        <inflight_blocking>true</inflight_blocking>
+        <!-- SYSTEM -->>
+        <debugLevel>2</debugLevel>
+        <printscreen>true</printscreen>
+        <stallMode>inbuffer_stall</stallMode>
+        <attachMemory>true</attachMemory>
+        <maxClk>200000</maxClk>
+        <profiling>true</profiling>
+        <maxMemoryDepth>100000</maxMemoryDepth>
+        
+    </array>
+    <arch>
+
+    </arch>
+</parameter>

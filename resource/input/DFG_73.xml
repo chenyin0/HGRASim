@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 边缘检测-->
+<!-- PE53 LC2 LS18 total = 73 -->
+<Config manual_placement="true">
+    <node type="pe" index="0" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="lc" index="0" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[5, 4]"/>
+    </node>
+    <node type="pe" index="1" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="lc" index="1" port="0"/>
+        <input type="pe" index="0" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[5, 3]"/>
+    </node>
+    <node type="pe" index="2" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="1" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[6, 3]"/>
+    </node>
+    <node type="pe" index="3" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="1" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[8, 4]"/>
+    </node>
+    <node type="pe" index="4" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="3" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[1, 1]"/>
+    </node>
+    <node type="pe" index="5" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="3" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[1, 5]"/>
+    </node>
+    <node type="pe" index="6" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="3" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[8, 2]"/>
+    </node>
+    <node type="pe" index="7" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="3" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[2, 7]"/>
+    </node>
+    <node type="pe" index="8" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="1" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[1, 2]"/>
+    </node>
+    <node type="pe" index="9" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="2" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[1, 3]"/>
+    </node>
+    <node type="pe" index="10" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="3" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[1, 4]"/>
+    </node>
+    <node type="pe" index="11" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="5" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[1, 6]"/>
+    </node>
+    <node type="pe" index="12" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="6" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[1, 7]"/>
+    </node>
+    <node type="pe" index="13" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="7" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[1, 8]"/>
+    </node>
+    <node type="pe" index="14" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="9" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[2, 8]"/>
+    </node>
+    <node type="pe" index="15" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="10" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[3, 8]"/>
+    </node>
+    <node type="pe" index="16" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="11" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[4, 8]"/>
+    </node>
+    <node type="pe" index="17" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="5" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[2, 6]"/>
+    </node>
+    <node type="pe" index="18" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="6" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[3, 7]"/>
+    </node>
+    <node type="pe" index="19" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="7" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[4, 7]"/>
+    </node>
+    <node type="pe" index="20" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="9" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[2, 5]"/>
+    </node>
+    <node type="pe" index="21" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="10" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[3, 5]"/>
+    </node>
+    <node type="pe" index="22" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="11" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[4, 5]"/>
+    </node>
+    <node type="pe" index="23" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="13" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[6, 8]"/>
+    </node>
+    <node type="pe" index="24" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="14" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[7, 8]"/>
+    </node>
+    <node type="pe" index="25" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="ls" index="15" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[8, 8]"/>
+    </node>
+    <node type="pe" index="26" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="8" port="0"/>
+        <input type="pe" index="9" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[2, 2]"/>
+    </node>
+    <node type="pe" index="27" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="10" port="0"/>
+        <input type="pe" index="11" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[2, 4]"/>
+    </node>
+    <node type="pe" index="28" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="12" port="0"/>
+        <input type="pe" index="13" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[5, 7]"/>
+    </node>
+    <node type="pe" index="29" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="14" port="0"/>
+        <input type="pe" index="15" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[4, 6]"/>
+    </node>
+    <node type="pe" index="30" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="26" port="0"/>
+        <input type="pe" index="27" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[3, 2]"/>
+    </node>
+    <node type="pe" index="31" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="28" port="0"/>
+        <input type="pe" index="29" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[4, 3]"/>
+    </node>
+    <node type="pe" index="32" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="30" port="0"/>
+        <input type="pe" index="31" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[4, 2]"/>
+    </node>
+    <node type="pe" index="33" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="32" port="0"/>
+        <input type="pe" index="16" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[5, 2]"/>
+    </node>
+    <node type="pe" index="34" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="33" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[5, 1]"/>
+    </node>
+    <node type="pe" index="35" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="17" port="0"/>
+        <input type="pe" index="18" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[3, 6]"/>
+    </node>
+    <node type="pe" index="36" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="19" port="0"/>
+        <input type="pe" index="20" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[5, 5]"/>
+    </node>
+    <node type="pe" index="37" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="21" port="0"/>
+        <input type="pe" index="22" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[3, 4]"/>
+    </node>
+    <node type="pe" index="38" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="23" port="0"/>
+        <input type="pe" index="24" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[6, 7]"/>
+    </node>
+    <node type="pe" index="39" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="35" port="0"/>
+        <input type="pe" index="36" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[5, 6]"/>
+    </node>
+    <node type="pe" index="40" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="37" port="0"/>
+        <input type="pe" index="38" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[6, 4]"/>
+    </node>
+    <node type="pe" index="41" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="39" port="0"/>
+        <input type="pe" index="40" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[6, 6]"/>
+    </node>
+    <node type="pe" index="42" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="41" port="0"/>
+        <input type="pe" index="25" port="0"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[8, 6]"/>
+    </node>
+    <node type="pe" index="43" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="42" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[8, 5]"/>
+    </node>
+    <node type="pe" index="44" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="2" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[6, 2]"/>
+    </node>
+    <node type="pe" index="45" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="44" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[6, 1]"/>
+    </node>
+    <node type="pe" index="46" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="48" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[7, 4]"/>
+    </node>
+    <node type="pe" index="47" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="46" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[8, 4]"/>
+    </node>
+    <node type="pe" index="48" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="2" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[7, 3]"/>
+    </node>
+    <node type="pe" index="49" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="4" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[5, 8]"/>
+    </node>
+    <node type="pe" index="50" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="5" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[7, 6]"/>
+    </node>
+    <node type="pe" index="51" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="6" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[7, 7]"/>
+    </node>
+    <node type="pe" index="52" opcode="add" controlMode="data_flow">
+        <inner_connection lr_from="in1" alu_in0_from="inbuffer" alu_in1_from="inbuffer" alu_in2_from="inbuffer" ob0_from="alu" output0_from="alu"/>
+        <input type="pe" index="7" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <placement cord="[8, 7]"/>
+    </node>
+    <node type="lc" index="0" outermost="false" controlMode="3">
+        <input type="begin"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <reg value="100" />
+        <reg value="100" />
+        <placement cord="[0, 0]"/>
+    </node>
+    <node type="lc" index="1" outermost="false" controlMode="3">
+        <input type="pe" index="0" port="0"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <input type="null"/>
+        <reg value="100" />
+        <reg value="100" />
+        <reg value="100" />
+        <placement cord="[9, 9]"/>
+    </node>
+    <node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="4" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 1]"/>
+    </node>
+    <node type="ls" index="1" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="4" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 2]"/>
+    </node>
+    <node type="ls" index="2" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="4" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 3]"/>
+    </node>
+    <node type="ls" index="3" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="5" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 4]"/>
+    </node>
+    <node type="ls" index="4" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="5" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 5]"/>
+    </node>
+    <node type="ls" index="5" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="5" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 6]"/>
+    </node>
+    <node type="ls" index="6" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="5" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 7]"/>
+    </node>
+    <node type="ls" index="7" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="5" port="0"/>
+        <input type="null"/>
+        <placement cord="[0, 8]"/>
+    </node>
+    <node type="ls" index="8" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="5" port="0"/>
+        <input type="null"/>
+        <placement cord="[1, 9]"/>
+    </node>
+    <node type="ls" index="9" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="7" port="0"/>
+        <input type="null"/>
+        <placement cord="[2, 9]"/>
+    </node>
+    <node type="ls" index="10" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="7" port="0"/>
+        <input type="null"/>
+        <placement cord="[3, 9]"/>
+    </node>
+    <node type="ls" index="11" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="7" port="0"/>
+        <input type="null"/>
+        <placement cord="[4, 9]"/>
+    </node>
+    <node type="ls" index="12" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="49" port="0"/>
+        <input type="null"/>
+        <placement cord="[5, 9]"/>
+    </node>
+    <node type="ls" index="13" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="50" port="0"/>
+        <input type="null"/>
+        <placement cord="[6, 9]"/>
+    </node>
+    <node type="ls" index="14" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="51" port="0"/>
+        <input type="null"/>
+        <placement cord="[7, 9]"/>
+    </node>
+    <node type="ls" index="15" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="52" port="0"/>
+        <input type="null"/>
+        <placement cord="[8, 9]"/>
+    </node>
+    <node type="ls" index="16" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="45" port="0"/>
+        <input type="pe" index="34" port="0"/>
+        <placement cord="[5, 0]"/>
+    </node>
+    <node type="ls" index="17" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="small" match="true">
+        <input type="pe" index="47" port="0"/>
+        <input type="pe" index="43" port="0"/>
+        <placement cord="[9, 5]"/>
+    </node>
+</Config>
