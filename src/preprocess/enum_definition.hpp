@@ -219,4 +219,21 @@ namespace Simulator
 	{
 		simulate_anneal
 	};
+
+	enum class MemAccessMode
+	{
+		//Idle,  // 当前context，LSE空闲
+		temp,  // 存储中间数据,	LSE处于load和store模式都有效！！
+		stream,  // 有规律的连续访存, 仅当LSE处于load模式；store模式无效！！
+		irregular,  // 无规律的访存，Out of order,；仅当LSE处于load模式；store模式无效！！
+		none  // 当LSE处于store模式时，如果不是配为temp，就都配为None！！
+	};
+
+	// 以下配置字仅在LSE处于load模式下有效，因为DAE是针对LSE的load操作
+	enum class DaeMode
+	{
+		send_addr,  // send address to SPM in LSE load
+		get_data,  // get data from SPM in LSE load
+		none  // if LSE not in load mode(namely when LSE in store mode), daeMode should configured as "None"
+	};
 }

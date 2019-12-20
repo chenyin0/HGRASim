@@ -35,9 +35,52 @@ namespace Simulator::Array
 		short tag;
 		bool rdwr;
 		bool dae;
+
+		//bool isNewContext;  // identify it is a new context when switch the context
+		uint lseId_virtual;  // LSE 实际的硬件ID，从配置文件里读出
+
+		MemAccessMode _memAccessMode;  // add memory access mode
+		DaeMode _daeMode;
+
+		bool lastData; // 表示最后一次循环的数据，用来指导SPM里的schedule切换配置
+		// bind with each load request, send the data back to SPM according to these two Id
+		uint bankId;
+		uint rowId;
+
 		//uint tag;
-		Port_inout_lsu() { value_addr = 0; value_data = 0; valid = false; tag = 0; rdwr = false; dae = false; }
-		void reset() { value_addr = 0; value_data = 0; valid = false; tag = 0; rdwr = false; dae = false; };
+
+		Port_inout_lsu() 
+		{
+			value_addr = 0; 
+			value_data = 0; 
+			valid = false; 
+			tag = 0;
+			rdwr = false; 
+			dae = false;
+
+			_memAccessMode = MemAccessMode::temp;
+			_daeMode = DaeMode::none; 
+			/*isNewContext = 0;*/  
+			lseId_virtual = 0;
+			lastData = 0;
+			
+			bankId = 0;  
+			rowId = 0; 
+		}
+
+		void reset() 
+		{ 
+			value_addr = 0; 
+			value_data = 0;
+			valid = false; 
+			tag = 0; 
+			rdwr = false;
+			dae = false; 
+			_memAccessMode = MemAccessMode::temp;
+			_daeMode = DaeMode::none; 
+			/*isNewContext = 0;*/
+			lastData = 0;
+		}
 	};
 
 	/*

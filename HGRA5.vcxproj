@@ -234,6 +234,7 @@
     <ClInclude Include="src\sim\Node\LSE.h" />
     <ClInclude Include="src\sim\Node\Node.h" />
     <ClInclude Include="src\sim\Node\PE.h" />
+    <ClInclude Include="src\sim\Node\SPM.hpp" />
     <ClInclude Include="src\sim\protocol\protocol.h" />
     <ClInclude Include="src\sim\HgraSystem.h" />
     <ClInclude Include="src\util\address.hpp" />

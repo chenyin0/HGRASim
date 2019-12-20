@@ -399,6 +399,9 @@
     <ClInclude Include="src\sim\ClkDomain.h" />
     <ClInclude Include="src\sim\debug.hpp" />
     <ClInclude Include="src\util\address.hpp" />
+    <ClInclude Include="src\sim\Node\SPM.hpp">
+      <Filter>src\sim\Node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="resource\input\system.xml">

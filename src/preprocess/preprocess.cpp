@@ -417,6 +417,7 @@ namespace Simulator::Preprocess
 		//lse
 		_array_para.lse_inbuffer_depth = std::stoi(array_xml->FirstChildElement("lseInBufferDepth")->GetText());
 		_array_para.lse_num= std::stoi(array_xml->FirstChildElement("lseNum")->GetText());
+		_array_para.lse_virtual_num = std::stoi(array_xml->FirstChildElement("lseVirtualNum")->GetText());
 		_array_para.lse_datain_breadth = std::stoi(array_xml->FirstChildElement("lseDataInBreadth")->GetText());
 		_array_para.lse_boolin_breadth = std::stoi(array_xml->FirstChildElement("lseBoolInBreadth")->GetText());
 		_array_para.le_dataout_breadth = std::stoi(array_xml->FirstChildElement("leDataOutBreadth")->GetText());
@@ -424,6 +425,10 @@ namespace Simulator::Preprocess
 		_array_para.le_outbuffer_depth_small = std::stoi(array_xml->FirstChildElement("leOutBufferDepthSmall")->GetText());
 		_array_para.le_outbuffer_depth_middle = std::stoi(array_xml->FirstChildElement("leOutBufferDepthMiddle")->GetText());
 		_array_para.le_outbuffer_depth_large = std::stoi(array_xml->FirstChildElement("leOutBufferDepthLarge")->GetText());
+
+
+		//SPM
+		_array_para.SPM_depth = std::stoi(array_xml->FirstChildElement("SPM_depth")->GetText());
 
 		//lsu
 		_array_para.tabline_num = std::stoi(array_xml->FirstChildElement("tabline_num")->GetText());
@@ -441,6 +446,7 @@ namespace Simulator::Preprocess
 		_array_para.write_bypass = (array_xml->FirstChildElement("write_bypass")->GetText() == string("true"));
 		_array_para.cache_mode = (array_xml->FirstChildElement("cache_mode")->GetText() == string("true"));
 		_array_para.inflight_block = (array_xml->FirstChildElement("inflight_blocking")->GetText() == string("true"));
+
 		//system
 		_array_para.debug_level = std::stoi(array_xml->FirstChildElement("debugLevel")->GetText());
 		_array_para.stall_mode = StallModeConverter::toEnum(array_xml->FirstChildElement("stallMode")->GetText());
