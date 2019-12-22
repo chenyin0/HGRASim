@@ -417,10 +417,33 @@ namespace Simulator::Array
 		// update SPM in each cycle
 		void spmUpdate()
 		{
-			for (auto i : contextQueue)
+			for (auto i : contextQueue)  // traverse each context
 			{
-				
+				for (auto i : _lseConfig[i])  // traverse each LSE in the current context
+				{
+					lse2Spm();  // send temp data or addr from LSE to SPM
+					spm2Mem();  // send addr from SPM to Mem
+					mem2Spm();  // send load data from Mem to SPM
+					spm2Lse();  // send temp data or load data from SPM to LSE
+				}
 			}
+		}
+
+		void lse2Spm()
+		{
+
+		}
+
+		void spm2Mem()
+		{
+		}
+
+		void mem2Spm()
+		{
+		}
+
+		void spm2Lse()
+		{
 		}
 
 	private:
