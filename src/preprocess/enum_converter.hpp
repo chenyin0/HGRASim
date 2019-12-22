@@ -725,6 +725,35 @@ namespace Simulator
 		}
 	};
 
+	class BranchModeConverter
+	{
+	public:
+		static auto toString(BranchMode type_)->string
+		{
+			if (type_ == BranchMode::truePath)
+				return "truePath";
+			if (type_ == BranchMode::falsePath)
+				return "falsePath";
+			if (type_ == BranchMode::none)
+				return "none";
+			DEBUG_ASSERT(false);
+			return "";
+		}
+
+		static auto toEnum(string s_)->BranchMode
+		{
+			if (s_ == "truePath")
+				return BranchMode::truePath;
+			if (s_ == "falsePath")
+				return BranchMode::falsePath;
+			if (s_ == "none")
+				return BranchMode::none;
+			throw std::runtime_error("your configuration is boom(BranchMode)");
+			DEBUG_ASSERT(false);
+			return BranchMode::none;
+		}
+	};
+
 	using WireTypeConverter = PortTypeConverter;
 	using SegmentTypeConverter = PortTypeConverter;
 

@@ -220,6 +220,7 @@ namespace Simulator
 		simulate_anneal
 	};
 
+
 	enum class MemAccessMode
 	{
 		//Idle,  // µ±«∞context£¨LSEø’œ–
@@ -235,5 +236,12 @@ namespace Simulator
 		send_addr,  // send address to SPM in LSE load
 		get_data,  // get data from SPM in LSE load
 		none  // if LSE not in load mode(namely when LSE in store mode), daeMode should configured as "None"
+	};
+
+	enum class BranchMode
+	{
+		truePath,  // current context is a true path in the branch
+		falsePath, // current context is a false path in the branch
+		none  // current context is not in a branch
 	};
 }

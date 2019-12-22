@@ -4,6 +4,7 @@
 #include "stdlib.h"                       
 #include "math.h"                         //pay attention to ACK
 #include <vector>
+#include <deque>
 #include <map>
 #include "../mem_system/MultiChannelMemorySystem.h"
 #include "../mem_system/Cache.h"
@@ -81,14 +82,16 @@ namespace Simulator::Array
 			}
 		}
 
-		// reset bank read/write finish signal when switch context
-		void spmContextSwitchReset()
+		// reset bank read finish signal before a new context with SPM read
+		void resetBankReadFinish(uint bankId)
 		{
-			for (size_t i = 0; i < bankNum; ++i)
-			{
-				bankReadFinish[i] = 0;
-				bankWriteFinish[i] = 0;
-			}
+			bankReadFinish[bankId] = 0;
+		}
+
+		// reset bank write finish signal before a new context with SPM write
+		void resetBankWriteFinish(uint bankId)
+		{
+			bankWriteFinish[bankId] = 0;
 		}
 
 		// get SPM rdPtr
@@ -145,31 +148,186 @@ namespace Simulator::Array
 				bankEmpty[bankId] = 0;
 		}
 
-		// read data from SPM to LSE
-		// use for reading temp data not in branch, read as fifo-style
-		Port_inout_lsu readSpm2Lse_tempWithNonCond(const uint bankId)
+		bool checkBankEmptyWithCond(const uint bankId, bool cond)
 		{
-			if (bankEmpty[bankId] == 1)
-				throw std::runtime_error("try to read an empty SPM bank");
+			bool empty = 0;
 
-			Port_inout_lsu data = _spmBuffer[bankId][rdPtr[bankId]];
+			for (size_t i = 0; i < bankDepth; ++i)
+			{
+				if (_spmBuffer[bankId][i].cond == cond)
+				{
+					empty = empty | _spmBuffer[bankId][i].valid;
+				}
+			}
+
+			/*if (empty == 0)
+				bankEmpty[bankId] = 1;
+			else
+				bankEmpty[bankId] = 0;*/
+
+			return ~empty;
+		}
+
+		// get SPM data, provide to "class SPM" 
+		Port_inout_lsu getSpmData(const uint bankId, const uint rowId)
+		{
+			return _spmBuffer[bankId][rowId];
+		}
+
+		// set data to SPM, provide to "class SPM"
+		void setSpmData(const uint bankId, const uint rowId, const Port_inout_lsu data)
+		{
+			_spmBuffer[bankId][rowId] = data;
+		}
+
+		Port_inout_lsu readData(const uint bankId, const uint rowId)
+		{	
+			if (_spmBuffer[bankId][rowId].valid == 0)
+				throw std::runtime_error("read SPM address error -> try to read an invalid data");
+			else 
+			{
+				_spmBuffer[bankId][rowId].dataReady = 0; // clear data ready both in SPM & current data
+				Port_inout_lsu data = _spmBuffer[bankId][rowId];
+				_spmBuffer[bankId][rowId].valid = 0;  // clear valid flag after data read (only in SPM, keep valid flag in current data)
+				return data;
+			}	
+		}
+
+		Port_inout_lsu readAddr(const uint bankId, const uint rowId)
+		{
+			if (_spmBuffer[bankId][rowId].valid == 0)
+				throw std::runtime_error("read SPM address error -> try to read an invalid address");
+			else if(_spmBuffer[bankId][rowId].dataReady)
+				throw std::runtime_error("read SPM address error -> there is a ready data hasn't been read out");
+			else
+			{
+				_spmBuffer[bankId][rowId].inflight = 1;  // set inflight, indicate this memory request has been sent to the memory
+				return _spmBuffer[bankId][rowId];
+			}
+		}
+
+		void writeData(const uint bankId, const uint rowId, Port_inout_lsu data)
+		{
+			if (_spmBuffer[bankId][rowId].valid == 1)
+				throw std::runtime_error("write SPM address conflict -> there is already a valid data");
+			else 
+			{
+				_spmBuffer[bankId][rowId] = data;
+				_spmBuffer[bankId][rowId].valid = 1;  // set valid flag after data write
+			}
+		}
+
+		void writeMemAck(const uint bankId, const uint rowId, Port_inout_lsu data)
+		{
+			if (_spmBuffer[bankId][rowId].valid != 1 && _spmBuffer[bankId][rowId].inflight != 1)
+				throw std::runtime_error("write back memory ack to SPM error -> there is not a valid inflight request");
+			else
+			{
+				_spmBuffer[bankId][rowId] = data;
+				_spmBuffer[bankId][rowId].inflight = 0;  // clear inflight, indicate the memory ack is already, the data has been load successfully
+				_spmBuffer[bankId][rowId].dataReady = 1; // indicate data is ready
+			}
+		}
+
+		void wrPtrUpdate(uint bankId)
+		{	
+			++wrPtr[bankId];
+
+			if (wrPtr[bankId] == bankDepth)
+				wrPtr[bankId] = 0;
+
+			if (wrPtr[bankId] == rdPtr[bankId])
+				bankFull[bankId] = 1;  // this bank is written full
+		}
+
+		void rdPtrUpdate(uint bankId)
+		{
 			++rdPtr[bankId];
 
 			if (rdPtr[bankId] == bankDepth)
 				rdPtr[bankId] = 0;
 
 			if (rdPtr[bankId] == wrPtr[bankId])
-				bankEmpty[bankId] = 1;
+				bankEmpty[bankId] = 1; // this bank is read empty
+		}
+
+		// reset wrPtr & rdPtr when read SPM context finish
+		// due to if current context read SPM, it must read the bank to empty before switch a new context 
+		void resetPtr(uint bankId)
+		{
+			rdPtr[bankId] = 0;
+			wrPtr[bankId] = 0;
+			bankEmpty[bankId] = 1;
+			bankFull[bankId] = 0;
+		}
+
+		// read data from SPM to LSE
+		// use for reading temp data not in branch, read as fifo-style
+		Port_inout_lsu readSpm2Lse_tempNoCond(const uint bankId)
+		{
+			Port_inout_lsu data;
+
+			if (bankEmpty[bankId] == 1)
+				throw std::runtime_error("try to read an empty SPM bank");
+
+			data = readData(bankId, rdPtr[bankId]);
+			rdPtrUpdate(bankId);
+
+			// if this is the last data of current context, bank read operation is over
+			if (data.lastData == 1)
+			{
+				bankReadFinish[bankId] = 1;
+			}
+			else if (bankEmpty[bankId])  // if bank has been read empty, bank read operation is over
+			{
+				bankReadFinish[bankId] = 1;
+			}
+			else
+				bankReadFinish[bankId] = 0;
 
 			return data;
 		}
 
-		// use for loading irregular-memory-access data, in an OoO way 
-		Port_inout_lsu readSPM_OOO()
+		// read data from SPM to LSE
+		// use for reading temp data in branch, read according to the condition status
+		Port_inout_lsu readSpm2Lse_tempWithCond(const uint bankId, bool cond)
 		{
+			Port_inout_lsu data;
+
 			if (bankEmpty[bankId] == 1)
 				throw std::runtime_error("try to read an empty SPM bank");
-			return _spmBuffer[bankId][rowId];
+
+			while (~checkBankEmptyWithCond(bankId, cond))  // when data with corresponding condition hasn't been read empty
+			{	
+				if (_spmBuffer[bankId][rdPtr[bankId]].cond == cond)
+				{
+					data = readData(bankId, rdPtr[bankId]);
+					rdPtrUpdate(bankId);
+
+					if (data.lastData == 1)
+					{
+						bankReadFinish[bankId] = 1;
+					}
+
+					return data;
+				}
+			}
+
+			bankReadFinish[bankId] = 1;
+		}
+
+		// token match operate in "class SPM", due to "class SpmBuffer" doesn't know which banks need to match
+		Port_inout_lsu readSpm2Lse_memLoad(const uint bankId, const uint rowId)
+		{
+			Port_inout_lsu data = readData(bankId, rowId);
+
+			checkBankEmpty(bankId);
+			if (bankEmpty[bankId])
+			{
+				bankReadFinish[bankId] = 1;
+			}
+
+			return data;
 		}
 
 		// write data from LSE to SPM; 
@@ -179,19 +337,8 @@ namespace Simulator::Array
 			if(bankFull[bankId] == 1)
 				throw std::runtime_error("try to write a full SPM bank");
 
-			if(_spmBuffer[bankId][wrPtr[bankId]].valid == 1)
-				throw std::runtime_error("write SPM address conflict -> there is already a valid data");
-			else
-			{
-				_spmBuffer[bankId][wrPtr[bankId]] = data;
-				++wrPtr[bankId];
-			}
-
-			if (wrPtr[bankId] == bankDepth)
-				wrPtr[bankId] = 0;
-
-			if (wrPtr[bankId] == rdPtr[bankId])
-				bankFull[bankId] = 1;  // this bank is written full
+			writeData(bankId, wrPtr[bankId], data);
+			wrPtrUpdate(bankId);
 
 			// if this is the last data of current context, bank write operation is over
 			if (data.lastData == 1)
@@ -206,25 +353,18 @@ namespace Simulator::Array
 				bankWriteFinish[bankId] = 0;
 		}
 
+		// read addr. from SPM to Memory
+		// use for send addr to memory when load data in DAE
+		Port_inout_lsu readSpm2Mem(const uint bankId, const uint rowId)
+		{
+			return readAddr(bankId, rowId);
+		}
+
 		// write memory ack back to SPM
 		// use for 1) load data in stream/irregular-memory-access mode;
 		void writeMem2Spm(const uint bankId, const uint rowId, const Port_inout_lsu data)
 		{
-			if (_spmBuffer[bankId][rowId].valid == 1)
-				throw std::runtime_error("write SPM address conflict -> there is already a valid data");
-			else
-			{
-				_spmBuffer[bankId][rowId] = data;
-			}
-
-			// only for stream data load, for dynamic schedule
-			checkBankFull(data.bankId);
-
-			if (data.lastData == 1 && bankFull[data.bankId] == 1)
-			{
-				bankWriteFinish[data.bankId];
-			}
-			//************//
+			writeMemAck(bankId, rowId, data);
 		}
 
 
@@ -245,23 +385,12 @@ namespace Simulator::Array
 	};
 
 
-	//class spmStatusTable
-	//{
-	//public:
-	//	spmStatusTable()
-	//	{
-
-	//	}
-
-	//private:
-
-	//};
-
+	using Context = vector<vector<LseConfig>>;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
 
 	class Spm
 	{
 	public:
-		Spm()
+		Spm(Context lseConfig) : _lseConfig(lseConfig)
 		{
 			bankNum = Preprocess::Para::getInstance()->getArrayPara().lse_virtual_num;  // SPM bank number is equal to LSE virtual number
 			bankDepth = Preprocess::Para::getInstance()->getArrayPara().SPM_depth;  // initial SPM buffer depth
@@ -270,12 +399,64 @@ namespace Simulator::Array
 			spmOutput.resize(bankNum);
 		}
 
+		// provide for Scheduler to add a new context to the SPM
+		void addContext(uint contextId)
+		{
+			contextQueue.push_back(contextId);
+		}
+
+		// provide for Scheduler to delete a finished context in the SPM
+		void removeContext(uint contextId)
+		{
+			if (contextId != contextQueue.front())
+				throw std::runtime_error("delete context in contextQueue error -> the context to delete is not the first one in the queue");
+			else
+				contextQueue.pop_front();
+		}
+		
+		// update SPM in each cycle
+		void spmUpdate()
+		{
+			for (auto i : contextQueue)
+			{
+				
+			}
+		}
+
 	private:
+		vector<Port_inout_lsu> spmInput;
+		vector<Port_inout_lsu> spmOutput;
 		uint bankNum;
 		uint bankDepth;
 		SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
-		vector<Port_inout_lsu> spmInput;
-		vector<Port_inout_lsu> spmOutput;
+
+		Context _lseConfig;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
+		deque<uint> contextQueue;  // add/delete valid context by Scheduler, SPM may work under several contexts simultaneously
+	};
+
+
+	class Scheduler
+	{
+	public:
+		Scheduler(Context lseConfig) : _lseConfig(lseConfig)
+		{
+		}
+
+	private:
+		Context _lseConfig;  
+	};
+
+
+	struct LseConfig
+	{
+	public:
+		uint lseTag;  // lse node tag, number in .xml
+		uint lseVirtualTag; // indicate this lse connect to which SPM bank
+		LSMode _lseMode; // indicate current LSE mode
+
+		MemAccessMode _memAccessMode;  // configure in .xml
+		DaeMode _daeMode;  // configure in .xml
+		BranchMode _branchMode;  // configure in .xml
 	};
 
 }

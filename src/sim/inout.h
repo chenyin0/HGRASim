@@ -46,6 +46,10 @@ namespace Simulator::Array
 		// bind with each load request, send the data back to SPM according to these two Id
 		uint bankId;
 		uint rowId;
+		bool inflight; // indicate this addr is send to memory, but hasn't been sent back;
+
+		bool cond; // for branch
+		bool dataReady; // indicate the load request has been sent back, data load is ready
 
 		//uint tag;
 
@@ -65,7 +69,12 @@ namespace Simulator::Array
 			lastData = 0;
 			
 			bankId = 0;  
-			rowId = 0; 
+			rowId = 0;
+
+			inflight = 0;
+
+			cond = 0;
+			dataReady = 0;
 		}
 
 		void reset() 
