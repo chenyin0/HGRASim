@@ -240,6 +240,12 @@ namespace Simulator
 
 	enum class BranchMode
 	{
+		// Note:
+		// 1) for LE in send_addr mode, this configure means whether the data to be loaded will be used in T or F or both path
+		//	  if current data's condition mismatch with the LE's configuration, don't write it to the SPM
+		//
+		// 2) for LE in get_data mode, only send back the data which condition flag match with the current LE's configuration
+
 		truePath,  // current context is a true path in the branch
 		falsePath, // current context is a false path in the branch
 		none  // current context is not in a branch
