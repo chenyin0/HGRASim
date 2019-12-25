@@ -225,8 +225,9 @@ namespace Simulator
 	{
 		//Idle,  // 当前context，LSE空闲
 		temp,  // 存储中间数据,	LSE处于load和store模式都有效！！
-		stream,  // 有规律的连续访存, 仅当LSE处于load模式；store模式无效！！
-		irregular,  // 无规律的访存，Out of order,；仅当LSE处于load模式；store模式无效！！
+		//stream,  // 有规律的连续访存, 仅当LSE处于load模式；store模式无效！！
+		//irregular,  // 无规律的访存，Out of order,；仅当LSE处于load模式；store模式无效！！
+		load,
 		none  // 当LSE处于store模式时，如果不是配为temp，就都配为None！！
 	};
 
