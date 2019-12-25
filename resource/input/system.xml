@@ -53,14 +53,14 @@
         <print_bus>false</print_bus>
         <read_bypass>false</read_bypass>
         <write_bypass>false</write_bypass>
-        <cache_mode>false</cache_mode>
-        <inflight_blocking>true</inflight_blocking>
+        <cache_mode>true</cache_mode>
+        <inflight_blocking>false</inflight_blocking>
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>
         <printscreen>true</printscreen>
         <stallMode>inbuffer_stall</stallMode>
         <attachMemory>true</attachMemory>
-        <maxClk>200000</maxClk>
+        <maxClk>2000000</maxClk>
         <profiling>true</profiling>
         <maxMemoryDepth>100000</maxMemoryDepth>
         
