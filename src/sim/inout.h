@@ -51,6 +51,8 @@ namespace Simulator::Array
 		bool cond; // for branch
 		bool dataReady; // indicate the load request has been sent back, data load is ready
 
+		bool occupy;  // used in branch, to occupy
+
 		//uint tag;
 
 		Port_inout_lsu() 
@@ -75,6 +77,8 @@ namespace Simulator::Array
 
 			cond = 0;
 			dataReady = 0;
+
+			occupy = 0;
 		}
 
 		void reset() 
