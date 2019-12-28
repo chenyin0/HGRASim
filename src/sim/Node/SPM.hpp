@@ -632,7 +632,88 @@ namespace Simulator::Array
 			else
 				contextQueue.pop_front();
 		}
+
+		// interface for Scheduler
+		uint getContextQueueHead()
+		{
+			if(!contextQueue.empty())
+				return contextQueue.front();
+			else 
+				throw std::runtime_error("try to read an empty contextQueue");
+		}
+
+		uint getContextQueueTail()
+		{
+			if(!contextQueue.empty())
+				return contextQueue.back();
+			else
+				throw std::runtime_error("try to read an empty contextQueue");
+		}
 		
+
+		// interface for "class Scheduler"
+		void setLseReadBankFinish(uint bankId)
+		{
+			_spmBuffer.setLseReadBankFinish(bankId);
+		}
+
+		void setMemReadBankFinish(uint bankId)
+		{
+			_spmBuffer.setMemReadBankFinish(bankId);
+		}
+
+		void setLseWriteBankFinish(uint bankId)
+		{
+			_spmBuffer.setLseWriteBankFinish(bankId);
+		}
+
+		void setMemWriteBankFinish(uint bankId)
+		{
+			_spmBuffer.setMemWriteBankFinish(bankId);
+		}
+
+		void resetLseReadBankFinish(uint bankId)
+		{
+			_spmBuffer.resetLseReadBankFinish(bankId);
+		}
+
+		void resetMemReadBankFinish(uint bankId)
+		{
+			_spmBuffer.resetMemReadBankFinish(bankId);
+		}
+
+		void resetLseWriteBankFinish(uint bankId)
+		{
+			_spmBuffer.resetLseWriteBankFinish(bankId);
+		}
+
+		void resetMemWriteBankFinish(uint bankId)
+		{
+			_spmBuffer.resetMemWriteBankFinish(bankId);
+		}
+
+		// interface function for "class Scheduler" to get SPM bank write/read status
+		bool getLseReadBankFinish(uint bankId)
+		{
+			return _spmBuffer.getLseReadBankFinish(bankId);
+		}
+
+		bool getMemReadBankFinish(uint bankId)
+		{
+			return _spmBuffer.getMemReadBankFinish(bankId);
+		}
+
+		bool getLseWriteBankFinish(uint bankId)
+		{
+			return _spmBuffer.getLseWriteBankFinish(bankId);
+		}
+
+		bool getMemWriteBankFinish(uint bankId)
+		{
+			return _spmBuffer.getMemWriteBankFinish(bankId);
+		}
+
+
 		// update SPM in each cycle
 		void spmUpdate()
 		{
