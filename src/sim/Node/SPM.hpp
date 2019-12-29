@@ -717,9 +717,9 @@ namespace Simulator::Array
 		// update SPM in each cycle
 		void spmUpdate()
 		{
-			for (auto i : contextQueue)  // traverse each context
+			for (auto contextId : contextQueue)  // traverse each context
 			{
-				for (auto lseContext : _lseConfig[i])  // traverse each LSE's configuration in the current context
+				for (auto lseContext : _lseConfig[contextId])  // traverse each LSE's configuration in the current context
 				{
 					lse2Spm(lseContext);  // send temp data or addr from LSE to SPM
 					//spm2Mem(lseContext);  // send addr from SPM to Mem
@@ -727,7 +727,7 @@ namespace Simulator::Array
 					//spm2Lse(lseContext);  // send temp data or load data from SPM to LSE
 				}
 
-				spm2Lse();  // send temp data or load data from SPM to LSE
+				spm2Lse(contextId);  // send temp data or load data from SPM to LSE
 			}
 
 			spm2Mem();  // send addr from SPM to Mem
@@ -876,14 +876,14 @@ namespace Simulator::Array
 			}
 		}
 
-		void spm2Lse()
+		void spm2Lse(uint contextId)
 		{
 			// send lastData when bankReadFinish!!!
 			// data match
 
-			BranchMode lseBranMode = _lseConfig[i][0]._branchMode;
+			BranchMode lseBranMode = _lseConfig[contextId][0]._branchMode;
 			// check branchMode consistance
-			for (auto lseContext : _lseConfig[i])
+			for (auto lseContext : _lseConfig[contextId])
 			{
 				if (lseContext._branchMode != lseBranMode)
 					throw std::runtime_error("LSE branchMode configure error -> All the LSE belong to the same context must have the same branchMode");
@@ -892,9 +892,9 @@ namespace Simulator::Array
 			for (size_t rowId = 0; rowId < bankDepth; ++rowId)
 			{
 				bool dataMatch = 1;
-				bool bankLoadFinish = 1;  // indicate all the bank in load mode is written completely by memory
+				bool bankFinish = 1;  
 
-				for (auto lseContext : _lseConfig[i])
+				for (auto lseContext : _lseConfig[contextId])
 				{
 					uint bankId = lseContext.lseVirtualTag;
 					Port_inout_lsu data = _spmBuffer.getSpmData(bankId, rowId);
@@ -909,12 +909,20 @@ namespace Simulator::Array
 						}
 					}
 
-					bankLoadFinish = bankLoadFinish & _spmBuffer.getLseWriteBankFinish[bankId];
+					if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::temp)
+					{
+						bankFinish = bankFinish & _spmBuffer.getLseWriteBankFinish(bankId);
+					}
+					else if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._daeMode == DaeMode::get_data)
+					{
+						bankFinish = bankFinish & _spmBuffer.getMemWriteBankFinish(bankId);
+					}
+						
 				}
 
 				if (dataMatch) // if match successfully
 				{
-					for (auto lseContext : _lseConfig[i])
+					for (auto lseContext : _lseConfig[contextId])
 					{
 						uint bankId = lseContext.lseVirtualTag;
 
@@ -927,13 +935,13 @@ namespace Simulator::Array
 					break;
 				}
 
-				if (rowId == bankDepth - 1 && bankLoadFinish)  // there is no data match
+				if (rowId == bankDepth - 1 && bankFinish)  // there is no data match
 				{
-					for (auto lseContext : _lseConfig[i])
+					for (auto lseContext : _lseConfig[contextId])
 					{
 						if (lseContext._lseMode == LSMode::load)
 						{
-							_spmBuffer.setLseReadBankFinish[lseContext.lseVirtualTag];
+							_spmBuffer.setLseReadBankFinish(lseContext.lseVirtualTag);
 
 							// send last data to each LSE, to indicate current context is over
 							Port_inout_lsu data;
