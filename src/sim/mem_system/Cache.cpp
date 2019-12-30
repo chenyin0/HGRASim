@@ -509,6 +509,7 @@ void Cache::update()                                           //利用宏实现
 								lsunit->cachefile << "WR Cache hit in Addr " << hitfifo[i].front().addr << " at Mem Cycle " << lsunit->ClockCycle << endl;
 							}
 							hitfifo[i].pop_back();
+							hitcounter++;
 						}
 						else                                        //miss
 						{

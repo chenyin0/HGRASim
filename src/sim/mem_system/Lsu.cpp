@@ -996,115 +996,115 @@ namespace DRAMSim {
 
 
 
-		if (!p_order.empty())
+	if (!p_order.empty())
+	{
+		PRINTM("error occurs for !p_order.empty() after step3!");
+		cachefile << "error occurs for !p_order.empty() after step3!" << endl;
+	}
+
+	if (print_enable)
+	{
+		PRINTM("conflict times: "<<conflict_times<<" total times: "<< add_times)
+		PRINTM("MSHR_STATE = " << MSHR_STATE);
+		if (MSHR_STATE == 1)
+			//cout << "finishing the post_table " << miss_index << endl;
+
+		PRINTM("------------FIFO-------------" );
+		for (int bank = 0; bank < CACHE_BANK; bank++)
 		{
-			PRINTM("error occurs for !p_order.empty() after step3!");
-			cachefile << "error occurs for !p_order.empty() after step3!" << endl;
+			PRINTM("-----BANK " << bank << "-----");
+			for (uint32_t i = 0; i < pre_fifo[bank].size(); i++)
+			{
+				PRINTM("fifo " << i << " transid " << pre_fifo[bank][i]->transid << " valid =" << pre_fifo[bank][i]->valid << " addr "
+					<< "=" << pre_fifo[bank][i]->ADDR_ <<" offset "<< pre_fifo[bank][i]->offset[0].valid<<" "<< pre_fifo[bank][i]->offset[0].pointer<<" "<< pre_fifo[bank][i]->offset[0].tag
+					<< "  " << pre_fifo[bank][i]->offset[1].valid << " " << pre_fifo[bank][i]->offset[1].pointer << " " << pre_fifo[bank][i]->offset[1].tag
+					<< "  " << pre_fifo[bank][i]->offset[2].valid << " " << pre_fifo[bank][i]->offset[2].pointer << " " << pre_fifo[bank][i]->offset[2].tag
+					<< "  " << pre_fifo[bank][i]->offset[3].valid << " " << pre_fifo[bank][i]->offset[3].pointer << " " << pre_fifo[bank][i]->offset[3].tag
+					<< "  " << pre_fifo[bank][i]->offset[4].valid << " " << pre_fifo[bank][i]->offset[4].pointer << " " << pre_fifo[bank][i]->offset[4].tag
+					<< "  " << pre_fifo[bank][i]->offset[5].valid << " " << pre_fifo[bank][i]->offset[5].pointer << " " << pre_fifo[bank][i]->offset[5].tag
+					<< "  " << pre_fifo[bank][i]->offset[6].valid << " " << pre_fifo[bank][i]->offset[6].pointer << " " << pre_fifo[bank][i]->offset[6].tag
+					<< "  " << pre_fifo[bank][i]->offset[7].valid << " " << pre_fifo[bank][i]->offset[7].pointer << " " << pre_fifo[bank][i]->offset[7].tag
+					<< " rdwr " << "=" << pre_fifo[bank][i]->rdwr << " pointer = " << pre_fifo[bank][i]->TAG_ << " pref = " << pre_fifo[bank][i]->pref);
+			}
 		}
 
-		if (print_enable)
+		PRINTM("------------INFLIGHT-------------" );
+		for (int bank = 0; bank < CACHE_BANK; bank++)
+			PRINTM("reg " << bank << " transid " << inflight_reg[bank]->transid << " valid =" << inflight_reg[bank]->valid << " addr "
+			<< "=" << inflight_reg[bank]->ADDR_ << " pref = " << inflight_reg[bank]->pref);
+
+
+		PRINTM(endl << "------------TABLE-------------");
+		for (uint32_t i = 0; i < post_table.size(); i++)
 		{
-			PRINTM("conflict times: "<<conflict_times<<" total times: "<< add_times)
-			PRINTM("MSHR_STATE = " << MSHR_STATE);
-			if (MSHR_STATE == 1)
-				//cout << "finishing the post_table " << miss_index << endl;
-
-			PRINTM("------------FIFO-------------" );
-			for (int bank = 0; bank < CACHE_BANK; bank++)
+			PRINTMN("table " << i << " transid " << post_table[i]->transid << " valid =" << post_table[i]->valid << " addr "
+				<< "=" << post_table[i]->ADDR_ << " rdwr " << "=" << post_table[i]->rdwr << " complete = " << post_table[i]->complete);
+			PRINTMN(" offset valid = ");
+			for (int j = 0; j < system_parameter.post_offset_depth; j++)
 			{
-				PRINTM("-----BANK " << bank << "-----");
-				for (uint32_t i = 0; i < pre_fifo[bank].size(); i++)
-				{
-					PRINTM("fifo " << i << " transid " << pre_fifo[bank][i]->transid << " valid =" << pre_fifo[bank][i]->valid << " addr "
-						<< "=" << pre_fifo[bank][i]->ADDR_ <<" offset "<< pre_fifo[bank][i]->offset[0].valid<<" "<< pre_fifo[bank][i]->offset[0].pointer<<" "<< pre_fifo[bank][i]->offset[0].tag
-						<< "  " << pre_fifo[bank][i]->offset[1].valid << " " << pre_fifo[bank][i]->offset[1].pointer << " " << pre_fifo[bank][i]->offset[1].tag
-						<< "  " << pre_fifo[bank][i]->offset[2].valid << " " << pre_fifo[bank][i]->offset[2].pointer << " " << pre_fifo[bank][i]->offset[2].tag
-						<< "  " << pre_fifo[bank][i]->offset[3].valid << " " << pre_fifo[bank][i]->offset[3].pointer << " " << pre_fifo[bank][i]->offset[3].tag
-						<< "  " << pre_fifo[bank][i]->offset[4].valid << " " << pre_fifo[bank][i]->offset[4].pointer << " " << pre_fifo[bank][i]->offset[4].tag
-						<< "  " << pre_fifo[bank][i]->offset[5].valid << " " << pre_fifo[bank][i]->offset[5].pointer << " " << pre_fifo[bank][i]->offset[5].tag
-						<< "  " << pre_fifo[bank][i]->offset[6].valid << " " << pre_fifo[bank][i]->offset[6].pointer << " " << pre_fifo[bank][i]->offset[6].tag
-						<< "  " << pre_fifo[bank][i]->offset[7].valid << " " << pre_fifo[bank][i]->offset[7].pointer << " " << pre_fifo[bank][i]->offset[7].tag
-						<< " rdwr " << "=" << pre_fifo[bank][i]->rdwr << " pointer = " << pre_fifo[bank][i]->TAG_ << " pref = " << pre_fifo[bank][i]->pref);
-				}
-			}
-
-			PRINTM("------------INFLIGHT-------------" );
-			for (int bank = 0; bank < CACHE_BANK; bank++)
-				PRINTM("reg " << bank << " transid " << inflight_reg[bank]->transid << " valid =" << inflight_reg[bank]->valid << " addr "
-				<< "=" << inflight_reg[bank]->ADDR_ << " pref = " << inflight_reg[bank]->pref);
-
-
-			PRINTM(endl << "------------TABLE-------------");
-			for (uint32_t i = 0; i < post_table.size(); i++)
-			{
-				PRINTMN("table " << i << " transid " << post_table[i]->transid << " valid =" << post_table[i]->valid << " addr "
-					<< "=" << post_table[i]->ADDR_ << " rdwr " << "=" << post_table[i]->rdwr << " complete = " << post_table[i]->complete);
-				PRINTMN(" offset valid = ");
-				for (int j = 0; j < system_parameter.post_offset_depth; j++)
-				{
-					PRINTMN(post_offset[i][j].valid << " ");
-				}
-				PRINTMN(endl);
-			}
-			PRINTM(endl << "------------pending-------------");
-			for (uint32_t i = 0; i < pending_inflight.size(); i++)
-			{
-				PRINTMN("table " << i << " transid " << pending_inflight[i].transid << " valid =" << pending_inflight[i].valid << " addr "
-					<< "=" << pending_inflight[i].ADDR_ << " rdwr " << "=" << pending_inflight[i].rdwr << " complete = " << pending_inflight[i].complete);
-				PRINTMN(" offset valid = ");
-				for (int j = 0; j < system_parameter.post_offset_depth; j++)
-				{
-					PRINTMN(pending_inflight[i].offset[j].valid << " ");
-				}
-				PRINTMN(endl);
-			}
-			PRINTMN("poped_addr size = " << poped_addr.size() << "; ");
-			for (auto it = poped_addr.begin(); it != poped_addr.end(); it++)
-			{
-				PRINTMN((*it).first<<"_"<< static_cast<int>((*it).second)<< " ");
+				PRINTMN(post_offset[i][j].valid << " ");
 			}
 			PRINTMN(endl);
-
-			PRINTMN("WB_table size = " << cache->WB_table.size() << "; ");
-			for (vector<uint32_t>::iterator it = cache->WB_table.begin(); it < cache->WB_table.end(); it++)
+		}
+		PRINTM(endl << "------------pending-------------");
+		for (uint32_t i = 0; i < pending_inflight.size(); i++)
+		{
+			PRINTMN("table " << i << " transid " << pending_inflight[i].transid << " valid =" << pending_inflight[i].valid << " addr "
+				<< "=" << pending_inflight[i].ADDR_ << " rdwr " << "=" << pending_inflight[i].rdwr << " complete = " << pending_inflight[i].complete);
+			PRINTMN(" offset valid = ");
+			for (int j = 0; j < system_parameter.post_offset_depth; j++)
 			{
-				PRINTMN(*it << " ");
+				PRINTMN(pending_inflight[i].offset[j].valid << " ");
 			}
 			PRINTMN(endl);
-
-			PRINTM("miss_finished_cnter = " << miss_finished_cnter );
-
-			PRINTMN("----------" << ClockCycle << "CYCLE END----------");
-			PRINTM(endl);
 		}
-
-		if (profiling)
+		PRINTMN("poped_addr size = " << poped_addr.size() << "; ");
+		for (auto it = poped_addr.begin(); it != poped_addr.end(); it++)
 		{
-			double fdepth = system_parameter.fifoline_num;
-
-			for (int i = 0; i < CACHE_BANK; i++)
-				lsu_fifo += pre_fifo[i].size() / (fdepth * CACHE_BANK);
-
-			int mshr_size = 0;
-			double mshr_rate;
-			for (int i = 0; i < system_parameter.tabline_num; i++)
-			{
-				if (post_table[i]->valid)
-					mshr_size++;
-			}
-			double bdepth = system_parameter.tabline_num;
-			mshr_rate = mshr_size / bdepth;
-			lsu_mshr += mshr_rate;
-
-			//max
-			for (int i = 0; i < CACHE_BANK; i++)
-			{
-				if (pre_fifo[i].size() > lsu_fifo_max)
-					lsu_fifo_max = pre_fifo[i].size();
-			}
-			if (mshr_size > lsu_mshr_max)
-				lsu_mshr_max = mshr_size;
+			PRINTMN((*it).first<<"_"<< static_cast<int>((*it).second)<< " ");
 		}
+		PRINTMN(endl);
+
+		PRINTMN("WB_table size = " << cache->WB_table.size() << "; ");
+		for (vector<uint32_t>::iterator it = cache->WB_table.begin(); it < cache->WB_table.end(); it++)
+		{
+			PRINTMN(*it << " ");
+		}
+		PRINTMN(endl);
+
+		PRINTM("miss_finished_cnter = " << miss_finished_cnter );
+
+		PRINTMN("----------" << ClockCycle << "CYCLE END----------");
+		PRINTM(endl);
+	}
+
+	if (profiling)
+	{
+		double fdepth = system_parameter.fifoline_num;
+
+		for (int i = 0; i < CACHE_BANK; i++)
+			lsu_fifo += pre_fifo[i].size() / (fdepth * CACHE_BANK);
+
+		int mshr_size = 0;
+		double mshr_rate;
+		for (int i = 0; i < system_parameter.tabline_num; i++)
+		{
+			if (post_table[i]->valid)
+				mshr_size++;
+		}
+		double bdepth = system_parameter.tabline_num;
+		mshr_rate = mshr_size / bdepth;
+		lsu_mshr += mshr_rate;
+
+		//max
+		for (int i = 0; i < CACHE_BANK; i++)
+		{
+			if (pre_fifo[i].size() > lsu_fifo_max)
+				lsu_fifo_max = pre_fifo[i].size();
+		}
+		if (mshr_size > lsu_mshr_max)
+			lsu_mshr_max = mshr_size;
+	}
 
 }
 

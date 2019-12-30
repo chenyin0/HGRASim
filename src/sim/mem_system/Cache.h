@@ -108,12 +108,14 @@ namespace DRAMSim
 		Cache_Trans lookup_trans[CACHE_BANK];
 		//vector <Cache_Trans> missfifo;
 		vector <Cache_Trans> hitfifo[CACHE_BANK];
-		int misscounter;
+
 
 
 	public:
 		Cache(const Simulator::Preprocess::ArrayPara para);
 		~Cache();
+		int misscounter;
+		int hitcounter;
 		void getInput(uint port, Simulator::Array::Port_inout input) override {};
 		void getBp(uint port, bool input) override {};
 		bool addtranscation(uint32_t adr, uint32_t rw);

@@ -733,6 +733,12 @@ void HgraArray::run()
 	}
 	std::cout << "pe ultilization:" << float(pe_ulti_cnt) / float(total_key_pe* clk) << endl;
 	std::cout << "lsu bank conflict rate:" << float(lsu->conflict_times) / float(lsu->add_times) << endl;
+	std::cout << "lsu cache miss rate:" << float(lsu->cache->misscounter) / (float(lsu->cache->misscounter)+ float(lsu->cache->hitcounter)) << endl;
+	std::cout << "lsu_fifo fill rate = " << (lsu->lsu_fifo / (double)clk) << endl;
+	std::cout << "lsu_fifo max fill rate = " << lsu->lsu_fifo_max << "/" << system_para.fifoline_num << endl;
+	std::cout << "lsu_mshr max fill rate = " << lsu->lsu_mshr_max << "/" << system_para.tabline_num << endl;
+	std::cout << "lsu_mshr fill rate = " << (lsu->lsu_mshr / (double)clk) << endl;
+	std::cout << "dram_port ultilization rate = " << (lsu->dram_port / (double)clk) << endl;
 }
 
 void HgraArray::sendBpOut(Simulator::NodeType type, uint index)
