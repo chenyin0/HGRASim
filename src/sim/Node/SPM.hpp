@@ -15,6 +15,10 @@
 
 namespace Simulator::Array
 {
+	class SpmBuffer;
+	class Spm;
+	struct LseConfig;
+
 	class SpmBuffer 
 	{
 	public:
@@ -27,8 +31,9 @@ namespace Simulator::Array
 		{
 			/*spmInput.resize(bankNum);
 			spmOutput.resize(bankNum);*/
-			rdPtr.resize(bankNum);
-			wrPtr.resize(bankNum);
+			rdPtrLse.resize(bankNum);
+			wrPtrLse.resize(bankNum);
+			rdPtrMem.resize(bankNum);
 			//basePtr.resize(bankNum);
 			bankFull.resize(bankNum);
 			bankEmpty.resize(bankNum);
@@ -37,6 +42,8 @@ namespace Simulator::Array
 			lseWriteBankFinish.resize(bankNum);
 			memReadBankFinish.resize(bankNum);
 			memWriteBankFinish.resize(bankNum);
+
+			lseWriteBankFinishHistory.resize(bankNum);
 
 			cnt.resize(bankNum);
 
@@ -70,8 +77,9 @@ namespace Simulator::Array
 			{
 				bankFull[i] = 0;
 				bankEmpty[i] = 1;
-				rdPtr[i] = 0;
-				wrPtr[i] = 0;
+				rdPtrLse[i] = 0;
+				wrPtrLse[i] = 0;
+				rdPtrMem[i] = 0;
 				//basePtr[i] = 0;
 
 				lseReadBankFinish[i] = 0;
@@ -79,6 +87,8 @@ namespace Simulator::Array
 
 				memReadBankFinish[i] = 0;
 				memWriteBankFinish[i] = 0;
+
+				lseWriteBankFinishHistory[i] = 0;
 
 				cnt[i] = 0;
 
@@ -92,8 +102,9 @@ namespace Simulator::Array
 		{
 			for (size_t i = 0; i < bankNum; ++i)
 			{
-				rdPtr[i] = 0;
-				wrPtr[i] = 0;
+				rdPtrLse[i] = 0;
+				wrPtrLse[i] = 0;
+				rdPtrMem[i] = 0;
 				//basePtr[i] = 0;
 				bankFull[i] = 0;
 				bankEmpty[i] = 0;
@@ -101,25 +112,30 @@ namespace Simulator::Array
 		}
 
 
-		// get SPM rdPtr
-		uint getRdPtr(const uint bankId)
+		// get SPM rdPtrLse
+		uint getRdPtrLse(const uint bankId)
 		{
-			return rdPtr[bankId];
+			return rdPtrLse[bankId];
 		}
 
-		// get SPM wrPtr
-		uint getWrPtr(const uint bankId)
+		// get SPM wrPtrLse
+		uint getWrPtrLse(const uint bankId)
 		{
-			return wrPtr[bankId];
+			return wrPtrLse[bankId];
 		}
 
-		bool updateRdPtr(uint rdPtr, vector<LseConfig> lseConfig)
+		uint getRdPtrMem(const uint bankId)
+		{
+			return rdPtrMem[bankId];
+		}
+
+		bool updateRdPtrLse(uint rdPtrLse, vector<LseConfig> lseConfig)
 		{
 			bool readBankEmpty = 0;
 			bool findNextPtr = 0;
 			uint nextRdPtr;
 
-			for (uint rowId = rdPtr; rowId < bankDepth; ++rowId)
+			for (uint rowId = rdPtrLse; rowId < bankDepth; ++rowId)
 			{
 				for (auto config : lseConfig)
 				{
@@ -148,7 +164,7 @@ namespace Simulator::Array
 					{
 						uint bankId = config.lseVirtualTag;
 
-						this->rdPtr[bankId] = nextRdPtr;
+						this->rdPtrLse[bankId] = nextRdPtr;
 					}
 				}
 
@@ -159,22 +175,35 @@ namespace Simulator::Array
 
 		}
 
-		void updateWrPtr(const uint bankId)  // only sequentially write, update wrPtr
+		void updateWrPtrLse(const uint bankId)  // only sequentially write, update wrPtrLse
 		{
-			if (wrPtr[bankId] < bankDepth - 1)
+			if (wrPtrLse[bankId] < bankDepth - 1)
 			{
-				++wrPtr[bankId];
+				++wrPtrLse[bankId];
 			}
 		}
 
-		void resetWrPtr(uint bankId)
+		void updateRdPtrMem(const uint bankId)
 		{
-			wrPtr[bankId] = 0;
+			if (rdPtrMem[bankId] < bankDepth - 1)
+			{
+				++rdPtrMem[bankId];
+			}
 		}
 
-		void resetRdPtr(uint bankId)
+		void resetWrPtrLse(uint bankId)
 		{
-			rdPtr[bankId] = 0;
+			wrPtrLse[bankId] = 0;
+		}
+
+		void resetRdPtrLse(uint bankId)
+		{
+			rdPtrLse[bankId] = 0;
+		}
+
+		void resetRdPtrMem(uint bankId)
+		{
+			rdPtrMem[bankId] = 0;
 		}
 
 
@@ -266,11 +295,17 @@ namespace Simulator::Array
 		void setLseWriteBankFinish(uint bankId)
 		{
 			lseWriteBankFinish[bankId] = 1;
+			wrPtrLse[bankId] = 0;  // reset wrPtrLse for next bank write
 		}
 
 		void setMemWriteBankFinish(uint bankId)
 		{
 			memWriteBankFinish[bankId] = 1;
+		}
+
+		void setLseWriteBankFinishHistory(uint bankId)
+		{
+			lseWriteBankFinishHistory[bankId] = 1;
 		}
 
 		void resetLseReadBankFinish(uint bankId)
@@ -291,6 +326,11 @@ namespace Simulator::Array
 		void resetMemWriteBankFinish(uint bankId)
 		{
 			memWriteBankFinish[bankId] = 0;
+		}
+
+		void resetLseWriteBankFinishHistory(uint bankId)
+		{
+			lseWriteBankFinishHistory[bankId] = 0;
 		}
 
 		// interface function to get SPM bank write/read status
@@ -314,6 +354,10 @@ namespace Simulator::Array
 			return memWriteBankFinish[bankId];
 		}
 		
+		bool getLseWriteBankFinishHistory(uint bankId)
+		{
+			return lseWriteBankFinishHistory[bankId];
+		}
 
 		// interface function for Spm2Mem
 		void setBankInLoad(uint bankId, bool flag)
@@ -412,7 +456,7 @@ namespace Simulator::Array
 				throw std::runtime_error("try to write a full SPM bank");
 
 			writeData(bankId, rowId, data);
-			updateWrPtr(bankId);  // update wrPtr, duo to sequentially write
+			updateWrPtrLse(bankId);  // update wrPtrLse, duo to sequentially write
 		}
 
 		// read addr. from SPM to Memory
@@ -453,8 +497,9 @@ namespace Simulator::Array
 	private:
 		/*vector<Port_inout_lsu> spmInput;
 		vector<Port_inout_lsu> spmOutput;*/
-		vector<uint> rdPtr;  // record the row number in last read, for roundrobin 
-		vector<uint> wrPtr;  // record the row number in last write, for roundrobin 
+		vector<uint> rdPtrLse;  // record the row number in last LSE read, for roundrobin 
+		vector<uint> wrPtrLse;  // record the row number in last LSE write, for roundrobin 
+		vector<uint> rdPtrMem;  // record the row number in last memory read, due to memory read SPM sequentially
 		//vector<uint> basePtr;  // write/read data to SPM base on this ptr, which bank is read empty, reset its basePtr;
 		vector<int> cnt;
 		vector<bool> bankFull;
@@ -463,6 +508,7 @@ namespace Simulator::Array
 		vector<bool> memWriteBankFinish;
 		vector<bool> lseReadBankFinish;
 		vector<bool> lseWriteBankFinish;
+		vector<bool> lseWriteBankFinishHistory;  // record last write status for bank read, due to bank read finish check need bank write finish history
 		vector<bool> bankInLoad;  // if a bank is in the sending addr. to memory status, set the flag to 1; If all the addr. has been sent to the memory, reset it to 0
 		uint bankNum;
 		uint bankDepth;
@@ -611,7 +657,7 @@ namespace Simulator::Array
 				if ((context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._daeMode == DaeMode::send_addr) || 
 					(context._lseMode == LSMode::store_data && context._memAccessMode == MemAccessMode::temp))  // if context is 1) send addr. to SPM or 2) store temp data to SPM
 				{
-					uint rowId = _spmBuffer.getWrPtr(bankId);
+					uint rowId = _spmBuffer.getWrPtrLse(bankId);
 					Port_inout_lsu rowData = _spmBuffer.getSpmData(bankId, rowId);
 
 					if (rowData.valid != 1 && rowData.occupy != 1)  // if write valid; occupy flag is used in branch
@@ -640,7 +686,8 @@ namespace Simulator::Array
 							else
 							{
 								_spmBuffer.setLseWriteBankFinish(bankId);
-								//_spmBuffer.wrPtrReset(bankId);  // don't reset rdPtr 
+								//_spmBuffer.setLseWriteBankFinishHistory(bankId);
+								//_spmBuffer.wrPtrReset(bankId);  // don't reset rdPtrLse 
 							}
 						}
 						else
@@ -674,9 +721,18 @@ namespace Simulator::Array
 					//}
 
 					// check whether Lse writes finish
-					if (_spmBuffer.getWrPtr(bankId) == bankDepth - 1)
+					if (_spmBuffer.getWrPtrLse(bankId) == bankDepth - 1)
+					{
 						_spmBuffer.setLseWriteBankFinish(bankId);
+						//_spmBuffer.setLseWriteBankFinishHistory(bankId);
+					}
 				}
+			}
+
+			if (_spmBuffer.getLseWriteBankFinish(bankId) && !_spmBuffer.getLseWriteBankFinishHistory(bankId))  // current LSE write SPM is finish && the data written by LSE last write operation has been read empty 
+			{
+				_spmBuffer.setLseWriteBankFinishHistory(bankId);
+				_spmBuffer.resetLseWriteBankFinish(bankId);
 			}
 		}
 
@@ -688,23 +744,28 @@ namespace Simulator::Array
 				{
 					if (!memory_ACK)  // when the datapath to memory not stall, due to the memory is only 8 banks
 					{
-						for (size_t i = 0; i < bankDepth; ++i)
+						uint rowId = _spmBuffer.getRdPtrMem(bankId);
+
+						for (size_t i = rowId; i < bankDepth; ++rowId)
 						{
-							Port_inout_lsu data = _spmBuffer.getSpmData(bankId, uint(i));
+							Port_inout_lsu data = _spmBuffer.getSpmData(bankId, rowId);
 
 							if (data.valid && data.dataReady != 1 && data.inflight != 1)
 							{
-								data = _spmBuffer.readSpm2Mem(bankId, uint(i));
+								data = _spmBuffer.readSpm2Mem(bankId, rowId);
 								sendData2Mem(data);  // send this addr. to memory
+								_spmBuffer.updateRdPtrMem(bankId);  // update rdPtrMem
+
 								break;
 							}
 
-							if (i == bankDepth - 1)  // execute to the last loop, indicates no addr has been read out
+							if (rowId == bankDepth - 1)  // execute to the last loop, indicates no addr has been read out
 							{
-								if (_spmBuffer.getLseWriteBankFinish(bankId))
+								if (_spmBuffer.getLseWriteBankFinishHistory(bankId))
 								{
-									_spmBuffer.setMemReadBankFinish[bankId];
+									_spmBuffer.setMemReadBankFinish(bankId);
 									_spmBuffer.setBankInLoad(bankId, 0);  // indicate current bank has been loaded completely
+									_spmBuffer.resetRdPtrMem(bankId);
 								}
 							}
 						}
@@ -724,7 +785,7 @@ namespace Simulator::Array
 			}
 
 			// check memory write bank finish
-			if (_spmBuffer.getLseWriteBankFinish(bankId))  // when all the addr. have been sent to SPM from LSE
+			if (_spmBuffer.getMemReadBankFinish(bankId))  // when all the addr. have been sent to SPM from LSE
 			{
 				for (size_t i = 0; i < bankDepth; ++i)
 				{
@@ -756,15 +817,15 @@ namespace Simulator::Array
 					throw std::runtime_error("LSE branchMode configure error -> All the LSE belong to the same context must have the same branchMode");
 			}
 
-			// check rdPtr consistance
-			uint rdPtr;
+			// check rdPtrLse consistance
+			uint rdPtrLse;
 			bool hasLoad = 0;  // signify there is at least one LSE in the load mode
 			for (auto lseContext : _lseConfig[contextId])
 			{
 				if (lseContext._lseMode == LSMode::load)
 				{
 					uint bankId = lseContext.lseVirtualTag;
-					rdPtr = _spmBuffer.getRdPtr(bankId);
+					rdPtrLse = _spmBuffer.getRdPtrLse(bankId);
 					hasLoad = 1;
 					break;
 				}
@@ -778,13 +839,13 @@ namespace Simulator::Array
 					{
 						uint bankId = lseContext.lseVirtualTag;
 
-						if(_spmBuffer.getRdPtr(bankId) != rdPtr)
-							throw std::runtime_error("read data from SPM to LSE error -> rdPtr in each bank in load mode must be the same");
+						if(_spmBuffer.getRdPtrLse(bankId) != rdPtrLse)
+							throw std::runtime_error("read data from SPM to LSE error -> rdPtrLse in each bank in load mode must be the same");
 					}
 				}
 			}
 
-			for (size_t rowId = rdPtr; rowId < bankDepth; ++rowId)  // roundrobin start at the rdPtr, stop at the bank tail
+			for (size_t rowId = rdPtrLse; rowId < bankDepth; ++rowId)  // roundrobin start at the rdPtrLse, stop at the bank tail
 			{
 				bool dataMatch = 1;
 				bool bankFinish = 1; 
@@ -807,7 +868,7 @@ namespace Simulator::Array
 
 					if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::temp)
 					{
-						bankFinish = bankFinish & _spmBuffer.getLseWriteBankFinish(bankId);
+						bankFinish = bankFinish & _spmBuffer.getLseWriteBankFinishHistory(bankId);
 					}
 					else if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._daeMode == DaeMode::get_data)
 					{
@@ -826,9 +887,9 @@ namespace Simulator::Array
 						{
 							sendData2Lse(_spmBuffer.readSpm2Lse(bankId, rowId));
 
-							if (rowId == rdPtr)
+							if (rowId == rdPtrLse)
 							{
-								bankReadEmpty = _spmBuffer.updateRdPtr(rdPtr, _lseConfig[contextId]);  // 1)update rdPtr and 2)check whether the bank is read empty
+								bankReadEmpty = _spmBuffer.updateRdPtrLse(rdPtrLse, _lseConfig[contextId]);  // 1)update rdPtrLse and 2)check whether the bank is read empty
 							}
 						}
 					}
@@ -842,7 +903,10 @@ namespace Simulator::Array
 					{
 						if (lseContext._lseMode == LSMode::load)
 						{
-							_spmBuffer.setLseReadBankFinish(lseContext.lseVirtualTag);
+							uint bankId = lseContext.lseVirtualTag;
+
+							_spmBuffer.setLseReadBankFinish(bankId);
+							_spmBuffer.resetLseWriteBankFinishHistory(bankId);  // reset lseWriteBankFinishHistory, indicate the data written by last LSE write has been read empty
 
 							// send last data to each LSE, to indicate current context is over
 							Port_inout_lsu data;
@@ -864,18 +928,6 @@ namespace Simulator::Array
 		Context _lseConfig;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
 		deque<uint> contextQueue;  // add/delete valid context by Scheduler, SPM may work under several contexts simultaneously
 	};
-
-
-	//class Scheduler
-	//{
-	//public:
-	//	Scheduler(Context lseConfig) : _lseConfig(lseConfig)
-	//	{
-	//	}
-
-	//private:
-	//	Context _lseConfig;  
-	//};
 
 
 	struct LseConfig
