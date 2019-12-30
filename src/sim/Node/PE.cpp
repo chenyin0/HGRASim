@@ -391,6 +391,21 @@ void Processing_element::getAluInput()
 					else if (alu->canReceiveInput() && attribution->input_bypass == InputBypass::bypass)//alu来源于inport
 						aluin[i] = input_port[i];
 				}
+				if (attribution->opcode == PEOpcode::merge)
+				{
+					if(aluin[0].valid&& aluin[0].condition) {
+						aluin[2].valid = true;
+						aluin[2].value_data = true;
+						aluin[2].condition = true;
+						aluin[2].last = aluin[0].last;
+					}
+					else if (aluin[0].valid && aluin[0].condition) {
+						aluin[2].valid = true;
+						aluin[2].value_data = false;
+						aluin[2].condition = true;
+						aluin[2].last = aluin[0].last;
+					}
+				}
 			}
 
 
@@ -505,12 +520,24 @@ void Processing_element::getAluInput()
 
 			}
 
-
-			for (auto& i : aluin) {
-				if (i.valid) {
-					if (i.condition == false) {//清condition
-						rs_cd = true;
-						break;
+			if (attribution->opcode != PEOpcode::merge) {
+				for (auto& i : aluin) {
+					if (i.valid) {
+						if (i.condition == false) {//清condition
+							rs_cd = true;
+							break;
+						}
+					}
+				}
+			}
+			else {
+				rs_cd = true;
+				for (int i = 0; i < 2;i++) {
+					if (aluin[i].valid) {
+						if (aluin[i].condition) {//清condition
+							rs_cd = false;
+							break;
+						}
 					}
 				}
 			}
@@ -567,64 +594,6 @@ void Processing_element::gatherOperands()
 	if (!oprand_collected)
 		return;
 
-	//	lastCheck();//////////////////////////////////////////////////////////////放这里可以吗？？？？？？////////////
-
-	//if (attribution->control_mode == ControlMode::break_pre)
-	//{
-	//	//	if (aluin[2].valid && aluin[2].value_bool)
-	//	if (aluin[2].valid && aluin[2].value_data)
-	//	{
-	//		if (alu->input(aluin, attribution->opcode, true, rs_cd))
-	//		{
-	//			breakoccur();
-	//			inbuffer->reset();       //进入break状态是清空inbuffer
-	//		}
-	//	}
-	//	//else if (aluin[2].valid && !aluin[2].value_bool)
-	//	else if (aluin[2].valid && !aluin[2].value_data)
-	//	{
-	//		alu->input(aluin, attribution->opcode, true, rs_cd);
-	//	}
-	//	else
-	//		DEBUG_ASSERT(false);
-	//}
-	//else if (attribution->control_mode == ControlMode::break_post)
-	//{
-	//	//if (aluin[2].valid && aluin[2].value_bool)
-	//	if (aluin[2].valid && aluin[2].value_data)
-	//	{
-	//		breakoccur();
-	//		inbuffer->reset();       //进入break状态是清空inbuffer
-	//	}
-	//	//else if (aluin[2].valid && !aluin[2].value_bool)
-	//	else if (aluin[2].valid && !aluin[2].value_data)
-	//	{
-	//		alu->input(aluin, attribution->opcode, true, rs_cd);
-	//	}
-	//	else
-	//		DEBUG_ASSERT(false);
-	//}
-	//else if (attribution->control_mode == ControlMode::continue_)
-	//{
-	//	//if (aluin[2].valid && aluin[2].value_bool)
-	//	if (aluin[2].valid && aluin[2].value_data)
-	//	{
-	//		//do nothing
-	//	}
-	//	//else if (aluin[2].valid && !aluin[2].value_bool)
-	//	else if (aluin[2].valid && !aluin[2].value_data)
-	//	{
-	//		alu->input(aluin, attribution->opcode, true, rs_cd);
-	//	}
-	//	else
-	//		DEBUG_ASSERT(false);
-	//}
-	////else if (attribution->control_mode == ControlMode::cb)
-	////{
-	////	if()
-	////}
-	//else      //其他情况下，bool口不需要控制alu的行为
-	//{
 		if (alu->depth != 0) {
 			if (alu->canReceiveInput()) {
 				//		bool alu_flag = false;

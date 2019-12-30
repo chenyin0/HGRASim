@@ -248,6 +248,10 @@ void Pealu::compute(Port_inout& out)
 					out.value_data = pipeline.front().data1 + pipeline.front().data2;
 					break;
 
+				case PEOpcode::merge:
+					out.valid = true;
+					out.value_data = pipeline.front().data3 ? pipeline.front().data1 : pipeline.front().data2;
+					break;
 				case PEOpcode::mul:
 					out.valid = true;
 					out.value_data = pipeline.front().data1 * pipeline.front().data2;
@@ -351,10 +355,7 @@ void Pealu::compute(Port_inout& out)
 					out.value_data = !pipeline.front().data2;
 					break;
 
-				case PEOpcode::merge:
-					out.valid = true;
-					out.value_data = ~pipeline.front().data2;
-					break;
+
 
 				default:
 					DEBUG_ASSERT(false);
