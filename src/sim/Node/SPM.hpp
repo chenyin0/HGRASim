@@ -30,8 +30,6 @@ namespace Simulator::Array
 
 		void spmInit()
 		{
-			/*spmInput.resize(bankNum);
-			spmOutput.resize(bankNum);*/
 			rdPtrLse.resize(bankNum);
 			wrPtrLse.resize(bankNum);
 			rdPtrMem.resize(bankNum);
@@ -50,19 +48,6 @@ namespace Simulator::Array
 
 			bankInLoad.resize(bankNum);
 
-			//// initial bank id
-			//bankId.resize(bankNum);
-			//for (size_t i = 0; i < bankId.size(); ++i)
-			//{
-			//	bankId[i] = i;
-			//}
-
-			//// initial row id
-			//rowId.resize(bankDepth);
-			//for (size_t i = 0; i < rowId.size(); ++i)
-			//{
-			//	rowId[i] = i;
-			//}
 
 			// initial SPM buffer's bank number
 			_spmBuffer.resize(bankNum);
@@ -295,95 +280,6 @@ namespace Simulator::Array
 				return false;
 		}
 
-		//// interface for "class SPM"
-		//void setLseReadBankFinish(uint bankId)
-		//{
-		//	lseReadBankFinish[bankId] = 1;
-		//}
-
-		//void setMemReadBankFinish(uint bankId)
-		//{
-		//	memReadBankFinish[bankId] = 1;
-		//}
-
-		//void setLseWriteBankFinish(uint bankId)
-		//{
-		//	lseWriteBankFinish[bankId] = 1;
-		//	wrPtrLse[bankId] = 0;  // reset wrPtrLse for next bank write
-		//}
-
-		//void setMemWriteBankFinish(uint bankId)
-		//{
-		//	memWriteBankFinish[bankId] = 1;
-		//}
-
-		//void setLseWriteBankFinishHistory(uint bankId)
-		//{
-		//	lseWriteBankFinishHistory[bankId] = 1;
-		//}
-
-		//void resetLseReadBankFinish(uint bankId)
-		//{
-		//	lseReadBankFinish[bankId] = 0;
-		//}
-
-		//void resetMemReadBankFinish(uint bankId)
-		//{
-		//	memReadBankFinish[bankId] = 0;
-		//}
-
-		//void resetLseWriteBankFinish(uint bankId)
-		//{
-		//	lseWriteBankFinish[bankId] = 0;
-		//}
-
-		//void resetMemWriteBankFinish(uint bankId)
-		//{
-		//	memWriteBankFinish[bankId] = 0;
-		//}
-
-		//void resetLseWriteBankFinishHistory(uint bankId)
-		//{
-		//	lseWriteBankFinishHistory[bankId] = 0;
-		//}
-
-		//// interface function to get SPM bank write/read status
-		//bool getLseReadBankFinish(uint bankId)
-		//{
-		//	return lseReadBankFinish[bankId];
-		//}
-
-		//bool getMemReadBankFinish(uint bankId)
-		//{
-		//	return memReadBankFinish[bankId];
-		//}
-
-		//bool getLseWriteBankFinish(uint bankId)
-		//{
-		//	return lseWriteBankFinish[bankId];
-		//}
-
-		//bool getMemWriteBankFinish(uint bankId)
-		//{
-		//	return memWriteBankFinish[bankId];
-		//}
-		//
-		//bool getLseWriteBankFinishHistory(uint bankId)
-		//{
-		//	return lseWriteBankFinishHistory[bankId];
-		//}
-
-		//// interface function for Spm2Mem
-		//void setBankInLoad(uint bankId, bool flag)
-		//{
-		//	bankInLoad[bankId] = flag;
-		//}
-
-		//bool getBankInLoad(uint bankId)
-		//{
-		//	return bankInLoad[bankId];
-		//}
-
 
 		Port_inout_lsu readData(const uint bankId, const uint rowId)
 		{	
@@ -558,13 +454,19 @@ namespace Simulator::Array
 		void addContext(uint contextId)
 		{
 			contextQueue.push_back(contextId);
+
+			// reset contextFinish before push a new context
+			for (auto config : _lseConfig[contextId])
+			{
+				config.contextFinish = 0;
+			}
 		}
 
 		// provide for Scheduler to delete a finished context in the SPM
-		void removeContext(uint contextId)
+		void removeContext()
 		{
-			if (contextId != contextQueue.front())
-				throw std::runtime_error("delete context in contextQueue error -> the context to delete is not the first one in the queue");
+			if (contextQueue.empty())
+				throw std::runtime_error("pop contextQueue error -> try to pop an empty contextQueue");
 			else
 				contextQueue.pop_front();
 		}
@@ -585,77 +487,19 @@ namespace Simulator::Array
 			else
 				throw std::runtime_error("try to read an empty contextQueue");
 		}
+
+		bool contextQueueEmpty()
+		{
+			return contextQueue.empty();
+		}
 		
-
-		//// interface for "class Scheduler"
-		//void setLseReadBankFinish(uint bankId)
-		//{
-		//	_spmBuffer.setLseReadBankFinish(bankId);
-		//}
-
-		//void setMemReadBankFinish(uint bankId)
-		//{
-		//	_spmBuffer.setMemReadBankFinish(bankId);
-		//}
-
-		//void setLseWriteBankFinish(uint bankId)
-		//{
-		//	_spmBuffer.setLseWriteBankFinish(bankId);
-		//}
-
-		//void setMemWriteBankFinish(uint bankId)
-		//{
-		//	_spmBuffer.setMemWriteBankFinish(bankId);
-		//}
-
-		//void resetLseReadBankFinish(uint bankId)
-		//{
-		//	_spmBuffer.resetLseReadBankFinish(bankId);
-		//}
-
-		//void resetMemReadBankFinish(uint bankId)
-		//{
-		//	_spmBuffer.resetMemReadBankFinish(bankId);
-		//}
-
-		//void resetLseWriteBankFinish(uint bankId)
-		//{
-		//	_spmBuffer.resetLseWriteBankFinish(bankId);
-		//}
-
-		//void resetMemWriteBankFinish(uint bankId)
-		//{
-		//	_spmBuffer.resetMemWriteBankFinish(bankId);
-		//}
-
-		//// interface function for "class Scheduler" to get SPM bank write/read status
-		//bool getLseReadBankFinish(uint bankId)
-		//{
-		//	return _spmBuffer.getLseReadBankFinish(bankId);
-		//}
-
-		//bool getMemReadBankFinish(uint bankId)
-		//{
-		//	return _spmBuffer.getMemReadBankFinish(bankId);
-		//}
-
-		//bool getLseWriteBankFinish(uint bankId)
-		//{
-		//	return _spmBuffer.getLseWriteBankFinish(bankId);
-		//}
-
-		//bool getMemWriteBankFinish(uint bankId)
-		//{
-		//	return _spmBuffer.getMemWriteBankFinish(bankId);
-		//}
-
-
+		
 		// update SPM in each cycle
 		void spmUpdate()
 		{
 			for (auto contextId : contextQueue)  // traverse each context
 			{
-				for (auto lseContext : _lseConfig[contextId])  // traverse each LSE's configuration in the current context
+				for (auto &lseContext : _lseConfig[contextId])  // traverse each LSE's configuration in the current context
 				{
 					lse2Spm(lseContext);  // send temp data or addr from LSE to SPM
 					//spm2Mem(lseContext);  // send addr from SPM to Mem
@@ -669,7 +513,7 @@ namespace Simulator::Array
 			spm2Mem();  // send addr from SPM to Mem
 		}
 
-		void lse2Spm(const LseConfig context)
+		void lse2Spm(LseConfig &context)
 		{
 			Port_inout_lsu data = lseGetData(lseTag);
 			uint bankId = context.lseVirtualTag;
@@ -696,9 +540,13 @@ namespace Simulator::Array
 									data.dataReady = 0;  // for addr, dataReady set to 0
 									_spmBuffer.writeLse2Spm(bankId, rowId, data);
 
-									if (_spmBuffer.queueNotFull(_spmBuffer.bankInLoad[bankId]))
+									if (context.contextFinish != 1 && context.hasSetBankInLoad != 1)
 									{
-										_spmBuffer.bankInLoad[bankId].push(1);
+										if (_spmBuffer.queueNotFull(_spmBuffer.bankInLoad[bankId]))
+										{
+											_spmBuffer.bankInLoad[bankId].push(1);
+											context.hasSetBankInLoad = 1;
+										}
 									}
 								}
 
@@ -710,9 +558,14 @@ namespace Simulator::Array
 							}
 							else
 							{
-								if (_spmBuffer.queueNotFull(_spmBuffer.lseWriteBankFinish[bankId]))
+								if (context.contextFinish != 1)
 								{
-									_spmBuffer.lseWriteBankFinish[bankId].push(1);
+									if (_spmBuffer.queueNotFull(_spmBuffer.lseWriteBankFinish[bankId]))
+									{
+										_spmBuffer.lseWriteBankFinish[bankId].push(1);
+										_spmBuffer.resetWrPtrLse(bankId);  // reset wrPtrLse for next bank write
+										context.contextFinish = 1;  // signify current context has finished
+									}
 								}
 								//_spmBuffer.setLseWriteBankFinishHistory(bankId);
 								//_spmBuffer.wrPtrReset(bankId);  // don't reset rdPtrLse 
@@ -729,9 +582,14 @@ namespace Simulator::Array
 					// check whether Lse writes finish
 					if (_spmBuffer.getWrPtrLse(bankId) == bankDepth - 1)
 					{
-						if (_spmBuffer.queueNotFull(_spmBuffer.lseWriteBankFinish[bankId]))
+						if (context.contextFinish != 1)
 						{
-							_spmBuffer.lseWriteBankFinish[bankId].push(1);
+							if (_spmBuffer.queueNotFull(_spmBuffer.lseWriteBankFinish[bankId]))
+							{
+								_spmBuffer.lseWriteBankFinish[bankId].push(1);
+								_spmBuffer.resetWrPtrLse(bankId);  // reset wrPtrLse for next bank write
+								context.contextFinish = 1;  // signify current context has finished
+							}
 						}
 						//_spmBuffer.setLseWriteBankFinishHistory(bankId);
 					}
@@ -775,9 +633,11 @@ namespace Simulator::Array
 									if (_spmBuffer.queueNotFull(_spmBuffer.memReadBankFinish[bankId]))
 									{
 										_spmBuffer.memReadBankFinish[bankId].push(1);
+										_spmBuffer.lseWriteBankFinish[bankId].pop();  // clear current status
+										_spmBuffer.bankInLoad[bankId].pop();  // clear current status
 									}
 
-									_spmBuffer.bankInLoad[bankId].pop();  // indicate current bank has been loaded completely
+									//_spmBuffer.bankInLoad[bankId].pop();  // indicate current bank has been loaded completely
 									_spmBuffer.resetRdPtrMem(bankId);
 								}
 							}
@@ -800,7 +660,7 @@ namespace Simulator::Array
 			// check memory write bank finish
 			if (_spmBuffer.queueNotEmpty(_spmBuffer.memReadBankFinish[bankId]))  // when all the addr. have been sent to SPM from LSE
 			{
-				for (size_t i = 0; i < bankDepth; ++i)
+				for (size_t i = _spmBuffer.getWrPtrLse[bankId]; i < bankDepth; ++i)  // traverse from wrPtrLse, in order to exclude the next round lse write;
 				{
 					Port_inout_lsu data = _spmBuffer.getSpmData(bankId, uint(i));
 
@@ -812,7 +672,11 @@ namespace Simulator::Array
 					
 					if (i = bankDepth - 1)
 					{
-						if(_spmBuffer.queue)
+						if (_spmBuffer.queueNotFull(_spmBuffer.memWriteBankFinish[bankId]))
+						{
+							_spmBuffer.memWriteBankFinish[bankId].push(1);
+							_spmBuffer.memReadBankFinish[bankId].pop();
+						}
 					}
 				}
 			}
@@ -831,7 +695,7 @@ namespace Simulator::Array
 					throw std::runtime_error("LSE branchMode configure error -> All the LSE belong to the same context must have the same branchMode");
 			}
 
-			// check rdPtrLse consistance
+			//**** check rdPtrLse consistance  ***//
 			uint rdPtrLse;
 			bool hasLoad = 0;  // signify there is at least one LSE in the load mode
 			for (auto lseContext : _lseConfig[contextId])
@@ -858,6 +722,7 @@ namespace Simulator::Array
 					}
 				}
 			}
+			//***********************//
 
 			for (size_t rowId = rdPtrLse; rowId < bankDepth; ++rowId)  // roundrobin start at the rdPtrLse, stop at the bank tail
 			{
@@ -882,11 +747,11 @@ namespace Simulator::Array
 
 					if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::temp)
 					{
-						bankFinish = bankFinish & _spmBuffer.getLseWriteBankFinishHistory(bankId);
+						bankFinish = bankFinish & _spmBuffer.queueNotEmpty(_spmBuffer.lseWriteBankFinish[bankId]);
 					}
 					else if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._daeMode == DaeMode::get_data)
 					{
-						bankFinish = bankFinish & _spmBuffer.getMemWriteBankFinish(bankId);
+						bankFinish = bankFinish & _spmBuffer.queueNotEmpty(_spmBuffer.memWriteBankFinish[bankId]);
 					}
 						
 				}
@@ -913,14 +778,26 @@ namespace Simulator::Array
 
 				if (bankReadEmpty && bankFinish)  // there is no data match
 				{
-					for (auto lseContext : _lseConfig[contextId])
+					for (auto &lseContext : _lseConfig[contextId])
 					{
 						if (lseContext._lseMode == LSMode::load)
 						{
 							uint bankId = lseContext.lseVirtualTag;
 
-							_spmBuffer.setLseReadBankFinish(bankId);
-							_spmBuffer.resetLseWriteBankFinishHistory(bankId);  // reset lseWriteBankFinishHistory, indicate the data written by last LSE write has been read empty
+							if (lseContext.contextFinish != 1)
+							{
+								if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::temp)
+								{
+									_spmBuffer.lseWriteBankFinish[bankId].pop();  // clear lse write status
+								}
+
+								if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._daeMode == DaeMode::get_data)
+								{
+									_spmBuffer.memWriteBankFinish[bankId].pop();  // clear mem write status
+								}
+
+								lseContext.contextFinish = 1;
+							}
 
 							// send last data to each LSE, to indicate current context is over
 							Port_inout_lsu data;
@@ -932,14 +809,15 @@ namespace Simulator::Array
 			}
 		}
 
+	public:
+		Context _lseConfig;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
+
 	private:
 		vector<Port_inout_lsu> spmInput;
 		vector<Port_inout_lsu> spmOutput;
 		uint bankNum;
 		uint bankDepth;
 		SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
-
-		Context _lseConfig;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
 		deque<uint> contextQueue;  // add/delete valid context by Scheduler, SPM may work under several contexts simultaneously
 	};
 
@@ -955,6 +833,9 @@ namespace Simulator::Array
 		DaeMode _daeMode;  // configure in .xml
 		BranchMode _branchMode;  // configure in .xml
 
+		bool contextFinish;
+		bool hasSetBankInLoad;
+
 		LseConfig()
 		{
 			lseTag = 0;
@@ -963,6 +844,9 @@ namespace Simulator::Array
 			_memAccessMode = MemAccessMode::none;
 			_daeMode = DaeMode::none;
 			_branchMode = BranchMode::none;
+
+			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1
+			hasSetBankInLoad = 0;  // for only push BankInLoad Queue once in each context
 		}
 	};
 
