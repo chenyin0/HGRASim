@@ -53,6 +53,8 @@ namespace Simulator::Array
 
 		bool occupy;  // used in branch, to occupy
 
+		bool bypassCache;  // set to 1, signify bypass cache and send to DRAM directly
+
 		//uint tag;
 
 		Port_inout_lsu() 
@@ -79,6 +81,8 @@ namespace Simulator::Array
 			dataReady = 0;
 
 			occupy = 0;
+
+			bypassCache = 0;
 		}
 
 		void reset() 
@@ -93,6 +97,7 @@ namespace Simulator::Array
 			_daeMode = DaeMode::none; 
 			/*isNewContext = 0;*/
 			lastData = 0;
+			bypassCache = 0;
 		}
 	};
 

@@ -538,7 +538,7 @@ namespace Simulator::Array
 								if (context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._daeMode == DaeMode::send_addr)
 								{
 									data.dataReady = 0;  // for addr, dataReady set to 0
-									_spmBuffer.writeLse2Spm(bankId, rowId, data);
+									_spmBuffer.writeLse2Spm(bankId, rowId, data);									
 
 									if (context.contextFinish != 1 && context.hasSetBankInLoad != 1)
 									{
