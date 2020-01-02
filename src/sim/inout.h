@@ -55,6 +55,8 @@ namespace Simulator::Array
 
 		bool bypassCache;  // set to 1, signify bypass cache and send to DRAM directly
 
+		uint contextId;  // 不用配置，用作SPM callbackAck4Lse
+
 		//uint tag;
 
 		Port_inout_lsu() 
@@ -83,6 +85,8 @@ namespace Simulator::Array
 			occupy = 0;
 
 			bypassCache = 0;
+
+			contextId = 0;
 		}
 
 		void reset() 
