@@ -242,7 +242,7 @@ void Processing_element::simStep1(uint i)
 								local_reg[1]->input(input_port[i]);
 								inbuffer->input(input_port[1], 1);
 								//local_reg[1]->reg_v = true;
-								//first_loop = true;
+								first_loop = true;
 							}
 							else {
 								//inbuffer->input(input_port[0], 1);
@@ -285,7 +285,12 @@ void Processing_element::simStep1(uint i)
 							else */if (i == 2 && (attribution->control_mode == ControlMode::calc_activate || attribution->control_mode == ControlMode::loop_activate )
 										&& attribution->input_bypass != InputBypass::bypass) {
 								if (attribution->buffer_mode[i] == BufferMode::buffer && attribution->inbuffer_from[2] == InBufferFrom::in2) {
-									if (input_port[i].valid ) { inbuffer->input(input_port[i], i); }
+									if (input_port[i].valid ) { 
+										inbuffer->input(input_port[i], i);
+										if (attribution->control_mode == ControlMode::loop_activate) {
+											first_loop = false;
+										}
+									}
 									else { ; }
 								}
 							}
@@ -466,7 +471,7 @@ void Processing_element::getAluInput()
 						{
 							oprand_collected = false;
 						}
-						first_loop = false;
+						//first_loop = false;
 					}
 
 				}
@@ -569,7 +574,7 @@ void Processing_element::getAluInput()
 			else {
 				if ( (aluin[2].valid && aluin[2].last)) {
 
-				first_loop = true;
+				//first_loop = true;
 				alu_flag = true;
 					for (uint i = 0; i < in_num; i++) {
 						if ((attribution->buffer_mode[i] == BufferMode::keep || attribution->buffer_mode[i] == BufferMode::lr) && attribution->inbuffer_from[i] != InBufferFrom::flr)

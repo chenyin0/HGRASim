@@ -71,8 +71,8 @@ bool Pebp::getBp(uint port)
 						return true;
 					}
 					else if (pe->alu->depth != 0 && pe->alu->canReceiveInput() && pe->allAluOperandsGot()) { return true; }
-					else if (pe->alu->depth == 0 && pe->outbuffer->isBufferNotFull(0)) { return true; }
-					else if (pe->alu->depth != 0 && pe->allAluOperandsGot() && pe->outbuffer->isBufferNotFull(0) && !pe->alu->canReceiveInput() && pe->attribution->opcode == PEOpcode::mul) {
+					else if (pe->alu->depth == 0 && pe->outbuffer->isBufferNotFull(0) && pe->allAluOperandsGot()) { return true; }
+					else if (pe->alu->depth != 0 && pe->allAluOperandsGot() && pe->outbuffer->isBufferNotFull(0) && !pe->alu->canReceiveInput() ) {
 						return true;
 					}
 					else { return false; }
@@ -130,8 +130,8 @@ bool Pebp::getBp(uint port)
 						return true;
 					}
 					else if (pe->alu->depth != 0 && pe->alu->canReceiveInput() && pe->allAluOperandsGot()) { return true; }
-					else if (pe->alu->depth == 0 && pe->outbuffer->isBufferNotFull(0)) { return true; }
-					else if (pe->alu->depth != 0 && pe->allAluOperandsGot() && pe->outbuffer->isBufferNotFull(0) && !pe->alu->canReceiveInput() && pe->attribution->opcode == PEOpcode::mul) {
+					else if (pe->alu->depth == 0 && pe->outbuffer->isBufferNotFull(0) && pe->allAluOperandsGot()) { return true; }
+					else if (pe->alu->depth != 0 && pe->allAluOperandsGot() && pe->outbuffer->isBufferNotFull(0) && !pe->alu->canReceiveInput() ) {
 						return true;
 					}
 					else { return false; }
@@ -171,8 +171,8 @@ bool Pebp::getBp(uint port)
 						return true;
 					}
 					else if (pe->alu->depth != 0 && pe->alu->canReceiveInput() && pe->allAluOperandsGot()) { return true; }
-					else if (pe->alu->depth == 0 && pe->outbuffer->isBufferNotFull(0)) { return true; }
-					else if (pe->alu->depth != 0 && pe->allAluOperandsGot() && pe->outbuffer->isBufferNotFull(0) && !pe->alu->canReceiveInput() && pe->attribution->opcode == PEOpcode::mul) {
+					else if (pe->alu->depth == 0 && pe->outbuffer->isBufferNotFull(0) && pe->allAluOperandsGot()) { return true; }
+					else if (pe->alu->depth != 0 && pe->allAluOperandsGot() && pe->outbuffer->isBufferNotFull(0) && !pe->alu->canReceiveInput() ) {
 						return true;
 					}
 					else { return false; }
