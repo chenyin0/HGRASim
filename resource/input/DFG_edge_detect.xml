@@ -202,7 +202,9 @@
         <input type="null"/>
         <placement cord="[1, 9]"/>
     </node>-->
-
+  <cluster type="ls" index="0_1_4">
+    <input type="pe" index="11" port="0"/>
+  </cluster>
   <node type="ls" index="0" ls_mode="load" tag_mode="true" dae="true" fifo_step="1" buffer_size="middle" match="false">
     <input type="pe" index="11" port="0"/>
     <input type="null"/>

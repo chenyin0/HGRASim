@@ -255,5 +255,44 @@ namespace Simulator::Preprocess
 			return manual_placement;
 		}
 	};
-
+	class ClusterInterface
+	{
+	public:
+		NodeType nodetype;
+		uint id;
+		uint start_node;
+		uint step;
+		uint end_node;
+		uint counter;
+		vector<Input> input_vec;
+	//	bool update_en;
+	public:
+		friend class DFG;
+		ClusterInterface(NodeType nodetype_,uint id_, uint start_node_, uint step_, uint end_node_, uint counter_, vector<Input> input_vec_)
+			: nodetype(nodetype_)
+			,id(id_)
+			, start_node(start_node_)
+			, step(step_)
+			, end_node(end_node_)
+			, counter(counter_)
+			,input_vec(input_vec_)
+		{
+		}
+	};
+	class ClusterGroupInterface
+	{
+	private:
+		unordered_map<std::pair<NodeType, uint>, shared_ptr<ClusterInterface>> clusters;
+		unordered_map<std::pair<NodeType, uint>, uint> ls_cluster;
+	public:
+		friend class DFG;
+		auto getAllClusters() const->const unordered_map<std::pair<NodeType, uint>, shared_ptr<ClusterInterface>> &
+		{
+			return clusters;
+		}
+		auto getClusterID() const->const unordered_map<std::pair<NodeType, uint>, uint> &
+		{
+			return ls_cluster;
+		}
+	};
 }

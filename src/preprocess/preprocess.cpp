@@ -27,6 +27,10 @@ namespace Simulator::Preprocess
 		return dfg_dictionary;
 	}
 
+	auto DFG::getDfgCluster() const -> const ClusterGroupInterface &
+	{
+		return cluster_group;
+	}
 	auto DFG::isManualPlacement() const -> bool
 	{
 		return _manual_placement;
@@ -97,7 +101,38 @@ namespace Simulator::Preprocess
 
 			node_xml = node_xml->NextSiblingElement("node");
 		}
+		XMLElement* cluster_xml = root_xml->FirstChildElement("cluster");
+		while (cluster_xml) {
+			uint id= std::stoi(cluster_xml->FindAttribute("index")->Value());
+			NodeType node_type = NodeTypeConverter::toEnum(cluster_xml->FindAttribute("type")->Value());
+			string indexstr = static_cast<string>(cluster_xml->FindAttribute("lsindexs")->Value());
+			vector<string> indexs= Util::splitString(indexstr, "_", true);
+			if (indexs.size() != 3) {
+				throw std::runtime_error("raed cluster bug at lsindexs");
+			}
+			vector<Input> input_vec;
+			XMLElement* input_xml = cluster_xml->FirstChildElement("input");
+			NodeType input_type = NodeTypeConverter::toEnum(input_xml->FindAttribute("type")->Value());
+			if (input_type == NodeType::null || input_type == NodeType::begin)
+			{
+				input_vec.emplace_back(input_type, 0, 0);
+			}
+			else
+			{
+				uint input_index = std::stoi(input_xml->FindAttribute("index")->Value());
+				uint port_index = std::stoi(input_xml->FindAttribute("port")->Value());
+				input_vec.emplace_back(input_type, input_index, port_index);
+			}
 
+			input_xml = input_xml->NextSiblingElement("input");
+			uint start_node = std::stoi(indexs[0]),step= std::stoi(indexs[1]),end_node= std::stoi(indexs[2]);
+			shared_ptr<ClusterInterface> cluster=make_shared<ClusterInterface>(node_type, id, start_node, step, end_node, 0, input_vec);
+			cluster_group.clusters.insert({ {node_type, id}, cluster });
+			for (uint i = start_node; i <= end_node; i++) {
+				cluster_group.ls_cluster.insert({ {node_type, i}, id });
+			}
+			cluster_xml = cluster_xml->NextSiblingElement("cluster");
+		}
 	}
 
 	auto DFG::fgRead(XMLElement* node_xml_) const -> DFGNodeInterface*
@@ -247,6 +282,7 @@ namespace Simulator::Preprocess
 	{
 		// attributes
 		uint index = std::stoi(node_xml_->FindAttribute("index")->Value());
+		uint cluster = std::stoi(node_xml_->FindAttribute("cluster")->Value());
 		LSMode ls_mode = LSModeConverter::toEnum(node_xml_->FindAttribute("ls_mode")->Value());
 		bool tag_bind = static_cast<string>(node_xml_->FindAttribute("tag_mode")->Value()) == string("true");
 		bool dae = static_cast<string>(node_xml_->FindAttribute("dae")->Value()) == string("true");

@@ -5,7 +5,6 @@ using namespace Simulator::Array;
 HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_graph))
 {
 	const auto& system_para = Preprocess::Para::getInstance()->getArrayPara();
-	//clk = 0;
 	if (system_para.stall_mode == stallType::none) {
 		#define stall
 	}
@@ -36,7 +35,7 @@ HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_g
 			temp.index = every_node.type_num;
 			config_order.push_back(temp);
 
-			auto ptr = new Loadstore_element(system_para, ls_index, lsu);
+			auto ptr = new Loadstore_element(system_para, ls_index, lsu, cluster_group);
 			lse_map[ls_index] = ptr;
 			bridge.inputFunRegister(every_node.type, ptr->getAttr()->index,
 				std::bind(&Loadstore_element::getInput, ptr, std::placeholders::_1, std::placeholders::_2));
@@ -479,6 +478,7 @@ void HgraArray::run()
 				break;
 			}
 			ClkDomain::getInstance()->selfAdd();
+			cluster_group.update();
 		}
 	}
 
@@ -701,6 +701,7 @@ void HgraArray::run()
 				Debug::getInstance()->getPortFile() << "clk" << clk << std::endl;
 				break;
 			}
+			cluster_group.update();
 	//		bridge.setAllBp();
 			ClkDomain::getInstance()->selfAdd();
 		}

@@ -3,7 +3,7 @@
 
 using namespace Simulator::Array;
 
-Loadstore_element::Loadstore_element(const Simulator::Preprocess::ArrayPara para, uint index, DRAMSim::Lsu* lsu):Node(para)
+Loadstore_element::Loadstore_element(const Simulator::Preprocess::ArrayPara para, uint index, DRAMSim::Lsu* lsu,ClusterGroup &cluster_group_):Node(para), cluster_group(cluster_group)
 {
 	this->lsu = lsu;
 	this->index = index;
@@ -106,8 +106,10 @@ void Loadstore_element::leSimStep1(uint i)
 		}
 		else
 		{
-			if (input_port_pe[i].valid)
+			if (input_port_pe[i].valid) {
+				have_recv = true;
 				inbuffer->input(input_port_pe[i], i);
+			}
 		}
 //	}
 
@@ -160,6 +162,7 @@ void Loadstore_element::seSimStep1(uint i)
 				//}
 				//else                                                             //！match时不需要tag
 				//	outbuffer->input(input_port_pe[i], i);
+				have_recv = true;
 				if (outbuffer->input_tag(input_port_pe[i], i, tag_counter))
 					tag_counter_update();//都需要按tag进数和出数
 			}
@@ -196,22 +199,34 @@ void Loadstore_element::simStep1(uint i)
 
 void Loadstore_element::simStep1()
 {
-	if (attribution->ls_mode != LSMode::dummy) {
-		if (attribution->ls_mode == LSMode::load)
-		{
-			leSimStep1();
+	if ((cluster_group.exists(NodeType::ls, attribution->index)&& cluster_group.canRecv(NodeType::ls, attribution->index))||!cluster_group.exists(NodeType::ls, attribution->index)) {
+		if (attribution->ls_mode != LSMode::dummy) {
+			if (attribution->ls_mode == LSMode::load)
+			{
+				leSimStep1();
+			}
+			//se
+			else if (attribution->ls_mode == LSMode::store_addr || attribution->ls_mode == LSMode::store_data)
+			{
+				seSimStep1();
+			}
 		}
-		//se
-		else if (attribution->ls_mode == LSMode::store_addr || attribution->ls_mode == LSMode::store_data)
+		else
 		{
-			seSimStep1();
+			//	DEBUG_ASSERT(i == 0);
+			for (uint i = 0; i < input_port_pe.size(); ++i)
+				if (input_port_pe[i].valid) {
+					have_recv = true;
+					outbuffer->input(input_port_pe[i], i);
+				}
 		}
-	}
-	else
-	{
-	//	DEBUG_ASSERT(i == 0);
-		for (uint i = 0; i < input_port_pe.size(); ++i)
-			outbuffer->input(input_port_pe[i], i);
+		if (cluster_group.exists(NodeType::ls, attribution->index)) {
+			if (have_recv) {
+				uint clusterID = cluster_group.index2Id(NodeType::ls, attribution->index);
+				cluster_group.enable(NodeType::ls, clusterID);
+				have_recv = false;
+			}
+		}
 	}
 
 }

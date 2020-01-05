@@ -18,6 +18,7 @@ namespace Simulator
 		begin
 		
 	};
+
 	//std::ostream& operator<<(std::ostream& os, const enum class NodeType& nodetype)
 	//{
 	//	static const char* maps[7] = { "pe","fg","ls","lv","lc","null","begin" };

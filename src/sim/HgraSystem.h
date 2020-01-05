@@ -17,6 +17,7 @@
 #include "Node/LC.h"
 #include "Node/LSE.h"
 #include "Node/PE.h"
+#include "Node/Cluster.h"
  //#include "mem_system/MultiChannelMemorySystem.h"
  //#include "../sim/mem_system/Lsu.h"
 
@@ -45,6 +46,7 @@ namespace Simulator::Array
 		uint pe_ulti;
 		uint pe_ulti_cnt;
 		uint total_key_pe;
+		ClusterGroup cluster_group= ClusterGroup();
 		vector<Simulator::Bridge::Location> reserved_nodes;
 		std::map<uint, std::pair<NodeType, uint>> order2index;//config_order转换成pe_map中的以pe_map的index为索引的元素
 		std::map< std::pair<NodeType, uint>,uint> ele2order;

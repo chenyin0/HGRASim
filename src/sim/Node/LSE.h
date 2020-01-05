@@ -1,5 +1,6 @@
 #pragma once
 #include "Node.h"
+#include "Cluster.h"
 #include "../mem_system/Lsu.h"
 #include "../debug.h"
 #include "../memory/MemoryData.h"
@@ -16,11 +17,13 @@ namespace Simulator::Array
 		const Preprocess::DFGNode<NodeType::ls>* attribution;
 		Buffer* inbuffer;
 		Buffer* outbuffer;
+		bool have_recv;
 		Lsebp* inbuffer_bp;
 		Lsebp* outbuffer_bp;
 		vector<Bool> break_state;
 		vector<Port_inout_lsu> fake_lsu;
 		DRAMSim::Lsu* lsu;
+		ClusterGroup& cluster_group;
 		Loadstore_element* couple_se;
 		uint tag_counter;
 		uint sended_tag;
@@ -69,7 +72,7 @@ namespace Simulator::Array
 		void resetByCouple(uint tag);
 
 	public:
-		Loadstore_element(const Preprocess::ArrayPara para, uint index, DRAMSim::Lsu* lsu);
+		Loadstore_element(const Preprocess::ArrayPara para, uint index, DRAMSim::Lsu* lsu, ClusterGroup& cluster_group);
 		friend class Lsebp;
 		friend class Lsu;
 		~Loadstore_element();
