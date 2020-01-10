@@ -663,6 +663,97 @@ namespace Simulator
 		}
 	};
 
+	class MemAccessModeConverter
+	{
+	public:
+		static auto toString(MemAccessMode type_)->string
+		{
+			if (type_ == MemAccessMode::temp)
+				return "temp";
+			if (type_ == MemAccessMode::stream)
+				return "stream";
+			if (type_ == MemAccessMode::irregular)
+				return "irregular";
+			if (type_ == MemAccessMode::none)
+				return "none";
+			DEBUG_ASSERT(false);
+			return "";
+		}
+
+		static auto toEnum(string s_)->MemAccessMode
+		{
+			if (s_ == "temp")
+				return MemAccessMode::temp;
+			if (s_ == "stream")
+				return MemAccessMode::stream;
+			if (s_ == "irregular")
+				return MemAccessMode::irregular;
+			if (s_ == "none")
+				return MemAccessMode::none;
+			throw std::runtime_error("your configuration is boom(MemAccessMode)");
+			DEBUG_ASSERT(false);
+			return MemAccessMode::none;
+		}
+	};
+
+	class DaeModeConverter
+	{
+	public:
+		static auto toString(DaeMode type_)->string
+		{
+			if (type_ == DaeMode::send_addr)
+				return "send_addr";
+			if (type_ == DaeMode::get_data)
+				return "get_data";
+			if (type_ == DaeMode::none)
+				return "none";
+			DEBUG_ASSERT(false);
+			return "";
+		}
+
+		static auto toEnum(string s_)->DaeMode
+		{
+			if (s_ == "send_addr")
+				return DaeMode::send_addr;
+			if (s_ == "get_data")
+				return DaeMode::get_data;
+			if (s_ == "none")
+				return DaeMode::none;
+			throw std::runtime_error("your configuration is boom(DaeMode)");
+			DEBUG_ASSERT(false);
+			return DaeMode::none;
+		}
+	};
+
+	class BranchModeConverter
+	{
+	public:
+		static auto toString(BranchMode type_)->string
+		{
+			if (type_ == BranchMode::truePath)
+				return "truePath";
+			if (type_ == BranchMode::falsePath)
+				return "falsePath";
+			if (type_ == BranchMode::none)
+				return "none";
+			DEBUG_ASSERT(false);
+			return "";
+		}
+
+		static auto toEnum(string s_)->BranchMode
+		{
+			if (s_ == "truePath")
+				return BranchMode::truePath;
+			if (s_ == "falsePath")
+				return BranchMode::falsePath;
+			if (s_ == "none")
+				return BranchMode::none;
+			throw std::runtime_error("your configuration is boom(BranchMode)");
+			DEBUG_ASSERT(false);
+			return BranchMode::none;
+		}
+	};
+
 	using WireTypeConverter = PortTypeConverter;
 	using SegmentTypeConverter = PortTypeConverter;
 

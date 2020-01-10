@@ -35,71 +35,73 @@ namespace Simulator::Array
 		short tag;
 		bool rdwr;
 		bool dae;
-		bool condition;
-		bool last;
-		
+
 		//bool isNewContext;  // identify it is a new context when switch the context
 		uint lseId_virtual;  // LSE 实际的硬件ID，从配置文件里读出
 
 		MemAccessMode _memAccessMode;  // add memory access mode
 		DaeMode _daeMode;
-		BranchMode _branchMode;
-//		bool lastData; // 表示最后一次循环的数据，用来指导SPM里的schedule切换配置
+
+		bool lastData; // 表示最后一次循环的数据，用来指导SPM里的schedule切换配置
 		// bind with each load request, send the data back to SPM according to these two Id
 		uint bankId;
 		uint rowId;
 		bool inflight; // indicate this addr is send to memory, but hasn't been sent back;
 
-//		bool cond; // for branch
+		bool cond; // for branch
 		bool dataReady; // indicate the load request has been sent back, data load is ready
 
 		bool occupy;  // used in branch, to occupy
 
+		bool bypassCache;  // set to 1, signify bypass cache and send to DRAM directly
+
+		uint contextId;  // 不用配置，用作SPM callbackAck4Lse
+
 		//uint tag;
 
-		Port_inout_lsu()
+		Port_inout_lsu() 
 		{
-			value_addr = 0;
-			value_data = 0;
-			valid = false;
+			value_addr = 0; 
+			value_data = 0; 
+			valid = false; 
 			tag = 0;
-			rdwr = false;
+			rdwr = false; 
 			dae = false;
 
 			_memAccessMode = MemAccessMode::temp;
-			_daeMode = DaeMode::none;
-			_branchMode = BranchMode::none;
-			/*isNewContext = 0;*/
+			_daeMode = DaeMode::none; 
+			/*isNewContext = 0;*/  
 			lseId_virtual = 0;
-//			lastData = 0;
-
-			bankId = UINT_MAX;
+			lastData = 0;
+			
+			bankId = 0;  
 			rowId = 0;
-			condition = true;
-			last = false;
+
 			inflight = 0;
 
-//			cond = 0;
+			cond = 0;
 			dataReady = 0;
 
 			occupy = 0;
+
+			bypassCache = 0;
+
+			contextId = 0;
 		}
 
-		void reset()
-		{
-			value_addr = 0;
+		void reset() 
+		{ 
+			value_addr = 0; 
 			value_data = 0;
-			valid = false;
-			tag = 0;
+			valid = false; 
+			tag = 0; 
 			rdwr = false;
-			dae = false;
-			condition = true;
-			last = false;
-			_branchMode = BranchMode::none;
+			dae = false; 
 			_memAccessMode = MemAccessMode::temp;
-			_daeMode = DaeMode::none;
+			_daeMode = DaeMode::none; 
 			/*isNewContext = 0;*/
-//			lastData = 0;
+			lastData = 0;
+			bypassCache = 0;
 		}
 	};
 

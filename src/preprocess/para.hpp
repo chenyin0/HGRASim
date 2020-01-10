@@ -53,6 +53,7 @@ namespace Simulator::Preprocess
 
 		//lse
 		uint lse_num;
+		uint lse_virtual_num;  // 硬件实际的LSE数量
 		uint lse_inbuffer_depth;
 		uint lse_datain_breadth;
 		uint lse_boolin_breadth;
@@ -61,6 +62,11 @@ namespace Simulator::Preprocess
 		uint le_outbuffer_depth_small;
 		uint le_outbuffer_depth_middle;
 		uint le_outbuffer_depth_large;
+
+
+
+		//SPM
+		uint SPM_depth;
 
 		//lsu
 		uint tabline_num;

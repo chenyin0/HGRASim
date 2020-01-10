@@ -15,7 +15,10 @@
         <boolOutPortNum>0</boolOutPortNum>
 
         <!-- LSE -->>
+      <!--lseNum代表仿真时配置的LSE数量，可以超过LSE硬件的实际数量-->
         <lseNum>32</lseNum>
+      <!--lseVirtualNum代表实际硬件上的LSE个数-->
+        <lseVirtualNum>32</lseVirtualNum>  
         <lseInBufferDepth>3</lseInBufferDepth>
         <lseDataInBreadth>1</lseDataInBreadth>
         <lseBoolInBreadth>0</lseBoolInBreadth>
@@ -36,6 +39,9 @@
         <lcBufferDataBreadth>1</lcBufferDataBreadth>
         <lcEndInNum>8</lcEndInNum>
         <lcRegInNum>4</lcRegInNum>
+
+        <!-- SPM -->>
+       <SPM_depth>128</SPM_depth>
 
         <!-- LSU -->>
       <!--要测量bankconflict，把leOutBufferDepthMiddle,fifolinen_num,post_offset_depth设的尽量大，可设成2048-->
