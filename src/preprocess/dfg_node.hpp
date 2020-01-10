@@ -183,12 +183,18 @@ namespace Simulator::Preprocess
 		vector<Input> input_vec;
 		Cord manual_placement;
 		VecMode vec_mode;
+		DaeMode dae_mode;
+		BranchMode branch_mode;
+		MemAccessMode mem_access_mode;
 		uint pointer;
+		uint cluster;
 		uint step;
 		uint vec_size;
 
 		DFGNode(uint index_, LSMode ls_mode_, bool tag_bind_, bool dae_, uint fifo_step_, BufferSize size_,
-			bool match_, vector<Input> input_vec_, Cord manual_placement_,VecMode vec_mode_ = VecMode::null,uint pointer_=0, uint step_ = 0, uint thesize_=0)
+			bool match_, vector<Input> input_vec_, Cord manual_placement_,MemAccessMode mem_access_mode_,
+			DaeMode dae_mode_, BranchMode branch_mode_,uint cluster_, VecMode vec_mode_ = VecMode::null,
+			uint pointer_=0, uint step_ = 0, uint thesize_=0)
 			: index(index_)
 			, ls_mode(ls_mode_)
 			, tag_bind(tag_bind_)
@@ -202,6 +208,10 @@ namespace Simulator::Preprocess
 			,pointer(pointer_)
 			,step(step_)
 			,vec_size(thesize_)
+			,dae_mode(dae_mode_)
+			,mem_access_mode(mem_access_mode_)
+			,branch_mode(branch_mode_)
+			,cluster(cluster_)
 		{
 		}
 
@@ -270,12 +280,12 @@ namespace Simulator::Preprocess
 		friend class DFG;
 		ClusterInterface(NodeType nodetype_,uint id_, uint start_node_, uint step_, uint end_node_, uint counter_, vector<Input> input_vec_)
 			: nodetype(nodetype_)
-			,id(id_)
+			, id(id_)
 			, start_node(start_node_)
 			, step(step_)
 			, end_node(end_node_)
 			, counter(counter_)
-			,input_vec(input_vec_)
+			, input_vec(input_vec_)
 		{
 		}
 	};

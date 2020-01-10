@@ -25,6 +25,9 @@
         <leOutBufferDepthMiddle>64</leOutBufferDepthMiddle>
         <leOutBufferDepthLarge>128</leOutBufferDepthLarge>
 
+        <!-- LSE -->>
+        <spmBank>30</spmBank>
+        <lsclusterNum>30</lsclusterNum>
         <!-- LC -->>
         <lcNum>4</lcNum>
         <lcOutputNum>4</lcOutputNum>
@@ -57,6 +60,7 @@
         <inflight_blocking>false</inflight_blocking>
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>
+        <spm_mode>true</spm_mode>
         <printscreen>true</printscreen>
         <stallMode>inbuffer_stall</stallMode>
         <attachMemory>true</attachMemory>

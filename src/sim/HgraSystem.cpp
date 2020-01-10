@@ -69,12 +69,17 @@ HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_g
 				std::bind(&LoopControl::getBp, ptr, std::placeholders::_1, std::placeholders::_2));
 		}
 	}
+	initIndex();
+	cluster_group.insert(index2order, lse_map);
 	lsu = new DRAMSim::Lsu(system_para, lse_map);
 	mem = new DRAMSim::MultiChannelMemorySystem("./resource/input/DRAMSimini/DDR3_micron_16M_8B_x8_sg15.ini", "./resource/input/DRAMSimini/system.ini", ".", "example_app", 16384);
 	DRAMSim::TransactionCompleteCB* read_cb = new Callback<DRAMSim::Cache, void, unsigned, uint64_t, uint64_t>(&(*(lsu->cache)), &DRAMSim::Cache::mem_read_complete);
 	DRAMSim::TransactionCompleteCB* write_cb = new Callback<DRAMSim::Cache, void, unsigned, uint64_t, uint64_t>(&(*(lsu->cache)), &DRAMSim::Cache::mem_write_complete);
 	mem->RegisterCallbacks(read_cb, write_cb, power_callback);
 	lsu->AttachMem(mem);
+	spm = new Simulator::Array::Spm(Preprocess::DFG::getInstance()->getContext(), cluster_group, lse_map, index2order);
+	lsu->attachSpm(spm);
+	spm->attachLsu(lsu);
 	for (auto& lse : lse_map)
 		lse.second->attachLsu(lsu);
 	match_set = new Match_set(system_para, lse_map);
@@ -326,7 +331,6 @@ void HgraArray::pe_update(uint config_index) {
 void HgraArray::run()
 {
 	const auto& system_para = Preprocess::Para::getInstance()->getArrayPara();
-	initIndex();
 
 	if (system_para.stall_mode == stallType::none) {
 		while (ClkDomain::getInstance()->getClk() < system_para.maxclk)

@@ -1,6 +1,7 @@
 #include "Lsu.h"                                        
 #include <vector>
 #include "../Node/LSE.h"
+#include "../Node/SPM.h"
 
 //#define leNums    2  
 //#define seNums    2
@@ -58,17 +59,31 @@ namespace DRAMSim {
 		//	se_ = lse;
 		TAG_ = TAG;
 		pe_tag = 0;
+		bankId = UINT_MAX;
 	//	pe_round = 0;
 	}
 
+	ArbitratorLine::ArbitratorLine(const Simulator::Preprocess::ArrayPara para,  uint32_t TAG) :Node(para)
+	{
+		//	se_ = lse;
+		TAG_ = TAG;
+		pe_tag = 0;
+		bankId = UINT_MAX;
+		//	pe_round = 0;
+	}
 
 	bool ArbitratorLine::AddTrans(Simulator::Array::Port_inout_lsu input,uint32_t TAG , bool bypass)
 	{
 		valid = input.valid;
 		ADDR_ = input.value_addr;
-		pe_tag = input.tag;
+		if (bankId != UINT_MAX) {
+			pe_tag = input.tag;
+		}
+		else {
+			pe_tag = input.rowId;
+		}
+		bankId = input.bankId;
 		rdwr = input.rdwr;
-	//	pe_round = PE_ROUND;
 		TAG_ = TAG;
 		this->bypass = bypass;
 		pref = 0;
@@ -77,12 +92,27 @@ namespace DRAMSim {
 
 	void ArbitratorLine::returnACK()
 	{
-		if (TAG_ < system_parameter.lse_num)
-			lse_->callbackACK();    //pay attention to this name
-	/*	else if (TAG_ >= leNums && TAG_ < (leNums + seNums))
-			se_->callbackACK();*/
-		else
-			PRINTM("error occurs in ArbitratorLine::returnACK()");
+		if (system_parameter.cache_mode) {
+			if (TAG_ < system_parameter.lse_num)
+				lse_->callbackACK();    //pay attention to this name
+		/*	else if (TAG_ >= leNums && TAG_ < (leNums + seNums))
+				se_->callbackACK();*/
+			else
+				PRINTM("error occurs in ArbitratorLine::returnACK()");
+		}
+		else {
+			if (TAG_ < system_parameter.lse_num) {
+				if (bankId != UINT_MAX) {
+					//spm->callbackACK(bankId);
+				}
+				else {
+					lse_->callbackACK();
+				}
+			}
+			else {
+				PRINTM("error occurs in ArbitratorLine::returnACK()");
+			}
+		}
 	}
 
 
@@ -93,21 +123,32 @@ namespace DRAMSim {
 	//	lseSize = lse_map.size();
 		pointer = 0;
 		uint relse_counter = 0;
-
-		for (uint32_t i = 0; i < lse_map.size(); i++)
-		{
-			if (lse_map[i]->getAttr()->ls_mode != Simulator::LSMode::dummy) {
+		if (system_parameter.cache_mode) {
+			for (uint i = 0; i < system_parameter.spm_bank; i++) {
 				lse2relse[i] = relse_counter;
-				ArbitratorLine* arbline = new ArbitratorLine(para, lse_map[i], relse_counter++);                       //隐含了ArbitratorLines的下标即为TAG的意思
-				ArbitratorLines.push_back(arbline);
+				ArbitratorLine* arbline = new ArbitratorLine(para, relse_counter++);
+			}
+
+			for (uint32_t i = 0; i < lse_map.size(); i++)
+			{
+				if (lse_map[i]->getAttr()->ls_mode != Simulator::LSMode::dummy && !lse_map[i]->existsInGroup()) {
+					lse2relse[i + system_parameter.spm_bank] = relse_counter;
+					ArbitratorLine* arbline = new ArbitratorLine(para, lse_map[i], relse_counter++);                       //隐含了ArbitratorLines的下标即为TAG的意思
+					ArbitratorLines.push_back(arbline);
+				}
+			}
+		}
+		else {
+			for (uint32_t i = 0; i < lse_map.size(); i++)
+			{
+				if (lse_map[i]->getAttr()->ls_mode != Simulator::LSMode::dummy) {
+					lse2relse[i] = relse_counter;
+					ArbitratorLine* arbline = new ArbitratorLine(para, lse_map[i], relse_counter++);                       //隐含了ArbitratorLines的下标即为TAG的意思
+					ArbitratorLines.push_back(arbline);
+				}
 			}
 		}
 
-		/*	for (uint32_t i = 0; i < ssize; i++)
-			{
-				ArbitratorLine* arbline = new ArbitratorLine(NULL, sep[i], i + lsize);
-				ArbitratorLines.push_back(arbline);
-			}*/
 	}
 
 
@@ -135,7 +176,9 @@ namespace DRAMSim {
 		else
 			return ArbitratorLines[lse2relse[lse_index]]->AddTrans(input, lse2relse[lse_index],bypass);
 	}
-
+	bool Lsu::returnACK(uint bankId) {
+		return !arbitrator->ArbitratorLines[bankId]->valid;
+	}
 	void Lsu::addpoped_addr(int addr, bool bypass)
 	{
 		if (poped_addr.find(addr) != poped_addr.end()) {
@@ -269,7 +312,19 @@ namespace DRAMSim {
 							if (entry.offset[j].valid && !channel_occupy[entry.offset[j].pointer])
 							{
 								//cbk_addr在步长为1时才有效，用于debug
-								(arbitrator->ArbitratorLines[entry.offset[j].pointer]->lse_)->LSEcallback(entry.ADDR_ + j, ClockCycle, entry.offset[j].tag);
+								if (arbitrator->ArbitratorLines[entry.offset[j].pointer]->bankId == UINT_MAX) {
+									(arbitrator->ArbitratorLines[entry.offset[j].pointer]->lse_)->LSEcallback(entry.ADDR_ + j, ClockCycle, entry.offset[j].tag);
+								}
+								else {
+									Simulator::Array::Port_inout_lsu inp;
+									inp.valid = true;
+									inp.value_addr = entry.ADDR_ + j;
+									inp.rowId = entry.offset[j].tag;
+									inp.bankId = arbitrator->ArbitratorLines[entry.offset[j].pointer]->bankId;
+									inp.rdwr = false;
+									inp.value_data= entry.ADDR_ + j;
+									spm->mem2Spm(inp);
+								}
 								if (print_enable)
 									PRINTM("return inflight_reg data to " << arbitrator->ArbitratorLines[entry.offset[j].pointer]->lse_->attribution->index << " " << entry.ADDR_ + j);
 								entry.offset[j].valid = 0;
@@ -329,7 +384,19 @@ namespace DRAMSim {
 							{
 								if (!channel_occupy[post_table[index]->offset[i].pointer])
 								{
-									(arbitrator->ArbitratorLines[post_table[index]->offset[i].pointer]->lse_)->LSEcallback(post_table[index]->ADDR_ + i, ClockCycle, post_table[index]->offset[i].tag);
+									if (arbitrator->ArbitratorLines[post_table[index]->offset[i].pointer]->bankId == UINT_MAX) {
+										(arbitrator->ArbitratorLines[post_table[index]->offset[i].pointer]->lse_)->LSEcallback(post_table[index]->ADDR_ + i, ClockCycle, post_table[index]->offset[i].tag);
+									}
+									else {
+										Simulator::Array::Port_inout_lsu inp;
+										inp.valid = true;
+										inp.value_addr = post_table[index]->ADDR_ + i;
+										inp.rowId = post_table[index]->offset[i].tag;
+										inp.bankId = arbitrator->ArbitratorLines[post_table[index]->offset[i].pointer]->bankId;
+										inp.rdwr = false;
+										inp.value_data = post_table[index]->ADDR_ + i;
+										spm->mem2Spm(inp);
+									}
 									if(print_enable)
 										PRINTM("return mshr data to " << arbitrator->ArbitratorLines[post_table[index]->offset[i].pointer]->lse_->attribution->index << " " << post_table[index]->ADDR_ + i);
 									post_table[index]->offset[i].valid = 0;
@@ -357,7 +424,19 @@ namespace DRAMSim {
 									{
 										if (!channel_occupy[post_offset[index][i].offset[j].pointer])
 										{
-											(arbitrator->ArbitratorLines[post_offset[index][i].offset[j].pointer]->lse_)->LSEcallback(post_table[index]->ADDR_ + j, ClockCycle, post_offset[index][i].offset[j].tag);
+											if (arbitrator->ArbitratorLines[post_table[index]->offset[i].pointer]->bankId == UINT_MAX) {
+												(arbitrator->ArbitratorLines[post_offset[index][i].offset[j].pointer]->lse_)->LSEcallback(post_table[index]->ADDR_ + j, ClockCycle, post_offset[index][i].offset[j].tag);
+											}
+											else {
+												Simulator::Array::Port_inout_lsu inp;
+												inp.valid = true;
+												inp.value_addr = post_table[index]->ADDR_ + j;
+												inp.rowId = post_offset[index][i].offset[j].tag;
+												inp.bankId = arbitrator->ArbitratorLines[post_offset[index][i].offset[j].pointer]->bankId;
+												inp.rdwr = false;
+												inp.value_data = post_table[index]->ADDR_ + j;
+												spm->mem2Spm(inp);
+											}
 											if (print_enable)
 												PRINTM("return mshrpost_offset data to " << arbitrator->ArbitratorLines[post_offset[index][i].offset[j].pointer]->lse_->attribution->index << " " << post_table[index]->ADDR_ + j );
 											post_offset[index][i].offset[j].valid = 0;
@@ -635,7 +714,19 @@ namespace DRAMSim {
 						if (inflight_reg[bank]->offset[j].valid && !channel_occupy[inflight_reg[bank]->offset[j].pointer])
 						{
 							//cbk_addr在步长为1时才有效，用于debug
-							(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->offset[j].tag);
+							if (arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->bankId == UINT_MAX) {
+								(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->offset[j].tag);
+							}
+							else {
+								Simulator::Array::Port_inout_lsu inp;
+								inp.valid = true;
+								inp.value_addr = inflight_reg[bank]->ADDR_ + j;
+								inp.rowId = inflight_reg[bank]->offset[j].tag;
+								inp.bankId = arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->bankId;
+								inp.rdwr = false;
+								inp.value_data = inflight_reg[bank]->ADDR_ + j;
+								spm->mem2Spm(inp);
+							}
 							if(print_enable)
 								PRINTM("return inflight_reg data to " << arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_->attribution->index << " " << inflight_reg[bank]->ADDR_ + j);
 							inflight_reg[bank]->offset[j].valid = 0;
@@ -1150,7 +1241,19 @@ void Lsu::read_hit_complete(uint32_t addr,uint32_t i)
 				if (inflight_reg[bank]->offset[j].valid && !channel_occupy[inflight_reg[bank]->offset[j].pointer])
 				{
 					//cbk_addr在步长为1时才有效，用于debug
-					(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->pe_tag);
+					if (arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->bankId == UINT_MAX) {
+						(arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_)->LSEcallback(inflight_reg[bank]->ADDR_ + j, ClockCycle, inflight_reg[bank]->pe_tag);
+					}
+					else {
+						Simulator::Array::Port_inout_lsu inp;
+						inp.valid = true;
+						inp.value_addr = inflight_reg[bank]->ADDR_ + j;
+						inp.rowId = inflight_reg[bank]->pe_tag;
+						inp.bankId = arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->bankId;
+						inp.rdwr = false;
+						inp.value_data = inflight_reg[bank]->ADDR_ + j;
+						spm->mem2Spm(inp);
+					}
 					if (print_enable)
 					{
 						PRINTM("return hit data to " << arbitrator->ArbitratorLines[inflight_reg[bank]->offset[j].pointer]->lse_->attribution->index <<" "<< inflight_reg[bank]->ADDR_ + j );
@@ -1529,5 +1632,9 @@ void Lsu::release_poped_addr(uint32_t addr)
 	}
 	PRINTM("error occurs in LSUnit::release_poped_addr! addr = " << addr );
 //	system("pause");
+}
+void Lsu::attachSpm(Simulator::Array::Spm *spm_)
+{
+	spm = spm_;
 }
 }

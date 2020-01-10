@@ -220,4 +220,34 @@ namespace Simulator
 	{
 		simulate_anneal
 	};
+	enum class MemAccessMode
+	{
+		//Idle,  // 当前context，LSE空闲
+		temp,  // 存储中间数据,	LSE处于load和store模式都有效！！
+		//stream,  // 有规律的连续访存, 仅当LSE处于load模式；store模式无效！！
+		//irregular,  // 无规律的访存，Out of order,；仅当LSE处于load模式；store模式无效！！
+		load,
+		none  // 当LSE处于store模式时，如果不是配为temp，就都配为None！！
+	};
+
+	// 以下配置字仅在LSE处于load模式下有效，因为DAE是针对LSE的load操作
+	enum class DaeMode
+	{
+		send_addr,  // send address to SPM in LSE load
+		get_data,  // get data from SPM in LSE load
+		none  // if LSE not in load mode(namely when LSE in store mode), daeMode should configured as "None"
+	};
+
+	enum class BranchMode
+	{
+		// Note:
+		// 1) for LE in send_addr mode, this configure means whether the data to be loaded will be used in T or F or both path
+		//	  if current data's condition mismatch with the LE's configuration, don't write it to the SPM
+		//
+		// 2) for LE in get_data mode, only send back the data which condition flag match with the current LE's configuration
+
+		truePath,  // current context is a true path in the branch
+		falsePath, // current context is a false path in the branch
+		none  // current context is not in a branch
+	};
 }

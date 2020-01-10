@@ -7,6 +7,7 @@
 #include "../debug.h"
 #include "../ClkDomain.h"
 
+class Simulator::Array::Spm;
 namespace Simulator::Array
 {
 	//LSE与LSU之间互相传输都使用ack机制
@@ -48,7 +49,7 @@ namespace Simulator::Array
 		Bool nextlsu_bp=true;
 		Bool firstlsu = true;
 		bool ack;
-
+		Simulator::Array::Spm spm;
 		void leSimStep1(uint i);
 		void leSimStep1();
 		void seSimStep1(uint i);
@@ -77,9 +78,13 @@ namespace Simulator::Array
 		friend class Lsu;
 		~Loadstore_element();
 		void simStep2();
+		bool Ack2spm();
+		void spm2lse_temp(Port_inout_lsu data);
 		void simStep1();
 		void simStep1(uint i);
 		void simBp();
+		bool existsInGroup();
+		void LSEcallback(uint addr);
 		void print();
 		void value_update(uint &update_tag,const uint &last_tag);
 		void printBuffer();
@@ -100,6 +105,7 @@ namespace Simulator::Array
 		Bufferlse_out *getOutbuffer() { return static_cast<Simulator::Array::Bufferlse_out*>(outbuffer); }
 //		Bufferlse_in *getInbuffer() { return inbuffer; }
 		Port_inout_lsu output_port_2lsu;    //second
+		Port_inout_lsu getData();
 		Port_inout output_port_2array;      //first
 		//Port_inout output_port_2lc;         //last
 		vector<Bool> this_bp;                   //0-pe_addr 1-lsu/pe_data

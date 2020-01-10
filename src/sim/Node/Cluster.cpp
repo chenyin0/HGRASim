@@ -25,6 +25,10 @@ ClusterGroup::ClusterGroup():attribution(Preprocess::DFG::getInstance()->getDfgC
 		clusters.insert({ cluster,make_shared<Cluster>(cluster_attr) });
 	}
 }
+void ClusterGroup::insert(std::map<std::pair<NodeType, uint>, uint>& index2order_, map<uint, Simulator::Array::Loadstore_element*>& lse_map_){
+	index2order = index2order_;
+	lse_map = lse_map_;
+}
 void ClusterGroup::update()
 {
 	for (auto& [clusterId, cluster] : clusters)
@@ -62,3 +66,6 @@ bool ClusterGroup::canRecv(NodeType nodetype_, uint index) {
 		return false;
 	}
 }
+//Simulator::Array::Loadstore_element* ClusterGroup::getEle(NodeType nodetype_, uint lse_tag) {
+//	clusters.find({ nodetype_ ,index2Id(nodetype_,index) })->second
+//}

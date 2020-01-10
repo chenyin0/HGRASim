@@ -88,10 +88,14 @@ bool Buffer_out::input_nolast(Port_inout input, const uint port) {
 }
 bool Buffer_in::input_tag_lsu(Port_inout_lsu input, uint port, uint tag)
 {
-	DEBUG_ASSERT(true);
+	DEBUG_ASSERT(false);
 	return false;
 }
-
+bool Buffer_in::input_lsu(Port_inout_lsu input, uint port)
+{
+	DEBUG_ASSERT(false);
+	return false;
+}
 bool Buffer_in::input_tag(Port_inout input, uint port, uint tag)
 {
 	DEBUG_ASSERT(true);
@@ -390,7 +394,24 @@ bool Buffer_out::input_tag_lsu(Port_inout_lsu input, uint port, uint tag)
 	}
 	return false;
 }
-
+bool Buffer_out::input_lsu(Port_inout_lsu input, uint port)
+{
+	if (input.valid)
+	{
+		if (canReceiveInput(port))
+		{
+			Port_inout portinp;
+			portinp.valid = true;
+			portinp.condition = input.condition;
+			portinp.last = input.last;
+			portinp.value_data= input.value_data;
+			portinp.value_bool = false;
+			bufferInput(portinp, port);
+			return true;
+		}
+	}
+	return false;
+}
 bool Buffer_out::input_tag(Port_inout input, uint port, uint tag)
 {
 	if (input.valid)

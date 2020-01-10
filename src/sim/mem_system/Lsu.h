@@ -11,6 +11,7 @@
 #include "../Node/Node.h"
 
 class Simulator::Array::Loadstore_element;
+class Simulator::Array::Spm;
 
 typedef struct comb_offset {
 	bool valid;
@@ -92,7 +93,9 @@ namespace DRAMSim
 //		Simulator::Array::Loadstore_element* se_;
 		uint32_t TAG_;
 		uint32_t ADDR_;
+		uint bankId;
 		ArbitratorLine(const Simulator::Preprocess::ArrayPara para, Simulator::Array::Loadstore_element* lse, uint32_t TAG);
+		ArbitratorLine(const Simulator::Preprocess::ArrayPara para, uint32_t TAG);
 		~ArbitratorLine() {};
 		uint32_t valid;
 		bool rdwr;
@@ -150,11 +153,14 @@ namespace DRAMSim
 		Lsu(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map);
 		~Lsu() ;
 		Cache* cache;
+		Simulator::Array::Spm* spm;
 		uint conflict_times;
 		uint add_times;
 		uint seek_bank();
 		uint receive_enable(uint transnum);
+		void attachSpm(Simulator::Array::Spm *spm_);
 		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint TAG,bool bypass);
+		bool returnACK(uint bankId);
 		void AttachMem(DRAMSim::MultiChannelMemorySystem* memory);
 		void write_hit_complete(uint32_t addr, uint32_t i);
 		void read_hit_complete(uint32_t addr, uint32_t i);

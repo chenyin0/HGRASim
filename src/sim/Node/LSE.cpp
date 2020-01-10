@@ -1,4 +1,5 @@
 #include "LSE.h"
+#include "SPM.h"
 #include <iomanip>
 
 using namespace Simulator::Array;
@@ -196,7 +197,9 @@ void Loadstore_element::simStep1(uint i)
 	}
 
 }
-
+bool Loadstore_element::existsInGroup() {
+	return cluster_group.exists(NodeType::ls, attribution->index);
+}
 void Loadstore_element::simStep1()
 {
 	if ((cluster_group.exists(NodeType::ls, attribution->index)&& cluster_group.canRecv(NodeType::ls, attribution->index))||!cluster_group.exists(NodeType::ls, attribution->index)) {
@@ -289,7 +292,6 @@ void Loadstore_element::LSEcallback(uint addr, uint64_t cycle, short tag)
 			input_port_lsu[i].valid = true;
 			input_port_lsu[i].tag = tag;
 			input_port_lsu[i].value_data = addr;
-//			input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////
 			input_port_lsu[i].rdwr = false;
 		}
 		for (uint i = 0; i < input_port_lsu.size(); ++i)
@@ -307,11 +309,57 @@ void Loadstore_element::LSEcallback(uint addr, uint64_t cycle, short tag)
 	}
 	else
 		DEBUG_ASSERT(false);
-
+}
+void Loadstore_element::LSEcallback(uint addr)
+{
+	if (attribution->ls_mode == LSMode::load) {
+		for (uint i = 0; i < input_port_lsu.size(); ++i) {
+			input_port_lsu[i].value_addr = addr;
+			input_port_lsu[i].valid = true;
+			input_port_lsu[i].tag = 0;
+			input_port_lsu[i].value_data = addr;
+			//			input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////
+			input_port_lsu[i].rdwr = false;
+		}
+		for (uint i = 0; i < input_port_lsu.size(); ++i)
+			if (input_port_lsu[i].valid) {
+				if (outbuffer->input_lsu(input_port_lsu[i], i)) { ; }////////////////////这个地方是需要bp判断的吧
+				else {
+					uint clk = ClkDomain::getInstance()->getClk();
+					Debug::getInstance()->getPortFile() << "outbuffer can no in kls" << attribution->index << " " << ClkDomain::getInstance()->getClk() << std::endl;
+					//					DEBUG_ASSERT(false); 
+				}
+			}
+	}
+	else
+		DEBUG_ASSERT(false);
+}
+void Loadstore_element::spm2lse_temp(Port_inout_lsu data)
+{
+	if (attribution->ls_mode == LSMode::load&& attribution->mem_access_mode == MemAccessMode::temp&& attribution->direct_mode == DirectMode::get) {
+		if (data.valid) {
+			if (outbuffer->input_lsu(data, 0)) { ; }////////////////////这个地方是需要bp判断的吧
+			else {
+				uint clk = ClkDomain::getInstance()->getClk();
+				Debug::getInstance()->getPortFile() << "outbuffer is full but you call its input function" << attribution->index << " " << ClkDomain::getInstance()->getClk() << std::endl;
+				DEBUG_ASSERT(false); 
+			}
+		}
+	}
+	else {
+		DEBUG_ASSERT(false);
+	}
+}
+bool Loadstore_element::Ack2spm()
+{
+	return outbuffer->isBufferNotFull(0);
+}
+Port_inout_lsu Loadstore_element::getData()
+{
+	return output_port_2lsu;
 }
 void Loadstore_element::leSimStep2()
 {
-
 	//for (uint i = 0; i < input_port_lsu.size(); ++i)
 	//{
 	//	if (input_port_lsu[i].valid)///////////需要考虑直连情况////////////////////////
@@ -335,7 +383,6 @@ void Loadstore_element::leSimStep2()
 			}
 #endif
 			outbuffer->output(output_port_2array, 0);//这里输出了
-
 		}
 		//tag match, matchset的仿真是多LE级的，适合放在更高层次执行
 		//不放在le函数内执行
@@ -359,7 +406,6 @@ void Loadstore_element::leSimStep2()
 
 	if (nextlsu_bp)
 	{
-//		inbuffer->reset_head();
 		if (!wait_for_data)
 			inbuffer->reset(0);
 		if (inbuffer->output_ack(inbuffer_out, 0)) {
@@ -374,20 +420,18 @@ void Loadstore_element::leSimStep2()
 			}
 			else {
 				tag_counter_update();//第一次更新tag为0
-//				firstlsu = false;
 			}
 		}
-	//	addr_v = true;
-//			tag_counter_update();//只有后一级返回ack时出新数才能更新tag_counter，否则不更新
-		if(!inbuffer_out.last && inbuffer_out.condition&& inbuffer_out.valid)///////对应了非直通的情况
-			nextlsu_bp = false;
+		if (!system_parameter.spm_mode) {
+			if (!inbuffer_out.last && inbuffer_out.condition && inbuffer_out.valid)///////对应了非直通的情况
+				nextlsu_bp = false;
+		}
 	}
 	else
 	{
 		inbuffer->output_ack(inbuffer_out, 0);
 	}
 //	inbuffer->output(inbuffer_out, 0);
-
 	if (!inbuffer_out.last && inbuffer_out.condition && inbuffer_out.valid)//在last的时候就不要过数据流
 	{
 		output_port_2lsu.valid = inbuffer_out.valid;
@@ -395,52 +439,66 @@ void Loadstore_element::leSimStep2()
 		output_port_2lsu.rdwr = false;
 		output_port_2lsu.dae = attribution->dae;
 		output_port_2lsu.tag = tag_counter;
+		output_port_2lsu.condition = inbuffer_out.condition;
+		output_port_2lsu._memAccessMode = attribution->mem_access_mode;
+		output_port_2lsu._DirectMode = attribution->direct_mode;
+		output_port_2lsu._branchMode = attribution->branch_mode;
+		output_port_2lsu.last = inbuffer_out.last;
 	//	tag_counter_update();
 	//	if (addr_v) {
-
+		if (!system_parameter.spm_mode||attribution->mem_access_mode==MemAccessMode::none) {
 #ifdef order_force
-		if (maintain_order[output_port_2lsu.tag]) {
+			if (maintain_order[output_port_2lsu.tag]) {
 #endif
-			lsu->AddTrans(output_port_2lsu, index, system_parameter.read_bypass);
+				if (!system_parameter.spm_mode) {
+					lsu->AddTrans(output_port_2lsu, index, system_parameter.read_bypass);
+				}
+				else {
+					lsu->AddTrans(output_port_2lsu, index + system_parameter.spm_bank, system_parameter.read_bypass);
+				}
 #ifdef order_force
-			maintain_order[output_port_2lsu.tag] = false;
-
+				maintain_order[output_port_2lsu.tag] = false;
+			}
+#endif
 		}
-#endif
-	//		addr_v = false;
-	//	}
 	}
 	else if(inbuffer_out.valid)
 	{
-//		if (inbuffer_out.valid) {
-//			tag_counter_update();
+		output_port_2lsu.valid = inbuffer_out.valid;
+		output_port_2lsu.value_addr = inbuffer_out.value_data;
+		output_port_2lsu.rdwr = false;
+		output_port_2lsu.dae = attribution->dae;
+		output_port_2lsu.tag = tag_counter;
+		output_port_2lsu.condition = inbuffer_out.condition;
+		output_port_2lsu._memAccessMode = attribution->mem_access_mode;
+		output_port_2lsu._DirectMode = attribution->direct_mode;
+		output_port_2lsu._branchMode = attribution->branch_mode;
+		output_port_2lsu.last = inbuffer_out.last;
+		if (!system_parameter.spm_mode || attribution->mem_access_mode == MemAccessMode::none) {
+			//		if (inbuffer_out.valid) {
+			//			tag_counter_update();
 #ifdef order_force
-		if (maintain_order[tag_counter]) {
+			if (maintain_order[tag_counter]) {
 #endif
-			if (outbuffer->input_tag(inbuffer_out, 0, tag_counter))////////////////暗含了inbuffer_out.valid信息/////////////
-			{
-				maintain_order[tag_counter] = false;
-				//		tag_counter_update();
-				nextlsu_bp = true;
-				//			inbuffer->reset(0);
-				//			if (attribution->match)
-				//////////////////////////////////////////////////////在所有情况都需要tag_counter_update()///////////////
-			}
-			else { 
-				//nextlsu_bp = false;
-				Debug::getInstance()->getPortFile() << "outbuffer can no in ls" <<attribution->index<<" "<< ClkDomain::getInstance()->getClk() << std::endl; 
-			//	DEBUG_ASSERT(false); 
-			}
+				if (outbuffer->input_tag(inbuffer_out, 0, tag_counter))////////////////暗含了inbuffer_out.valid信息/////////////
+				{
+					maintain_order[tag_counter] = false;
+					nextlsu_bp = true;
+					//			inbuffer->reset(0);
+					//			if (attribution->match)
+					//////////////////////////////////////////////////////在所有情况都需要tag_counter_update()///////////////
+				}
+				else {
+					Debug::getInstance()->getPortFile() << "outbuffer can no in ls" << attribution->index << " " << ClkDomain::getInstance()->getClk() << std::endl;
+				}
 #ifdef order_force
+			}
+			else { nextlsu_bp = false; }
+#endif
+			//		}
 		}
-		else{ nextlsu_bp = false; }
-#endif
-//		}
 	}
-	//通过outbuffer的输出决定bp
-	
-
-		
+	//通过outbuffer的输出决定bp		
 }
 
 void Loadstore_element::leSimStep2NoMem()
@@ -742,7 +800,10 @@ void Loadstore_element::sedSimStep2()
 			output_port_2lsu.rdwr = true;
 			output_port_2lsu.dae = attribution->dae;
 			output_port_2lsu.tag = match_tag;
-			lsu->AddTrans(output_port_2lsu, index,system_parameter.write_bypass);////////////给output_port_2lsu赋值////////////////
+			if(!system_parameter.spm_mode)
+				lsu->AddTrans(output_port_2lsu, index,system_parameter.write_bypass);////////////给output_port_2lsu赋值////////////////
+			else
+				lsu->AddTrans(output_port_2lsu, index+system_parameter.spm_bank, system_parameter.write_bypass);
 			MemoryData::getInstance()->write(output_port_2lsu.value_addr, output_port_2lsu.value_data);
 			sended_tag = match_tag;
 		}

@@ -42,6 +42,7 @@ namespace Simulator::Preprocess
 		auto getDictionary() const -> const unordered_map<NodeType, vector<const DFGNodeInterface*>>&;
 		auto getDfgDict() const-> const std::vector<std::pair<NodeType, const DFGNodeInterface*>>&;//config_order不能用_dictionary来初始化，得按仿真顺序初始化，使用dfg_dictionary初始化config_order
 		auto getDfgCluster() const-> const ClusterGroupInterface &;
+		auto getContext() const -> const unordered_map<NodeType, vector<vector<const DFGNodeInterface*>>> &;
 		auto isManualPlacement() const -> bool;
 
 	private:
@@ -49,6 +50,7 @@ namespace Simulator::Preprocess
 
 		bool _manual_placement;
 		unordered_map<NodeType, vector<const DFGNodeInterface*>> _dictionary;
+		unordered_map<NodeType, vector<vector<const DFGNodeInterface*>>> context_dictionary;
 		std::vector<std::pair<NodeType, const DFGNodeInterface*>> dfg_dictionary;
 		ClusterGroupInterface cluster_group;
 
@@ -60,6 +62,7 @@ namespace Simulator::Preprocess
 		auto lsRead(XMLElement* node_xml_) const -> DFGNodeInterface*;
 		auto lvRead(XMLElement* node_xml_) const -> DFGNodeInterface*;
 		auto lcRead(XMLElement* node_xml_) const -> DFGNodeInterface*;
+		auto lsContextRead(XMLElement* node_xml_) const->vector<DFGNodeInterface*>;
 
 	};
 

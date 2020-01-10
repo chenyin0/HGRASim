@@ -33,6 +33,7 @@ namespace Simulator::Array
 		friend class Loadstore_element;
 		virtual bool input(Port_inout input, uint port) = 0;
 		virtual bool input_tag_lsu(Port_inout_lsu input, uint port, uint tag) = 0;
+		virtual bool input_lsu(Port_inout_lsu input, uint port) = 0;
 		virtual bool input_tag(Port_inout input, uint port, uint tag) = 0;
 		virtual void output(Port_inout& input, uint port) = 0;
 		virtual void back_head(uint port) = 0;
@@ -88,6 +89,7 @@ namespace Simulator::Array
 
 		virtual bool input(Port_inout input, const uint port) override;   //Port_inout和buffer不为相同的数据结构为了将来更改时方便
 		bool input_tag_lsu(Port_inout_lsu input, uint port, uint tag) override;
+		bool input_lsu(Port_inout_lsu input, uint port) override;
 		virtual bool input_tag(Port_inout input, uint port, uint tag) override;
 		virtual void back_head(uint port) override;
 		virtual bool input_nolast(Port_inout input, uint port) override;
@@ -155,6 +157,7 @@ namespace Simulator::Array
 		virtual bool input_nolast(Port_inout input, uint port) override;
 		bool input(Port_inout input, const uint port) override;   //Port_inout和buffer不为相同的数据结构为了将来更改时方便
 		bool input_tag_lsu(Port_inout_lsu input, uint port, uint tag) override;
+		bool input_lsu(Port_inout_lsu input, uint port) override;
 		bool input_tag(Port_inout input, uint port, uint tag) override;
 		virtual void output(Port_inout& output, uint port) override;
 		virtual bool output_ack(Port_inout& output, uint port) override;

@@ -35,7 +35,10 @@ namespace Simulator::Preprocess
 	{
 		return _manual_placement;
 	}
-
+	auto DFG::getContext() const -> const unordered_map<NodeType, vector<vector<const DFGNodeInterface*>>> &
+	{
+		return context_dictionary;
+	}
 	auto DFG::xmlRead() -> void
 	{
 		XMLDocument doc;
@@ -44,7 +47,7 @@ namespace Simulator::Preprocess
 			string path_info = GlobalPara::getInstance()->getInputAddr(InputAddr::DFG_xml_addr);
 			DEBUG_ASSERT(false);
 		}
-
+		context_dictionary[NodeType::ls].resize(Para::getInstance()->getArrayPara().lscluster_num);
 		XMLElement* root_xml = doc.RootElement();
 		_manual_placement = static_cast<string>(root_xml->FindAttribute("manual_placement")->Value()) == string("true");
 
@@ -73,6 +76,9 @@ namespace Simulator::Preprocess
 				{
 					_dictionary[NodeType::ls].push_back(lsRead(node_xml));
 					dfg_dictionary.push_back({ NodeType::ls, lsRead(node_xml) });
+					if (MemAccessModeConverter::toEnum(node_xml->FindAttribute("mem_access_mode")->Value()) != MemAccessMode::none) {
+						context_dictionary[NodeType::ls][std::stoi(node_xml->FindAttribute("cluster")->Value())].push_back(lsRead(node_xml));
+					}
 					break;
 				}
 				case NodeType::lv:
@@ -277,7 +283,7 @@ namespace Simulator::Preprocess
 		DFGNode<NodeType::pe>* ptr = new DFGNode<NodeType::pe>(index, opcode, control_mode, output_from, input_vec, reg_vec, manual_cord, buffer_mode, input_bypass, inbuffer_from, key_cal);
 		return dynamic_cast<DFGNodeInterface*>(ptr);
 	}
-
+	
 	auto DFG::lsRead(XMLElement* node_xml_) const -> DFGNodeInterface*
 	{
 		// attributes
@@ -289,7 +295,9 @@ namespace Simulator::Preprocess
 		uint fifo_step = std::stoi(node_xml_->FindAttribute("fifo_step")->Value());
 		BufferSize size = BufferSizeConverter::toEnum(node_xml_->FindAttribute("buffer_size")->Value());
 		bool match = static_cast<string>(node_xml_->FindAttribute("match")->Value()) == string("true");
-
+		MemAccessMode mem_access_mode = MemAccessModeConverter::toEnum(node_xml_->FindAttribute("mem_access_mode")->Value());
+		DirectMode direct_mode= DirectModeConverter::toEnum(node_xml_->FindAttribute("direct_mode")->Value());
+		BranchMode branch_mode= BranchModeConverter::toEnum(node_xml_->FindAttribute("branch_mode")->Value());
 		//inputs
 		vector<Input> input_vec;
 		XMLElement* input_xml = node_xml_->FirstChildElement("input");
@@ -325,18 +333,28 @@ namespace Simulator::Preprocess
 				throw std::runtime_error("your configuration is boom(pss)");
 			}
 			DFGNode<NodeType::ls>* ptr = new DFGNode<NodeType::ls>(index, ls_mode, tag_bind,
-				dae, fifo_step, size, match, input_vec, manual_cord,vecmode, std::stoi(vec_pss[0]), std::stoi(vec_pss[1]), std::stoi(vec_pss[2]));
+				dae, fifo_step, size, match, input_vec, manual_cord, mem_access_mode, direct_mode, branch_mode,cluster,vecmode, std::stoi(vec_pss[0]), std::stoi(vec_pss[1]), std::stoi(vec_pss[2]));
 			return dynamic_cast<DFGNodeInterface*>(ptr);
 		}
 		else {
 			DFGNode<NodeType::ls>* ptr = new DFGNode<NodeType::ls>(index, ls_mode, tag_bind,
-				dae, fifo_step, size, match, input_vec, manual_cord);
+				dae, fifo_step, size, match, input_vec, manual_cord, mem_access_mode, direct_mode, branch_mode, cluster);
 			return dynamic_cast<DFGNodeInterface*>(ptr);
 		}
 
 		//return dynamic_cast<DFGNodeInterface*>(ptr);
 	}
 
+	auto DFG::lsContextRead(XMLElement* context_xml_) const->vector<DFGNodeInterface*>
+	{
+		vector<DFGNodeInterface*> OneContext;
+		XMLElement* node_xml = context_xml_->FirstChildElement("node");
+		while(node_xml){
+			NodeType node_type = NodeTypeConverter::toEnum(node_xml->FindAttribute("type")->Value());
+			OneContext.push_back(lsRead(node_xml));
+			node_xml = node_xml->NextSiblingElement("node");
+		}
+	}
 	auto DFG::lvRead(XMLElement* node_xml_) const -> DFGNodeInterface*
 	{
 		return nullptr;
@@ -453,6 +471,9 @@ namespace Simulator::Preprocess
 		//lse
 		_array_para.lse_inbuffer_depth = std::stoi(array_xml->FirstChildElement("lseInBufferDepth")->GetText());
 		_array_para.lse_num= std::stoi(array_xml->FirstChildElement("lseNum")->GetText());
+		_array_para.spm_bank = std::stoi(array_xml->FirstChildElement("spmBank")->GetText());
+		_array_para.lscluster_num = std::stoi(array_xml->FirstChildElement("clusterNum")->GetText());
+		_array_para.SPM_depth = std::stoi(array_xml->FirstChildElement("spmDepth")->GetText());
 		_array_para.lse_datain_breadth = std::stoi(array_xml->FirstChildElement("lseDataInBreadth")->GetText());
 		_array_para.lse_boolin_breadth = std::stoi(array_xml->FirstChildElement("lseBoolInBreadth")->GetText());
 		_array_para.le_dataout_breadth = std::stoi(array_xml->FirstChildElement("leDataOutBreadth")->GetText());
@@ -484,6 +505,7 @@ namespace Simulator::Preprocess
 		_array_para.maxclk = std::stoi(array_xml->FirstChildElement("maxClk")->GetText());
 		_array_para.max_memory_depth = std::stoi(array_xml->FirstChildElement("maxMemoryDepth")->GetText());
 		_array_para.attach_memory = (array_xml->FirstChildElement("attachMemory")->GetText() == string("true"));
+		_array_para.spm_mode = (array_xml->FirstChildElement("spm_mode")->GetText() == string("true"));
 	
 	}
 

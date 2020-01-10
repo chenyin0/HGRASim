@@ -781,4 +781,85 @@ namespace Simulator
 			return BpType::credit;
 		}
 	};
+	class MemAccessModeConverter
+	{
+	public:
+		static auto toString(MemAccessMode type_)->string
+		{
+			if (type_ == MemAccessMode::temp)
+				return "temp";
+			if (type_ == MemAccessMode::none)
+				return "none";
+			if (type_ == MemAccessMode::load)
+				return "load";
+			DEBUG_ASSERT(false);
+			return "";
+		}
+
+		static auto toEnum(string s_)->MemAccessMode
+		{
+			if (s_ == "temp")
+				return MemAccessMode::temp;
+			if (s_ == "none")
+				return MemAccessMode::none;
+			if (s_ == "load")
+				return MemAccessMode::load;
+			DEBUG_ASSERT(false);
+			return MemAccessMode::none;
+		}
+	};
+	class BranchModeConverter
+	{
+	public:
+		static auto toString(BranchMode type_)->string
+		{
+			if (type_ == BranchMode::truePath)
+				return "truePath";
+			if (type_ == BranchMode::falsePath)
+				return "falsePath";
+			if (type_ == BranchMode::none)
+				return "none";
+			DEBUG_ASSERT(false);
+			return "";
+		}
+
+		static auto toEnum(string s_)->BranchMode
+		{
+			if (s_ == "truePath")
+				return BranchMode::truePath;
+			if (s_ == "falsePath")
+				return BranchMode::falsePath;
+			if (s_ == "none")
+				return BranchMode::none;
+			DEBUG_ASSERT(false);
+			return BranchMode::none;
+		}
+	};
+	class DaeModeConverter
+	{
+	public:
+		static auto toString(DaeMode type_)->string
+		{
+			if (type_ == DaeMode::send_addr)
+				return "truePath";
+			if (type_ == DaeMode::get_data)
+				return "falsePath";
+			if (type_ == DaeMode::none)
+				return "none";
+			DEBUG_ASSERT(false);
+			return "";
+		}
+
+		static auto toEnum(string s_)->DaeMode
+		{
+			if (s_ == "truePath")
+				return DaeMode::send_addr;
+			if (s_ == "falsePath")
+				return DaeMode::get_data;
+			if (s_ == "none")
+				return DaeMode::none;
+			DEBUG_ASSERT(false);
+			return DaeMode::none;
+		}
+	};
 }
