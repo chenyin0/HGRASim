@@ -670,10 +670,8 @@ namespace Simulator
 		{
 			if (type_ == MemAccessMode::temp)
 				return "temp";
-			if (type_ == MemAccessMode::stream)
-				return "stream";
-			if (type_ == MemAccessMode::irregular)
-				return "irregular";
+			if (type_ == MemAccessMode::load)
+				return "load";
 			if (type_ == MemAccessMode::none)
 				return "none";
 			DEBUG_ASSERT(false);
@@ -684,10 +682,8 @@ namespace Simulator
 		{
 			if (s_ == "temp")
 				return MemAccessMode::temp;
-			if (s_ == "stream")
-				return MemAccessMode::stream;
-			if (s_ == "irregular")
-				return MemAccessMode::irregular;
+			if (s_ == "load")
+				return MemAccessMode::load;
 			if (s_ == "none")
 				return MemAccessMode::none;
 			throw std::runtime_error("your configuration is boom(MemAccessMode)");
@@ -696,32 +692,32 @@ namespace Simulator
 		}
 	};
 
-	class DaeModeConverter
+	class DirectModeConverter
 	{
 	public:
-		static auto toString(DaeMode type_)->string
+		static auto toString(DirectMode type_)->string
 		{
-			if (type_ == DaeMode::send_addr)
-				return "send_addr";
-			if (type_ == DaeMode::get_data)
-				return "get_data";
-			if (type_ == DaeMode::none)
+			if (type_ == DirectMode::send)
+				return "send";
+			if (type_ == DirectMode::get)
+				return "get";
+			if (type_ == DirectMode::none)
 				return "none";
 			DEBUG_ASSERT(false);
 			return "";
 		}
 
-		static auto toEnum(string s_)->DaeMode
+		static auto toEnum(string s_)->DirectMode
 		{
-			if (s_ == "send_addr")
-				return DaeMode::send_addr;
-			if (s_ == "get_data")
-				return DaeMode::get_data;
+			if (s_ == "send")
+				return DirectMode::send;
+			if (s_ == "get")
+				return DirectMode::get;
 			if (s_ == "none")
-				return DaeMode::none;
-			throw std::runtime_error("your configuration is boom(DaeMode)");
+				return DirectMode::none;
+			throw std::runtime_error("your configuration is boom(DirectMode)");
 			DEBUG_ASSERT(false);
-			return DaeMode::none;
+			return DirectMode::none;
 		}
 	};
 
@@ -926,31 +922,31 @@ namespace Simulator
 			return BranchMode::none;
 		}
 	};
-	class DaeModeConverter
+	class DirectModeConverter
 	{
 	public:
-		static auto toString(DaeMode type_)->string
+		static auto toString(DirectMode type_)->string
 		{
-			if (type_ == DaeMode::send_addr)
+			if (type_ == DirectMode::send)
 				return "truePath";
-			if (type_ == DaeMode::get_data)
+			if (type_ == DirectMode::get)
 				return "falsePath";
-			if (type_ == DaeMode::none)
+			if (type_ == DirectMode::none)
 				return "none";
 			DEBUG_ASSERT(false);
 			return "";
 		}
 
-		static auto toEnum(string s_)->DaeMode
+		static auto toEnum(string s_)->DirectMode
 		{
 			if (s_ == "truePath")
-				return DaeMode::send_addr;
+				return DirectMode::send;
 			if (s_ == "falsePath")
-				return DaeMode::get_data;
+				return DirectMode::get;
 			if (s_ == "none")
-				return DaeMode::none;
+				return DirectMode::none;
 			DEBUG_ASSERT(false);
-			return DaeMode::none;
+			return DirectMode::none;
 		}
 	};
 }

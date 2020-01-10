@@ -7,13 +7,13 @@
 #include <deque>
 #include <queue>
 #include <map>
-#include "../mem_system/MultiChannelMemorySystem.h"
-#include "../mem_system/Cache.h"
-#include "../inout.h"
-//#include "../Node/LSE.h" 
+#include "../debug.h"
+#include "../ClkDomain.h"
 #include "../Node/Node.h"
-#include "../../preprocess/para.hpp"
-
+#include "../../preprocess/preprocess.h"
+#include "Cluster.h"
+#include "LSE.h"
+#include "../mem_system/Lsu.h"
 namespace Simulator::Array
 {
 	class SpmBuffer;
@@ -441,8 +441,18 @@ namespace Simulator::Array
 	class Spm
 	{
 	public:
-		Spm(Context lseConfig) : _lseConfig(lseConfig)
+		Spm(unordered_map<NodeType, vector<vector<const Simulator::Preprocess::DFGNodeInterface*>>> context_attr_, ClusterGroup& cluster_group_,
+			map<uint, Simulator::Array::Loadstore_element*>& lse_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_):
+			cluster_group(cluster_group_), lse_map(lse_map_), index2order(index2order_)
 		{
+			for (auto& context : context_attr_[NodeType::ls]) {
+				vector<LseConfig> context_config;
+				for (auto& attr : context) {
+					LseConfig lse_config(attr);
+					context_config.push_back(lse_config);
+				}
+				_lseConfig.push_back(context_config);
+			}
 			bankNum = Preprocess::Para::getInstance()->getArrayPara().lse_virtual_num;  // SPM bank number is equal to LSE virtual number
 			bankDepth = Preprocess::Para::getInstance()->getArrayPara().SPM_depth;  // initial SPM buffer depth
 
@@ -551,15 +561,17 @@ namespace Simulator::Array
 
 			spm2Mem();  // send addr from SPM to Mem
 		}
-
+		Simulator::Array::Loadstore_element* getLse(uint lse_tag) {
+			return lse_map[index2order[{NodeType::ls, lse_tag}]];
+		}
 		void lse2Spm(LseConfig &context)
 		{
-			Port_inout_lsu data = getLse(context.lseTag)->lseGetData(lseTag);  // get data by the callback function of LSE
+			Port_inout_lsu data = getLse(context.lseTag)->getData();  // get data by the callback function of LSE
 			uint bankId = context.lseVirtualTag;
 
 			if (data.valid)
 			{
-				if ((context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._daeMode == DaeMode::send_addr) || 
+				if ((context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._DirectMode == DirectMode::send) || 
 					(context._lseMode == LSMode::store_data && context._memAccessMode == MemAccessMode::temp))  // if context is 1) send addr. to SPM or 2) store temp data to SPM
 				{
 					uint rowId = _spmBuffer.getWrPtrLse(bankId);
@@ -574,7 +586,7 @@ namespace Simulator::Array
 							if (~data.lastData)
 							{
 								// once a valid addr written in the bank, it begin to load from memory immediately
-								if (context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._daeMode == DaeMode::send_addr)
+								if (context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._DirectMode == DirectMode::send)
 								{
 									data.dataReady = 0;  // for addr, dataReady set to 0
 									_spmBuffer.writeLse2Spm(bankId, rowId, data);
@@ -792,7 +804,7 @@ namespace Simulator::Array
 					{
 						bankFinish = bankFinish & _spmBuffer.queueNotEmpty(_spmBuffer.lseWriteBankFinish[bankId]);
 					}
-					else if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._daeMode == DaeMode::get_data)
+					else if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._DirectMode == DirectMode::get)
 					{
 						bankFinish = bankFinish & _spmBuffer.queueNotEmpty(_spmBuffer.memWriteBankFinish[bankId]);
 					}
@@ -852,7 +864,7 @@ namespace Simulator::Array
 									_spmBuffer.lseWriteBankFinish[bankId].pop();  // clear lse write status
 								}
 
-								if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._daeMode == DaeMode::get_data)
+								if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._DirectMode == DirectMode::get)
 								{
 									_spmBuffer.memWriteBankFinish[bankId].pop();  // clear mem write status
 								}
@@ -865,15 +877,22 @@ namespace Simulator::Array
 				}
 			}
 		}
-
+		void attachLsu(DRAMSim::Lsu* lsu_) {
+			lsu = lsu_;
+		}
 	public:
 		Context _lseConfig;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
+		
 
 	private:
 		vector<Port_inout_lsu> spmInput;
 		vector<Port_inout_lsu> spmOutput;
 		uint bankNum;
 		uint bankDepth;
+		DRAMSim::Lsu* lsu;
+		ClusterGroup& cluster_group;
+		map<uint, Simulator::Array::Loadstore_element*> lse_map;
+		std::map<std::pair<NodeType, uint>, uint>& index2order;
 		SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
 		deque<uint> contextQueue;  // add/delete valid context by Scheduler, SPM may work under several contexts simultaneously
 		vector<bool> bankReadEmpty;  // used in Spm2Lse, each context has a bankReadEmpty flag
@@ -889,7 +908,7 @@ namespace Simulator::Array
 		LSMode _lseMode; // indicate current LSE mode
 
 		MemAccessMode _memAccessMode;  // configure in .xml
-		DaeMode _daeMode;  // configure in .xml
+		DirectMode _DirectMode;  // configure in .xml
 		BranchMode _branchMode;  // configure in .xml
 
 		bool contextFinish;
@@ -901,8 +920,21 @@ namespace Simulator::Array
 			lseVirtualTag = 0;
 			_lseMode = LSMode::null;
 			_memAccessMode = MemAccessMode::none;
-			_daeMode = DaeMode::none;
+			_DirectMode = DirectMode::none;
 			_branchMode = BranchMode::none;
+
+			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1
+			hasSetBankInLoad = 0;  // for only push BankInLoad Queue once in each context
+		}
+		LseConfig(const Simulator::Preprocess::DFGNodeInterface* attr_)
+		{
+			auto attribution = dynamic_cast<const Preprocess::DFGNode<Simulator::NodeType::ls>*>(attr_);
+			lseTag = attribution->index;
+			lseVirtualTag = attribution->cluster;
+			_lseMode = attribution->ls_mode;
+			_memAccessMode = attribution->mem_access_mode;
+			_DirectMode = attribution->direct_mode;
+			_branchMode = attribution->branch_mode;
 
 			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1
 			hasSetBankInLoad = 0;  // for only push BankInLoad Queue once in each context

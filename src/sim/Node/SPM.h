@@ -188,7 +188,7 @@ namespace Simulator::Array
 		LSMode _lseMode; // indicate current LSE mode
 
 		MemAccessMode _memAccessMode;  // configure in .xml
-		DaeMode _daeMode;  // configure in .xml
+		DirectMode _daeMode;  // configure in .xml
 		BranchMode _branchMode;  // configure in .xml
 
 		bool contextFinish;
