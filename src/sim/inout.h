@@ -40,15 +40,15 @@ namespace Simulator::Array
 		uint lseId_virtual;  // LSE 实际的硬件ID，从配置文件里读出
 
 		MemAccessMode _memAccessMode;  // add memory access mode
-		DaeMode _daeMode;
-
-		bool lastData; // 表示最后一次循环的数据，用来指导SPM里的schedule切换配置
+		DirectMode _DirectMode;
+		BranchMode _branchMode;
+		bool last; // 表示最后一次循环的数据，用来指导SPM里的schedule切换配置
 		// bind with each load request, send the data back to SPM according to these two Id
 		uint bankId;
 		uint rowId;
 		bool inflight; // indicate this addr is send to memory, but hasn't been sent back;
 
-		bool cond; // for branch
+		bool condition; // for branch
 		bool dataReady; // indicate the load request has been sent back, data load is ready
 
 		bool occupy;  // used in branch, to occupy
@@ -69,17 +69,18 @@ namespace Simulator::Array
 			dae = false;
 
 			_memAccessMode = MemAccessMode::temp;
-			_daeMode = DaeMode::none; 
+			_DirectMode = DirectMode::none; 
+			_branchMode = BranchMode::none;
 			/*isNewContext = 0;*/  
 			lseId_virtual = 0;
-			lastData = 0;
+			last = 0;
 			
 			bankId = 0;  
 			rowId = 0;
 
 			inflight = 0;
 
-			cond = 0;
+			condition = 1;
 			dataReady = 0;
 
 			occupy = 0;
@@ -98,9 +99,11 @@ namespace Simulator::Array
 			rdwr = false;
 			dae = false; 
 			_memAccessMode = MemAccessMode::temp;
-			_daeMode = DaeMode::none; 
+			_DirectMode = DirectMode::none; 
+			_branchMode = BranchMode::none;
 			/*isNewContext = 0;*/
-			lastData = 0;
+			last = 0;
+			condition = 1;
 			bypassCache = 0;
 		}
 	};

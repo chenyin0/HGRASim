@@ -245,7 +245,7 @@ namespace Simulator::Array
 
 			for (size_t i = 0; i < bankDepth; ++i)
 			{
-				if (_spmBuffer[bankId][i].cond == cond)
+				if (_spmBuffer[bankId][i].condition == cond)
 				{
 					empty = empty | _spmBuffer[bankId][i].valid;
 				}
@@ -537,7 +537,7 @@ namespace Simulator::Array
 			}
 
 			// if last data has been received by LSE, clear hasNotSentLastData flag
-			if (data.lastData)
+			if (data.last)
 			{
 				hasNotSentLastData[bankId] = 0;
 			}
@@ -572,18 +572,18 @@ namespace Simulator::Array
 			if (data.valid)
 			{
 				if ((context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._DirectMode == DirectMode::send) || 
-					(context._lseMode == LSMode::store_data && context._memAccessMode == MemAccessMode::temp))  // if context is 1) send addr. to SPM or 2) store temp data to SPM
+					(context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::temp && context._DirectMode == DirectMode::send))  // if context is 1) send addr. to SPM or 2) store temp data to SPM
 				{
 					uint rowId = _spmBuffer.getWrPtrLse(bankId);
 					Port_inout_lsu rowData = _spmBuffer.getSpmData(bankId, rowId);
 
 					if (rowData.valid != 1 && rowData.occupy != 1)  // if write valid; occupy flag is used in branch
 					{
-						if ((context._branchMode == BranchMode::truePath && data.cond == 1) ||
-							(context._branchMode == BranchMode::falsePath && data.cond == 0) ||
+						if ((context._branchMode == BranchMode::truePath && data.condition == 1) ||
+							(context._branchMode == BranchMode::falsePath && data.condition == 0) ||
 							(context._branchMode == BranchMode::none))
 						{
-							if (~data.lastData)
+							if (~data.last)
 							{
 								// once a valid addr written in the bank, it begin to load from memory immediately
 								if (context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._DirectMode == DirectMode::send)
@@ -602,7 +602,7 @@ namespace Simulator::Array
 									}
 								}
 
-								if (context._lseMode == LSMode::store_data && context._memAccessMode == MemAccessMode::temp)
+								if (context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::temp && context._DirectMode == DirectMode::send)
 								{
 									data.dataReady = 1;  // for temp data, dataReady set to 1
 									_spmBuffer.writeLse2Spm(bankId, rowId, data);
@@ -674,7 +674,7 @@ namespace Simulator::Array
 						if (data.valid && data.dataReady != 1 && data.inflight != 1)
 						{
 							data = _spmBuffer.readSpm2Mem(bankId, rowId);
-							sendData2Mem(data);  // send this addr. to memory, call the AddTransaction function of LSU
+							lsu->AddTrans(data,data.bankId,false);  // send this addr. to memory, call the AddTransaction function of LSU
 							//_spmBuffer.updateRdPtrMem(bankId);  // LSU use callbackACK to update rdPtrMem!! 
 
 							break;
@@ -793,8 +793,8 @@ namespace Simulator::Array
 					if (lseContext._lseMode == LSMode::load)
 					{
 						if (lseBranMode == BranchMode::none ||
-							(lseBranMode == BranchMode::falsePath && !data.cond) ||
-							(lseBranMode == BranchMode::truePath && data.cond))
+							(lseBranMode == BranchMode::falsePath && !data.condition) ||
+							(lseBranMode == BranchMode::truePath && data.condition))
 						{
 							dataMatch = dataMatch & (data.valid & data.dataReady);  // due to SPM data contain load data and temp data, so only when valid & dataReady all set to 1 signify the data is valid;  
 						}
@@ -821,7 +821,7 @@ namespace Simulator::Array
 						{
 							Port_inout_lsu data = _spmBuffer.readSpm2Lse(bankId, rowId);
 							data.contextId = contextId;  // used in callbackAck4Lse
-							sendData2Lse(data);
+							sendData2Lse(data);//参考接口中的spm2lse_temp和LSEcallback
 
 							//if (rowId == rdPtrLse)
 							//{
@@ -843,7 +843,7 @@ namespace Simulator::Array
 						{
 							// send last data to each LSE, to indicate current context is over
 							Port_inout_lsu data;
-							data.lastData = 1;
+							data.last = 1;
 							sendData2Lse(data);
 						}
 					}
