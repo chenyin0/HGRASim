@@ -692,32 +692,32 @@ namespace Simulator
 		}
 	};
 
-	class DirectModeConverter
+	class DirectionModeConverter
 	{
 	public:
-		static auto toString(DirectMode type_)->string
+		static auto toString(DirectionMode type_)->string
 		{
-			if (type_ == DirectMode::send)
+			if (type_ == DirectionMode::send)
 				return "send";
-			if (type_ == DirectMode::get)
+			if (type_ == DirectionMode::get)
 				return "get";
-			if (type_ == DirectMode::none)
+			if (type_ == DirectionMode::none)
 				return "none";
 			DEBUG_ASSERT(false);
 			return "";
 		}
 
-		static auto toEnum(string s_)->DirectMode
+		static auto toEnum(string s_)->DirectionMode
 		{
 			if (s_ == "send")
-				return DirectMode::send;
+				return DirectionMode::send;
 			if (s_ == "get")
-				return DirectMode::get;
+				return DirectionMode::get;
 			if (s_ == "none")
-				return DirectMode::none;
-			throw std::runtime_error("your configuration is boom(DirectMode)");
+				return DirectionMode::none;
+			throw std::runtime_error("your configuration is boom(DirectionMode)");
 			DEBUG_ASSERT(false);
-			return DirectMode::none;
+			return DirectionMode::none;
 		}
 	};
 
@@ -922,31 +922,31 @@ namespace Simulator
 			return BranchMode::none;
 		}
 	};
-	class DirectModeConverter
+	class DirectionModeConverter
 	{
 	public:
-		static auto toString(DirectMode type_)->string
+		static auto toString(DirectionMode type_)->string
 		{
-			if (type_ == DirectMode::send)
+			if (type_ == DirectionMode::send)
 				return "truePath";
-			if (type_ == DirectMode::get)
+			if (type_ == DirectionMode::get)
 				return "falsePath";
-			if (type_ == DirectMode::none)
+			if (type_ == DirectionMode::none)
 				return "none";
 			DEBUG_ASSERT(false);
 			return "";
 		}
 
-		static auto toEnum(string s_)->DirectMode
+		static auto toEnum(string s_)->DirectionMode
 		{
 			if (s_ == "truePath")
-				return DirectMode::send;
+				return DirectionMode::send;
 			if (s_ == "falsePath")
-				return DirectMode::get;
+				return DirectionMode::get;
 			if (s_ == "none")
-				return DirectMode::none;
+				return DirectionMode::none;
 			DEBUG_ASSERT(false);
-			return DirectMode::none;
+			return DirectionMode::none;
 		}
 	};
 }

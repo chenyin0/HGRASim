@@ -183,7 +183,7 @@ namespace Simulator::Preprocess
 		vector<Input> input_vec;
 		Cord manual_placement;
 		VecMode vec_mode;
-		DirectMode direct_mode;
+		DirectionMode direction_mode;
 		BranchMode branch_mode;
 		MemAccessMode mem_access_mode;
 		uint pointer;
@@ -193,7 +193,7 @@ namespace Simulator::Preprocess
 
 		DFGNode(uint index_, LSMode ls_mode_, bool tag_bind_, bool dae_, uint fifo_step_, BufferSize size_,
 			bool match_, vector<Input> input_vec_, Cord manual_placement_,MemAccessMode mem_access_mode_,
-			DirectMode direct_mode_, BranchMode branch_mode_,uint cluster_, VecMode vec_mode_ = VecMode::null,
+			DirectionMode direction_mode_, BranchMode branch_mode_,uint cluster_, VecMode vec_mode_ = VecMode::null,
 			uint pointer_=0, uint step_ = 0, uint thesize_=0)
 			: index(index_)
 			, ls_mode(ls_mode_)
@@ -208,7 +208,7 @@ namespace Simulator::Preprocess
 			,pointer(pointer_)
 			,step(step_)
 			,vec_size(thesize_)
-			,direct_mode(direct_mode_)
+			,direction_mode(direction_mode_)
 			,mem_access_mode(mem_access_mode_)
 			,branch_mode(branch_mode_)
 			,cluster(cluster_)

@@ -296,7 +296,7 @@ namespace Simulator::Preprocess
 		BufferSize size = BufferSizeConverter::toEnum(node_xml_->FindAttribute("buffer_size")->Value());
 		bool match = static_cast<string>(node_xml_->FindAttribute("match")->Value()) == string("true");
 		MemAccessMode mem_access_mode = MemAccessModeConverter::toEnum(node_xml_->FindAttribute("mem_access_mode")->Value());
-		DirectMode direct_mode= DirectModeConverter::toEnum(node_xml_->FindAttribute("direct_mode")->Value());
+		DirectionMode direction_mode= DirectionModeConverter::toEnum(node_xml_->FindAttribute("direction_mode")->Value());
 		BranchMode branch_mode= BranchModeConverter::toEnum(node_xml_->FindAttribute("branch_mode")->Value());
 		//inputs
 		vector<Input> input_vec;
@@ -333,12 +333,12 @@ namespace Simulator::Preprocess
 				throw std::runtime_error("your configuration is boom(pss)");
 			}
 			DFGNode<NodeType::ls>* ptr = new DFGNode<NodeType::ls>(index, ls_mode, tag_bind,
-				dae, fifo_step, size, match, input_vec, manual_cord, mem_access_mode, direct_mode, branch_mode,cluster,vecmode, std::stoi(vec_pss[0]), std::stoi(vec_pss[1]), std::stoi(vec_pss[2]));
+				dae, fifo_step, size, match, input_vec, manual_cord, mem_access_mode, direction_mode, branch_mode,cluster,vecmode, std::stoi(vec_pss[0]), std::stoi(vec_pss[1]), std::stoi(vec_pss[2]));
 			return dynamic_cast<DFGNodeInterface*>(ptr);
 		}
 		else {
 			DFGNode<NodeType::ls>* ptr = new DFGNode<NodeType::ls>(index, ls_mode, tag_bind,
-				dae, fifo_step, size, match, input_vec, manual_cord, mem_access_mode, direct_mode, branch_mode, cluster);
+				dae, fifo_step, size, match, input_vec, manual_cord, mem_access_mode, direction_mode, branch_mode, cluster);
 			return dynamic_cast<DFGNodeInterface*>(ptr);
 		}
 

@@ -231,11 +231,11 @@ namespace Simulator
 	};
 
 	// 以下配置字仅在LSE处于load模式下有效，因为DAE是针对LSE的load操作
-	enum class DirectMode
+	enum class DirectionMode
 	{
 		send,  // send address to SPM in LSE load
 		get,  // get data from SPM in LSE load
-		none  // if LSE not in load mode(namely when LSE in store mode), DirectMode should configured as "None"
+		none  // if LSE not in load mode(namely when LSE in store mode), DirectionMode should configured as "None"
 	};
 
 	enum class BranchMode

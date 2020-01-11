@@ -284,7 +284,10 @@ namespace Simulator::Array
 		Port_inout_lsu readData(const uint bankId, const uint rowId)
 		{	
 			if (_spmBuffer[bankId][rowId].valid == 0)
-				throw std::runtime_error("read SPM address error -> try to read an invalid data");
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("read SPM address error -> try to read an invalid data");
+			}
 			else 
 			{
 				Port_inout_lsu data = _spmBuffer[bankId][rowId];
@@ -298,9 +301,15 @@ namespace Simulator::Array
 		Port_inout_lsu readAddr(const uint bankId, const uint rowId)
 		{
 			if (_spmBuffer[bankId][rowId].valid == 0)
-				throw std::runtime_error("read SPM address error -> try to read an invalid address");
-			else if(_spmBuffer[bankId][rowId].dataReady)
-				throw std::runtime_error("read SPM address error -> there is a ready data hasn't been read out");
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("read SPM address error -> try to read an invalid address");
+			}
+			else if (_spmBuffer[bankId][rowId].dataReady)
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("read SPM address error -> there is a ready data hasn't been read out");
+			}
 			else
 			{
 				_spmBuffer[bankId][rowId].inflight = 1;  // set inflight, indicate this memory request has been sent to the memory
@@ -317,7 +326,10 @@ namespace Simulator::Array
 		void writeData(const uint bankId, const uint rowId, Port_inout_lsu data)
 		{
 			if (_spmBuffer[bankId][rowId].valid == 1)
-				throw std::runtime_error("write SPM address conflict -> there is already a valid data");
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("write SPM address conflict -> there is already a valid data");
+			}	
 			else 
 			{
 				_spmBuffer[bankId][rowId] = data;
@@ -334,7 +346,10 @@ namespace Simulator::Array
 		void writeMemAck(const uint bankId, const uint rowId, Port_inout_lsu data)
 		{
 			if (_spmBuffer[bankId][rowId].valid != 1 && _spmBuffer[bankId][rowId].inflight != 1)
-				throw std::runtime_error("write back memory ack to SPM error -> there is not a valid inflight request");
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("write back memory ack to SPM error -> there is not a valid inflight request");
+			}
 			else
 			{
 				_spmBuffer[bankId][rowId] = data;
@@ -353,7 +368,10 @@ namespace Simulator::Array
 		Port_inout_lsu readSpm2Lse(const uint bankId, const uint rowId)
 		{
 			if (_spmBuffer[bankId][rowId].valid != 1)
-				throw std::runtime_error("try to read a invalid data in SPM -> the memory load has't been completed");
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("try to read a invalid data in SPM -> the memory load has't been completed");
+			}
 
 			return readData(bankId, rowId);
 		}
@@ -362,8 +380,11 @@ namespace Simulator::Array
 		// use for 1) store temp data in branch or non-branch; 2) store address in stream/irregular-memory-access mode; 
 		void writeLse2Spm(const uint bankId, const uint rowId, const Port_inout_lsu data)
 		{
-			if(checkBankFull(bankId))
-				throw std::runtime_error("try to write a full SPM bank");
+			if (checkBankFull(bankId))
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("try to write a full SPM bank");
+			}
 
 			writeData(bankId, rowId, data);
 			updateWrPtrLse(bankId);  // update wrPtrLse, duo to sequentially write
@@ -378,7 +399,10 @@ namespace Simulator::Array
 			// record the number of load requests inflight, used for OoO memory access
 			++cnt[bankId];
 			if (cnt[bankId] > bankDepth)
-				throw std::runtime_error("read SPM bank error -> current cnt > bank depth");
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("read SPM bank error -> current cnt > bank depth");
+			}
 
 			return addr;
 		}
@@ -391,8 +415,11 @@ namespace Simulator::Array
 
 			// record the number of load requests inflight, used for OoO memory access
 			--cnt[bankId];
-			if (cnt[bankId] > bankDepth)
-				throw std::runtime_error("read SPM bank error -> current cnt < 0");
+			if (cnt[bankId] < 0)
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("read SPM bank error -> current cnt < 0");
+			}
 
 			// all load request have been responsed, the data load phase completes.
 			if (cnt[bankId] == 0)
@@ -445,14 +472,17 @@ namespace Simulator::Array
 			map<uint, Simulator::Array::Loadstore_element*>& lse_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_):
 			cluster_group(cluster_group_), lse_map(lse_map_), index2order(index2order_)
 		{
-			for (auto& context : context_attr_[NodeType::ls]) {
+			for (auto& context : context_attr_[NodeType::ls]) 
+			{
 				vector<LseConfig> context_config;
-				for (auto& attr : context) {
+				for (auto& attr : context) 
+				{
 					LseConfig lse_config(attr);
 					context_config.push_back(lse_config);
 				}
 				_lseConfig.push_back(context_config);
 			}
+
 			bankNum = Preprocess::Para::getInstance()->getArrayPara().lse_virtual_num;  // SPM bank number is equal to LSE virtual number
 			bankDepth = Preprocess::Para::getInstance()->getArrayPara().SPM_depth;  // initial SPM buffer depth
 
@@ -490,7 +520,11 @@ namespace Simulator::Array
 		void removeContext()
 		{
 			if (contextQueue.empty())
-				throw std::runtime_error("pop contextQueue error -> try to pop an empty contextQueue");
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("pop contextQueue error -> try to pop an empty contextQueue");
+			}
+				
 			else
 				contextQueue.pop_front();
 		}
@@ -500,8 +534,12 @@ namespace Simulator::Array
 		{
 			if(!contextQueue.empty())
 				return contextQueue.front();
-			else 
-				throw std::runtime_error("try to read an empty contextQueue");
+			else
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("try to read an empty contextQueue");
+			}
+				
 		}
 
 		uint getContextQueueTail()
@@ -509,7 +547,11 @@ namespace Simulator::Array
 			if(!contextQueue.empty())
 				return contextQueue.back();
 			else
-				throw std::runtime_error("try to read an empty contextQueue");
+			{
+				DEBUG_ASSERT(false);
+				//throw std::runtime_error("try to read an empty contextQueue");
+			}
+				
 		}
 
 		bool contextQueueEmpty()
@@ -517,7 +559,7 @@ namespace Simulator::Array
 			return contextQueue.empty();
 		}
 		
-		// callback ack function provided for LSU
+		// callback ack function provided for LSU // warningYin, unused by LSU
 		void callbackAck4Lsu(Port_inout_lsu addr)
 		{
 			uint bankId = addr.bankId;
@@ -525,7 +567,7 @@ namespace Simulator::Array
 		}
 
 		// callback ack function provided for LSE
-		void callbackAck4Lse(Port_inout_lsu data)
+		void callbackAck4Lse(Port_inout_lsu data)  // warningYin, unused by LSE
 		{
 			uint bankId = data.bankId;
 			uint rowId = data.rowId;
@@ -543,6 +585,11 @@ namespace Simulator::Array
 			}
 		}
 		
+		// get the pointer of the LSE instance
+		Simulator::Array::Loadstore_element* getLse(uint lse_tag) {
+			return lse_map[index2order[{NodeType::ls, lse_tag}]];
+		}
+
 		// update SPM in each cycle
 		void spmUpdate()
 		{
@@ -561,9 +608,8 @@ namespace Simulator::Array
 
 			spm2Mem();  // send addr from SPM to Mem
 		}
-		Simulator::Array::Loadstore_element* getLse(uint lse_tag) {
-			return lse_map[index2order[{NodeType::ls, lse_tag}]];
-		}
+
+	private:
 		void lse2Spm(LseConfig &context)
 		{
 			Port_inout_lsu data = getLse(context.lseTag)->getData();  // get data by the callback function of LSE
@@ -571,8 +617,8 @@ namespace Simulator::Array
 
 			if (data.valid)
 			{
-				if ((context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._DirectMode == DirectMode::send) || 
-					(context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::temp && context._DirectMode == DirectMode::send))  // if context is 1) send addr. to SPM or 2) store temp data to SPM
+				if ((context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._DirectionMode == DirectionMode::send) || 
+					(context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::temp && context._DirectionMode == DirectionMode::send))  // if context is 1) send addr. to SPM or 2) store temp data to SPM
 				{
 					uint rowId = _spmBuffer.getWrPtrLse(bankId);
 					Port_inout_lsu rowData = _spmBuffer.getSpmData(bankId, rowId);
@@ -586,7 +632,7 @@ namespace Simulator::Array
 							if (~data.last)
 							{
 								// once a valid addr written in the bank, it begin to load from memory immediately
-								if (context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._DirectMode == DirectMode::send)
+								if (context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::load && context._DirectionMode == DirectionMode::send)
 								{
 									data.dataReady = 0;  // for addr, dataReady set to 0
 									_spmBuffer.writeLse2Spm(bankId, rowId, data);
@@ -602,7 +648,7 @@ namespace Simulator::Array
 									}
 								}
 
-								if (context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::temp && context._DirectMode == DirectMode::send)
+								if (context._lseMode == LSMode::load && context._memAccessMode == MemAccessMode::temp && context._DirectionMode == DirectionMode::send)
 								{
 									data.dataReady = 1;  // for temp data, dataReady set to 1
 									_spmBuffer.writeLse2Spm(bankId, rowId, data);
@@ -674,7 +720,7 @@ namespace Simulator::Array
 						if (data.valid && data.dataReady != 1 && data.inflight != 1)
 						{
 							data = _spmBuffer.readSpm2Mem(bankId, rowId);
-							lsu->AddTrans(data,data.bankId,false);  // send this addr. to memory, call the AddTransaction function of LSU
+							lsu->AddTrans(data, data.bankId, false);  // send this addr. to memory, call the AddTransaction function of LSU  // warningYin, missing rowId，bypass can't set to false
 							//_spmBuffer.updateRdPtrMem(bankId);  // LSU use callbackACK to update rdPtrMem!! 
 
 							break;
@@ -747,7 +793,10 @@ namespace Simulator::Array
 			for (auto lseContext : _lseConfig[contextId])
 			{
 				if (lseContext._branchMode != lseBranMode)
-					throw std::runtime_error("LSE branchMode configure error -> All the LSE belong to the same context must have the same branchMode");
+				{
+					DEBUG_ASSERT(false);
+					//throw std::runtime_error("LSE branchMode configure error -> All the LSE belong to the same context must have the same branchMode");
+				}	
 			}
 
 			//**** check rdPtrLse consistance  ****//
@@ -772,8 +821,11 @@ namespace Simulator::Array
 					{
 						uint bankId = lseContext.lseVirtualTag;
 
-						if(_spmBuffer.getRdPtrLse(bankId) != rdPtrLse)
-							throw std::runtime_error("read data from SPM to LSE error -> rdPtrLse in each bank in load mode must be the same");
+						if (_spmBuffer.getRdPtrLse(bankId) != rdPtrLse)
+						{
+							DEBUG_ASSERT(false);
+							//throw std::runtime_error("read data from SPM to LSE error -> rdPtrLse in each bank in load mode must be the same");
+						}	
 					}
 				}
 			}
@@ -804,7 +856,7 @@ namespace Simulator::Array
 					{
 						bankFinish = bankFinish & _spmBuffer.queueNotEmpty(_spmBuffer.lseWriteBankFinish[bankId]);
 					}
-					else if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._DirectMode == DirectMode::get)
+					else if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._DirectionMode == DirectionMode::get)
 					{
 						bankFinish = bankFinish & _spmBuffer.queueNotEmpty(_spmBuffer.memWriteBankFinish[bankId]);
 					}
@@ -821,7 +873,15 @@ namespace Simulator::Array
 						{
 							Port_inout_lsu data = _spmBuffer.readSpm2Lse(bankId, rowId);
 							data.contextId = contextId;  // used in callbackAck4Lse
-							sendData2Lse(data);//参考接口中的spm2lse_temp和LSEcallback
+							if (lseContext._memAccessMode == MemAccessMode::temp)
+							{
+								getLse(lseContext.lseTag)->spm2lse_temp(data);
+								//sendData2Lse(data);//参考接口中的spm2lse_temp和LSEcallback
+							}
+							else if (lseContext._memAccessMode == MemAccessMode::load)
+							{
+								getLse(lseContext.lseTag)->LSEcallback(data);  // warningYin, it is a Port_inout_lse type, need transfer the last signal
+							}
 
 							//if (rowId == rdPtrLse)
 							//{
@@ -844,7 +904,16 @@ namespace Simulator::Array
 							// send last data to each LSE, to indicate current context is over
 							Port_inout_lsu data;
 							data.last = 1;
-							sendData2Lse(data);
+
+							if (lseContext._memAccessMode == MemAccessMode::temp)
+							{
+								getLse(lseContext.lseTag)->spm2lse_temp(data);
+								//sendData2Lse(data);//参考接口中的spm2lse_temp和LSEcallback
+							}
+							else if (lseContext._memAccessMode == MemAccessMode::load)
+							{
+								getLse(lseContext.lseTag)->LSEcallback(data);  // warningYin, it is a Port_inout_lse type, need transfer the last signal
+							}
 						}
 					}
 				}
@@ -864,7 +933,7 @@ namespace Simulator::Array
 									_spmBuffer.lseWriteBankFinish[bankId].pop();  // clear lse write status
 								}
 
-								if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._DirectMode == DirectMode::get)
+								if (lseContext._lseMode == LSMode::load && lseContext._memAccessMode == MemAccessMode::load && lseContext._DirectionMode == DirectionMode::get)
 								{
 									_spmBuffer.memWriteBankFinish[bankId].pop();  // clear mem write status
 								}
@@ -877,13 +946,14 @@ namespace Simulator::Array
 				}
 			}
 		}
+
 		void attachLsu(DRAMSim::Lsu* lsu_) {
 			lsu = lsu_;
 		}
+
 	public:
 		Context _lseConfig;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
 		
-
 	private:
 		vector<Port_inout_lsu> spmInput;
 		vector<Port_inout_lsu> spmOutput;
@@ -908,7 +978,7 @@ namespace Simulator::Array
 		LSMode _lseMode; // indicate current LSE mode
 
 		MemAccessMode _memAccessMode;  // configure in .xml
-		DirectMode _DirectMode;  // configure in .xml
+		DirectionMode _DirectionMode;  // configure in .xml
 		BranchMode _branchMode;  // configure in .xml
 
 		bool contextFinish;
@@ -920,7 +990,7 @@ namespace Simulator::Array
 			lseVirtualTag = 0;
 			_lseMode = LSMode::null;
 			_memAccessMode = MemAccessMode::none;
-			_DirectMode = DirectMode::none;
+			_DirectionMode = DirectionMode::none;
 			_branchMode = BranchMode::none;
 
 			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1
@@ -933,7 +1003,7 @@ namespace Simulator::Array
 			lseVirtualTag = attribution->cluster;
 			_lseMode = attribution->ls_mode;
 			_memAccessMode = attribution->mem_access_mode;
-			_DirectMode = attribution->direct_mode;
+			_DirectionMode = attribution->direction_mode;
 			_branchMode = attribution->branch_mode;
 
 			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1

@@ -270,7 +270,7 @@ namespace DRAMSim {
 	}
 
 
-	bool Lsu::AddTrans(Simulator::Array::Port_inout_lsu input,uint TAG,bool bypass)
+	bool Lsu::AddTrans(Simulator::Array::Port_inout_lsu input, uint TAG, bool bypass)
 	{
 //		return arbitrator->AddTrans(input.value_addr, TAG, input.valid, input.tag);
 		return arbitrator->AddTrans(input, TAG,bypass);

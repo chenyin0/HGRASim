@@ -40,7 +40,7 @@ namespace Simulator::Array
 		uint lseId_virtual;  // LSE 实际的硬件ID，从配置文件里读出
 
 		MemAccessMode _memAccessMode;  // add memory access mode
-		DirectMode _DirectMode;
+		DirectionMode _DirectionMode;
 		BranchMode _branchMode;
 		bool last; // 表示最后一次循环的数据，用来指导SPM里的schedule切换配置
 		// bind with each load request, send the data back to SPM according to these two Id
@@ -69,7 +69,7 @@ namespace Simulator::Array
 			dae = false;
 
 			_memAccessMode = MemAccessMode::temp;
-			_DirectMode = DirectMode::none; 
+			_DirectionMode = DirectionMode::none; 
 			_branchMode = BranchMode::none;
 			/*isNewContext = 0;*/  
 			lseId_virtual = 0;
@@ -99,7 +99,7 @@ namespace Simulator::Array
 			rdwr = false;
 			dae = false; 
 			_memAccessMode = MemAccessMode::temp;
-			_DirectMode = DirectMode::none; 
+			_DirectionMode = DirectionMode::none; 
 			_branchMode = BranchMode::none;
 			/*isNewContext = 0;*/
 			last = 0;

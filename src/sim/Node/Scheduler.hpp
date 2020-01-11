@@ -42,7 +42,7 @@ namespace Simulator::Array
 				bool finishTemp = 0;
 
 				// LSE to SPM
-				if ((config._lseMode == LSMode::load && config._memAccessMode == MemAccessMode::load && config._DirectMode == DirectMode::send) ||
+				if ((config._lseMode == LSMode::load && config._memAccessMode == MemAccessMode::load && config._DirectionMode == DirectionMode::send) ||
 					(config._lseMode == LSMode::store_data && config._memAccessMode == MemAccessMode::temp))
 				{
 					if (config.contextFinish)
@@ -56,7 +56,7 @@ namespace Simulator::Array
 				}
 				// SPM to LSE (temp data & load data)
 				else if ((config._lseMode == LSMode::load && config._memAccessMode == MemAccessMode::temp) ||
-						 (config._lseMode == LSMode::load && config._memAccessMode == MemAccessMode::load && config._DirectMode == DirectMode::get))
+						 (config._lseMode == LSMode::load && config._memAccessMode == MemAccessMode::load && config._DirectionMode == DirectionMode::get))
 				{
 					if (config.contextFinish)
 					{
@@ -89,7 +89,7 @@ namespace Simulator::Array
 				bool readyTemp = 0;
 
 				// SPM to LSE (read SPM)
-				if ((config._lseMode == LSMode::load && config._memAccessMode == MemAccessMode::load && config._DirectMode == DirectMode::get) ||
+				if ((config._lseMode == LSMode::load && config._memAccessMode == MemAccessMode::load && config._DirectionMode == DirectionMode::get) ||
 					(config._lseMode == LSMode::load && config._memAccessMode == MemAccessMode::temp))
 				{
 					if (config.contextFinish)  // current bank's data has been read empty

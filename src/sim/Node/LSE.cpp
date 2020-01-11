@@ -336,7 +336,7 @@ void Loadstore_element::LSEcallback(uint addr)
 }
 void Loadstore_element::spm2lse_temp(Port_inout_lsu data)
 {
-	if (attribution->ls_mode == LSMode::load&& attribution->mem_access_mode == MemAccessMode::temp&& attribution->direct_mode == DirectMode::get) {
+	if (attribution->ls_mode == LSMode::load&& attribution->mem_access_mode == MemAccessMode::temp&& attribution->direction_mode == DirectionMode::get) {
 		if (data.valid) {
 			if (outbuffer->input_lsu(data, 0)) { ; }////////////////////这个地方是需要bp判断的吧
 			else {
@@ -441,7 +441,7 @@ void Loadstore_element::leSimStep2()
 		output_port_2lsu.tag = tag_counter;
 		output_port_2lsu.condition = inbuffer_out.condition;
 		output_port_2lsu._memAccessMode = attribution->mem_access_mode;
-		output_port_2lsu._DirectMode = attribution->direct_mode;
+		output_port_2lsu._DirectionMode = attribution->direction_mode;
 		output_port_2lsu._branchMode = attribution->branch_mode;
 		output_port_2lsu.last = inbuffer_out.last;
 	//	tag_counter_update();
@@ -471,7 +471,7 @@ void Loadstore_element::leSimStep2()
 		output_port_2lsu.tag = tag_counter;
 		output_port_2lsu.condition = inbuffer_out.condition;
 		output_port_2lsu._memAccessMode = attribution->mem_access_mode;
-		output_port_2lsu._DirectMode = attribution->direct_mode;
+		output_port_2lsu._DirectionMode = attribution->direction_mode;
 		output_port_2lsu._branchMode = attribution->branch_mode;
 		output_port_2lsu.last = inbuffer_out.last;
 		if (!system_parameter.spm_mode || attribution->mem_access_mode == MemAccessMode::none) {
