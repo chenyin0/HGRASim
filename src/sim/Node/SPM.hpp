@@ -566,24 +566,24 @@ namespace Simulator::Array
 			_spmBuffer.updateRdPtrMem(bankId);
 		}
 
-		// callback ack function provided for LSE
-		void callbackAck4Lse(Port_inout_lsu data)  // warningYin, unused by LSE
-		{
-			uint bankId = data.bankId;
-			uint rowId = data.rowId;
-			uint rdPtrLse = _spmBuffer.getRdPtrLse(bankId);
+		//// callback ack function provided for LSE
+		//void callbackAck4Lse(Port_inout_lsu data)  // warningYin, unused by LSE // call Ack2spm 
+		//{
+		//	uint bankId = data.bankId;
+		//	uint rowId = data.rowId;
+		//	uint rdPtrLse = _spmBuffer.getRdPtrLse(bankId);
 
-			if (rowId == rdPtrLse)
-			{
-				bankReadEmpty[data.contextId] = _spmBuffer.updateRdPtrLse(rdPtrLse, _lseConfig[data.contextId]);  // 1)update rdPtrLse and 2)check whether the bank is read empty 
-			}
+		//	if (rowId == rdPtrLse)
+		//	{
+		//		bankReadEmpty[data.contextId] = _spmBuffer.updateRdPtrLse(rdPtrLse, _lseConfig[data.contextId]);  // 1)update rdPtrLse and 2)check whether the bank is read empty 
+		//	}
 
-			// if last data has been received by LSE, clear hasNotSentLastData flag
-			if (data.last)
-			{
-				hasNotSentLastData[bankId] = 0;
-			}
-		}
+		//	// if last data has been received by LSE, clear hasNotSentLastData flag
+		//	if (data.last)
+		//	{
+		//		hasNotSentLastData[bankId] = 0;
+		//	}
+		//}
 		
 		// get the pointer of the LSE instance
 		Simulator::Array::Loadstore_element* getLse(uint lse_tag) {
@@ -720,7 +720,7 @@ namespace Simulator::Array
 						if (data.valid && data.dataReady != 1 && data.inflight != 1)
 						{
 							data = _spmBuffer.readSpm2Mem(bankId, rowId);
-							lsu->AddTrans(data, data.bankId, false);  // send this addr. to memory, call the AddTransaction function of LSU  // warningYin, missing rowId，bypass can't set to false
+							lsu->AddTrans(data, data.bankId, data.bypassCache);  // send this addr. to memory, call the AddTransaction function of LSU  // warningYin, missing rowId，bypass can't set to false
 							//_spmBuffer.updateRdPtrMem(bankId);  // LSU use callbackACK to update rdPtrMem!! 
 
 							break;
@@ -834,6 +834,7 @@ namespace Simulator::Array
 			for (size_t rowId = rdPtrLse; rowId < bankDepth; ++rowId)  // roundrobin start at the rdPtrLse, stop at the bank tail
 			{
 				bool dataMatch = 1;
+				bool lseNotFull = 1;  // signify the lse buffer is not full and is able to get data from SPM
 				bool bankFinish = 1; 
 				//bool bankReadEmpty = 0;
 
@@ -849,6 +850,7 @@ namespace Simulator::Array
 							(lseBranMode == BranchMode::truePath && data.condition))
 						{
 							dataMatch = dataMatch & (data.valid & data.dataReady);  // due to SPM data contain load data and temp data, so only when valid & dataReady all set to 1 signify the data is valid;  
+							lseNotFull = lseNotFull & getLse(lseContext.lseTag)->Ack2spm();
 						}
 					}
 
@@ -863,7 +865,7 @@ namespace Simulator::Array
 						
 				}
 
-				if (dataMatch) // if match successfully
+				if (dataMatch && lseNotFull) // if match successfully and lse is able to receive the data
 				{
 					for (auto lseContext : _lseConfig[contextId])
 					{
@@ -883,40 +885,46 @@ namespace Simulator::Array
 								getLse(lseContext.lseTag)->LSEcallback(data);  // warningYin, it is a Port_inout_lse type, need transfer the last signal
 							}
 
-							//if (rowId == rdPtrLse)
-							//{
-							//	bankReadEmpty = _spmBuffer.updateRdPtrLse(rdPtrLse, _lseConfig[contextId]);  // 1)update rdPtrLse and 2)check whether the bank is read empty  // LSE update it by callbackACK!!
-							//}
+							if (rowId == rdPtrLse)
+							{
+								bankReadEmpty[contextId] = _spmBuffer.updateRdPtrLse(rdPtrLse, _lseConfig[contextId]);  // 1)update rdPtrLse and 2)check whether the bank is read empty  // LSE update it by callbackACK!!
+							}
 						}
 					}
 
 					break;
 				}
 
-				for (auto& lseContext : _lseConfig[contextId])
+				if (lseNotFull) // lse not full & there is no data match 
 				{
-					if (lseContext._lseMode == LSMode::load)
+					for (auto& lseContext : _lseConfig[contextId])
 					{
-						uint bankId = lseContext.lseVirtualTag;
-
-						if (bankReadEmpty[contextId] && bankFinish && hasNotSentLastData[bankId])  // there is no data match
+						if (lseContext._lseMode == LSMode::load)
 						{
-							// send last data to each LSE, to indicate current context is over
-							Port_inout_lsu data;
-							data.last = 1;
+							uint bankId = lseContext.lseVirtualTag;
 
-							if (lseContext._memAccessMode == MemAccessMode::temp)
+							if (bankReadEmpty[contextId] && bankFinish && hasNotSentLastData[bankId])  // there is no data match
 							{
-								getLse(lseContext.lseTag)->spm2lse_temp(data);
-								//sendData2Lse(data);//参考接口中的spm2lse_temp和LSEcallback
-							}
-							else if (lseContext._memAccessMode == MemAccessMode::load)
-							{
-								getLse(lseContext.lseTag)->LSEcallback(data);  // warningYin, it is a Port_inout_lse type, need transfer the last signal
+								// send last data to each LSE, to indicate current context is over
+								Port_inout_lsu data;
+								data.last = 1;
+
+								if (lseContext._memAccessMode == MemAccessMode::temp)
+								{
+									getLse(lseContext.lseTag)->spm2lse_temp(data);
+									//sendData2Lse(data);//参考接口中的spm2lse_temp和LSEcallback
+								}
+								else if (lseContext._memAccessMode == MemAccessMode::load)
+								{
+									getLse(lseContext.lseTag)->LSEcallback(data);  // warningYin, it is a Port_inout_lse type, need transfer the last signal
+								}
+
+								hasNotSentLastData[bankId] = 0; // indicate last data signal has already sent
 							}
 						}
 					}
 				}
+				
 
 				if (bankReadEmpty[contextId] && bankFinish)  // there is no data match
 				{
@@ -939,7 +947,7 @@ namespace Simulator::Array
 								}
 
 								lseContext.contextFinish = 1;
-								hasNotSentLastData[bankId] = 0;
+								hasNotSentLastData[bankId] = 1;  // reset this flag
 							}
 						}
 					}
