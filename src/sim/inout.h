@@ -1,5 +1,6 @@
 #pragma once
 #include "../define/define.hpp"
+#include "../preprocess/enum_definition.hpp"
 
 namespace Simulator::Array
 {

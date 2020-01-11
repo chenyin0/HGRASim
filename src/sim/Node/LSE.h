@@ -3,7 +3,7 @@
 #include "../mem_system/Lsu.h"
 #include "../memory/MemoryData.h"
 #include "../ClkDomain.h"
-
+#include "SPM.h"
 namespace Simulator::Array
 {
 	//LSE与LSU之间互相传输都使用ack机制

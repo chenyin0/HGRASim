@@ -354,6 +354,7 @@ namespace Simulator::Preprocess
 			OneContext.push_back(lsRead(node_xml));
 			node_xml = node_xml->NextSiblingElement("node");
 		}
+		return OneContext;
 	}
 	auto DFG::lvRead(XMLElement* node_xml_) const -> DFGNodeInterface*
 	{

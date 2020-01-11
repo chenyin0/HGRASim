@@ -1,7 +1,7 @@
 #include "Lsu.h"                                        
 #include <vector>
 #include "../Node/LSE.h"
-#include "../Node/SPM.hpp"
+#include "../Node/SPM.h"
 
 //#define leNums    2  
 //#define seNums    2

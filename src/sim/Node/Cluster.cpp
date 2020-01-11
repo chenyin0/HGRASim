@@ -1,8 +1,9 @@
-#include "Cluster.h"
 #include <iomanip>
+#include "Cluster.h"
+
 
 using namespace Simulator::Array;
-Cluster::Cluster(shared_ptr<Preprocess::ClusterInterface> attr):attribution(attr){
+Cluster::Cluster(shared_ptr<Simulator::Preprocess::ClusterInterface> attr):attribution(attr){
 	//attribution = attr;
 }
 void Cluster::enable() {
@@ -25,7 +26,7 @@ ClusterGroup::ClusterGroup():attribution(Preprocess::DFG::getInstance()->getDfgC
 		clusters.insert({ cluster,make_shared<Cluster>(cluster_attr) });
 	}
 }
-void ClusterGroup::insert(std::map<std::pair<NodeType, uint>, uint>& index2order_, map<uint, Simulator::Array::Loadstore_element*>& lse_map_){
+void ClusterGroup::insert(std::map<std::pair<Simulator::NodeType, uint>, uint>& index2order_, map<uint, Simulator::Array::Loadstore_element*>& lse_map_){
 	index2order = index2order_;
 	lse_map = lse_map_;
 }
@@ -36,13 +37,13 @@ void ClusterGroup::update()
 		cluster->update();
 	}
 }
-void ClusterGroup::enable(NodeType nodetype_, uint cluster_id_)
+void ClusterGroup::enable(Simulator::NodeType nodetype_, uint cluster_id_)
 {
 	clusters[std::make_pair(nodetype_, cluster_id_)]->enable();
 }
-int ClusterGroup::index2Id(NodeType nodetype_, uint index)
+int ClusterGroup::index2Id(Simulator::NodeType nodetype_, uint index)
 {
-	if (attribution.getClusterID().find({ nodetype_ ,index }) == attribution.getClusterID.end()) {
+	if (attribution.getClusterID().find({ nodetype_ ,index }) == attribution.getClusterID().end()) {
 		return -1;
 	}
 	else {
@@ -50,7 +51,7 @@ int ClusterGroup::index2Id(NodeType nodetype_, uint index)
 		return ls_cluster[{nodetype_, index }];
 	}
 }
-bool ClusterGroup::exists(NodeType nodetype_, uint index) {
+bool ClusterGroup::exists(Simulator::NodeType nodetype_, uint index) {
 	if (index2Id(nodetype_, index) != -1) {
 		return true;
 	}
@@ -58,7 +59,7 @@ bool ClusterGroup::exists(NodeType nodetype_, uint index) {
 		return false;
 	}
 }
-bool ClusterGroup::canRecv(NodeType nodetype_, uint index) {
+bool ClusterGroup::canRecv(Simulator::NodeType nodetype_, uint index) {
 	if (clusters.find({ nodetype_ ,index2Id(nodetype_,index) })->second->counter == index) {
 		return true;
 	}

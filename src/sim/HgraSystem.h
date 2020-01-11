@@ -18,7 +18,7 @@
 #include "Node/LSE.h"
 #include "Node/PE.h"
 #include "Node/Cluster.h"
-#include "Node/SPM.hpp"
+#include "Node/SPM.h"
  //#include "mem_system/MultiChannelMemorySystem.h"
  //#include "../sim/mem_system/Lsu.h"
 

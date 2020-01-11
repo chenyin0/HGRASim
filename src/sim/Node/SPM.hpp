@@ -483,8 +483,6 @@ namespace Simulator::Array
 		/*vector<uint> bankId;
 		vector<uint> rowId;*/
 	};
-
-
 	using Context = vector<vector<LseConfig>>;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
 
 	class Spm
@@ -492,7 +490,7 @@ namespace Simulator::Array
 	public:
 	//	using Context = vector<vector<LseConfig>>;
 		Spm(unordered_map<NodeType, vector<vector<const Simulator::Preprocess::DFGNodeInterface*>>> context_attr_, ClusterGroup& cluster_group_,
-			map<uint, Simulator::Array::Loadstore_element*>& lse_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_):
+			map<uint, Loadstore_element*>& lse_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_):
 			cluster_group(cluster_group_), lse_map(lse_map_), index2order(index2order_)
 		{
 			for (auto& context : context_attr_[NodeType::ls]) 
@@ -609,7 +607,7 @@ namespace Simulator::Array
 		}
 		
 		// get the pointer of the LSE instance
-		Simulator::Array::Loadstore_element* getLse(uint lse_tag) {
+		Loadstore_element* getLse(uint lse_tag) {
 			return lse_map[index2order[{NodeType::ls, lse_tag}]];
 		}
 
@@ -984,7 +982,7 @@ namespace Simulator::Array
 		uint bankDepth;
 		DRAMSim::Lsu* lsu;
 		ClusterGroup cluster_group;
-		map<uint, Simulator::Array::Loadstore_element*> lse_map;
+		map<uint, Loadstore_element*> lse_map;
 		std::map<std::pair<NodeType, uint>, uint> index2order;
 		SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
 		deque<uint> contextQueue;  // add/delete valid context by Scheduler, SPM may work under several contexts simultaneously
