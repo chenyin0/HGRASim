@@ -452,8 +452,10 @@ Spm::Spm(unordered_map<Simulator::NodeType, vector<vector<const Simulator::Prepr
 		_lseConfig.push_back(context_config);
 	}
 
-	bankNum = Preprocess::Para::getInstance()->getArrayPara().lse_virtual_num;  // SPM bank number is equal to LSE virtual number
+	bankNum = Preprocess::Para::getInstance()->getArrayPara().spm_bank;  // SPM bank number is equal to LSE virtual number
 	bankDepth = Preprocess::Para::getInstance()->getArrayPara().SPM_depth;  // initial SPM buffer depth
+	
+	_spmBuffer= SpmBuffer(bankNum, bankDepth);
 
 	spmInput.resize(bankNum);
 	spmOutput.resize(bankNum);
@@ -729,7 +731,7 @@ void Spm::mem2Spm(const Port_inout_lsu data)
 	// check memory write bank finish
 	if (_spmBuffer.queueNotEmpty(_spmBuffer.memReadBankFinish[bankId]))  // when all the addr. have been sent to SPM from LSE
 	{
-		for (size_t i = _spmBuffer.getWrPtrLse[bankId]; i < bankDepth; ++i)  // traverse from wrPtrLse, in order to exclude the next round lse write;
+		for (size_t i = _spmBuffer.getWrPtrLse(bankId); i < bankDepth; ++i)  // traverse from wrPtrLse, in order to exclude the next round lse write;
 		{
 			Port_inout_lsu data = _spmBuffer.getSpmData(bankId, uint(i));
 

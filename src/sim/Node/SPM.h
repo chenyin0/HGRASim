@@ -37,7 +37,7 @@ namespace Simulator::Array
 		//vector<bool> lseWriteBankFinishHistory;  // record last write status for bank read, due to bank read finish check need bank write finish history
 		vector<queue<bool>> bankInLoad;  // if a bank is in the sending addr. to memory status, set the flag to 1; If all the addr. has been sent to the memory, reset it to 0
 		SpmBuffer(uint _bankNum, uint _bankDepth);
-
+		SpmBuffer() = default;
 		void spmInit();
 
 		// reset SPM stauts
@@ -193,7 +193,8 @@ namespace Simulator::Array
 		ClusterGroup cluster_group;
 		map<uint, Loadstore_element*> lse_map;
 		std::map<std::pair<NodeType, uint>, uint> index2order;
-		SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
+		//SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
+		SpmBuffer _spmBuffer;
 
 		std::deque<uint> contextQueue;  // add/delete valid context by Scheduler, SPM may work under several contexts simultaneously
 		vector<bool> bankReadEmpty;  // used in Spm2Lse, each context has a bankReadEmpty flag
