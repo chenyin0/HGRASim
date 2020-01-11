@@ -169,6 +169,7 @@
     <ClCompile Include="src\sim\mem_system\SimulatorObject.cpp" />
     <ClCompile Include="src\sim\mem_system\Transaction.cpp" />
     <ClCompile Include="src\sim\module\module.cpp" />
+    <ClCompile Include="src\sim\Node\Cluster.cpp" />
     <ClCompile Include="src\sim\Node\LC.cpp" />
     <ClCompile Include="src\sim\Node\LSE.cpp" />
     <ClCompile Include="src\sim\Node\Node.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="src\sim\mem_system\Transaction.h" />
     <ClInclude Include="src\sim\mem_system\unistd.h" />
     <ClInclude Include="src\sim\module\module.h" />
+    <ClInclude Include="src\sim\Node\Cluster.h" />
     <ClInclude Include="src\sim\Node\LC.h" />
     <ClInclude Include="src\sim\Node\LSE.h" />
     <ClInclude Include="src\sim\Node\Node.h" />

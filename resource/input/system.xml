@@ -29,7 +29,7 @@
         <leOutBufferDepthLarge>128</leOutBufferDepthLarge>
 
         <!-- LSE -->>
-        <spmBank>30</spmBank>
+        <spmBank>3</spmBank>
         <lsclusterNum>30</lsclusterNum>
         <!-- LC -->>
         <lcNum>4</lcNum>

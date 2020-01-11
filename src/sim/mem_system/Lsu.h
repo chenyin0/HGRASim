@@ -9,9 +9,10 @@
 #include "../inout.h"
 //#include "../Node/LSE.h" 
 #include "../Node/Node.h"
+//#include "../Node/SPM.hpp"
 
 class Simulator::Array::Loadstore_element;
-class Simulator::Array::Spm;
+//class Simulator::Array::Spm;
 
 typedef struct comb_offset {
 	bool valid;

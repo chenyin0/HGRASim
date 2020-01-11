@@ -1,5 +1,5 @@
 #include "LSE.h"
-#include "SPM.h"
+#include "SPM.hpp"
 #include <iomanip>
 
 using namespace Simulator::Array;

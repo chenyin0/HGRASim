@@ -1,13 +1,9 @@
 #pragma once
-#include "Node.h"
 #include "Cluster.h"
 #include "../mem_system/Lsu.h"
-#include "../debug.h"
 #include "../memory/MemoryData.h"
-#include "../debug.h"
 #include "../ClkDomain.h"
 
-class Simulator::Array::Spm;
 namespace Simulator::Array
 {
 	//LSE与LSU之间互相传输都使用ack机制

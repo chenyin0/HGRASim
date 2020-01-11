@@ -1,25 +1,47 @@
 #pragma once
-
-#include "iostream"                        
-#include "stdlib.h"                       
-#include "math.h"                         //pay attention to ACK
-#include <vector>
-#include <deque>
-#include <queue>
-#include <map>
-#include "../debug.h"
-#include "../ClkDomain.h"
-#include "../Node/Node.h"
-#include "../../preprocess/preprocess.h"
-#include "Cluster.h"
 #include "LSE.h"
-#include "../mem_system/Lsu.h"
 namespace Simulator::Array
 {
-	class SpmBuffer;
-	class Spm;
-	struct LseConfig;
+	struct LseConfig
+	{
+	public:
+		uint lseTag;  // lse node tag, number in .xml
+		uint lseVirtualTag; // indicate this lse connect to which SPM bank
+		LSMode _lseMode; // indicate current LSE mode
 
+		MemAccessMode _memAccessMode;  // configure in .xml
+		DirectionMode _DirectionMode;  // configure in .xml
+		BranchMode _branchMode;  // configure in .xml
+
+		bool contextFinish;
+		bool hasSetBankInLoad;
+
+		LseConfig()
+		{
+			lseTag = 0;
+			lseVirtualTag = 0;
+			_lseMode = LSMode::null;
+			_memAccessMode = MemAccessMode::none;
+			_DirectionMode = DirectionMode::none;
+			_branchMode = BranchMode::none;
+
+			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1
+			hasSetBankInLoad = 0;  // for only push BankInLoad Queue once in each context
+		}
+		LseConfig(const Simulator::Preprocess::DFGNodeInterface* attr_)
+		{
+			auto attribution = dynamic_cast<const Preprocess::DFGNode<Simulator::NodeType::ls>*>(attr_);
+			lseTag = attribution->index;
+			lseVirtualTag = attribution->cluster;
+			_lseMode = attribution->ls_mode;
+			_memAccessMode = attribution->mem_access_mode;
+			_DirectionMode = attribution->direction_mode;
+			_branchMode = attribution->branch_mode;
+
+			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1
+			hasSetBankInLoad = 0;  // for only push BankInLoad Queue once in each context
+		}
+	};
 	class SpmBuffer 
 	{
 	public:
@@ -468,6 +490,7 @@ namespace Simulator::Array
 	class Spm
 	{
 	public:
+	//	using Context = vector<vector<LseConfig>>;
 		Spm(unordered_map<NodeType, vector<vector<const Simulator::Preprocess::DFGNodeInterface*>>> context_attr_, ClusterGroup& cluster_group_,
 			map<uint, Simulator::Array::Loadstore_element*>& lse_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_):
 			cluster_group(cluster_group_), lse_map(lse_map_), index2order(index2order_)
@@ -960,9 +983,9 @@ namespace Simulator::Array
 		uint bankNum;
 		uint bankDepth;
 		DRAMSim::Lsu* lsu;
-		ClusterGroup& cluster_group;
+		ClusterGroup cluster_group;
 		map<uint, Simulator::Array::Loadstore_element*> lse_map;
-		std::map<std::pair<NodeType, uint>, uint>& index2order;
+		std::map<std::pair<NodeType, uint>, uint> index2order;
 		SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
 		deque<uint> contextQueue;  // add/delete valid context by Scheduler, SPM may work under several contexts simultaneously
 		vector<bool> bankReadEmpty;  // used in Spm2Lse, each context has a bankReadEmpty flag
@@ -970,45 +993,6 @@ namespace Simulator::Array
 	};
 
 
-	struct LseConfig
-	{
-	public:
-		uint lseTag;  // lse node tag, number in .xml
-		uint lseVirtualTag; // indicate this lse connect to which SPM bank
-		LSMode _lseMode; // indicate current LSE mode
 
-		MemAccessMode _memAccessMode;  // configure in .xml
-		DirectionMode _DirectionMode;  // configure in .xml
-		BranchMode _branchMode;  // configure in .xml
-
-		bool contextFinish;
-		bool hasSetBankInLoad;
-
-		LseConfig()
-		{
-			lseTag = 0;
-			lseVirtualTag = 0;
-			_lseMode = LSMode::null;
-			_memAccessMode = MemAccessMode::none;
-			_DirectionMode = DirectionMode::none;
-			_branchMode = BranchMode::none;
-
-			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1
-			hasSetBankInLoad = 0;  // for only push BankInLoad Queue once in each context
-		}
-		LseConfig(const Simulator::Preprocess::DFGNodeInterface* attr_)
-		{
-			auto attribution = dynamic_cast<const Preprocess::DFGNode<Simulator::NodeType::ls>*>(attr_);
-			lseTag = attribution->index;
-			lseVirtualTag = attribution->cluster;
-			_lseMode = attribution->ls_mode;
-			_memAccessMode = attribution->mem_access_mode;
-			_DirectionMode = attribution->direction_mode;
-			_branchMode = attribution->branch_mode;
-
-			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1
-			hasSetBankInLoad = 0;  // for only push BankInLoad Queue once in each context
-		}
-	};
 
 }

@@ -30,7 +30,6 @@ namespace Simulator::Preprocess
 		uint pe_num;
 		uint pe_in_buffer_depth;
 		uint spm_bank;
-		uint SPM_depth;
 		BpType buffer_bp;
 		uint pe_out_buffer_depth;
 		uint lse_buffer_depth;

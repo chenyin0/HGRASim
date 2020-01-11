@@ -101,6 +101,7 @@ HgraArray::~HgraArray()
 	delete match_set;
 	delete lsu;
 	delete mem;
+	delete spm;
 }
 void HgraArray::initIndex()
 {
