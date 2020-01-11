@@ -1,7 +1,7 @@
 #include "Lsu.h"                                        
 #include <vector>
 #include "../Node/LSE.h"
-#include "../Node/SPM.h"
+#include "../Node/SPM.hpp"
 
 //#define leNums    2  
 //#define seNums    2
@@ -63,9 +63,10 @@ namespace DRAMSim {
 	//	pe_round = 0;
 	}
 
-	ArbitratorLine::ArbitratorLine(const Simulator::Preprocess::ArrayPara para,  uint32_t TAG) :Node(para)
+	ArbitratorLine::ArbitratorLine(const Simulator::Preprocess::ArrayPara para,  uint32_t TAG, Simulator::Array::Spm* spm_) :Node(para)
 	{
 		//	se_ = lse;
+		spm = spm_;
 		TAG_ = TAG;
 		pe_tag = 0;
 		bankId = UINT_MAX;
@@ -103,7 +104,10 @@ namespace DRAMSim {
 		else {
 			if (TAG_ < system_parameter.lse_num) {
 				if (bankId != UINT_MAX) {
-					//spm->callbackACK(bankId);
+					Simulator::Array::Port_inout_lsu inp;
+					inp.valid = true;
+					inp.bankId = bankId;
+					spm->callbackAck4Lsu(inp);
 				}
 				else {
 					lse_->callbackACK();
@@ -116,17 +120,17 @@ namespace DRAMSim {
 	}
 
 
-	Arbitrator::Arbitrator(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map) :Node(para)                //out_num unused
+	Arbitrator::Arbitrator(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map, Simulator::Array::Spm* spm_) :Node(para)                //out_num unused
 	{
 		//	lsize = leNums;                                    //as a pointer the return value of sizeof() is fixed as 8
 		//	ssize = seNums;
 	//	lseSize = lse_map.size();
 		pointer = 0;
 		uint relse_counter = 0;
-		if (system_parameter.cache_mode) {
+		if (system_parameter.spm_mode) {
 			for (uint i = 0; i < system_parameter.spm_bank; i++) {
 				lse2relse[i] = relse_counter;
-				ArbitratorLine* arbline = new ArbitratorLine(para, relse_counter++);
+				ArbitratorLine* arbline = new ArbitratorLine(para, relse_counter++, spm_);
 			}
 
 			for (uint32_t i = 0; i < lse_map.size(); i++)
@@ -223,7 +227,7 @@ namespace DRAMSim {
 		total_rd = 0;
 		transid = 0;
 		lseSize = lse_map.size();
-		Arbitrator* arb = new Arbitrator(para, lse_map);
+		Arbitrator* arb = new Arbitrator(para, lse_map,spm);
 		arbitrator = arb;
 
 		cache = new Cache(para);

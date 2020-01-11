@@ -609,7 +609,7 @@ namespace Simulator::Array
 			spm2Mem();  // send addr from SPM to Mem
 		}
 
-	private:
+	public:
 		void lse2Spm(LseConfig &context)
 		{
 			Port_inout_lsu data = getLse(context.lseTag)->getData();  // get data by the callback function of LSE

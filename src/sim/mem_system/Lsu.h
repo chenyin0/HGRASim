@@ -94,8 +94,10 @@ namespace DRAMSim
 		uint32_t TAG_;
 		uint32_t ADDR_;
 		uint bankId;
+		Simulator::Array::Spm* spm;
 		ArbitratorLine(const Simulator::Preprocess::ArrayPara para, Simulator::Array::Loadstore_element* lse, uint32_t TAG);
-		ArbitratorLine(const Simulator::Preprocess::ArrayPara para, uint32_t TAG);
+	//	ArbitratorLine(const Simulator::Preprocess::ArrayPara para, uint32_t TAG, Simulator::Array::Spm* spm_);
+		ArbitratorLine(const Simulator::Preprocess::ArrayPara para, uint32_t TAG, Simulator::Array::Spm* spm_);
 		~ArbitratorLine() {};
 		uint32_t valid;
 		bool rdwr;
@@ -123,7 +125,8 @@ namespace DRAMSim
 		std::map<uint, uint> lse2relse;
 	//	bool print_screen;
 		vector<ArbitratorLine*> ArbitratorLines;
-		Arbitrator(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map);
+	//	Arbitrator(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map,Simulator::Array::Spm* spm_);
+		Arbitrator(const Simulator::Preprocess::ArrayPara para, map<uint, Simulator::Array::Loadstore_element*> lse_map,Simulator::Array::Spm* spm_);
 		~Arbitrator();
 		bool AddTrans(Simulator::Array::Port_inout_lsu input, uint32_t TAG,bool bypass);
 		void getInput(uint port, Simulator::Array::Port_inout input) override {};
