@@ -84,7 +84,7 @@ namespace Simulator::Array
 		void simStep1(uint i);
 		void simBp();
 		bool existsInGroup();
-		void LSEcallback(uint addr);
+		void LSEcallback(Port_inout_lsu inp);
 		void print();
 		void value_update(uint &update_tag,const uint &last_tag);
 		void printBuffer();

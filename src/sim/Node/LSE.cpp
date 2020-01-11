@@ -310,16 +310,15 @@ void Loadstore_element::LSEcallback(uint addr, uint64_t cycle, short tag)
 	else
 		DEBUG_ASSERT(false);
 }
-void Loadstore_element::LSEcallback(uint addr)
+void Loadstore_element::LSEcallback(Port_inout_lsu inp)
 {
 	if (attribution->ls_mode == LSMode::load) {
 		for (uint i = 0; i < input_port_lsu.size(); ++i) {
-			input_port_lsu[i].value_addr = addr;
-			input_port_lsu[i].valid = true;
-			input_port_lsu[i].tag = 0;
-			input_port_lsu[i].value_data = addr;
-			//			input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////
-			input_port_lsu[i].rdwr = false;
+			input_port_lsu[i] = inp;
+			if (input_port_lsu[i].valid && !input_port_lsu[i].last) {
+				input_port_lsu[i].value_data = inp.value_addr;
+				//input_port_lsu[i].value_data = Simulator::Array::MemoryData::getInstance()->read(addr);//////////////////////////////////////////////此处可以更加完善///////////////////////////////			
+			}
 		}
 		for (uint i = 0; i < input_port_lsu.size(); ++i)
 			if (input_port_lsu[i].valid) {

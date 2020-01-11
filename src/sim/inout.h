@@ -75,7 +75,7 @@ namespace Simulator::Array
 			lseId_virtual = 0;
 			last = 0;
 			
-			bankId = 0;  
+			bankId = UINT_MAX;
 			rowId = 0;
 
 			inflight = 0;
@@ -98,6 +98,8 @@ namespace Simulator::Array
 			tag = 0; 
 			rdwr = false;
 			dae = false; 
+			bankId = UINT_MAX;
+			rowId = 0;
 			_memAccessMode = MemAccessMode::temp;
 			_DirectionMode = DirectionMode::none; 
 			_branchMode = BranchMode::none;

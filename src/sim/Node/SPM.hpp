@@ -609,7 +609,7 @@ namespace Simulator::Array
 			spm2Mem();  // send addr from SPM to Mem
 		}
 
-	private:
+	public:
 		void lse2Spm(LseConfig &context)
 		{
 			Port_inout_lsu data = getLse(context.lseTag)->getData();  // get data by the callback function of LSE
@@ -720,7 +720,7 @@ namespace Simulator::Array
 						if (data.valid && data.dataReady != 1 && data.inflight != 1)
 						{
 							data = _spmBuffer.readSpm2Mem(bankId, rowId);
-							lsu->AddTrans(data, data.bankId, false);  // send this addr. to memory, call the AddTransaction function of LSU  // warningYin, missing rowId£¬bypass can't set to false
+							lsu->AddTrans(data, data.bankId, data.bypassCache);  // send this addr. to memory, call the AddTransaction function of LSU  // warningYin, missing rowId£¬bypass can't set to false
 							//_spmBuffer.updateRdPtrMem(bankId);  // LSU use callbackACK to update rdPtrMem!! 
 
 							break;
