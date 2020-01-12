@@ -62,14 +62,14 @@
         <read_bypass>false</read_bypass>
         <write_bypass>false</write_bypass>
         <cache_mode>true</cache_mode>
-        <inflight_blocking>false</inflight_blocking>
+        <inflight_blocking>true</inflight_blocking>
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>
         <spm_mode>true</spm_mode>
         <printscreen>true</printscreen>
         <stallMode>inbuffer_stall</stallMode>
         <attachMemory>true</attachMemory>
-        <maxClk>2000000</maxClk>
+        <maxClk>2000</maxClk>
         <profiling>true</profiling>
         <maxMemoryDepth>100000</maxMemoryDepth>
         

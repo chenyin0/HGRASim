@@ -421,10 +421,11 @@ void Loadstore_element::leSimStep2()
 				tag_counter_update();//第一次更新tag为0
 			}
 		}
-		if (!system_parameter.spm_mode) {
+		if (!system_parameter.spm_mode||attribution->mem_access_mode==MemAccessMode::none) {
 			if (!inbuffer_out.last && inbuffer_out.condition && inbuffer_out.valid)///////对应了非直通的情况
 				nextlsu_bp = false;
 		}
+		
 	}
 	else
 	{

@@ -77,7 +77,7 @@ namespace DRAMSim {
 	{
 		valid = input.valid;
 		ADDR_ = input.value_addr;
-		if (bankId != UINT_MAX) {
+		if (bankId == UINT_MAX) {
 			pe_tag = input.tag;
 		}
 		else {
@@ -93,7 +93,7 @@ namespace DRAMSim {
 
 	void ArbitratorLine::returnACK()
 	{
-		if (system_parameter.cache_mode) {
+		if (system_parameter.spm_mode) {
 			if (TAG_ < system_parameter.lse_num)
 				lse_->callbackACK();    //pay attention to this name
 		/*	else if (TAG_ >= leNums && TAG_ < (leNums + seNums))
