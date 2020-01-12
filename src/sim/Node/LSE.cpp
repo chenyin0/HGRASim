@@ -425,6 +425,9 @@ void Loadstore_element::leSimStep2()
 			if (!inbuffer_out.last && inbuffer_out.condition && inbuffer_out.valid)///////对应了非直通的情况
 				nextlsu_bp = false;
 		}
+		else {
+			nextlsu_bp = false;
+		}
 		
 	}
 	else
