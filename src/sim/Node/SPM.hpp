@@ -504,7 +504,7 @@ namespace Simulator::Array
 				_lseConfig.push_back(context_config);
 			}
 
-			bankNum = Preprocess::Para::getInstance()->getArrayPara().lse_virtual_num;  // SPM bank number is equal to LSE virtual number
+			bankNum = Preprocess::Para::getInstance()->getArrayPara().spm_bank;  // SPM bank number is equal to LSE virtual number
 			bankDepth = Preprocess::Para::getInstance()->getArrayPara().SPM_depth;  // initial SPM buffer depth
 
 			spmInput.resize(bankNum);
@@ -580,7 +580,7 @@ namespace Simulator::Array
 			return contextQueue.empty();
 		}
 		
-		// callback ack function provided for LSU // warningYin, unused by LSU
+		// callback ack function provided for LSU 
 		void callbackAck4Lsu(Port_inout_lsu addr)
 		{
 			uint bankId = addr.bankId;
@@ -741,7 +741,7 @@ namespace Simulator::Array
 						if (data.valid && data.dataReady != 1 && data.inflight != 1)
 						{
 							data = _spmBuffer.readSpm2Mem(bankId, rowId);
-							lsu->AddTrans(data, data.bankId, data.bypassCache);  // send this addr. to memory, call the AddTransaction function of LSU  // warningYin, missing rowId£¬bypass can't set to false
+							lsu->AddTrans(data, data.bankId, data.bypassCache);  // send this addr. to memory, call the AddTransaction function of LSU 
 							//_spmBuffer.updateRdPtrMem(bankId);  // LSU use callbackACK to update rdPtrMem!! 
 
 							break;
@@ -782,7 +782,7 @@ namespace Simulator::Array
 			// check memory write bank finish
 			if (_spmBuffer.queueNotEmpty(_spmBuffer.memReadBankFinish[bankId]))  // when all the addr. have been sent to SPM from LSE
 			{
-				for (size_t i = _spmBuffer.getWrPtrLse[bankId]; i < bankDepth; ++i)  // traverse from wrPtrLse, in order to exclude the next round lse write;
+				for (size_t i = _spmBuffer.getWrPtrLse(bankId); i < bankDepth; ++i)  // traverse from wrPtrLse, in order to exclude the next round lse write;
 				{
 					Port_inout_lsu data = _spmBuffer.getSpmData(bankId, uint(i));
 
@@ -899,11 +899,11 @@ namespace Simulator::Array
 							if (lseContext._memAccessMode == MemAccessMode::temp)
 							{
 								getLse(lseContext.lseTag)->spm2lse_temp(data);
-								//sendData2Lse(data);//²Î¿¼½Ó¿ÚÖÐµÄspm2lse_tempºÍLSEcallback
+								//sendData2Lse(data);//ï¿½Î¿ï¿½ï¿½Ó¿ï¿½ï¿½Ðµï¿½spm2lse_tempï¿½ï¿½LSEcallback
 							}
 							else if (lseContext._memAccessMode == MemAccessMode::load)
 							{
-								getLse(lseContext.lseTag)->LSEcallback(data);  // warningYin, it is a Port_inout_lse type, need transfer the last signal
+								getLse(lseContext.lseTag)->LSEcallback(data);  
 							}
 
 							if (rowId == rdPtrLse)
@@ -933,11 +933,11 @@ namespace Simulator::Array
 								if (lseContext._memAccessMode == MemAccessMode::temp)
 								{
 									getLse(lseContext.lseTag)->spm2lse_temp(data);
-									//sendData2Lse(data);//²Î¿¼½Ó¿ÚÖÐµÄspm2lse_tempºÍLSEcallback
+									//sendData2Lse(data);//ï¿½Î¿ï¿½ï¿½Ó¿ï¿½ï¿½Ðµï¿½spm2lse_tempï¿½ï¿½LSEcallback
 								}
 								else if (lseContext._memAccessMode == MemAccessMode::load)
 								{
-									getLse(lseContext.lseTag)->LSEcallback(data);  // warningYin, it is a Port_inout_lse type, need transfer the last signal
+									getLse(lseContext.lseTag)->LSEcallback(data);  
 								}
 
 								hasNotSentLastData[bankId] = 0; // indicate last data signal has already sent
@@ -999,6 +999,43 @@ namespace Simulator::Array
 	};
 
 
+	struct LseConfig
+	{
+	public:
+		uint lseTag;  // lse node tag, number in .xml
+		uint lseVirtualTag; // indicate this lse connect to which SPM bank
+		LSMode _lseMode; // indicate current LSE mode
 
+		MemAccessMode _memAccessMode;  // configure in .xml
+		DirectionMode _DirectionMode;  // configure in .xml
+		BranchMode _branchMode;  // configure in .xml
+
+		bool contextFinish;
+		bool hasSetBankInLoad;
+
+		LseConfig()
+		{
+			lseTag = 0;
+			lseVirtualTag = 0;
+			_lseMode = LSMode::null;
+			_memAccessMode = MemAccessMode::none;
+			_DirectionMode = DirectionMode::none;
+			_branchMode = BranchMode::none;
+
+			contextFinish = 1;  // initial value set 1, scheduler push a context in contextQueue only when its contextFinish equal to 1
+			hasSetBankInLoad = 0;  // for only push BankInLoad Queue once in each context
+		}
+
+		LseConfig(const Simulator::Preprocess::DFGNodeInterface* attr_)
+		{
+			auto attribution = dynamic_cast<const Preprocess::DFGNode<Simulator::NodeType::ls>*>(attr_);
+			lseTag = attribution->index;
+			lseVirtualTag = attribution->cluster;
+			_lseMode = attribution->ls_mode;
+			_memAccessMode = attribution->mem_access_mode;
+			_DirectionMode = attribution->direction_mode;
+			_branchMode = attribution->branch_mode;
+		}
+	}
 
 }
