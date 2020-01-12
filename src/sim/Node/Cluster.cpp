@@ -5,6 +5,8 @@
 using namespace Simulator::Array;
 Cluster::Cluster(shared_ptr<Simulator::Preprocess::ClusterInterface> attr):attribution(attr){
 	//attribution = attr;
+	counter = 0;
+	update_en = true;
 }
 void Cluster::enable() {
 	update_en = true;

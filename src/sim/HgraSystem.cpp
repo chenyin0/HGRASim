@@ -2,7 +2,7 @@
 
 using namespace Simulator::Array;
 
-HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_graph))
+HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_graph)), cluster_group(ClusterGroup())
 {
 	const auto& system_para = Preprocess::Para::getInstance()->getArrayPara();
 	if (system_para.stall_mode == stallType::none) {

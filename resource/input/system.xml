@@ -39,9 +39,9 @@
         <lcRegInNum>4</lcRegInNum>
 
         <!-- SPM -->>
-       <SPM_depth>128</SPM_depth>
-       <spmBank>3</spmBank>
-       <lsclusterNum>30</lsclusterNum>
+       <spmDepth>128</spmDepth>
+       <spmBank>1</spmBank>
+       <clusterNum>30</clusterNum>
         <!-- LSU -->>
       <!--要测量bankconflict，把leOutBufferDepthMiddle,fifolinen_num,post_offset_depth设的尽量大，可设成2048-->
       <!--<tabline_num>20</tabline_num>

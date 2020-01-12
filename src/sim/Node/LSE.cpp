@@ -4,7 +4,7 @@
 
 using namespace Simulator::Array;
 
-Loadstore_element::Loadstore_element(const Simulator::Preprocess::ArrayPara para, uint index, DRAMSim::Lsu* lsu,ClusterGroup &cluster_group_):Node(para), cluster_group(cluster_group)
+Loadstore_element::Loadstore_element(const Simulator::Preprocess::ArrayPara para, uint index, DRAMSim::Lsu* lsu,ClusterGroup &cluster_group_):Node(para), cluster_group(cluster_group_)
 {
 	this->lsu = lsu;
 	this->index = index;
