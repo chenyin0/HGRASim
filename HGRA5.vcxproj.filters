@@ -214,6 +214,12 @@
       <Filter>src\sim\mem_system</Filter>
     </ClCompile>
     <ClCompile Include="src\sim\ClkDomain.cpp" />
+    <ClCompile Include="src\sim\Node\Cluster.cpp">
+      <Filter>src\sim\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sim\Node\SPM.cpp">
+      <Filter>src\sim\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\tinyxml2\tinyxml2.h">
@@ -399,10 +405,13 @@
     <ClInclude Include="src\sim\ClkDomain.h" />
     <ClInclude Include="src\sim\debug.hpp" />
     <ClInclude Include="src\util\address.hpp" />
-    <ClInclude Include="src\sim\Node\SPM.hpp">
+    <ClInclude Include="src\sim\Node\Scheduler.hpp">
       <Filter>src\sim\Node</Filter>
     </ClInclude>
-    <ClInclude Include="src\sim\Node\Scheduler.hpp">
+    <ClInclude Include="src\sim\Node\Cluster.h">
+      <Filter>src\sim\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sim\Node\SPM.h">
       <Filter>src\sim\Node</Filter>
     </ClInclude>
   </ItemGroup>

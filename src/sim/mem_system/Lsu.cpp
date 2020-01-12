@@ -1,7 +1,7 @@
 #include "Lsu.h"                                        
 #include <vector>
 #include "../Node/LSE.h"
-#include "../Node/SPM.hpp"
+#include "../Node/SPM.h"
 
 //#define leNums    2  
 //#define seNums    2
@@ -77,7 +77,7 @@ namespace DRAMSim {
 	{
 		valid = input.valid;
 		ADDR_ = input.value_addr;
-		if (bankId != UINT_MAX) {
+		if (bankId == UINT_MAX) {
 			pe_tag = input.tag;
 		}
 		else {
@@ -93,7 +93,7 @@ namespace DRAMSim {
 
 	void ArbitratorLine::returnACK()
 	{
-		if (system_parameter.cache_mode) {
+		if (system_parameter.spm_mode) {
 			if (TAG_ < system_parameter.lse_num)
 				lse_->callbackACK();    //pay attention to this name
 		/*	else if (TAG_ >= leNums && TAG_ < (leNums + seNums))
@@ -131,6 +131,7 @@ namespace DRAMSim {
 			for (uint i = 0; i < system_parameter.spm_bank; i++) {
 				lse2relse[i] = relse_counter;
 				ArbitratorLine* arbline = new ArbitratorLine(para, relse_counter++, spm_);
+				ArbitratorLines.push_back(arbline);
 			}
 
 			for (uint32_t i = 0; i < lse_map.size(); i++)
@@ -428,7 +429,7 @@ namespace DRAMSim {
 									{
 										if (!channel_occupy[post_offset[index][i].offset[j].pointer])
 										{
-											if (arbitrator->ArbitratorLines[post_table[index]->offset[i].pointer]->bankId == UINT_MAX) {
+											if (arbitrator->ArbitratorLines[post_offset[index][i].offset[j].pointer]->bankId == UINT_MAX) {
 												(arbitrator->ArbitratorLines[post_offset[index][i].offset[j].pointer]->lse_)->LSEcallback(post_table[index]->ADDR_ + j, ClockCycle, post_offset[index][i].offset[j].tag);
 											}
 											else {
@@ -1450,13 +1451,13 @@ void Lsu::config_in(map<uint, Simulator::Array::Loadstore_element*> lse_map)
 	{
 		if (i.second->getAttr()->vec_mode == Simulator::VecMode::vect) {
 			Vec_Msg msg;
-			msg.pointer = arbitrator->lse2relse[i.second->index];
+			msg.pointer = arbitrator->lse2relse[i.second->index+system_parameter.spm_bank];
 			msg.step = i.second->getAttr()->step;
 			msg.size = i.second->getAttr()->vec_size;
 			vec_pointer.push_back(msg);
 		}
 		else if (i.second->getAttr()->vec_mode == Simulator::VecMode::vecr) {
-			r_pointer.push_back(arbitrator->lse2relse[i.second->index]);
+			r_pointer.push_back(arbitrator->lse2relse[i.second->index + system_parameter.spm_bank]);
 		}
 		
 	}

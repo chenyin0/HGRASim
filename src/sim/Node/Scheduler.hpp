@@ -13,7 +13,7 @@
 #include "../Node/Node.h"
 #include "../../preprocess/para.hpp"
 
-#include "./SPM.hpp"
+#include "SPM.h"
 
 namespace Simulator::Array
 {

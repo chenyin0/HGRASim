@@ -292,15 +292,15 @@ namespace Simulator::Preprocess
 	class ClusterGroupInterface
 	{
 	private:
-		unordered_map<std::pair<NodeType, uint>, shared_ptr<ClusterInterface>> clusters;
-		unordered_map<std::pair<NodeType, uint>, uint> ls_cluster;
+		map<std::pair<NodeType, uint>, shared_ptr<ClusterInterface>> clusters;
+		map<std::pair<NodeType, uint>, uint> ls_cluster;
 	public:
 		friend class DFG;
-		auto getAllClusters() const->const unordered_map<std::pair<NodeType, uint>, shared_ptr<ClusterInterface>> &
+		auto getAllClusters() const->const map<std::pair<NodeType, uint>, shared_ptr<ClusterInterface>> &
 		{
 			return clusters;
 		}
-		auto getClusterID() const->const unordered_map<std::pair<NodeType, uint>, uint> &
+		auto getClusterID() const->const map<std::pair<NodeType, uint>, uint> &
 		{
 			return ls_cluster;
 		}

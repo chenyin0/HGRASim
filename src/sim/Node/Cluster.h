@@ -21,7 +21,7 @@ namespace Simulator::Array {
 		std::map<std::pair<NodeType, uint>, uint> index2order;
 		map<uint, Simulator::Array::Loadstore_element*> lse_map;
 		const Preprocess::ClusterGroupInterface &attribution;
-		unordered_map<std::pair<NodeType, uint>, shared_ptr<Cluster>> clusters;
+		map<std::pair<NodeType, uint>, shared_ptr<Cluster>> clusters;
 	public:
 		ClusterGroup();
 		int index2Id(NodeType nodetype_, uint index);

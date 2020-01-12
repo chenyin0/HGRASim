@@ -2,7 +2,7 @@
 
 using namespace Simulator::Array;
 
-HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_graph))
+HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_graph)), cluster_group(ClusterGroup())
 {
 	const auto& system_para = Preprocess::Para::getInstance()->getArrayPara();
 	if (system_para.stall_mode == stallType::none) {
@@ -77,11 +77,12 @@ HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_g
 	DRAMSim::TransactionCompleteCB* write_cb = new Callback<DRAMSim::Cache, void, unsigned, uint64_t, uint64_t>(&(*(lsu->cache)), &DRAMSim::Cache::mem_write_complete);
 	mem->RegisterCallbacks(read_cb, write_cb, power_callback);
 	lsu->AttachMem(mem);
+
+	for (auto& lse : lse_map)
+		lse.second->attachLsu(lsu);
 	spm = new Simulator::Array::Spm(Preprocess::DFG::getInstance()->getContext(), cluster_group, lse_map, index2order);
 	lsu->attachSpm(spm);
 	spm->attachLsu(lsu);
-	for (auto& lse : lse_map)
-		lse.second->attachLsu(lsu);
 	match_set = new Match_set(system_para, lse_map);
 	total_key_pe = number_key_pe();
 }
@@ -101,6 +102,7 @@ HgraArray::~HgraArray()
 	delete match_set;
 	delete lsu;
 	delete mem;
+	delete spm;
 }
 void HgraArray::initIndex()
 {

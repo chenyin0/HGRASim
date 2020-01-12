@@ -30,7 +30,6 @@ namespace Simulator::Preprocess
 		uint pe_num;
 		uint pe_in_buffer_depth;
 		uint spm_bank;
-		uint SPM_depth;
 		BpType buffer_bp;
 		uint pe_out_buffer_depth;
 		uint lse_buffer_depth;
@@ -53,7 +52,7 @@ namespace Simulator::Preprocess
 
 		//lse
 		uint lse_num;
-		uint lse_virtual_num;  // 硬件实际的LSE数量
+//		uint lse_virtual_num;  // 硬件实际的LSE数量
 		uint lse_inbuffer_depth;
 		uint lse_datain_breadth;
 		uint lse_boolin_breadth;

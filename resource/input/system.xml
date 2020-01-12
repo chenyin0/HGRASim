@@ -28,9 +28,7 @@
         <leOutBufferDepthMiddle>64</leOutBufferDepthMiddle>
         <leOutBufferDepthLarge>128</leOutBufferDepthLarge>
 
-        <!-- LSE -->>
-        <spmBank>30</spmBank>
-        <lsclusterNum>30</lsclusterNum>
+
         <!-- LC -->>
         <lcNum>4</lcNum>
         <lcOutputNum>4</lcOutputNum>
@@ -41,8 +39,9 @@
         <lcRegInNum>4</lcRegInNum>
 
         <!-- SPM -->>
-       <SPM_depth>128</SPM_depth>
-
+       <spmDepth>128</spmDepth>
+       <spmBank>1</spmBank>
+       <clusterNum>30</clusterNum>
         <!-- LSU -->>
       <!--要测量bankconflict，把leOutBufferDepthMiddle,fifolinen_num,post_offset_depth设的尽量大，可设成2048-->
       <!--<tabline_num>20</tabline_num>
@@ -63,14 +62,14 @@
         <read_bypass>false</read_bypass>
         <write_bypass>false</write_bypass>
         <cache_mode>true</cache_mode>
-        <inflight_blocking>false</inflight_blocking>
+        <inflight_blocking>true</inflight_blocking>
         <!-- SYSTEM -->>
         <debugLevel>2</debugLevel>
         <spm_mode>true</spm_mode>
         <printscreen>true</printscreen>
         <stallMode>inbuffer_stall</stallMode>
         <attachMemory>true</attachMemory>
-        <maxClk>2000000</maxClk>
+        <maxClk>2000</maxClk>
         <profiling>true</profiling>
         <maxMemoryDepth>100000</maxMemoryDepth>
         

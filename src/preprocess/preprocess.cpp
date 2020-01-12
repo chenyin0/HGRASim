@@ -133,9 +133,9 @@ namespace Simulator::Preprocess
 			input_xml = input_xml->NextSiblingElement("input");
 			uint start_node = std::stoi(indexs[0]),step= std::stoi(indexs[1]),end_node= std::stoi(indexs[2]);
 			shared_ptr<ClusterInterface> cluster=make_shared<ClusterInterface>(node_type, id, start_node, step, end_node, 0, input_vec);
-			cluster_group.clusters.insert({ {node_type, id}, cluster });
+			cluster_group.clusters[{node_type, id}]=cluster;
 			for (uint i = start_node; i <= end_node; i++) {
-				cluster_group.ls_cluster.insert({ {node_type, i}, id });
+				cluster_group.ls_cluster[{node_type, i}]=id;
 			}
 			cluster_xml = cluster_xml->NextSiblingElement("cluster");
 		}
@@ -354,6 +354,7 @@ namespace Simulator::Preprocess
 			OneContext.push_back(lsRead(node_xml));
 			node_xml = node_xml->NextSiblingElement("node");
 		}
+		return OneContext;
 	}
 	auto DFG::lvRead(XMLElement* node_xml_) const -> DFGNodeInterface*
 	{

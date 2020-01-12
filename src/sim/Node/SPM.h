@@ -1,19 +1,32 @@
 #pragma once
-
-
+#include "Node.h"
+#include "Cluster.h"
 #include "../debug.h"
 #include "../ClkDomain.h"
-#include "Cluster.h"
-#include "../../preprocess/preprocess.h"
-#include "LSE.h"
-#include "../mem_system/Lsu.h"
-
+#include <deque>
+class Simulator::Array::Loadstore_element;
+namespace DRAMSim {
+	class Lsu;
+}
 namespace Simulator::Array
 {
-	class SpmBuffer;
-	class Spm;
-	class LseConfig;
+	struct LseConfig
+	{
+	public:
+		uint lseTag;  // lse node tag, number in .xml
+		uint lseVirtualTag; // indicate this lse connect to which SPM bank
+		LSMode _lseMode; // indicate current LSE mode
 
+		MemAccessMode _memAccessMode;  // configure in .xml
+		DirectionMode _DirectionMode;  // configure in .xml
+		BranchMode _branchMode;  // configure in .xml
+
+		bool contextFinish;
+		bool hasSetBankInLoad;
+
+		LseConfig();
+		LseConfig(const Simulator::Preprocess::DFGNodeInterface* attr_);
+	};
 	class SpmBuffer
 	{
 	public:
@@ -24,9 +37,13 @@ namespace Simulator::Array
 		//vector<bool> lseWriteBankFinishHistory;  // record last write status for bank read, due to bank read finish check need bank write finish history
 		vector<queue<bool>> bankInLoad;  // if a bank is in the sending addr. to memory status, set the flag to 1; If all the addr. has been sent to the memory, reset it to 0
 		SpmBuffer(uint _bankNum, uint _bankDepth);
+		SpmBuffer() = default;
 		void spmInit();
+
 		// reset SPM stauts
 		void spmReset();
+
+
 		// get SPM rdPtrLse
 		uint getRdPtrLse(const uint bankId);
 
@@ -58,7 +75,7 @@ namespace Simulator::Array
 
 		bool checkBankEmpty(const uint bankId);
 
-		bool checkBankEmptyWithCond(const uint bankId, bool condition);
+		bool checkBankEmptyWithCond(const uint bankId, bool cond);
 
 
 		// get SPM data, provide to "class SPM" 
@@ -95,12 +112,7 @@ namespace Simulator::Array
 		// write memory ack back to SPM
 		// use for 1) load data in stream/irregular-memory-access mode;
 		void writeMem2Spm(const uint bankId, const uint rowId, const Port_inout_lsu data);
-		vector<queue<bool>> memReadBankFinish;
-		vector<queue<bool>> memWriteBankFinish;
-		vector<queue<bool>> lseReadBankFinish;
-		vector<queue<bool>> lseWriteBankFinish;
-		//vector<bool> lseWriteBankFinishHistory;  // record last write status for bank read, due to bank read finish check need bank write finish history
-		vector<queue<bool>> bankInLoad;  // if a bank is in the sending addr. to memory status, set the flag to 1; If all the addr. has been sent to the memory, reset it to 0
+
 
 	private:
 		/*vector<Port_inout_lsu> spmInput;
@@ -124,26 +136,16 @@ namespace Simulator::Array
 		/*vector<uint> bankId;
 		vector<uint> rowId;*/
 	};
-
-
 	using Context = vector<vector<LseConfig>>;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
 
 	class Spm
 	{
 	public:
-		//Spm(Context lseConfig) : _lseConfig(lseConfig)
-		//{
-		//	bankNum = Preprocess::Para::getInstance()->getArrayPara().lse_virtual_num;  // SPM bank number is equal to LSE virtual number
-		//	bankDepth = Preprocess::Para::getInstance()->getArrayPara().SPM_depth;  // initial SPM buffer depth
-
-		//	spmInput.resize(bankNum);
-		//	spmOutput.resize(bankNum);
-		//}
 		Context _lseConfig;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
-		ClusterGroup& cluster_group;
-		map<uint, Simulator::Array::Loadstore_element*> lse_map;
-		std::map<std::pair<NodeType, uint>, uint>& index2order;
-		Spm(unordered_map<NodeType, vector<vector<const Simulator::Preprocess::DFGNodeInterface*>>> context_attr_, ClusterGroup& cluster_group_, map<uint, Simulator::Array::Loadstore_element*>& lse_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_);
+		//	using Context = vector<vector<LseConfig>>;
+		Spm(unordered_map<NodeType, vector<vector<const Simulator::Preprocess::DFGNodeInterface*>>> context_attr_, ClusterGroup& cluster_group_,
+			map<uint, Loadstore_element*>& lse_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_);
+		Spm() = default;
 		// provide for Scheduler to add a new context to the SPM
 		void addContext(uint contextId);
 
@@ -157,45 +159,49 @@ namespace Simulator::Array
 
 		bool contextQueueEmpty();
 
+		// callback ack function provided for LSU // warningYin, unused by LSU
+		void callbackAck4Lsu(Port_inout_lsu addr);
+
+		// callback ack function provided for LSE
+		void callbackAck4Lse(Port_inout_lsu data);
+
+		// get the pointer of the LSE instance
+		Loadstore_element* getLse(uint lse_tag);
 
 		// update SPM in each cycle
 		void spmUpdate();
-		Simulator::Array::Loadstore_element* getLse(uint lse_tag);
+	   
 		void lse2Spm(LseConfig& context);
 
 		void spm2Mem();
-		void attachLsu(DRAMSim::Lsu *lsu_);
+
+		// callback function for LSU
 		void mem2Spm(const Port_inout_lsu data);
 
 		void spm2Lse(uint contextId);
-		DRAMSim::Lsu* lsu;
+
+		void attachLsu(DRAMSim::Lsu* lsu_);
+
+		
+
 	private:
 		vector<Port_inout_lsu> spmInput;
 		vector<Port_inout_lsu> spmOutput;
 		uint bankNum;
-		//bool memory_ACK;
 		uint bankDepth;
-		SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
+		DRAMSim::Lsu* lsu;
+		ClusterGroup cluster_group;
+		map<uint, Loadstore_element*> lse_map;
+		std::map<std::pair<NodeType, uint>, uint> index2order;
+		//SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
+		SpmBuffer _spmBuffer;
+
 		std::deque<uint> contextQueue;  // add/delete valid context by Scheduler, SPM may work under several contexts simultaneously
+		vector<bool> bankReadEmpty;  // used in Spm2Lse, each context has a bankReadEmpty flag
+		vector<bool> hasNotSentLastData; // used in Spm2Lse, each bank has a basNotSentLastData flag;
 	};
 
 
-	class LseConfig
-	{
-	public:
-		uint lseTag;  // lse node tag, number in .xml
-		uint lseVirtualTag; // indicate this lse connect to which SPM bank
-		LSMode _lseMode; // indicate current LSE mode
 
-		MemAccessMode _memAccessMode;  // configure in .xml
-		DirectMode _daeMode;  // configure in .xml
-		BranchMode _branchMode;  // configure in .xml
-
-		bool contextFinish;
-		bool hasSetBankInLoad;
-
-		LseConfig();
-		LseConfig(const Simulator::Preprocess::DFGNodeInterface* attr_);
-	};
 
 }
