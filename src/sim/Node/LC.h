@@ -2,6 +2,7 @@
 #include "Node.h"
 #include "../debug.h"
 #include "../ClkDomain.h"
+
 namespace Simulator::Array
 {
 	//INSPECTION  break需要的循环结束以及全局结束的冲突
@@ -16,8 +17,10 @@ namespace Simulator::Array
 		vector<Protocol*> reg_protocol;
 		vector<Protocol*> endreg_protocol;
 		Buffer* muxout_buffer;
+		Spm* spm;
 
 		bool first_loop;
+		bool spmBp;
 		int df_cnt;
 		uint activate_cnt;
 		uint end_cnt;
@@ -45,7 +48,9 @@ namespace Simulator::Array
 		vector<Port_inout> reg_input;
 		vector<Port_inout> end_input;
 		void update();
+		void attachSpm(Spm* spm_);
 		void buffer_print();
+		void activate();
 		void getInput(uint port, Port_inout input) override;  //port之间来源不同，解耦合；但inbuffer的写入仍保持耦合
 		void getBp(uint port, bool input) override;
 		void simStep2();                                       //lc buffer get input

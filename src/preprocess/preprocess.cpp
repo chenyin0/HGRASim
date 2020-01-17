@@ -366,7 +366,8 @@ namespace Simulator::Preprocess
 		// attributes
 		uint index = std::stoi(node_xml_->FindAttribute("index")->Value());
 		bool outermost = static_cast<string>(node_xml_->FindAttribute("outermost")->Value()) == string("true");
-
+		uint contextId = std::stoi(node_xml_->FindAttribute("contextId")->Value());
+		uint SpmSize = std::stoi(node_xml_->FindAttribute("SpmSize")->Value());
 		//inputs
 		vector<Input> input_vec;
 		XMLElement* input_xml = node_xml_->FirstChildElement("input");
@@ -409,7 +410,7 @@ namespace Simulator::Preprocess
 			manual_cord = Cord::stringAnalysis(static_cast<string>(manual_placement_xml->FindAttribute("cord")->Value()));
 
 		// build
-		DFGNode<NodeType::lc>* ptr = new DFGNode<NodeType::lc>(index, outermost, input_vec, reg_vec, manual_cord);
+		DFGNode<NodeType::lc>* ptr = new DFGNode<NodeType::lc>(index, outermost,contextId,SpmSize, input_vec, reg_vec, manual_cord);
 
 		return dynamic_cast<DFGNodeInterface*>(ptr);
 	}

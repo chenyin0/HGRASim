@@ -2,7 +2,7 @@
 <!-- 边缘检测-->
 <!-- PE53 LC2 LS18 total = 73 -->
 <Config manual_placement="true">
-    <node type="lc" index="0" outermost="true">
+    <node type="lc" index="0" outermost="true" contextId="0" SpmSize="100">
       <input type="begin"/>
       <input type="null"/>
       <input type="null"/>
@@ -28,7 +28,7 @@
         <reg value="256" />
         <placement cord="[2, 7]"/>
     </node>
-    <node type="lc" index="1" outermost="false">
+    <node type="lc" index="1" outermost="false" contextId="0" SpmSize="100">
       <input type="lc" index="0" port="1"/>
       <input type="null"/>
       <input type="null"/>

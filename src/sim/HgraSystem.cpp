@@ -80,9 +80,13 @@ HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_g
 
 	for (auto& lse : lse_map)
 		lse.second->attachLsu(lsu);
-	spm = new Simulator::Array::Spm(Preprocess::DFG::getInstance()->getContext(), cluster_group, lse_map, index2order);
+	spm = new Simulator::Array::Spm(Preprocess::DFG::getInstance()->getContext(), cluster_group, lse_map,lc_map, index2order);
 	lsu->attachSpm(spm);
 	spm->attachLsu(lsu);
+	for (auto& entry : lc_map)
+	{
+		entry.second->attachSpm(spm);
+	}
 	match_set = new Match_set(system_para, lse_map);
 	total_key_pe = number_key_pe();
 }
