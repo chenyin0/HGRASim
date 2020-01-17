@@ -6,7 +6,7 @@
 #include <vector>
 #include <deque>
 #include <map>
-#include "../mem_system/MultiChannelMemorySystem.h"
+//#include "../mem_system/MultiChannelMemorySystem.h"
 #include "../mem_system/Cache.h"
 #include "../inout.h"
 //#include "../Node/LSE.h"

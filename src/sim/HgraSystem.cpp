@@ -81,6 +81,7 @@ HgraArray::HgraArray(const Simulator::AppGraph& app_graph) : bridge(Bridge(app_g
 	for (auto& lse : lse_map)
 		lse.second->attachLsu(lsu);
 	spm = new Simulator::Array::Spm(Preprocess::DFG::getInstance()->getContext(), cluster_group, lse_map, index2order);
+	scheduler = new Simulator::Array::Scheduler(cdq, spm);  // warningYin, must initial cdq here, future modify to read from .xml!!!
 	lsu->attachSpm(spm);
 	spm->attachLsu(lsu);
 	for (auto& entry : lc_map)
@@ -111,6 +112,7 @@ HgraArray::~HgraArray()
 	delete lsu;
 	delete mem;
 	delete spm;
+	delete scheduler;
 }
 void HgraArray::initIndex()
 {
@@ -436,6 +438,8 @@ void HgraArray::run()
 
 			if (system_para.attach_memory) {
 				lsu->update();//lsu->updateÒª·ÅÔÚ×îÉÏÃæ£¬ÕâÑùlsu°ÑÊä³ö·ÅÔÚ¶Ë¿ÚÉÏ¾ÍÄÜÊÕµ½
+				spm->spmUpdate();
+				scheduler->schedulerUpdate();
 			}
 
 			if (reserved_nodes.size()) {

@@ -19,6 +19,7 @@
 #include "Node/PE.h"
 #include "Node/Cluster.h"
 #include "Node/SPM.h"
+#include "Node/Scheduler.hpp"
  //#include "mem_system/MultiChannelMemorySystem.h"
  //#include "../sim/mem_system/Lsu.h"
 
@@ -41,7 +42,9 @@ namespace Simulator::Array
 		map<uint, LoopControl*> lc_map;
 		Match_set* match_set;
 		DRAMSim::Lsu* lsu;
-		Simulator::Array::Spm *spm;
+		Simulator::Array::Spm* spm;
+		Simulator::Array::Scheduler* scheduler;
+		vector<uint> cdq;
 		DRAMSim::MultiChannelMemorySystem* mem;
 		vector<type_index> config_order;
 		uint clk;
