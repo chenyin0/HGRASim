@@ -66,6 +66,7 @@ namespace Simulator::Array
 		bool update_flag = false;
 		const char* maps[7] = { "pe","fg","ls","lv","lc","null","begin" };
 		void run();
+		void updateLC(vector<uint>& lc_index);
 		void calc_data();
 		uint number_key_pe();
 		void pe_update(uint);

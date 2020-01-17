@@ -2,7 +2,7 @@
 #include "Node.h"
 #include "../debug.h"
 #include "../ClkDomain.h"
-
+#include "SPM.h"
 namespace Simulator::Array
 {
 	//INSPECTION  break需要的循环结束以及全局结束的冲突

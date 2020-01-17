@@ -6,7 +6,6 @@
 #include <deque>
 
 class Simulator::Array::Loadstore_element;
-class Simulator::Array::LoopControl;
 namespace DRAMSim {
 	class Lsu;
 }
@@ -146,7 +145,7 @@ namespace Simulator::Array
 		Context _lseConfig;  // vector1<vector2<LseConfig>>  vector1:each context  vector2:each LSE configured in current context
 		//	using Context = vector<vector<LseConfig>>;
 		Spm(unordered_map<NodeType, vector<vector<const Simulator::Preprocess::DFGNodeInterface*>>> context_attr_, ClusterGroup& cluster_group_,
-			map<uint, Loadstore_element*>& lse_map_, map<uint, Simulator::Array::LoopControl*>& lc_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_);
+			map<uint, Loadstore_element*>& lse_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_);
 		Spm() = default;
 		// provide for Scheduler to add a new context to the SPM
 		void addContext(uint contextId);
@@ -156,11 +155,11 @@ namespace Simulator::Array
 
 		// interface for Scheduler
 		uint getContextQueueHead();
-
+		vector<uint> lc_vec;
 		uint getContextQueueTail();
 
 		bool contextQueueEmpty();
-
+		void clear();
 		// callback ack function provided for LSU // warningYin, unused by LSU
 		void callbackAck4Lsu(Port_inout_lsu addr);
 
@@ -181,7 +180,7 @@ namespace Simulator::Array
 		void mem2Spm(const Port_inout_lsu data);
 
 		void spm2Lse(uint contextId);
-		vector<LoopControl*> getLC(uint contextId);
+		vector<uint> containLC(uint contextId);
 		void attachLsu(DRAMSim::Lsu* lsu_);
 
 		
@@ -194,7 +193,6 @@ namespace Simulator::Array
 		DRAMSim::Lsu* lsu;
 		ClusterGroup cluster_group;
 		map<uint, Loadstore_element*> lse_map;
-		map<uint, LoopControl*> lc_map;
 		std::map<std::pair<NodeType, uint>, uint> index2order;
 		//SpmBuffer _spmBuffer = SpmBuffer(bankNum, bankDepth);
 		SpmBuffer _spmBuffer;

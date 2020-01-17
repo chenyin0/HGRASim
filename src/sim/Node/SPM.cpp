@@ -1,6 +1,5 @@
 #include <iomanip>
 #include "SPM.h"
-#include "LC.h"
 #include "LSE.h"
 
 using namespace Simulator::Array;
@@ -439,9 +438,9 @@ void SpmBuffer::writeMem2Spm(const uint bankId, const uint rowId, const Port_ino
 	}
 }
 
-Spm::Spm(unordered_map<NodeType, vector<vector<const Simulator::Preprocess::DFGNodeInterface*>>> context_attr_, ClusterGroup& cluster_group_,
-	map<uint, Loadstore_element*>& lse_map_, map<uint, LoopControl*>& lc_map_, std::map<std::pair<NodeType, uint>, uint>& index2order_) :
-	cluster_group(cluster_group_), lse_map(lse_map_), lc_map(lc_map_),index2order(index2order_)
+Spm::Spm(unordered_map<Simulator::NodeType, vector<vector<const Simulator::Preprocess::DFGNodeInterface*>>> context_attr_, ClusterGroup& cluster_group_,
+	map<uint, Loadstore_element*>& lse_map_, std::map<std::pair<Simulator::NodeType, uint>, uint>& index2order_) :
+	cluster_group(cluster_group_), lse_map(lse_map_),index2order(index2order_)
 {
 	for (auto& context : context_attr_[Simulator::NodeType::ls])
 	{
@@ -486,15 +485,25 @@ Spm::Spm(unordered_map<NodeType, vector<vector<const Simulator::Preprocess::DFGN
 //		}
 //	}
 //}
-vector<LoopControl *> Spm::getLC(uint contextId)
-{	
-	vector<LoopControl*> lc_vec;
-	for (auto& entry : lc_map) {
-		if (entry.second->attribution->contextId == contextId) {
-			lc_vec.push_back(entry.second);
+void Spm::contextEnd() {
+
+}
+vector<uint> Spm::containLC(uint contextId)
+{
+	vector<uint> lcindex_vec;
+	auto dict = Preprocess::DFG::getInstance()->getDictionary();
+	auto lc_vec= dict.find(Simulator::NodeType::lc)->second;
+	for (auto& entry : lc_vec) {
+		auto attribution = dynamic_cast<const Preprocess::DFGNode<Simulator::NodeType::lc>*>(entry);
+		if (attribution->contextId == contextId) {
+			lcindex_vec.push_back(attribution->index);
 		}
-	}
-	return lc_vec;
+	}	
+	return lcindex_vec;
+}
+void Spm::clear()
+{
+	lc_vec.clear();
 }
 // provide for Scheduler to add a new context to the SPM
 void Spm::addContext(uint contextId)

@@ -1,6 +1,5 @@
 #include "LC.h"
 #include <iomanip>
-#include "SPM.h"
 using namespace Simulator::Array;
 
 LoopControl::LoopControl(const Simulator::Preprocess::ArrayPara para, uint index):Node(para), nextbp(system_parameter.lc_output_num, true)
