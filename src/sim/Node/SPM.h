@@ -4,6 +4,7 @@
 #include "../debug.h"
 #include "../ClkDomain.h"
 #include <deque>
+
 class Simulator::Array::Loadstore_element;
 namespace DRAMSim {
 	class Lsu;
@@ -148,17 +149,17 @@ namespace Simulator::Array
 		Spm() = default;
 		// provide for Scheduler to add a new context to the SPM
 		void addContext(uint contextId);
-
+		void contextEnd();
 		// provide for Scheduler to delete a finished context in the SPM
 		void removeContext();
 
 		// interface for Scheduler
 		uint getContextQueueHead();
-
+		vector<uint> lc_vec;
 		uint getContextQueueTail();
 
 		bool contextQueueEmpty();
-
+		void clear();
 		// callback ack function provided for LSU // warningYin, unused by LSU
 		void callbackAck4Lsu(Port_inout_lsu addr);
 
@@ -179,7 +180,7 @@ namespace Simulator::Array
 		void mem2Spm(const Port_inout_lsu data);
 
 		void spm2Lse(uint contextId);
-
+		vector<uint> containLC(uint contextId);
 		void attachLsu(DRAMSim::Lsu* lsu_);
 
 		

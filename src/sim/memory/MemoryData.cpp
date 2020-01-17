@@ -1,4 +1,5 @@
 #include "MemoryData.h"
+#include "../../util/txt_read.hpp"
 
 using namespace Simulator::Array;
 

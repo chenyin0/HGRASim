@@ -2,7 +2,6 @@
 #include "../../define/define.hpp"
 #include <iostream>
 #include <sstream>
-#include "../../util/txt_read.hpp"
 #include "../../preprocess/preprocess.h"
 
 namespace Simulator::Array

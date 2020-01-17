@@ -19,6 +19,7 @@ LoopControl::LoopControl(const Simulator::Preprocess::ArrayPara para, uint index
 	reg[1].valid = true;
 	reg[2].valid = true;
 	reg[3].valid = true;
+	spmBp = true;
 
 	end_reg.resize(system_parameter.lc_endin_num);
 	muxout_buffer = Buffer_factory::createLcBuffer(para);
@@ -294,6 +295,12 @@ void LoopControl::simStep2()
 		{
 			muxout = stepout;
 		}
+		if (system_parameter.spm_mode) {
+			if (muxout.valid && muxout.value_data > attribution->spmSize)
+			{
+				spmBp = false;
+			}
+		}
 	}
 
 	if (muxout_buffer->isBufferNotFull(0))
@@ -306,6 +313,14 @@ void LoopControl::simStep2()
 	}
 }
 
+void LoopControl::activate()
+{
+	spmBp = true;
+}
+void LoopControl::attachSpm(Spm *spm_)
+{
+	spm = spm_;
+}
 void LoopControl::simStep3()
 {
 	bool bpok = true;
@@ -314,9 +329,12 @@ void LoopControl::simStep3()
 		bpok = bpok & i;
 	}
 
-	if (bpok)
+	if (bpok&&spmBp)
 		muxout_buffer->output(bufferout, 0);
-
+	
+	if (!spmBp) {
+		spm->contextEnd();
+	}
     //step calculate
 	if (reg[3].valid)
 	{

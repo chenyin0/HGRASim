@@ -237,13 +237,18 @@ namespace Simulator::Preprocess
 	{
 		uint index;
 		bool outermost;
+		uint contextId;
+		uint spmSize;
 		vector<Input> input_vec;
 		vector<int> reg;
 		Cord manual_placement;
 
-		DFGNode(uint index_, bool outermost_, vector<Input> input_vec_, vector<int> reg_, Cord manual_placement_)
+
+		DFGNode(uint index_, bool outermost_,uint contextId_,uint spmSize_, vector<Input> input_vec_, vector<int> reg_, Cord manual_placement_)
 			: index(index_)
 			, outermost(outermost_)
+			, contextId(contextId_)
+			, spmSize(spmSize_)
 			, input_vec(std::move(input_vec_))
 			, reg(std::move(reg_))
 			, manual_placement(std::move(manual_placement_))
